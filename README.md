@@ -1,5 +1,5 @@
 # lbryinc
-lbryinc is a module which contains common api.lbry.io and rewards code shared between lbry-app and lbry-android.
+lbryinc is a module which contains common api.lbry.io and rewards code shared between lbry-desktop and lbry-android.
 
 ## Installation
 Add `lbryinc` as a dependency to your `package.json` file.
