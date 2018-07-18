@@ -5,12 +5,18 @@ const defaultState = {
   authenticating: false,
 };
 
-reducers[ACTIONS.GET_AUTH_TOKEN_STARTED] = state =>
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_FAILURE] = state =>
+  Object.assign({}, state, {
+    authToken: null,
+    authenticating: false,
+  });
+
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_STARTED] = state =>
   Object.assign({}, state, {
     authenticating: true,
   });
 
-reducers[ACTIONS.GET_AUTH_TOKEN_COMPLETED] = (state, action) =>
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS] = (state, action) =>
   Object.assign({}, state, {
     authToken: action.authToken,
     authenticating: false,

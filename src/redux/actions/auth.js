@@ -1,10 +1,10 @@
 import * as ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
 
-export function doNewInstallation(installationId) {
+export function doGenerateAuthToken(installationId) {
   return dispatch => {
     dispatch({
-      type: ACTIONS.GET_AUTH_TOKEN_STARTED,
+      type: ACTIONS.GENERATE_AUTH_TOKEN_STARTED,
     });
 
     Lbryio.call(
@@ -20,20 +20,18 @@ export function doNewInstallation(installationId) {
       .then(response => {
         if (!response.auth_token) {
           dispatch({
-            type: ACTIONS.GET_AUTH_TOKEN_COMPLETED,
-            data: { authToken: null },
+            type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE,
           });
         } else {
           dispatch({
-            type: ACTIONS.GET_AUTH_TOKEN_COMPLETED,
+            type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
             data: { authToken: response.auth_token },
           });
         }
       })
       .catch(() => {
         dispatch({
-          type: ACTIONS.GET_AUTH_TOKEN_COMPLETED,
-          data: { authToken: null },
+          type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE,
         });
       });
   };

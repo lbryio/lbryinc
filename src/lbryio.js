@@ -1,5 +1,5 @@
 import { Lbry } from 'lbry-redux';
-import { doNewInstallation } from 'redux/actions/auth';
+import { doGenerateAuthToken } from 'redux/actions/auth';
 import querystring from 'querystring';
 
 const Lbryio = {
@@ -71,7 +71,7 @@ Lbryio.getAuthToken = () =>
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
     } else {
-      const store = global.store || (window.app ? window.app.store : null);
+      const { store } = window;
       if (store) {
         const state = store.getState();
         const token = state.auth ? state.auth.authToken : null;
@@ -118,9 +118,9 @@ Lbryio.authenticate = () => {
           }
 
           return Lbry.status().then(status => {
-            const store = global.store || (window.app ? window.app.store : null);
+            const { store } = window;
             if (store) {
-              store.dispatch(doNewInstallation(status.installation_id));
+              store.dispatch(doGenerateAuthToken(status.installation_id));
               return resolve();
             }
 

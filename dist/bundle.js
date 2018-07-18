@@ -102,24 +102,387 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _lbryio = __webpack_require__(1);
 
 Object.defineProperty(exports, 'Lbryio', {
-  enumerable: true,
-  get: function get() {
-    return _lbryio.Lbryio;
-  }
+    enumerable: true,
+    get: function get() {
+        return _lbryio.Lbryio;
+    }
 });
+
+var _auth = __webpack_require__(4);
+
+Object.defineProperty(exports, 'doGenerateAuthToken', {
+    enumerable: true,
+    get: function get() {
+        return _auth.doGenerateAuthToken;
+    }
+});
+
+var _rewards = __webpack_require__(9);
+
+Object.defineProperty(exports, 'doRewardList', {
+    enumerable: true,
+    get: function get() {
+        return _rewards.doRewardList;
+    }
+});
+Object.defineProperty(exports, 'doClaimRewardType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards.doClaimRewardType;
+    }
+});
+Object.defineProperty(exports, 'doClaimEligiblePurchaseRewards', {
+    enumerable: true,
+    get: function get() {
+        return _rewards.doClaimEligiblePurchaseRewards;
+    }
+});
+Object.defineProperty(exports, 'doClaimRewardClearError', {
+    enumerable: true,
+    get: function get() {
+        return _rewards.doClaimRewardClearError;
+    }
+});
+
+var _user = __webpack_require__(14);
+
+Object.defineProperty(exports, 'doFetchInviteStatus', {
+    enumerable: true,
+    get: function get() {
+        return _user.doFetchInviteStatus;
+    }
+});
+Object.defineProperty(exports, 'doInstallNew', {
+    enumerable: true,
+    get: function get() {
+        return _user.doInstallNew;
+    }
+});
+Object.defineProperty(exports, 'doAuthenticate', {
+    enumerable: true,
+    get: function get() {
+        return _user.doAuthenticate;
+    }
+});
+Object.defineProperty(exports, 'doUserFetch', {
+    enumerable: true,
+    get: function get() {
+        return _user.doUserFetch;
+    }
+});
+
+var _auth2 = __webpack_require__(15);
+
+Object.defineProperty(exports, 'authReducer', {
+    enumerable: true,
+    get: function get() {
+        return _auth2.authReducer;
+    }
+});
+
+var _rewards2 = __webpack_require__(16);
+
+Object.defineProperty(exports, 'rewardsReducer', {
+    enumerable: true,
+    get: function get() {
+        return _rewards2.rewardsReducer;
+    }
+});
+
+var _user2 = __webpack_require__(17);
+
+Object.defineProperty(exports, 'userReducer', {
+    enumerable: true,
+    get: function get() {
+        return _user2.userReducer;
+    }
+});
+
+var _auth3 = __webpack_require__(18);
+
+Object.defineProperty(exports, 'selectAuthToken', {
+    enumerable: true,
+    get: function get() {
+        return _auth3.selectAuthToken;
+    }
+});
+
+var _rewards3 = __webpack_require__(10);
+
+Object.defineProperty(exports, 'makeSelectClaimRewardError', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.makeSelectClaimRewardError;
+    }
+});
+Object.defineProperty(exports, 'makeSelectIsRewardClaimPending', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.makeSelectIsRewardClaimPending;
+    }
+});
+Object.defineProperty(exports, 'makeSelectRewardAmountByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.makeSelectRewardAmountByType;
+    }
+});
+Object.defineProperty(exports, 'makeSelectRewardByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.makeSelectRewardByType;
+    }
+});
+Object.defineProperty(exports, 'selectUnclaimedRewardsByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectUnclaimedRewardsByType;
+    }
+});
+Object.defineProperty(exports, 'selectClaimedRewardsById', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimedRewardsById;
+    }
+});
+Object.defineProperty(exports, 'selectClaimedRewards', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimedRewards;
+    }
+});
+Object.defineProperty(exports, 'selectClaimedRewardsByTransactionId', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimedRewardsByTransactionId;
+    }
+});
+Object.defineProperty(exports, 'selectUnclaimedRewards', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectUnclaimedRewards;
+    }
+});
+Object.defineProperty(exports, 'selectFetchingRewards', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectFetchingRewards;
+    }
+});
+Object.defineProperty(exports, 'selectUnclaimedRewardValue', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectUnclaimedRewardValue;
+    }
+});
+Object.defineProperty(exports, 'selectClaimsPendingByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimsPendingByType;
+    }
+});
+Object.defineProperty(exports, 'selectIsClaimRewardPending', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectIsClaimRewardPending;
+    }
+});
+Object.defineProperty(exports, 'selectClaimErrorsByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimErrorsByType;
+    }
+});
+Object.defineProperty(exports, 'selectClaimRewardError', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectClaimRewardError;
+    }
+});
+Object.defineProperty(exports, 'selectRewardByType', {
+    enumerable: true,
+    get: function get() {
+        return _rewards3.selectRewardByType;
+    }
+});
+
+var _user3 = __webpack_require__(12);
+
+Object.defineProperty(exports, 'selectAuthenticationIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectAuthenticationIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectUserIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectUser', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUser;
+    }
+});
+Object.defineProperty(exports, 'selectUserEmail', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserEmail;
+    }
+});
+Object.defineProperty(exports, 'selectUserPhone', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserPhone;
+    }
+});
+Object.defineProperty(exports, 'selectUserCountryCode', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserCountryCode;
+    }
+});
+Object.defineProperty(exports, 'selectEmailToVerify', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectEmailToVerify;
+    }
+});
+Object.defineProperty(exports, 'selectPhoneToVerify', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectPhoneToVerify;
+    }
+});
+Object.defineProperty(exports, 'selectUserIsRewardApproved', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserIsRewardApproved;
+    }
+});
+Object.defineProperty(exports, 'selectEmailNewIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectEmailNewIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectEmailNewErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectEmailNewErrorMessage;
+    }
+});
+Object.defineProperty(exports, 'selectPhoneNewErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectPhoneNewErrorMessage;
+    }
+});
+Object.defineProperty(exports, 'selectEmailVerifyIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectEmailVerifyIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectEmailVerifyErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectEmailVerifyErrorMessage;
+    }
+});
+Object.defineProperty(exports, 'selectPhoneVerifyErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectPhoneVerifyErrorMessage;
+    }
+});
+Object.defineProperty(exports, 'selectIdentityVerifyIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectIdentityVerifyIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectIdentityVerifyErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectIdentityVerifyErrorMessage;
+    }
+});
+Object.defineProperty(exports, 'selectUserIsVerificationCandidate', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserIsVerificationCandidate;
+    }
+});
+Object.defineProperty(exports, 'selectAccessToken', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectAccessToken;
+    }
+});
+Object.defineProperty(exports, 'selectUserInviteStatusIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInviteStatusIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectUserInvitesRemaining', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInvitesRemaining;
+    }
+});
+Object.defineProperty(exports, 'selectUserInvitees', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInvitees;
+    }
+});
+Object.defineProperty(exports, 'selectUserInviteStatusFailed', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInviteStatusFailed;
+    }
+});
+Object.defineProperty(exports, 'selectUserInviteNewIsPending', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInviteNewIsPending;
+    }
+});
+Object.defineProperty(exports, 'selectUserInviteNewErrorMessage', {
+    enumerable: true,
+    get: function get() {
+        return _user3.selectUserInviteNewErrorMessage;
+    }
+});
+
+var _action_types = __webpack_require__(5);
+
+var LBRYINC_ACTIONS = _interopRequireWildcard(_action_types);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// constants
+exports.LBRYINC_ACTIONS = LBRYINC_ACTIONS;
+
+// Lbryio
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process, global) {
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -127,9 +490,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(3);
 
-var _querystring = __webpack_require__(5);
+var _auth = __webpack_require__(4);
+
+var _querystring = __webpack_require__(6);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
@@ -148,7 +513,6 @@ Lbryio.call = function (resource, action) {
   var method = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'get';
 
   if (!Lbryio.enabled) {
-    console.log(__('Internal API disabled'));
     return Promise.reject(new Error(__('LBRY internal API is disabled')));
   }
 
@@ -209,12 +573,12 @@ Lbryio.getAuthToken = function () {
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
     } else {
-      var store = global.store || (window.app ? window.app.store : null);
+      var store = window.store;
       if (store) {
         var state = store.getState();
         var token = state.auth ? state.auth.authToken : null;
         Lbryio.authToken = token;
-        return resolve(token);
+        resolve(token);
       }
 
       resolve(null);
@@ -259,11 +623,13 @@ Lbryio.authenticate = function () {
         }
 
         return _lbryRedux.Lbry.status().then(function (status) {
-          var store = global.store || (window.app ? window.app.store : null);
+          var store = window.store;
           if (store) {
-            store.dispatch(doNewInstallation(status.installation_id));
+            store.dispatch(doGenerateAuthToken(status.installation_id));
             return resolve();
           }
+
+          return reject();
         });
       }).then(resolve, reject);
     });
@@ -277,7 +643,7 @@ Lbryio.getStripeToken = function () {
 };
 
 exports.default = Lbryio;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2), __webpack_require__(3)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2)))
 
 /***/ }),
 /* 2 */
@@ -471,32 +837,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -6477,18 +6817,85 @@ var KEEP_DAEMON_RUNNING = exports.KEEP_DAEMON_RUNNING = 'keepDaemonRunning';
 });
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doGenerateAuthToken = doGenerateAuthToken;
+
+var _action_types = __webpack_require__(5);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryio = __webpack_require__(1);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function doGenerateAuthToken(installationId) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.GENERATE_AUTH_TOKEN_STARTED
+    });
+
+    _lbryio2.default.call('user', 'new', {
+      auth_token: '',
+      language: 'en',
+      app_id: installationId
+    }, 'post').then(function (response) {
+      if (!response.auth_token) {
+        dispatch({
+          type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+          data: { authToken: response.auth_token }
+        });
+      }
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
+      });
+    });
+  };
+}
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(6);
-exports.encode = exports.stringify = __webpack_require__(7);
-
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var GENERATE_AUTH_TOKEN_FAILURE = exports.GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
+var GENERATE_AUTH_TOKEN_STARTED = exports.GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
+var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.decode = exports.parse = __webpack_require__(7);
+exports.encode = exports.stringify = __webpack_require__(8);
+
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6579,7 +6986,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6669,6 +7076,1181 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doRewardList = doRewardList;
+exports.doClaimRewardType = doClaimRewardType;
+exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
+exports.doClaimRewardClearError = doClaimRewardClearError;
+
+var _action_types = __webpack_require__(5);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryio = __webpack_require__(1);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+var _lbryRedux = __webpack_require__(3);
+
+var _rewards = __webpack_require__(10);
+
+var _user = __webpack_require__(12);
+
+var _rewards2 = __webpack_require__(13);
+
+var _rewards3 = _interopRequireDefault(_rewards2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function doRewardList() {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.FETCH_REWARDS_STARTED
+    });
+
+    _lbryio2.default.call('reward', 'list', { multiple_rewards_per_type: true }).then(function (userRewards) {
+      dispatch({
+        type: ACTIONS.FETCH_REWARDS_COMPLETED,
+        data: { userRewards: userRewards }
+      });
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.FETCH_REWARDS_COMPLETED,
+        data: { userRewards: [] }
+      });
+    });
+  };
+}
+
+function doClaimRewardType(rewardType, options) {
+  return function (dispatch, getState) {
+    var state = getState();
+    var unclaimedRewards = (0, _rewards.selectUnclaimedRewards)(state);
+    var reward = unclaimedRewards.find(function (ur) {
+      return ur.reward_type === rewardType;
+    });
+    var userIsRewardApproved = (0, _user.selectUserIsRewardApproved)(state);
+
+    if (!reward || reward.transaction_id) {
+      // already claimed or doesn't exist, do nothing
+      return;
+    }
+
+    if (!userIsRewardApproved && rewardType !== _rewards3.default.TYPE_CONFIRM_EMAIL) {
+      var action = (0, _lbryRedux.doNotify)({
+        id: _lbryRedux.MODALS.REWARD_APPROVAL_REQUIRED,
+        isError: false
+      });
+      dispatch(action);
+
+      return;
+    }
+
+    dispatch({
+      type: ACTIONS.CLAIM_REWARD_STARTED,
+      data: { reward: reward }
+    });
+
+    var success = function success(successReward) {
+      dispatch({
+        type: ACTIONS.CLAIM_REWARD_SUCCESS,
+        data: {
+          reward: successReward
+        }
+      });
+      if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER) {
+        var _action = (0, _lbryRedux.doNotify)({
+          id: _lbryRedux.MODALS.FIRST_REWARD,
+          isError: false
+        });
+        dispatch(_action);
+      }
+    };
+
+    var failure = function failure(error) {
+      dispatch({
+        type: ACTIONS.CLAIM_REWARD_FAILURE,
+        data: {
+          reward: reward,
+          error: !options || !options.failSilently ? error : undefined
+        }
+      });
+    };
+
+    _rewards3.default.claimReward(rewardType).then(success, failure);
+  };
+}
+
+function doClaimEligiblePurchaseRewards() {
+  return function (dispatch, getState) {
+    var state = getState();
+    var unclaimedRewards = (0, _rewards.selectUnclaimedRewards)(state);
+    var userIsRewardApproved = (0, _user.selectUserIsRewardApproved)(state);
+
+    if (!userIsRewardApproved || !_lbryio2.default.enabled) {
+      return;
+    }
+
+    if (unclaimedRewards.find(function (ur) {
+      return ur.reward_type === _rewards3.default.TYPE_FIRST_STREAM;
+    })) {
+      dispatch(doClaimRewardType(_rewards3.default.TYPE_FIRST_STREAM));
+    } else {
+      [_rewards3.default.TYPE_MANY_DOWNLOADS, _rewards3.default.TYPE_FEATURED_DOWNLOAD].forEach(function (type) {
+        dispatch(doClaimRewardType(type, { failSilently: true }));
+      });
+    }
+  };
+}
+
+function doClaimRewardClearError(reward) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.CLAIM_REWARD_CLEAR_ERROR,
+      data: { reward: reward }
+    });
+  };
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
+
+var _reselect = __webpack_require__(11);
+
+var selectState = function selectState(state) {
+  return state.rewards || {};
+};
+
+var selectUnclaimedRewardsByType = exports.selectUnclaimedRewardsByType = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.unclaimedRewardsByType;
+});
+
+var selectClaimedRewardsById = exports.selectClaimedRewardsById = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.claimedRewardsById;
+});
+
+var selectClaimedRewards = exports.selectClaimedRewards = (0, _reselect.createSelector)(selectClaimedRewardsById, function (byId) {
+  return Object.values(byId) || [];
+});
+
+var selectClaimedRewardsByTransactionId = exports.selectClaimedRewardsByTransactionId = (0, _reselect.createSelector)(selectClaimedRewards, function (rewards) {
+  return rewards.reduce(function (mapParam, reward) {
+    var map = mapParam;
+    map[reward.transaction_id] = reward;
+    return map;
+  }, {});
+});
+
+var selectUnclaimedRewards = exports.selectUnclaimedRewards = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.unclaimedRewards;
+});
+
+var selectFetchingRewards = exports.selectFetchingRewards = (0, _reselect.createSelector)(selectState, function (state) {
+  return !!state.fetching;
+});
+
+var selectUnclaimedRewardValue = exports.selectUnclaimedRewardValue = (0, _reselect.createSelector)(selectUnclaimedRewards, function (rewards) {
+  return rewards.reduce(function (sum, reward) {
+    return sum + reward.reward_amount;
+  }, 0);
+});
+
+var selectClaimsPendingByType = exports.selectClaimsPendingByType = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.claimPendingByType;
+});
+
+var selectIsClaimRewardPending = function selectIsClaimRewardPending(state, props) {
+  return selectClaimsPendingByType(state, props)[props.reward_type];
+};
+
+var makeSelectIsRewardClaimPending = exports.makeSelectIsRewardClaimPending = function makeSelectIsRewardClaimPending() {
+  return (0, _reselect.createSelector)(selectIsClaimRewardPending, function (isClaiming) {
+    return isClaiming;
+  });
+};
+
+var selectClaimErrorsByType = exports.selectClaimErrorsByType = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.claimErrorsByType;
+});
+
+var selectClaimRewardError = function selectClaimRewardError(state, props) {
+  return selectClaimErrorsByType(state, props)[props.reward_type];
+};
+
+var makeSelectClaimRewardError = exports.makeSelectClaimRewardError = function makeSelectClaimRewardError() {
+  return (0, _reselect.createSelector)(selectClaimRewardError, function (errorMessage) {
+    return errorMessage;
+  });
+};
+
+var selectRewardByType = function selectRewardByType(state, rewardType) {
+  return selectUnclaimedRewards(state).find(function (reward) {
+    return reward.reward_type === rewardType;
+  });
+};
+
+var makeSelectRewardByType = exports.makeSelectRewardByType = function makeSelectRewardByType() {
+  return (0, _reselect.createSelector)(selectRewardByType, function (reward) {
+    return reward;
+  });
+};
+
+var makeSelectRewardAmountByType = exports.makeSelectRewardAmountByType = function makeSelectRewardAmountByType() {
+  return (0, _reselect.createSelector)(selectRewardByType, function (reward) {
+    return reward ? reward.reward_amount : 0;
+  });
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.defaultMemoize = defaultMemoize;
+exports.createSelectorCreator = createSelectorCreator;
+exports.createStructuredSelector = createStructuredSelector;
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = defaultMemoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
+
+var _reselect = __webpack_require__(11);
+
+var selectState = exports.selectState = function selectState(state) {
+  return state.user || {};
+};
+
+var selectAuthenticationIsPending = exports.selectAuthenticationIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.authenticationIsPending;
+});
+
+var selectUserIsPending = exports.selectUserIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.userIsPending;
+});
+
+var selectUser = exports.selectUser = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.user;
+});
+
+var selectUserEmail = exports.selectUserEmail = (0, _reselect.createSelector)(selectUser, function (user) {
+  return user ? user.primary_email : null;
+});
+
+var selectUserPhone = exports.selectUserPhone = (0, _reselect.createSelector)(selectUser, function (user) {
+  return user ? user.phone_number : null;
+});
+
+var selectUserCountryCode = exports.selectUserCountryCode = (0, _reselect.createSelector)(selectUser, function (user) {
+  return user ? user.country_code : null;
+});
+
+var selectEmailToVerify = exports.selectEmailToVerify = (0, _reselect.createSelector)(selectState, selectUserEmail, function (state, userEmail) {
+  return state.emailToVerify || userEmail;
+});
+
+var selectPhoneToVerify = exports.selectPhoneToVerify = (0, _reselect.createSelector)(selectState, selectUserPhone, function (state, userPhone) {
+  return state.phoneToVerify || userPhone;
+});
+
+var selectUserIsRewardApproved = exports.selectUserIsRewardApproved = (0, _reselect.createSelector)(selectUser, function (user) {
+  return user && user.is_reward_approved;
+});
+
+var selectEmailNewIsPending = exports.selectEmailNewIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.emailNewIsPending;
+});
+
+var selectEmailNewErrorMessage = exports.selectEmailNewErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.emailNewErrorMessage;
+});
+
+var selectPhoneNewErrorMessage = exports.selectPhoneNewErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.phoneNewErrorMessage;
+});
+
+var selectEmailVerifyIsPending = exports.selectEmailVerifyIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.emailVerifyIsPending;
+});
+
+var selectEmailVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.emailVerifyErrorMessage;
+});
+
+var selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.phoneVerifyErrorMessage;
+});
+
+var selectIdentityVerifyIsPending = exports.selectIdentityVerifyIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.identityVerifyIsPending;
+});
+
+var selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.identityVerifyErrorMessage;
+});
+
+var selectUserIsVerificationCandidate = exports.selectUserIsVerificationCandidate = (0, _reselect.createSelector)(selectUser, function (user) {
+  return user && (!user.has_verified_email || !user.is_identity_verified);
+});
+
+var selectAccessToken = exports.selectAccessToken = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.accessToken;
+});
+
+var selectUserInviteStatusIsPending = exports.selectUserInviteStatusIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.inviteStatusIsPending;
+});
+
+var selectUserInvitesRemaining = exports.selectUserInvitesRemaining = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.invitesRemaining;
+});
+
+var selectUserInvitees = exports.selectUserInvitees = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.invitees;
+});
+
+var selectUserInviteStatusFailed = exports.selectUserInviteStatusFailed = (0, _reselect.createSelector)(selectUserInvitesRemaining, function () {
+  return selectUserInvitesRemaining === null;
+});
+
+var selectUserInviteNewIsPending = exports.selectUserInviteNewIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.inviteNewIsPending;
+});
+
+var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.inviteNewErrorMessage;
+});
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _lbryRedux = __webpack_require__(3);
+
+var _lbryio = __webpack_require__(1);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rewards = {};
+
+rewards.TYPE_NEW_DEVELOPER = 'new_developer';
+rewards.TYPE_NEW_USER = 'new_user';
+rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
+rewards.TYPE_FIRST_CHANNEL = 'new_channel';
+rewards.TYPE_FIRST_STREAM = 'first_stream';
+rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
+rewards.TYPE_FIRST_PUBLISH = 'first_publish';
+rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
+rewards.TYPE_REFERRAL = 'referral';
+rewards.YOUTUBE_CREATOR = 'youtube_creator';
+
+rewards.claimReward = function (type) {
+  function requestReward(resolve, reject, params) {
+    if (!_lbryio2.default.enabled) {
+      reject(new Error(__('Rewards are not enabled.')));
+      return;
+    }
+    _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
+      var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
+
+      // Display global notice
+      var action = (0, _lbryRedux.doNotify)({
+        message: message,
+        linkText: __('Show All'),
+        linkTarget: '/rewards',
+        isError: false,
+        displayType: ['snackbar']
+      });
+      window.store.dispatch(action);
+
+      // Add more events here to display other places
+
+      resolve(reward);
+    }, reject);
+  }
+
+  return new Promise(function (resolve, reject) {
+    _lbryRedux.Lbry.wallet_unused_address().then(function (address) {
+      var params = {
+        reward_type: type,
+        wallet_address: address
+      };
+
+      switch (type) {
+        case rewards.TYPE_FIRST_CHANNEL:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.reverse().find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.category === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(new Error(__('Please create a channel identity first.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_PUBLISH:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.reverse().find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.category === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_STREAM:
+        case rewards.TYPE_NEW_USER:
+        default:
+          requestReward(resolve, reject, params);
+      }
+    });
+  });
+};
+
+exports.default = rewards;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doFetchInviteStatus = doFetchInviteStatus;
+exports.doInstallNew = doInstallNew;
+exports.doAuthenticate = doAuthenticate;
+exports.doUserFetch = doUserFetch;
+
+var _lbryRedux = __webpack_require__(3);
+
+var _rewards = __webpack_require__(9);
+
+function doFetchInviteStatus() {
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_STARTED
+    });
+
+    Lbryio.call('user', 'invite_status').then(function (status) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
+        data: {
+          invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
+          invitees: status.invitees
+        }
+      });
+    }).catch(function (error) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE,
+        data: { error: error }
+      });
+    });
+  };
+}
+
+function doInstallNew(appVersion) {
+  var deviceId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  var payload = { app_version: appVersion, device_id: deviceId };
+  _lbryRedux.Lbry.status().then(function (status) {
+    payload.app_id = status.installation_id;
+    payload.node_id = status.lbry_id;
+    _lbryRedux.Lbry.version().then(function (version) {
+      payload.daemon_version = version.lbrynet_version;
+      payload.operating_system = version.os_system;
+      payload.platform = version.platform;
+      Lbryio.call('install', 'new', payload);
+    });
+  });
+}
+
+// TODO: Call doInstallNew separately so we don't have to pass appVersion and deviceId params?
+function doAuthenticate(appVersion) {
+  var deviceId = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.AUTHENTICATION_STARTED
+    });
+    Lbryio.authenticate().then(function (user) {
+      //analytics.setUser(user);
+      dispatch({
+        type: _lbryRedux.ACTIONS.AUTHENTICATION_SUCCESS,
+        data: { user: user }
+      });
+      dispatch((0, _rewards.doRewardList)());
+      dispatch(doFetchInviteStatus());
+      doInstallNew(appVersion, deviceId);
+    }).catch(function (error) {
+      dispatch(doNotify({ id: MODALS.AUTHENTICATION_FAILURE }));
+      dispatch({
+        type: _lbryRedux.ACTIONS.AUTHENTICATION_FAILURE,
+        data: { error: error }
+      });
+    });
+  };
+}
+
+function doUserFetch() {
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_FETCH_STARTED
+    });
+    Lbryio.getCurrentUser().then(function (user) {
+      analytics.setUser(user);
+      dispatch((0, _rewards.doRewardList)());
+
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_FETCH_SUCCESS,
+        data: { user: user }
+      });
+    }).catch(function (error) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_FETCH_FAILURE,
+        data: { error: error }
+      });
+    });
+  };
+}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.authReducer = authReducer;
+
+var _action_types = __webpack_require__(5);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var reducers = {};
+var defaultState = {
+  authenticating: false
+};
+
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_FAILURE] = function (state) {
+  return Object.assign({}, state, {
+    authToken: null,
+    authenticating: false
+  });
+};
+
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    authenticating: true
+  });
+};
+
+reducers[ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    authToken: action.authToken,
+    authenticating: false
+  });
+};
+
+function authReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  var handler = reducers[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.rewardsReducer = rewardsReducer;
+
+var _lbryRedux = __webpack_require__(3);
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var reducers = {};
+var defaultState = {
+  fetching: false,
+  claimedRewardsById: {}, // id => reward
+  unclaimedRewards: [],
+  claimPendingByType: {},
+  claimErrorsByType: {}
+};
+
+reducers[_lbryRedux.ACTIONS.FETCH_REWARDS_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    fetching: true
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.FETCH_REWARDS_COMPLETED] = function (state, action) {
+  var userRewards = action.data.userRewards;
+
+
+  var unclaimedRewards = [];
+  var claimedRewards = {};
+  userRewards.forEach(function (reward) {
+    if (reward.transaction_id) {
+      claimedRewards[reward.id] = reward;
+    } else {
+      unclaimedRewards.push(reward);
+    }
+  });
+
+  return Object.assign({}, state, {
+    claimedRewardsById: claimedRewards,
+    unclaimedRewards: unclaimedRewards,
+    fetching: false
+  });
+};
+
+function setClaimRewardState(state, reward, isClaiming) {
+  var errorMessage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
+
+  var newClaimPendingByType = Object.assign({}, state.claimPendingByType);
+  var newClaimErrorsByType = Object.assign({}, state.claimErrorsByType);
+  if (isClaiming) {
+    newClaimPendingByType[reward.reward_type] = isClaiming;
+  } else {
+    delete newClaimPendingByType[reward.reward_type];
+  }
+  if (errorMessage) {
+    newClaimErrorsByType[reward.reward_type] = errorMessage;
+  } else {
+    delete newClaimErrorsByType[reward.reward_type];
+  }
+
+  return Object.assign({}, state, {
+    claimPendingByType: newClaimPendingByType,
+    claimErrorsByType: newClaimErrorsByType
+  });
+}
+
+reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_STARTED] = function (state, action) {
+  var reward = action.data.reward;
+
+
+  return setClaimRewardState(state, reward, true, '');
+};
+
+reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS] = function (state, action) {
+  var reward = action.data.reward;
+  var unclaimedRewards = state.unclaimedRewards;
+
+
+  var index = unclaimedRewards.findIndex(function (ur) {
+    return ur.reward_type === reward.reward_type;
+  });
+  unclaimedRewards.splice(index, 1);
+
+  var claimedRewardsById = state.claimedRewardsById;
+
+  claimedRewardsById[reward.id] = reward;
+
+  var newState = _extends({}, state, {
+    unclaimedRewards: [].concat(_toConsumableArray(unclaimedRewards)),
+    claimedRewardsById: _extends({}, claimedRewardsById)
+  });
+
+  return setClaimRewardState(newState, reward, false, '');
+};
+
+reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_FAILURE] = function (state, action) {
+  var _action$data = action.data,
+      reward = _action$data.reward,
+      error = _action$data.error;
+
+
+  return setClaimRewardState(state, reward, false, error ? error.message : '');
+};
+
+reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_CLEAR_ERROR] = function (state, action) {
+  var reward = action.data.reward;
+
+
+  return setClaimRewardState(state, reward, state.claimPendingByType[reward.reward_type], '');
+};
+
+function rewardsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  var handler = reducers[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.userReducer = userReducer;
+
+var _lbryRedux = __webpack_require__(3);
+
+var reducers = {};
+
+var defaultState = {
+  authenticationIsPending: false,
+  userIsPending: false,
+  emailNewIsPending: false,
+  emailNewErrorMessage: '',
+  emailToVerify: '',
+  inviteNewErrorMessage: '',
+  inviteNewIsPending: false,
+  inviteStatusIsPending: false,
+  invitesRemaining: undefined,
+  invitees: undefined,
+  user: undefined
+};
+
+reducers[_lbryRedux.ACTIONS.AUTHENTICATION_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    authenticationIsPending: true,
+    userIsPending: true,
+    user: defaultState.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.AUTHENTICATION_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    authenticationIsPending: false,
+    userIsPending: false,
+    user: action.data.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.AUTHENTICATION_FAILURE] = function (state) {
+  return Object.assign({}, state, {
+    authenticationIsPending: false,
+    userIsPending: false,
+    user: null
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_FETCH_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    userIsPending: true,
+    user: defaultState.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_FETCH_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    userIsPending: false,
+    user: action.data.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_FETCH_FAILURE] = function (state) {
+  return Object.assign({}, state, {
+    userIsPending: true,
+    user: null
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_NEW_STARTED] = function (state, action) {
+  var user = Object.assign({}, state.user);
+  user.country_code = action.data.country_code;
+  return Object.assign({}, state, {
+    phoneNewIsPending: true,
+    phoneNewErrorMessage: '',
+    user: user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_NEW_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    phoneToVerify: action.data.phone,
+    phoneNewIsPending: false
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_RESET] = function (state) {
+  return Object.assign({}, state, {
+    phoneToVerify: null
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_NEW_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    phoneNewIsPending: false,
+    phoneNewErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_VERIFY_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    phoneVerifyIsPending: true,
+    phoneVerifyErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    phoneToVerify: '',
+    phoneVerifyIsPending: false,
+    user: action.data.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_PHONE_VERIFY_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    phoneVerifyIsPending: false,
+    phoneVerifyErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_NEW_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    emailNewIsPending: true,
+    emailNewErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS] = function (state, action) {
+  var user = Object.assign({}, state.user);
+  user.primary_email = action.data.email;
+  return Object.assign({}, state, {
+    emailToVerify: action.data.email,
+    emailNewIsPending: false,
+    user: user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_NEW_EXISTS] = function (state, action) {
+  return Object.assign({}, state, {
+    emailToVerify: action.data.email,
+    emailNewIsPending: false
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_NEW_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    emailNewIsPending: false,
+    emailNewErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_VERIFY_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    emailVerifyIsPending: true,
+    emailVerifyErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SUCCESS] = function (state, action) {
+  var user = Object.assign({}, state.user);
+  user.primary_email = action.data.email;
+  return Object.assign({}, state, {
+    emailToVerify: '',
+    emailVerifyIsPending: false,
+    user: user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_VERIFY_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    emailVerifyIsPending: false,
+    emailVerifyErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    identityVerifyIsPending: true,
+    identityVerifyErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    identityVerifyIsPending: false,
+    identityVerifyErrorMessage: '',
+    user: action.data.user
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    identityVerifyIsPending: false,
+    identityVerifyErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS] = function (state, action) {
+  var token = action.data.token;
+
+
+  return Object.assign({}, state, {
+    accessToken: token
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    inviteStatusIsPending: true
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS] = function (state, action) {
+  return Object.assign({}, state, {
+    inviteStatusIsPending: false,
+    invitesRemaining: action.data.invitesRemaining,
+    invitees: action.data.invitees
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_NEW_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    inviteNewIsPending: true,
+    inviteNewErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_NEW_SUCCESS] = function (state) {
+  return Object.assign({}, state, {
+    inviteNewIsPending: false,
+    inviteNewErrorMessage: ''
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_NEW_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    inviteNewIsPending: false,
+    inviteNewErrorMessage: action.data.error.message
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE] = function (state) {
+  return Object.assign({}, state, {
+    inviteStatusIsPending: false,
+    invitesRemaining: null,
+    invitees: null
+  });
+};
+
+function userReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  var handler = reducers[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectAuthToken = undefined;
+
+var _reselect = __webpack_require__(11);
+
+var selectState = function selectState(state) {
+  return state.authToken || {};
+};
+
+var selectAuthToken = exports.selectAuthToken = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.authToken;
+});
 
 /***/ })
 /******/ ]);
