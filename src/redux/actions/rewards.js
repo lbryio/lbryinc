@@ -1,6 +1,5 @@
-import * as ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
-import { doNotify, MODALS } from 'lbry-redux';
+import { doNotify, ACTIONS, MODALS } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
 import rewards from 'rewards';

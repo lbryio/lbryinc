@@ -102,373 +102,370 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
-var _lbryio = __webpack_require__(1);
-
-Object.defineProperty(exports, 'Lbryio', {
-    enumerable: true,
-    get: function get() {
-        return _lbryio.Lbryio;
-    }
-});
-
-var _auth = __webpack_require__(4);
+var _auth = __webpack_require__(1);
 
 Object.defineProperty(exports, 'doGenerateAuthToken', {
-    enumerable: true,
-    get: function get() {
-        return _auth.doGenerateAuthToken;
-    }
+  enumerable: true,
+  get: function get() {
+    return _auth.doGenerateAuthToken;
+  }
 });
 
 var _rewards = __webpack_require__(9);
 
 Object.defineProperty(exports, 'doRewardList', {
-    enumerable: true,
-    get: function get() {
-        return _rewards.doRewardList;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards.doRewardList;
+  }
 });
 Object.defineProperty(exports, 'doClaimRewardType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards.doClaimRewardType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards.doClaimRewardType;
+  }
 });
 Object.defineProperty(exports, 'doClaimEligiblePurchaseRewards', {
-    enumerable: true,
-    get: function get() {
-        return _rewards.doClaimEligiblePurchaseRewards;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards.doClaimEligiblePurchaseRewards;
+  }
 });
 Object.defineProperty(exports, 'doClaimRewardClearError', {
-    enumerable: true,
-    get: function get() {
-        return _rewards.doClaimRewardClearError;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards.doClaimRewardClearError;
+  }
 });
 
 var _user = __webpack_require__(14);
 
 Object.defineProperty(exports, 'doFetchInviteStatus', {
-    enumerable: true,
-    get: function get() {
-        return _user.doFetchInviteStatus;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user.doFetchInviteStatus;
+  }
 });
 Object.defineProperty(exports, 'doInstallNew', {
-    enumerable: true,
-    get: function get() {
-        return _user.doInstallNew;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user.doInstallNew;
+  }
 });
 Object.defineProperty(exports, 'doAuthenticate', {
-    enumerable: true,
-    get: function get() {
-        return _user.doAuthenticate;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user.doAuthenticate;
+  }
 });
 Object.defineProperty(exports, 'doUserFetch', {
-    enumerable: true,
-    get: function get() {
-        return _user.doUserFetch;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user.doUserFetch;
+  }
 });
 
 var _auth2 = __webpack_require__(15);
 
 Object.defineProperty(exports, 'authReducer', {
-    enumerable: true,
-    get: function get() {
-        return _auth2.authReducer;
-    }
+  enumerable: true,
+  get: function get() {
+    return _auth2.authReducer;
+  }
 });
 
 var _rewards2 = __webpack_require__(16);
 
 Object.defineProperty(exports, 'rewardsReducer', {
-    enumerable: true,
-    get: function get() {
-        return _rewards2.rewardsReducer;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards2.rewardsReducer;
+  }
 });
 
 var _user2 = __webpack_require__(17);
 
 Object.defineProperty(exports, 'userReducer', {
-    enumerable: true,
-    get: function get() {
-        return _user2.userReducer;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user2.userReducer;
+  }
 });
 
 var _auth3 = __webpack_require__(18);
 
 Object.defineProperty(exports, 'selectAuthToken', {
-    enumerable: true,
-    get: function get() {
-        return _auth3.selectAuthToken;
-    }
+  enumerable: true,
+  get: function get() {
+    return _auth3.selectAuthToken;
+  }
 });
 
 var _rewards3 = __webpack_require__(10);
 
 Object.defineProperty(exports, 'makeSelectClaimRewardError', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.makeSelectClaimRewardError;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.makeSelectClaimRewardError;
+  }
 });
 Object.defineProperty(exports, 'makeSelectIsRewardClaimPending', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.makeSelectIsRewardClaimPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.makeSelectIsRewardClaimPending;
+  }
 });
 Object.defineProperty(exports, 'makeSelectRewardAmountByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.makeSelectRewardAmountByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.makeSelectRewardAmountByType;
+  }
 });
 Object.defineProperty(exports, 'makeSelectRewardByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.makeSelectRewardByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.makeSelectRewardByType;
+  }
 });
 Object.defineProperty(exports, 'selectUnclaimedRewardsByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectUnclaimedRewardsByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectUnclaimedRewardsByType;
+  }
 });
 Object.defineProperty(exports, 'selectClaimedRewardsById', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimedRewardsById;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimedRewardsById;
+  }
 });
 Object.defineProperty(exports, 'selectClaimedRewards', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimedRewards;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimedRewards;
+  }
 });
 Object.defineProperty(exports, 'selectClaimedRewardsByTransactionId', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimedRewardsByTransactionId;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimedRewardsByTransactionId;
+  }
 });
 Object.defineProperty(exports, 'selectUnclaimedRewards', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectUnclaimedRewards;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectUnclaimedRewards;
+  }
 });
 Object.defineProperty(exports, 'selectFetchingRewards', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectFetchingRewards;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectFetchingRewards;
+  }
 });
 Object.defineProperty(exports, 'selectUnclaimedRewardValue', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectUnclaimedRewardValue;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectUnclaimedRewardValue;
+  }
 });
 Object.defineProperty(exports, 'selectClaimsPendingByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimsPendingByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimsPendingByType;
+  }
 });
 Object.defineProperty(exports, 'selectIsClaimRewardPending', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectIsClaimRewardPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectIsClaimRewardPending;
+  }
 });
 Object.defineProperty(exports, 'selectClaimErrorsByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimErrorsByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimErrorsByType;
+  }
 });
 Object.defineProperty(exports, 'selectClaimRewardError', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectClaimRewardError;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectClaimRewardError;
+  }
 });
 Object.defineProperty(exports, 'selectRewardByType', {
-    enumerable: true,
-    get: function get() {
-        return _rewards3.selectRewardByType;
-    }
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectRewardByType;
+  }
 });
 
 var _user3 = __webpack_require__(12);
 
 Object.defineProperty(exports, 'selectAuthenticationIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectAuthenticationIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectAuthenticationIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectUserIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectUser', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUser;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUser;
+  }
 });
 Object.defineProperty(exports, 'selectUserEmail', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserEmail;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserEmail;
+  }
 });
 Object.defineProperty(exports, 'selectUserPhone', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserPhone;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserPhone;
+  }
 });
 Object.defineProperty(exports, 'selectUserCountryCode', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserCountryCode;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserCountryCode;
+  }
 });
 Object.defineProperty(exports, 'selectEmailToVerify', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectEmailToVerify;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectEmailToVerify;
+  }
 });
 Object.defineProperty(exports, 'selectPhoneToVerify', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectPhoneToVerify;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectPhoneToVerify;
+  }
 });
 Object.defineProperty(exports, 'selectUserIsRewardApproved', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserIsRewardApproved;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserIsRewardApproved;
+  }
 });
 Object.defineProperty(exports, 'selectEmailNewIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectEmailNewIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectEmailNewIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectEmailNewErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectEmailNewErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectEmailNewErrorMessage;
+  }
 });
 Object.defineProperty(exports, 'selectPhoneNewErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectPhoneNewErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectPhoneNewErrorMessage;
+  }
 });
 Object.defineProperty(exports, 'selectEmailVerifyIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectEmailVerifyIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectEmailVerifyIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectEmailVerifyErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectEmailVerifyErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectEmailVerifyErrorMessage;
+  }
 });
 Object.defineProperty(exports, 'selectPhoneVerifyErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectPhoneVerifyErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectPhoneVerifyErrorMessage;
+  }
 });
 Object.defineProperty(exports, 'selectIdentityVerifyIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectIdentityVerifyIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectIdentityVerifyIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectIdentityVerifyErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectIdentityVerifyErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectIdentityVerifyErrorMessage;
+  }
 });
 Object.defineProperty(exports, 'selectUserIsVerificationCandidate', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserIsVerificationCandidate;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserIsVerificationCandidate;
+  }
 });
 Object.defineProperty(exports, 'selectAccessToken', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectAccessToken;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectAccessToken;
+  }
 });
 Object.defineProperty(exports, 'selectUserInviteStatusIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInviteStatusIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInviteStatusIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectUserInvitesRemaining', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInvitesRemaining;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInvitesRemaining;
+  }
 });
 Object.defineProperty(exports, 'selectUserInvitees', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInvitees;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInvitees;
+  }
 });
 Object.defineProperty(exports, 'selectUserInviteStatusFailed', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInviteStatusFailed;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInviteStatusFailed;
+  }
 });
 Object.defineProperty(exports, 'selectUserInviteNewIsPending', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInviteNewIsPending;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInviteNewIsPending;
+  }
 });
 Object.defineProperty(exports, 'selectUserInviteNewErrorMessage', {
-    enumerable: true,
-    get: function get() {
-        return _user3.selectUserInviteNewErrorMessage;
-    }
+  enumerable: true,
+  get: function get() {
+    return _user3.selectUserInviteNewErrorMessage;
+  }
 });
 
-var _action_types = __webpack_require__(5);
+var _action_types = __webpack_require__(2);
 
 var LBRYINC_ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -477,8 +474,79 @@ exports.LBRYINC_ACTIONS = LBRYINC_ACTIONS;
 
 // Lbryio
 
+exports.Lbryio = _lbryio2.default;
+
+// actions
+
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doGenerateAuthToken = doGenerateAuthToken;
+
+var _action_types = __webpack_require__(2);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function doGenerateAuthToken(installationId) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.GENERATE_AUTH_TOKEN_STARTED
+    });
+
+    _lbryio2.default.call('user', 'new', {
+      auth_token: '',
+      language: 'en',
+      app_id: installationId
+    }, 'post').then(function (response) {
+      if (!response.auth_token) {
+        dispatch({
+          type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+          data: { authToken: response.auth_token }
+        });
+      }
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
+      });
+    });
+  };
+}
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var GENERATE_AUTH_TOKEN_FAILURE = exports.GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
+var GENERATE_AUTH_TOKEN_STARTED = exports.GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
+var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -490,9 +558,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
-var _auth = __webpack_require__(4);
+var _auth = __webpack_require__(1);
 
 var _querystring = __webpack_require__(6);
 
@@ -573,7 +641,9 @@ Lbryio.getAuthToken = function () {
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
     } else {
-      var store = window.store;
+      var _window = window,
+          store = _window.store;
+
       if (store) {
         var state = store.getState();
         var token = state.auth ? state.auth.authToken : null;
@@ -623,9 +693,11 @@ Lbryio.authenticate = function () {
         }
 
         return _lbryRedux.Lbry.status().then(function (status) {
-          var store = window.store;
+          var _window2 = window,
+              store = _window2.store;
+
           if (store) {
-            store.dispatch(doGenerateAuthToken(status.installation_id));
+            store.dispatch((0, _auth.doGenerateAuthToken)(status.installation_id));
             return resolve();
           }
 
@@ -643,10 +715,10 @@ Lbryio.getStripeToken = function () {
 };
 
 exports.default = Lbryio;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -836,7 +908,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 3 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -6817,73 +6889,6 @@ var KEEP_DAEMON_RUNNING = exports.KEEP_DAEMON_RUNNING = 'keepDaemonRunning';
 });
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.doGenerateAuthToken = doGenerateAuthToken;
-
-var _action_types = __webpack_require__(5);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _lbryio = __webpack_require__(1);
-
-var _lbryio2 = _interopRequireDefault(_lbryio);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function doGenerateAuthToken(installationId) {
-  return function (dispatch) {
-    dispatch({
-      type: ACTIONS.GENERATE_AUTH_TOKEN_STARTED
-    });
-
-    _lbryio2.default.call('user', 'new', {
-      auth_token: '',
-      language: 'en',
-      app_id: installationId
-    }, 'post').then(function (response) {
-      if (!response.auth_token) {
-        dispatch({
-          type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
-        });
-      } else {
-        dispatch({
-          type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
-          data: { authToken: response.auth_token }
-        });
-      }
-    }).catch(function () {
-      dispatch({
-        type: ACTIONS.GENERATE_AUTH_TOKEN_FAILURE
-      });
-    });
-  };
-}
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var GENERATE_AUTH_TOKEN_FAILURE = exports.GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
-var GENERATE_AUTH_TOKEN_STARTED = exports.GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
-var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7092,15 +7097,11 @@ exports.doClaimRewardType = doClaimRewardType;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 
-var _action_types = __webpack_require__(5);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _lbryio = __webpack_require__(1);
+var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
 var _rewards = __webpack_require__(10);
 
@@ -7112,22 +7113,20 @@ var _rewards3 = _interopRequireDefault(_rewards2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function doRewardList() {
   return function (dispatch) {
     dispatch({
-      type: ACTIONS.FETCH_REWARDS_STARTED
+      type: _lbryRedux.ACTIONS.FETCH_REWARDS_STARTED
     });
 
     _lbryio2.default.call('reward', 'list', { multiple_rewards_per_type: true }).then(function (userRewards) {
       dispatch({
-        type: ACTIONS.FETCH_REWARDS_COMPLETED,
+        type: _lbryRedux.ACTIONS.FETCH_REWARDS_COMPLETED,
         data: { userRewards: userRewards }
       });
     }).catch(function () {
       dispatch({
-        type: ACTIONS.FETCH_REWARDS_COMPLETED,
+        type: _lbryRedux.ACTIONS.FETCH_REWARDS_COMPLETED,
         data: { userRewards: [] }
       });
     });
@@ -7159,13 +7158,13 @@ function doClaimRewardType(rewardType, options) {
     }
 
     dispatch({
-      type: ACTIONS.CLAIM_REWARD_STARTED,
+      type: _lbryRedux.ACTIONS.CLAIM_REWARD_STARTED,
       data: { reward: reward }
     });
 
     var success = function success(successReward) {
       dispatch({
-        type: ACTIONS.CLAIM_REWARD_SUCCESS,
+        type: _lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
         data: {
           reward: successReward
         }
@@ -7181,7 +7180,7 @@ function doClaimRewardType(rewardType, options) {
 
     var failure = function failure(error) {
       dispatch({
-        type: ACTIONS.CLAIM_REWARD_FAILURE,
+        type: _lbryRedux.ACTIONS.CLAIM_REWARD_FAILURE,
         data: {
           reward: reward,
           error: !options || !options.failSilently ? error : undefined
@@ -7218,7 +7217,7 @@ function doClaimEligiblePurchaseRewards() {
 function doClaimRewardClearError(reward) {
   return function (dispatch) {
     dispatch({
-      type: ACTIONS.CLAIM_REWARD_CLEAR_ERROR,
+      type: _lbryRedux.ACTIONS.CLAIM_REWARD_CLEAR_ERROR,
       data: { reward: reward }
     });
   };
@@ -7582,9 +7581,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
-var _lbryio = __webpack_require__(1);
+var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
@@ -7690,9 +7689,15 @@ exports.doInstallNew = doInstallNew;
 exports.doAuthenticate = doAuthenticate;
 exports.doUserFetch = doUserFetch;
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
 var _rewards = __webpack_require__(9);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function doFetchInviteStatus() {
   return function (dispatch) {
@@ -7700,7 +7705,7 @@ function doFetchInviteStatus() {
       type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_STARTED
     });
 
-    Lbryio.call('user', 'invite_status').then(function (status) {
+    _lbryio2.default.call('user', 'invite_status').then(function (status) {
       dispatch({
         type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
         data: {
@@ -7728,7 +7733,7 @@ function doInstallNew(appVersion) {
       payload.daemon_version = version.lbrynet_version;
       payload.operating_system = version.os_system;
       payload.platform = version.platform;
-      Lbryio.call('install', 'new', payload);
+      _lbryio2.default.call('install', 'new', payload);
     });
   });
 }
@@ -7741,8 +7746,8 @@ function doAuthenticate(appVersion) {
     dispatch({
       type: _lbryRedux.ACTIONS.AUTHENTICATION_STARTED
     });
-    Lbryio.authenticate().then(function (user) {
-      //analytics.setUser(user);
+    _lbryio2.default.authenticate().then(function (user) {
+      // analytics.setUser(user);
       dispatch({
         type: _lbryRedux.ACTIONS.AUTHENTICATION_SUCCESS,
         data: { user: user }
@@ -7751,7 +7756,7 @@ function doAuthenticate(appVersion) {
       dispatch(doFetchInviteStatus());
       doInstallNew(appVersion, deviceId);
     }).catch(function (error) {
-      dispatch(doNotify({ id: MODALS.AUTHENTICATION_FAILURE }));
+      dispatch((0, _lbryRedux.doNotify)({ id: _lbryRedux.MODALS.AUTHENTICATION_FAILURE }));
       dispatch({
         type: _lbryRedux.ACTIONS.AUTHENTICATION_FAILURE,
         data: { error: error }
@@ -7765,8 +7770,8 @@ function doUserFetch() {
     dispatch({
       type: _lbryRedux.ACTIONS.USER_FETCH_STARTED
     });
-    Lbryio.getCurrentUser().then(function (user) {
-      analytics.setUser(user);
+    _lbryio2.default.getCurrentUser().then(function (user) {
+      // analytics.setUser(user);
       dispatch((0, _rewards.doRewardList)());
 
       dispatch({
@@ -7794,7 +7799,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.authReducer = authReducer;
 
-var _action_types = __webpack_require__(5);
+var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
@@ -7849,7 +7854,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.rewardsReducer = rewardsReducer;
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -7977,7 +7982,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userReducer = userReducer;
 
-var _lbryRedux = __webpack_require__(3);
+var _lbryRedux = __webpack_require__(5);
 
 var reducers = {};
 
