@@ -1,4 +1,5 @@
 import { ACTIONS, MODALS, Lbry, doNotify } from 'lbry-redux';
+import { selectEmailToVerify } from 'redux/selectors/user';
 import { doRewardList } from 'redux/actions/rewards';
 import Lbryio from 'lbryio';
 
@@ -89,5 +90,96 @@ export function doUserFetch() {
           data: { error },
         });
       });
+  };
+}
+
+export function doUserEmailNew(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_NEW_STARTED,
+      email,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email },
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error },
+      });
+    };
+
+    Lbryio.call('user_email', 'new', { email, send_verification_email: true }, 'post')
+      .catch(error => {
+        if (error.response && error.response.status === 409) {
+          return Lbryio.call(
+            'user_email',
+            'resend_token',
+            { email, only_if_expired: true },
+            'post'
+          ).then(success, failure);
+        }
+        throw error;
+      })
+      .then(success, failure);
+  };
+}
+
+export function doUserEmailVerifyFailure(error) {
+  return {
+    type: ACTIONS.USER_EMAIL_VERIFY_FAILURE,
+    data: { error },
+  };
+}
+
+export function doUserEmailVerify(verificationToken, recaptcha) {
+  return (dispatch, getState) => {
+    const email = selectEmailToVerify(getState());
+
+    dispatch({
+      type: ACTIONS.USER_EMAIL_VERIFY_STARTED,
+      code: verificationToken,
+      recaptcha,
+    });
+
+    Lbryio.call(
+      'user_email',
+      'confirm',
+      {
+        verification_token: verificationToken,
+        email,
+        recaptcha,
+      },
+      'post'
+    )
+      .then(userEmail => {
+        if (userEmail.is_verified) {
+          dispatch({
+            type: ACTIONS.USER_EMAIL_VERIFY_SUCCESS,
+            data: { email },
+          });
+          dispatch(doUserFetch());
+        } else {
+          throw new Error('Your email is still not verified.'); // shouldn't happen
+        }
+      })
+      .catch(error => dispatch(doUserEmailVerifyFailure(error)));
+  };
+}
+
+export function doFetchAccessToken() {
+  return dispatch => {
+    const success = token =>
+      dispatch({
+        type: ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS,
+        data: { token },
+      });
+    Lbryio.getAuthToken().then(success);
   };
 }

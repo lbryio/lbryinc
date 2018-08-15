@@ -15,7 +15,16 @@ export {
   doClaimEligiblePurchaseRewards,
   doClaimRewardClearError,
 } from 'redux/actions/rewards';
-export { doFetchInviteStatus, doInstallNew, doAuthenticate, doUserFetch } from 'redux/actions/user';
+export {
+  doFetchInviteStatus,
+  doInstallNew,
+  doAuthenticate,
+  doUserFetch,
+  doUserEmailNew,
+  doUserEmailVerifyFailure,
+  doUserEmailVerify,
+  doFetchAccessToken,
+} from 'redux/actions/user';
 
 // reducers
 export { authReducer } from 'redux/reducers/auth';
@@ -23,7 +32,7 @@ export { rewardsReducer } from 'redux/reducers/rewards';
 export { userReducer } from 'redux/reducers/user';
 
 // selectors
-export { selectAuthToken } from 'redux/selectors/auth';
+export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
 export {
   makeSelectClaimRewardError,
   makeSelectIsRewardClaimPending,

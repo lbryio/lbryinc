@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -168,6 +168,30 @@ Object.defineProperty(exports, 'doUserFetch', {
     return _user.doUserFetch;
   }
 });
+Object.defineProperty(exports, 'doUserEmailNew', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserEmailNew;
+  }
+});
+Object.defineProperty(exports, 'doUserEmailVerifyFailure', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserEmailVerifyFailure;
+  }
+});
+Object.defineProperty(exports, 'doUserEmailVerify', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserEmailVerify;
+  }
+});
+Object.defineProperty(exports, 'doFetchAccessToken', {
+  enumerable: true,
+  get: function get() {
+    return _user.doFetchAccessToken;
+  }
+});
 
 var _auth2 = __webpack_require__(15);
 
@@ -202,6 +226,12 @@ Object.defineProperty(exports, 'selectAuthToken', {
   enumerable: true,
   get: function get() {
     return _auth3.selectAuthToken;
+  }
+});
+Object.defineProperty(exports, 'selectIsAuthenticating', {
+  enumerable: true,
+  get: function get() {
+    return _auth3.selectIsAuthenticating;
   }
 });
 
@@ -703,7 +733,7 @@ Lbryio.authenticate = function () {
 
           return reject();
         });
-      }).then(resolve, reject);
+      }).then(Lbryio.getCurrentUser).then(resolve, reject);
     });
   }
 
@@ -7688,8 +7718,14 @@ exports.doFetchInviteStatus = doFetchInviteStatus;
 exports.doInstallNew = doInstallNew;
 exports.doAuthenticate = doAuthenticate;
 exports.doUserFetch = doUserFetch;
+exports.doUserEmailNew = doUserEmailNew;
+exports.doUserEmailVerifyFailure = doUserEmailVerifyFailure;
+exports.doUserEmailVerify = doUserEmailVerify;
+exports.doFetchAccessToken = doFetchAccessToken;
 
 var _lbryRedux = __webpack_require__(5);
+
+var _user = __webpack_require__(12);
 
 var _rewards = __webpack_require__(9);
 
@@ -7787,6 +7823,86 @@ function doUserFetch() {
   };
 }
 
+function doUserEmailNew(email) {
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_EMAIL_NEW_STARTED,
+      email: email
+    });
+
+    var success = function success() {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email: email }
+      });
+      dispatch(doUserFetch());
+    };
+
+    var failure = function failure(error) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error: error }
+      });
+    };
+
+    _lbryio2.default.call('user_email', 'new', { email: email, send_verification_email: true }, 'post').catch(function (error) {
+      if (error.response && error.response.status === 409) {
+        return _lbryio2.default.call('user_email', 'resend_token', { email: email, only_if_expired: true }, 'post').then(success, failure);
+      }
+      throw error;
+    }).then(success, failure);
+  };
+}
+
+function doUserEmailVerifyFailure(error) {
+  return {
+    type: _lbryRedux.ACTIONS.USER_EMAIL_VERIFY_FAILURE,
+    data: { error: error }
+  };
+}
+
+function doUserEmailVerify(verificationToken, recaptcha) {
+  return function (dispatch, getState) {
+    var email = (0, _user.selectEmailToVerify)(getState());
+
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_EMAIL_VERIFY_STARTED,
+      code: verificationToken,
+      recaptcha: recaptcha
+    });
+
+    _lbryio2.default.call('user_email', 'confirm', {
+      verification_token: verificationToken,
+      email: email,
+      recaptcha: recaptcha
+    }, 'post').then(function (userEmail) {
+      if (userEmail.is_verified) {
+        dispatch({
+          type: _lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SUCCESS,
+          data: { email: email }
+        });
+        dispatch(doUserFetch());
+      } else {
+        throw new Error('Your email is still not verified.'); // shouldn't happen
+      }
+    }).catch(function (error) {
+      return dispatch(doUserEmailVerifyFailure(error));
+    });
+  };
+}
+
+function doFetchAccessToken() {
+  return function (dispatch) {
+    var success = function success(token) {
+      return dispatch({
+        type: _lbryRedux.ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS,
+        data: { token: token }
+      });
+    };
+    _lbryio2.default.getAuthToken().then(success);
+  };
+}
+
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7825,7 +7941,7 @@ reducers[ACTIONS.GENERATE_AUTH_TOKEN_STARTED] = function (state) {
 
 reducers[ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS] = function (state, action) {
   return Object.assign({}, state, {
-    authToken: action.authToken,
+    authToken: action.data.authToken,
     authenticating: false
   });
 };
@@ -8245,16 +8361,20 @@ function userReducer() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectAuthToken = undefined;
+exports.selectIsAuthenticating = exports.selectAuthToken = undefined;
 
 var _reselect = __webpack_require__(11);
 
 var selectState = function selectState(state) {
-  return state.authToken || {};
+  return state.auth || {};
 };
 
 var selectAuthToken = exports.selectAuthToken = (0, _reselect.createSelector)(selectState, function (state) {
   return state.authToken;
+});
+
+var selectIsAuthenticating = exports.selectIsAuthenticating = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.authenticating;
 });
 
 /***/ })
