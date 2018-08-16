@@ -21,6 +21,7 @@ export {
   doAuthenticate,
   doUserFetch,
   doUserEmailNew,
+  doUserEmailToVerify,
   doUserEmailVerifyFailure,
   doUserEmailVerify,
   doFetchAccessToken,

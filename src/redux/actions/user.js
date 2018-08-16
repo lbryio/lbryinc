@@ -93,6 +93,15 @@ export function doUserFetch() {
   };
 }
 
+export function doUserEmailToVerify(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_VERIFY_SET,
+      data: { email },
+    });
+  };
+}
+
 export function doUserEmailNew(email) {
   return dispatch => {
     dispatch({

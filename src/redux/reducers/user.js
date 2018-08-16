@@ -151,6 +151,11 @@ reducers[ACTIONS.USER_EMAIL_VERIFY_FAILURE] = (state, action) =>
     emailVerifyErrorMessage: action.data.error,
   });
 
+reducers[ACTIONS.USER_EMAIL_VERIFY_SET] = (state, action) =>
+  Object.assign({}, state, {
+    emailToVerify: action.data.email,
+  });
+
 reducers[ACTIONS.USER_IDENTITY_VERIFY_STARTED] = state =>
   Object.assign({}, state, {
     identityVerifyIsPending: true,

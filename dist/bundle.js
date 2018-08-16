@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -172,6 +172,12 @@ Object.defineProperty(exports, 'doUserEmailNew', {
   enumerable: true,
   get: function get() {
     return _user.doUserEmailNew;
+  }
+});
+Object.defineProperty(exports, 'doUserEmailToVerify', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserEmailToVerify;
   }
 });
 Object.defineProperty(exports, 'doUserEmailVerifyFailure', {
@@ -1027,8 +1033,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectNavLinks = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = undefined;
-exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectRewardContentClaimIds = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectSnack = exports.selectNotificationProps = exports.selectNotification = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doSendSupport = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchRewardedContent = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doHideNotification = exports.doNotify = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.SETTINGS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.MODALS = exports.ACTIONS = exports.Notification = undefined;
+exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletState = exports.selectWalletIsEncrypted = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectNavLinks = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectRewardContentClaimIds = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = undefined;
+exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectSnack = exports.selectNotificationProps = exports.selectNotification = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doWalletStatus = exports.doWalletUnlock = exports.doWalletDecrypt = exports.doWalletEncrypt = exports.doSendSupport = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchRewardedContent = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doHideNotification = exports.doNotify = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.TRANSACTIONS = exports.SETTINGS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.MODALS = exports.ACTIONS = exports.Notification = undefined;
 
 var _Notification = __webpack_require__(1);
 
@@ -1168,7 +1174,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _cost_info = __webpack_require__(19);
+var _cost_info = __webpack_require__(21);
 
 Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   enumerable: true,
@@ -1177,7 +1183,7 @@ Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   }
 });
 
-var _file_info = __webpack_require__(20);
+var _file_info = __webpack_require__(22);
 
 Object.defineProperty(exports, 'doFetchFileInfo', {
   enumerable: true,
@@ -1198,7 +1204,7 @@ Object.defineProperty(exports, 'doFetchFileInfosAndPublishedClaims', {
   }
 });
 
-var _search = __webpack_require__(22);
+var _search = __webpack_require__(24);
 
 Object.defineProperty(exports, 'doSearch', {
   enumerable: true,
@@ -1225,7 +1231,7 @@ Object.defineProperty(exports, 'doBlurSearchInput', {
   }
 });
 
-var _blacklist = __webpack_require__(26);
+var _blacklist = __webpack_require__(27);
 
 Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   enumerable: true,
@@ -1234,7 +1240,7 @@ Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   }
 });
 
-var _wallet = __webpack_require__(27);
+var _wallet = __webpack_require__(28);
 
 Object.defineProperty(exports, 'doUpdateBalance', {
   enumerable: true,
@@ -1296,8 +1302,32 @@ Object.defineProperty(exports, 'doSendSupport', {
     return _wallet.doSendSupport;
   }
 });
+Object.defineProperty(exports, 'doWalletEncrypt', {
+  enumerable: true,
+  get: function get() {
+    return _wallet.doWalletEncrypt;
+  }
+});
+Object.defineProperty(exports, 'doWalletDecrypt', {
+  enumerable: true,
+  get: function get() {
+    return _wallet.doWalletDecrypt;
+  }
+});
+Object.defineProperty(exports, 'doWalletUnlock', {
+  enumerable: true,
+  get: function get() {
+    return _wallet.doWalletUnlock;
+  }
+});
+Object.defineProperty(exports, 'doWalletStatus', {
+  enumerable: true,
+  get: function get() {
+    return _wallet.doWalletStatus;
+  }
+});
 
-var _batchActions = __webpack_require__(18);
+var _batchActions = __webpack_require__(20);
 
 Object.defineProperty(exports, 'batchActions', {
   enumerable: true,
@@ -1321,7 +1351,7 @@ Object.defineProperty(exports, 'toQueryString', {
   }
 });
 
-var _formatCredits = __webpack_require__(29);
+var _formatCredits = __webpack_require__(31);
 
 Object.defineProperty(exports, 'formatCredits', {
   enumerable: true,
@@ -1336,7 +1366,7 @@ Object.defineProperty(exports, 'formatFullPrice', {
   }
 });
 
-var _claims2 = __webpack_require__(30);
+var _claims2 = __webpack_require__(32);
 
 Object.defineProperty(exports, 'claimsReducer', {
   enumerable: true,
@@ -1345,7 +1375,7 @@ Object.defineProperty(exports, 'claimsReducer', {
   }
 });
 
-var _cost_info2 = __webpack_require__(31);
+var _cost_info2 = __webpack_require__(33);
 
 Object.defineProperty(exports, 'costInfoReducer', {
   enumerable: true,
@@ -1354,7 +1384,7 @@ Object.defineProperty(exports, 'costInfoReducer', {
   }
 });
 
-var _file_info2 = __webpack_require__(32);
+var _file_info2 = __webpack_require__(34);
 
 Object.defineProperty(exports, 'fileInfoReducer', {
   enumerable: true,
@@ -1363,7 +1393,7 @@ Object.defineProperty(exports, 'fileInfoReducer', {
   }
 });
 
-var _notifications2 = __webpack_require__(33);
+var _notifications2 = __webpack_require__(35);
 
 Object.defineProperty(exports, 'notificationsReducer', {
   enumerable: true,
@@ -1372,7 +1402,7 @@ Object.defineProperty(exports, 'notificationsReducer', {
   }
 });
 
-var _search2 = __webpack_require__(35);
+var _search2 = __webpack_require__(37);
 
 Object.defineProperty(exports, 'searchReducer', {
   enumerable: true,
@@ -1381,7 +1411,7 @@ Object.defineProperty(exports, 'searchReducer', {
   }
 });
 
-var _wallet2 = __webpack_require__(37);
+var _wallet2 = __webpack_require__(39);
 
 Object.defineProperty(exports, 'walletReducer', {
   enumerable: true,
@@ -1390,7 +1420,7 @@ Object.defineProperty(exports, 'walletReducer', {
   }
 });
 
-var _blacklist2 = __webpack_require__(38);
+var _blacklist2 = __webpack_require__(40);
 
 Object.defineProperty(exports, 'blacklistReducer', {
   enumerable: true,
@@ -1399,7 +1429,7 @@ Object.defineProperty(exports, 'blacklistReducer', {
   }
 });
 
-var _blacklist3 = __webpack_require__(39);
+var _blacklist3 = __webpack_require__(41);
 
 Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   enumerable: true,
@@ -1408,7 +1438,7 @@ Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   }
 });
 
-var _notifications3 = __webpack_require__(40);
+var _notifications3 = __webpack_require__(42);
 
 Object.defineProperty(exports, 'selectNotification', {
   enumerable: true,
@@ -1495,6 +1525,24 @@ Object.defineProperty(exports, 'makeSelectTotalPagesForChannel', {
   enumerable: true,
   get: function get() {
     return _claims3.makeSelectTotalPagesForChannel;
+  }
+});
+Object.defineProperty(exports, 'makeSelectNsfwCountFromUris', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.makeSelectNsfwCountFromUris;
+  }
+});
+Object.defineProperty(exports, 'makeSelectNsfwCountForChannel', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.makeSelectNsfwCountForChannel;
+  }
+});
+Object.defineProperty(exports, 'makeSelectRecommendedContentForUri', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.makeSelectRecommendedContentForUri;
   }
 });
 Object.defineProperty(exports, 'selectClaimsById', {
@@ -1636,7 +1684,7 @@ Object.defineProperty(exports, 'selectRewardContentClaimIds', {
   }
 });
 
-var _cost_info3 = __webpack_require__(41);
+var _cost_info3 = __webpack_require__(43);
 
 Object.defineProperty(exports, 'makeSelectFetchingCostInfoForUri', {
   enumerable: true,
@@ -1669,7 +1717,7 @@ Object.defineProperty(exports, 'selectFetchingCostInfo', {
   }
 });
 
-var _file_info3 = __webpack_require__(21);
+var _file_info3 = __webpack_require__(23);
 
 Object.defineProperty(exports, 'makeSelectFileInfoForUri', {
   enumerable: true,
@@ -1831,7 +1879,7 @@ Object.defineProperty(exports, 'selectNavLinks', {
   }
 });
 
-var _search3 = __webpack_require__(24);
+var _search3 = __webpack_require__(18);
 
 Object.defineProperty(exports, 'makeSelectSearchUris', {
   enumerable: true,
@@ -1876,7 +1924,7 @@ Object.defineProperty(exports, 'selectSearchBarFocused', {
   }
 });
 
-var _wallet3 = __webpack_require__(28);
+var _wallet3 = __webpack_require__(29);
 
 Object.defineProperty(exports, 'makeSelectBlockDate', {
   enumerable: true,
@@ -1968,26 +2016,96 @@ Object.defineProperty(exports, 'selectBlocks', {
     return _wallet3.selectBlocks;
   }
 });
+Object.defineProperty(exports, 'selectWalletIsEncrypted', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletIsEncrypted;
+  }
+});
+Object.defineProperty(exports, 'selectWalletState', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletState;
+  }
+});
+Object.defineProperty(exports, 'selectWalletEncryptPending', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletEncryptPending;
+  }
+});
+Object.defineProperty(exports, 'selectWalletEncryptSucceeded', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletEncryptSucceeded;
+  }
+});
+Object.defineProperty(exports, 'selectWalletEncryptResult', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletEncryptResult;
+  }
+});
+Object.defineProperty(exports, 'selectWalletDecryptPending', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletDecryptPending;
+  }
+});
+Object.defineProperty(exports, 'selectWalletDecryptSucceeded', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletDecryptSucceeded;
+  }
+});
+Object.defineProperty(exports, 'selectWalletDecryptResult', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletDecryptResult;
+  }
+});
+Object.defineProperty(exports, 'selectWalletUnlockPending', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletUnlockPending;
+  }
+});
+Object.defineProperty(exports, 'selectWalletUnlockSucceeded', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletUnlockSucceeded;
+  }
+});
+Object.defineProperty(exports, 'selectWalletUnlockResult', {
+  enumerable: true,
+  get: function get() {
+    return _wallet3.selectWalletUnlockResult;
+  }
+});
 
 var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _modal_types = __webpack_require__(34);
+var _modal_types = __webpack_require__(36);
 
 var MODALS = _interopRequireWildcard(_modal_types);
 
-var _thumbnail_upload_statuses = __webpack_require__(42);
+var _thumbnail_upload_statuses = __webpack_require__(44);
 
 var THUMBNAIL_STATUSES = _interopRequireWildcard(_thumbnail_upload_statuses);
 
-var _search4 = __webpack_require__(23);
+var _search4 = __webpack_require__(25);
 
 var SEARCH_TYPES = _interopRequireWildcard(_search4);
 
-var _settings = __webpack_require__(43);
+var _settings = __webpack_require__(45);
 
 var SETTINGS = _interopRequireWildcard(_settings);
+
+var _transaction_types = __webpack_require__(30);
+
+var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
 var _lbry = __webpack_require__(6);
 
@@ -2007,6 +2125,7 @@ exports.MODALS = MODALS;
 exports.THUMBNAIL_STATUSES = THUMBNAIL_STATUSES;
 exports.SEARCH_TYPES = SEARCH_TYPES;
 exports.SETTINGS = SETTINGS;
+exports.TRANSACTIONS = TRANSACTIONS;
 
 // common
 
@@ -2375,6 +2494,7 @@ var SKIP_UPGRADE = exports.SKIP_UPGRADE = 'SKIP_UPGRADE';
 var START_UPGRADE = exports.START_UPGRADE = 'START_UPGRADE';
 var AUTO_UPDATE_DECLINED = exports.AUTO_UPDATE_DECLINED = 'AUTO_UPDATE_DECLINED';
 var AUTO_UPDATE_DOWNLOADED = exports.AUTO_UPDATE_DOWNLOADED = 'AUTO_UPDATE_DOWNLOADED';
+var CLEAR_UPGRADE_TIMER = exports.CLEAR_UPGRADE_TIMER = 'CLEAR_UPGRADE_TIMER';
 
 // Wallet
 var GET_NEW_ADDRESS_STARTED = exports.GET_NEW_ADDRESS_STARTED = 'GET_NEW_ADDRESS_STARTED';
@@ -2391,6 +2511,20 @@ var FETCH_BLOCK_SUCCESS = exports.FETCH_BLOCK_SUCCESS = 'FETCH_BLOCK_SUCCESS';
 var SUPPORT_TRANSACTION_STARTED = exports.SUPPORT_TRANSACTION_STARTED = 'SUPPORT_TRANSACTION_STARTED';
 var SUPPORT_TRANSACTION_COMPLETED = exports.SUPPORT_TRANSACTION_COMPLETED = 'SUPPORT_TRANSACTION_COMPLETED';
 var SUPPORT_TRANSACTION_FAILED = exports.SUPPORT_TRANSACTION_FAILED = 'SUPPORT_TRANSACTION_FAILED';
+var WALLET_ENCRYPT_START = exports.WALLET_ENCRYPT_START = 'WALLET_ENCRYPT_START';
+var WALLET_ENCRYPT_COMPLETED = exports.WALLET_ENCRYPT_COMPLETED = 'WALLET_ENCRYPT_COMPLETED';
+var WALLET_ENCRYPT_FAILED = exports.WALLET_ENCRYPT_FAILED = 'WALLET_ENCRYPT_FAILED';
+var WALLET_UNLOCK_START = exports.WALLET_UNLOCK_START = 'WALLET_UNLOCK_START';
+var WALLET_UNLOCK_COMPLETED = exports.WALLET_UNLOCK_COMPLETED = 'WALLET_UNLOCK_COMPLETED';
+var WALLET_UNLOCK_FAILED = exports.WALLET_UNLOCK_FAILED = 'WALLET_UNLOCK_FAILED';
+var WALLET_DECRYPT_START = exports.WALLET_DECRYPT_START = 'WALLET_DECRYPT_START';
+var WALLET_DECRYPT_COMPLETED = exports.WALLET_DECRYPT_COMPLETED = 'WALLET_DECRYPT_COMPLETED';
+var WALLET_DECRYPT_FAILED = exports.WALLET_DECRYPT_FAILED = 'WALLET_DECRYPT_FAILED';
+var WALLET_LOCK_START = exports.WALLET_LOCK_START = 'WALLET_LOCK_START';
+var WALLET_LOCK_COMPLETED = exports.WALLET_LOCK_COMPLETED = 'WALLET_LOCK_COMPLETED';
+var WALLET_LOCK_FAILED = exports.WALLET_LOCK_FAILED = 'WALLET_LOCK_FAILED';
+var WALLET_STATUS_START = exports.WALLET_STATUS_START = 'WALLET_STATUS_START';
+var WALLET_STATUS_COMPLETED = exports.WALLET_STATUS_COMPLETED = 'WALLET_STATUS_COMPLETED';
 
 // Claims
 var FETCH_FEATURED_CONTENT_STARTED = exports.FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
@@ -2462,6 +2596,7 @@ var USER_EMAIL_NEW_STARTED = exports.USER_EMAIL_NEW_STARTED = 'USER_EMAIL_NEW_ST
 var USER_EMAIL_NEW_SUCCESS = exports.USER_EMAIL_NEW_SUCCESS = 'USER_EMAIL_NEW_SUCCESS';
 var USER_EMAIL_NEW_EXISTS = exports.USER_EMAIL_NEW_EXISTS = 'USER_EMAIL_NEW_EXISTS';
 var USER_EMAIL_NEW_FAILURE = exports.USER_EMAIL_NEW_FAILURE = 'USER_EMAIL_NEW_FAILURE';
+var USER_EMAIL_VERIFY_SET = exports.USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 var USER_EMAIL_VERIFY_STARTED = exports.USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 var USER_EMAIL_VERIFY_SUCCESS = exports.USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 var USER_EMAIL_VERIFY_FAILURE = exports.USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
@@ -2588,7 +2723,7 @@ var _notifications = __webpack_require__(3);
 
 var _claims = __webpack_require__(14);
 
-var _batchActions = __webpack_require__(18);
+var _batchActions = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2931,6 +3066,16 @@ var daemonCallWithResult = function daemonCallWithResult(name) {
   });
 };
 
+// blobs
+Lbry.blob_delete = function () {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return daemonCallWithResult('blob_delete', params);
+};
+Lbry.blob_list = function () {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return daemonCallWithResult('blob_list', params);
+};
+
 // core
 Lbry.status = function () {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -2982,6 +3127,9 @@ Lbry.wallet_unlock = function () {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return daemonCallWithResult('wallet_unlock', params);
 };
+Lbry.wallet_lock = function () {
+  return daemonCallWithResult('wallet_lock', {});
+};
 
 // transactions
 Lbry.transaction_list = function () {
@@ -3013,12 +3161,9 @@ Lbry.connect = function () {
   return Lbry.connectPromise;
 };
 
-Lbry.getMediaType = function (contentType, fileName) {
-  if (contentType) {
-    return (/^[^/]+/.exec(contentType)[0]
-    );
-  } else if (fileName) {
-    var formats = [[/^.+\.(mp4|m4v|webm|flv|f4v|ogv)$/i, 'video'], [/^.+\.(mp3|m4a|aac|wav|flac|ogg|opus)$/i, 'audio'], [/^.+\.(html|htm|xml|pdf|odf|doc|docx|md|markdown|txt|epub|org)$/i, 'document'], [/^.+\.(stl|obj|fbx|gcode)$/i, '3D-file']];
+Lbry.getMediaType = function (contentType, extname) {
+  if (extname) {
+    var formats = [[/^(mp4|m4v|webm|flv|f4v|ogv)$/i, 'video'], [/^(mp3|m4a|aac|wav|flac|ogg|opus)$/i, 'audio'], [/^(html|htm|xml|pdf|odf|doc|docx|md|markdown|txt|epub|org)$/i, 'document'], [/^(stl|obj|fbx|gcode)$/i, '3D-file']];
     var res = formats.reduce(function (ret, testpair) {
       switch (testpair[0].test(ret)) {
         case true:
@@ -3026,8 +3171,11 @@ Lbry.getMediaType = function (contentType, fileName) {
         default:
           return ret;
       }
-    }, fileName);
-    return res === fileName ? 'unknown' : res;
+    }, extname);
+    return res === extname ? 'unknown' : res;
+  } else if (contentType) {
+    return (/^[^/]+/.exec(contentType)[0]
+    );
   }
   return 'unknown';
 };
@@ -3807,13 +3955,17 @@ var objectKeys = Object.keys || function (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectRewardContentClaimIds = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.makeSelectIsUriResolving = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectClaimsInChannelForPage = exports.makeSelectFetchingChannelClaims = exports.selectAllFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.makeSelectClaimForUri = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = undefined;
+exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.selectRewardContentClaimIds = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.makeSelectIsUriResolving = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectClaimsInChannelForPage = exports.makeSelectFetchingChannelClaims = exports.selectAllFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.makeSelectClaimForUri = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = undefined;
 
 var _lbryURI = __webpack_require__(2);
 
 var _navigation = __webpack_require__(15);
 
+var _search = __webpack_require__(18);
+
 var _reselect = __webpack_require__(16);
+
+var _claim = __webpack_require__(19);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -3989,7 +4141,7 @@ var selectMyChannelClaims = exports.selectMyChannelClaims = (0, _reselect.create
 
   ids.forEach(function (id) {
     if (byId[id]) {
-      // I'm not sure why this check is necessary, but it ought to be a quick fix for https://github.com/lbryio/lbry-app/issues/544
+      // I'm not sure why this check is necessary, but it ought to be a quick fix for https://github.com/lbryio/lbry-desktop/issues/544
       claims.push(byId[id]);
     }
   });
@@ -4046,6 +4198,57 @@ var makeSelectTotalPagesForChannel = exports.makeSelectTotalPagesForChannel = fu
 var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _reselect.createSelector)(selectState, function (state) {
   return state.rewardedContentClaimIds;
 });
+
+var makeSelectNsfwCountFromUris = exports.makeSelectNsfwCountFromUris = function makeSelectNsfwCountFromUris(uris) {
+  return (0, _reselect.createSelector)(selectClaimsByUri, function (claims) {
+    return uris.reduce(function (acc, uri) {
+      var claim = claims[uri];
+      if ((0, _claim.isClaimNsfw)(claim)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  });
+};
+
+var makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountForChannel = function makeSelectNsfwCountForChannel(uri) {
+  var pageSelector = (0, _navigation.makeSelectCurrentParam)('page');
+
+  return (0, _reselect.createSelector)(selectClaimsById, selectAllClaimsByChannel, pageSelector, function (byId, allClaims, page) {
+    var byChannel = allClaims[uri] || {};
+    var claimIds = byChannel[page || 1];
+
+    if (!claimIds) return 0;
+
+    return claimIds.reduce(function (acc, claimId) {
+      var claim = byId[claimId];
+      if ((0, _claim.isClaimNsfw)(claim)) {
+        return acc + 1;
+      }
+      return acc;
+    }, 0);
+  });
+};
+
+var makeSelectRecommendedContentForUri = exports.makeSelectRecommendedContentForUri = function makeSelectRecommendedContentForUri(uri) {
+  return (0, _reselect.createSelector)(makeSelectClaimForUri(uri), _search.selectSearchUrisByQuery, function (claim, searchUrisByQuery) {
+    var recommendedContent = void 0;
+
+    if (claim) {
+      var title = claim.value.stream.metadata.title;
+
+      var searchUris = searchUrisByQuery[title];
+      if (searchUris) {
+        searchUris = searchUris.filter(function (searchUri) {
+          return searchUri !== uri;
+        });
+        recommendedContent = searchUris;
+      }
+    }
+
+    return recommendedContent;
+  });
+};
 
 /***/ }),
 /* 15 */
@@ -4440,6 +4643,78 @@ function toQueryString(params) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.makeSelectSearchUris = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchQuery = exports.selectSearchValue = exports.selectState = undefined;
+
+var _navigation = __webpack_require__(15);
+
+var _reselect = __webpack_require__(16);
+
+var selectState = exports.selectState = function selectState(state) {
+  return state.search || {};
+};
+
+var selectSearchValue = exports.selectSearchValue = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.searchQuery;
+});
+
+var selectSearchQuery = exports.selectSearchQuery = (0, _reselect.createSelector)(_navigation.selectCurrentPage, _navigation.selectCurrentParams, function (page, params) {
+  return page === 'search' ? params && params.query : null;
+});
+
+var selectIsSearching = exports.selectIsSearching = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.searching;
+});
+
+var selectSearchUrisByQuery = exports.selectSearchUrisByQuery = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.urisByQuery;
+});
+
+var makeSelectSearchUris = exports.makeSelectSearchUris = function makeSelectSearchUris(query) {
+  return (
+    // replace statement below is kind of ugly, and repeated in doSearch action
+    (0, _reselect.createSelector)(selectSearchUrisByQuery, function (byQuery) {
+      return byQuery[query ? query.replace(/^lbry:\/\//i, '') : query];
+    })
+  );
+};
+
+var selectWunderBarAddress = exports.selectWunderBarAddress = (0, _reselect.createSelector)(_navigation.selectCurrentPage, selectSearchQuery, _navigation.selectCurrentParams, function (page, query, params) {
+  // only populate the wunderbar address if we are on the file/channel pages
+  // or show the search query
+  if (page === 'show') {
+    return params.uri;
+  }
+  return query;
+});
+
+var selectSearchBarFocused = exports.selectSearchBarFocused = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.focused;
+});
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var isClaimNsfw = exports.isClaimNsfw = function isClaimNsfw(claim) {
+  return claim && claim.value && claim.value.stream && claim.value.stream.metadata.nsfw;
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.batchActions = batchActions;
 // https://github.com/reactjs/redux/issues/911
 function batchActions() {
@@ -4454,7 +4729,7 @@ function batchActions() {
 }
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4514,7 +4789,7 @@ function doFetchCostInfoForUri(uri) {
 }
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4539,7 +4814,7 @@ var _claims = __webpack_require__(5);
 
 var _claims2 = __webpack_require__(14);
 
-var _file_info = __webpack_require__(21);
+var _file_info = __webpack_require__(23);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4607,7 +4882,7 @@ function doFetchFileInfosAndPublishedClaims() {
 }
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4814,7 +5089,7 @@ var selectSearchDownloadUris = exports.selectSearchDownloadUris = function selec
 };
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4829,7 +5104,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _search = __webpack_require__(23);
+var _search = __webpack_require__(25);
 
 var SEARCH_TYPES = _interopRequireWildcard(_search);
 
@@ -4837,11 +5112,11 @@ var _lbryURI = __webpack_require__(2);
 
 var _claims = __webpack_require__(5);
 
-var _search2 = __webpack_require__(24);
+var _search2 = __webpack_require__(18);
 
-var _batchActions = __webpack_require__(18);
+var _batchActions = __webpack_require__(20);
 
-var _handleFetch = __webpack_require__(25);
+var _handleFetch = __webpack_require__(26);
 
 var _handleFetch2 = _interopRequireDefault(_handleFetch);
 
@@ -4856,6 +5131,7 @@ var DEFAULTSEARCHRESULTFROM = 0;
 var doSearch = exports.doSearch = function doSearch(rawQuery) {
   var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
   var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
+  var isBackgroundSearch = arguments[3];
   return function (dispatch, getState) {
     var state = getState();
     var query = rawQuery.replace(/^lbry:\/\//i, '');
@@ -4880,7 +5156,8 @@ var doSearch = exports.doSearch = function doSearch(rawQuery) {
     // If the user is on the file page with a pre-populated uri and they select
     // the search option without typing anything, searchQuery will be empty
     // We need to populate it so the input is filled on the search page
-    if (!state.search.searchQuery) {
+    // isBackgroundSearch means the search is happening in the background, don't update the search query
+    if (!state.search.searchQuery && !isBackgroundSearch) {
       dispatch({
         type: ACTIONS.UPDATE_SEARCH_QUERY,
         data: { searchQuery: query }
@@ -5052,7 +5329,7 @@ var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput()
 };
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5066,65 +5343,7 @@ var CHANNEL = exports.CHANNEL = 'channel';
 var SEARCH = exports.SEARCH = 'search';
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.makeSelectSearchUris = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchQuery = exports.selectSearchValue = exports.selectState = undefined;
-
-var _navigation = __webpack_require__(15);
-
-var _reselect = __webpack_require__(16);
-
-var selectState = exports.selectState = function selectState(state) {
-  return state.search || {};
-};
-
-var selectSearchValue = exports.selectSearchValue = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.searchQuery;
-});
-
-var selectSearchQuery = exports.selectSearchQuery = (0, _reselect.createSelector)(_navigation.selectCurrentPage, _navigation.selectCurrentParams, function (page, params) {
-  return page === 'search' ? params && params.query : null;
-});
-
-var selectIsSearching = exports.selectIsSearching = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.searching;
-});
-
-var selectSearchUrisByQuery = exports.selectSearchUrisByQuery = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.urisByQuery;
-});
-
-var makeSelectSearchUris = exports.makeSelectSearchUris = function makeSelectSearchUris(query) {
-  return (
-    // replace statement below is kind of ugly, and repeated in doSearch action
-    (0, _reselect.createSelector)(selectSearchUrisByQuery, function (byQuery) {
-      return byQuery[query ? query.replace(/^lbry:\/\//i, '') : query];
-    })
-  );
-};
-
-var selectWunderBarAddress = exports.selectWunderBarAddress = (0, _reselect.createSelector)(_navigation.selectCurrentPage, selectSearchQuery, _navigation.selectCurrentParams, function (page, query, params) {
-  // only populate the wunderbar address if we are on the file/channel pages
-  // or show the search query
-  if (page === 'show') {
-    return params.uri;
-  }
-  return query;
-});
-
-var selectSearchBarFocused = exports.selectSearchBarFocused = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.focused;
-});
-
-/***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5139,7 +5358,7 @@ function handleFetchResponse(response) {
 }
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5222,7 +5441,7 @@ function doBlackListedOutpointsSubscribe() {
 }
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5241,6 +5460,11 @@ exports.doSendDraftTransaction = doSendDraftTransaction;
 exports.doSetDraftTransactionAmount = doSetDraftTransactionAmount;
 exports.doSetDraftTransactionAddress = doSetDraftTransactionAddress;
 exports.doSendSupport = doSendSupport;
+exports.doWalletEncrypt = doWalletEncrypt;
+exports.doWalletUnlock = doWalletUnlock;
+exports.doWalletLock = doWalletLock;
+exports.doWalletDecrypt = doWalletDecrypt;
+exports.doWalletStatus = doWalletStatus;
 
 var _action_types = __webpack_require__(4);
 
@@ -5252,7 +5476,7 @@ var _lbry2 = _interopRequireDefault(_lbry);
 
 var _notifications = __webpack_require__(3);
 
-var _wallet = __webpack_require__(28);
+var _wallet = __webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5486,8 +5710,113 @@ function doSendSupport(amount, claimId, uri, successCallback, errorCallback) {
   };
 }
 
+function doWalletEncrypt(newPassword) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.WALLET_ENCRYPT_START
+    });
+
+    _lbry2.default.wallet_encrypt({ new_password: newPassword }).then(function (result) {
+      if (result === true) {
+        dispatch({
+          type: ACTIONS.WALLET_ENCRYPT_COMPLETED,
+          result: result
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.WALLET_ENCRYPT_FAILED,
+          result: result
+        });
+      }
+    });
+  };
+}
+
+function doWalletUnlock(password) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.WALLET_UNLOCK_START
+    });
+
+    _lbry2.default.wallet_unlock({ password: password }).then(function (result) {
+      if (result === true) {
+        dispatch({
+          type: ACTIONS.WALLET_UNLOCK_COMPLETED,
+          result: result
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.WALLET_UNLOCK_FAILED,
+          result: result
+        });
+      }
+    });
+  };
+}
+
+function doWalletLock() {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.WALLET_LOCK_START
+    });
+
+    _lbry2.default.wallet_lock().then(function (result) {
+      if (result === true) {
+        dispatch({
+          type: ACTIONS.WALLET_LOCK_COMPLETED,
+          result: result
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.WALLET_LOCK_FAILED,
+          result: result
+        });
+      }
+    });
+  };
+}
+
+function doWalletDecrypt() {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.WALLET_DECRYPT_START
+    });
+
+    _lbry2.default.wallet_decrypt().then(function (result) {
+      if (result === true) {
+        dispatch({
+          type: ACTIONS.WALLET_DECRYPT_COMPLETED,
+          result: result
+        });
+      } else {
+        dispatch({
+          type: ACTIONS.WALLET_DECRYPT_FAILED,
+          result: result
+        });
+      }
+    });
+  };
+}
+
+function doWalletStatus() {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.WALLET_STATUS_START
+    });
+
+    _lbry2.default.status().then(function (status) {
+      if (status && status.wallet) {
+        dispatch({
+          type: ACTIONS.WALLET_STATUS_COMPLETED,
+          result: status.wallet.is_encrypted
+        });
+      }
+    });
+  };
+}
+
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5496,15 +5825,75 @@ function doSendSupport(amount, claimId, uri, successCallback, errorCallback) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeSelectBlockDate = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.selectState = undefined;
+exports.makeSelectBlockDate = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.selectWalletLockResult = exports.selectWalletLockSucceeded = exports.selectWalletLockPending = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletIsEncrypted = exports.selectWalletState = exports.selectState = undefined;
 
 var _reselect = __webpack_require__(16);
+
+var _transaction_types = __webpack_require__(30);
+
+var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var selectState = exports.selectState = function selectState(state) {
   return state.wallet || {};
 };
+
+var selectWalletState = exports.selectWalletState = selectState;
+
+var selectWalletIsEncrypted = exports.selectWalletIsEncrypted = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletIsEncrypted;
+});
+
+var selectWalletEncryptPending = exports.selectWalletEncryptPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletEncryptPending;
+});
+
+var selectWalletEncryptSucceeded = exports.selectWalletEncryptSucceeded = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletEncryptSucceded;
+});
+
+var selectWalletEncryptResult = exports.selectWalletEncryptResult = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletEncryptResult;
+});
+
+var selectWalletDecryptPending = exports.selectWalletDecryptPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletDecryptPending;
+});
+
+var selectWalletDecryptSucceeded = exports.selectWalletDecryptSucceeded = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletDecryptSucceded;
+});
+
+var selectWalletDecryptResult = exports.selectWalletDecryptResult = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletDecryptResult;
+});
+
+var selectWalletUnlockPending = exports.selectWalletUnlockPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletUnlockPending;
+});
+
+var selectWalletUnlockSucceeded = exports.selectWalletUnlockSucceeded = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletUnlockSucceded;
+});
+
+var selectWalletUnlockResult = exports.selectWalletUnlockResult = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletUnlockResult;
+});
+
+var selectWalletLockPending = exports.selectWalletLockPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletLockPending;
+});
+
+var selectWalletLockSucceeded = exports.selectWalletLockSucceeded = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletLockSucceded;
+});
+
+var selectWalletLockResult = exports.selectWalletLockResult = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.walletLockResult;
+});
 
 var selectBalance = exports.selectBalance = (0, _reselect.createSelector)(selectState, function (state) {
   return state.balance;
@@ -5522,7 +5911,7 @@ var selectTransactionItems = exports.selectTransactionItems = (0, _reselect.crea
 
     // ignore dust/fees
     // it is fee only txn if all infos are also empty
-    if (Math.abs(tx.value) === Math.abs(tx.fee) && tx.claim_info.length === 0 && tx.support_info.length === 0 && tx.update_info.length === 0) {
+    if (Math.abs(tx.value) === Math.abs(tx.fee) && tx.claim_info.length === 0 && tx.support_info.length === 0 && tx.update_info.length === 0 && tx.abandon_info.length === 0) {
       return;
     }
 
@@ -5530,21 +5919,24 @@ var selectTransactionItems = exports.selectTransactionItems = (0, _reselect.crea
 
     append.push.apply(append, _toConsumableArray(tx.claim_info.map(function (item) {
       return Object.assign({}, tx, item, {
-        type: item.claim_name[0] === '@' ? 'channel' : 'publish'
+        type: item.claim_name[0] === '@' ? TRANSACTIONS.CHANNEL : TRANSACTIONS.PUBLISH
       });
     })));
     append.push.apply(append, _toConsumableArray(tx.support_info.map(function (item) {
       return Object.assign({}, tx, item, {
-        type: !item.is_tip ? 'support' : 'tip'
+        type: !item.is_tip ? TRANSACTIONS.SUPPORT : TRANSACTIONS.TIP
       });
     })));
     append.push.apply(append, _toConsumableArray(tx.update_info.map(function (item) {
-      return Object.assign({}, tx, item, { type: 'update' });
+      return Object.assign({}, tx, item, { type: TRANSACTIONS.UPDATE });
+    })));
+    append.push.apply(append, _toConsumableArray(tx.abandon_info.map(function (item) {
+      return Object.assign({}, tx, item, { type: TRANSACTIONS.ABANDON });
     })));
 
     if (!append.length) {
       append.push(Object.assign({}, tx, {
-        type: tx.value < 0 ? 'spend' : 'receive'
+        type: tx.value < 0 ? TRANSACTIONS.SPEND : TRANSACTIONS.RECEIVE
       }));
     }
 
@@ -5560,7 +5952,7 @@ var selectTransactionItems = exports.selectTransactionItems = (0, _reselect.crea
         fee: amount < 0 ? -1 * tx.fee / append.length : 0,
         claim_id: item.claim_id,
         claim_name: item.claim_name,
-        type: item.type || 'send',
+        type: item.type || TRANSACTIONS.SPEND,
         nout: item.nout
       };
     })));
@@ -5623,7 +6015,27 @@ var makeSelectBlockDate = exports.makeSelectBlockDate = function makeSelectBlock
 };
 
 /***/ }),
-/* 29 */
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// eslint-disable-next-line import/prefer-default-export
+var SPEND = exports.SPEND = 'spend';
+var RECEIVE = exports.RECEIVE = 'receive';
+var PUBLISH = exports.PUBLISH = 'publish';
+var CHANNEL = exports.CHANNEL = 'channel';
+var TIP = exports.TIP = 'tip';
+var SUPPORT = exports.SUPPORT = 'support';
+var UPDATE = exports.UPDATE = 'update';
+var ABANDON = exports.ABANDON = 'abandon';
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5661,7 +6073,7 @@ function formatFullPrice(amount) {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5831,12 +6243,14 @@ reducers[ACTIONS.FETCH_CHANNEL_CLAIMS_COMPLETED] = function (state, action) {
   var currentPageClaimIds = [];
   var byId = Object.assign({}, state.byId);
   var fetchingChannelClaims = Object.assign({}, state.fetchingChannelClaims);
+  var claimsByUri = Object.assign({}, state.claimsByUri);
 
   if (claims !== undefined) {
     claims.forEach(function (claim) {
       allClaimIds.add(claim.claim_id);
       currentPageClaimIds.push(claim.claim_id);
       byId[claim.claim_id] = claim;
+      claimsByUri['lbry://' + claim.name + '#' + claim.claim_id] = claim.claim_id;
     });
   }
 
@@ -5848,7 +6262,8 @@ reducers[ACTIONS.FETCH_CHANNEL_CLAIMS_COMPLETED] = function (state, action) {
   return Object.assign({}, state, {
     claimsByChannel: claimsByChannel,
     byId: byId,
-    fetchingChannelClaims: fetchingChannelClaims
+    fetchingChannelClaims: fetchingChannelClaims,
+    claimsByUri: claimsByUri
   });
 };
 
@@ -5988,7 +6403,7 @@ function claimsReducer() {
 }
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6046,7 +6461,7 @@ function costInfoReducer() {
 }
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6055,6 +6470,9 @@ function costInfoReducer() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 exports.fileInfoReducer = fileInfoReducer;
 
 var _action_types = __webpack_require__(4);
@@ -6201,11 +6619,14 @@ reducers[ACTIONS.LOADING_VIDEO_STARTED] = function (state, action) {
 
 
   var newLoading = Object.assign({}, state.urisLoading);
-
   newLoading[uri] = true;
 
+  var newErrors = _extends({}, state.errors);
+  if (uri in newErrors) delete newErrors[uri];
+
   return Object.assign({}, state, {
-    urisLoading: newLoading
+    urisLoading: newLoading,
+    errors: _extends({}, newErrors)
   });
 };
 
@@ -6214,11 +6635,14 @@ reducers[ACTIONS.LOADING_VIDEO_FAILED] = function (state, action) {
 
 
   var newLoading = Object.assign({}, state.urisLoading);
-
   delete newLoading[uri];
 
+  var newErrors = _extends({}, state.errors);
+  newErrors[uri] = true;
+
   return Object.assign({}, state, {
-    urisLoading: newLoading
+    urisLoading: newLoading,
+    errors: _extends({}, newErrors)
   });
 };
 
@@ -6243,7 +6667,7 @@ function fileInfoReducer() {
 }
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6258,7 +6682,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _modal_types = __webpack_require__(34);
+var _modal_types = __webpack_require__(36);
 
 var MODALS = _interopRequireWildcard(_modal_types);
 
@@ -6329,7 +6753,7 @@ function notificationsReducer() {
 }
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6363,9 +6787,12 @@ var PUBLISH = exports.PUBLISH = 'publish';
 var SEARCH = exports.SEARCH = 'search';
 var CONFIRM_TRANSACTION = exports.CONFIRM_TRANSACTION = 'confirm_transaction';
 var CONFIRM_THUMBNAIL_UPLOAD = exports.CONFIRM_THUMBNAIL_UPLOAD = 'confirm_thumbnail_upload';
+var WALLET_ENCRYPT = exports.WALLET_ENCRYPT = 'wallet_encrypt';
+var WALLET_DECRYPT = exports.WALLET_DECRYPT = 'wallet_decrypt';
+var WALLET_UNLOCK = exports.WALLET_UNLOCK = 'wallet_unlock';
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6385,7 +6812,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(36);
+var _reduxUtils = __webpack_require__(38);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -6489,7 +6916,7 @@ var searchReducer = exports.searchReducer = (0, _reduxUtils.handleActions)((_han
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6522,7 +6949,7 @@ var handleActions = exports.handleActions = function handleActions(actionMap, de
 };
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6539,13 +6966,44 @@ var ACTIONS = _interopRequireWildcard(_action_types);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var reducers = {};
+var reducers = {}; // @flow
+
 var buildDraftTransaction = function buildDraftTransaction() {
   return {
     amount: undefined,
     address: undefined
   };
 };
+
+// TODO: Split into common success and failure types
+// See details in https://github.com/lbryio/lbry/issues/1307
+/*:: type ActionResult = {
+  type: any,
+  result: any,
+};*/
+/*:: type WalletState = {
+  balance: any,
+  blocks: any,
+  transactions: any,
+  fetchingTransactions: boolean,
+  gettingNewAddress: boolean,
+  draftTransaction: any,
+  sendingSupport: boolean,
+  walletIsEncrypted: boolean,
+  walletEncryptPending: boolean,
+  walletEncryptSucceded: ?boolean,
+  walletEncryptResult: ?boolean,
+  walletDecryptPending: boolean,
+  walletDecryptSucceded: ?boolean,
+  walletDecryptResult: ?boolean,
+  walletUnlockPending: boolean,
+  walletUnlockSucceded: ?boolean,
+  walletUnlockResult: ?boolean,
+  walletLockPending: boolean,
+  walletLockSucceded: ?boolean,
+  walletLockResult: ?boolean,
+};*/
+
 
 var defaultState = {
   balance: undefined,
@@ -6554,16 +7012,29 @@ var defaultState = {
   fetchingTransactions: false,
   gettingNewAddress: false,
   draftTransaction: buildDraftTransaction(),
-  sendingSupport: false
+  sendingSupport: false,
+  walletIsEncrypted: false,
+  walletEncryptPending: false,
+  walletEncryptSucceded: null,
+  walletEncryptResult: null,
+  walletDecryptPending: false,
+  walletDecryptSucceded: null,
+  walletDecryptResult: null,
+  walletUnlockPending: false,
+  walletUnlockSucceded: null,
+  walletUnlockResult: null,
+  walletLockPending: false,
+  walletLockSucceded: null,
+  walletLockResult: null
 };
 
-reducers[ACTIONS.FETCH_TRANSACTIONS_STARTED] = function (state) {
+reducers[ACTIONS.FETCH_TRANSACTIONS_STARTED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     fetchingTransactions: true
   });
 };
 
-reducers[ACTIONS.FETCH_TRANSACTIONS_COMPLETED] = function (state, action) {
+reducers[ACTIONS.FETCH_TRANSACTIONS_COMPLETED] = function (state /*: WalletState*/, action) {
   var byId = Object.assign({}, state.transactions);
 
   var transactions = action.data.transactions;
@@ -6579,13 +7050,13 @@ reducers[ACTIONS.FETCH_TRANSACTIONS_COMPLETED] = function (state, action) {
   });
 };
 
-reducers[ACTIONS.GET_NEW_ADDRESS_STARTED] = function (state) {
+reducers[ACTIONS.GET_NEW_ADDRESS_STARTED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     gettingNewAddress: true
   });
 };
 
-reducers[ACTIONS.GET_NEW_ADDRESS_COMPLETED] = function (state, action) {
+reducers[ACTIONS.GET_NEW_ADDRESS_COMPLETED] = function (state /*: WalletState*/, action) {
   var address = action.data.address;
 
   // Say no to localStorage!
@@ -6596,25 +7067,25 @@ reducers[ACTIONS.GET_NEW_ADDRESS_COMPLETED] = function (state, action) {
   });
 };
 
-reducers[ACTIONS.UPDATE_BALANCE] = function (state, action) {
+reducers[ACTIONS.UPDATE_BALANCE] = function (state /*: WalletState*/, action) {
   return Object.assign({}, state, {
     balance: action.data.balance
   });
 };
 
-reducers[ACTIONS.CHECK_ADDRESS_IS_MINE_STARTED] = function (state) {
+reducers[ACTIONS.CHECK_ADDRESS_IS_MINE_STARTED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     checkingAddressOwnership: true
   });
 };
 
-reducers[ACTIONS.CHECK_ADDRESS_IS_MINE_COMPLETED] = function (state) {
+reducers[ACTIONS.CHECK_ADDRESS_IS_MINE_COMPLETED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     checkingAddressOwnership: false
   });
 };
 
-reducers[ACTIONS.SET_DRAFT_TRANSACTION_AMOUNT] = function (state, action) {
+reducers[ACTIONS.SET_DRAFT_TRANSACTION_AMOUNT] = function (state /*: WalletState*/, action) {
   var oldDraft = state.draftTransaction;
   var newDraft = Object.assign({}, oldDraft, {
     amount: parseFloat(action.data.amount)
@@ -6625,7 +7096,7 @@ reducers[ACTIONS.SET_DRAFT_TRANSACTION_AMOUNT] = function (state, action) {
   });
 };
 
-reducers[ACTIONS.SET_DRAFT_TRANSACTION_ADDRESS] = function (state, action) {
+reducers[ACTIONS.SET_DRAFT_TRANSACTION_ADDRESS] = function (state /*: WalletState*/, action) {
   var oldDraft = state.draftTransaction;
   var newDraft = Object.assign({}, oldDraft, {
     address: action.data.address
@@ -6636,7 +7107,7 @@ reducers[ACTIONS.SET_DRAFT_TRANSACTION_ADDRESS] = function (state, action) {
   });
 };
 
-reducers[ACTIONS.SEND_TRANSACTION_STARTED] = function (state) {
+reducers[ACTIONS.SEND_TRANSACTION_STARTED] = function (state /*: WalletState*/) {
   var newDraftTransaction = Object.assign({}, state.draftTransaction, {
     sending: true
   });
@@ -6646,13 +7117,13 @@ reducers[ACTIONS.SEND_TRANSACTION_STARTED] = function (state) {
   });
 };
 
-reducers[ACTIONS.SEND_TRANSACTION_COMPLETED] = function (state) {
+reducers[ACTIONS.SEND_TRANSACTION_COMPLETED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     draftTransaction: buildDraftTransaction()
   });
 };
 
-reducers[ACTIONS.SEND_TRANSACTION_FAILED] = function (state, action) {
+reducers[ACTIONS.SEND_TRANSACTION_FAILED] = function (state /*: WalletState*/, action) {
   var newDraftTransaction = Object.assign({}, state.draftTransaction, {
     sending: false,
     error: action.data.error
@@ -6663,26 +7134,26 @@ reducers[ACTIONS.SEND_TRANSACTION_FAILED] = function (state, action) {
   });
 };
 
-reducers[ACTIONS.SUPPORT_TRANSACTION_STARTED] = function (state) {
+reducers[ACTIONS.SUPPORT_TRANSACTION_STARTED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     sendingSupport: true
   });
 };
 
-reducers[ACTIONS.SUPPORT_TRANSACTION_COMPLETED] = function (state) {
+reducers[ACTIONS.SUPPORT_TRANSACTION_COMPLETED] = function (state /*: WalletState*/) {
   return Object.assign({}, state, {
     sendingSupport: false
   });
 };
 
-reducers[ACTIONS.SUPPORT_TRANSACTION_FAILED] = function (state, action) {
+reducers[ACTIONS.SUPPORT_TRANSACTION_FAILED] = function (state /*: WalletState*/, action) {
   return Object.assign({}, state, {
     error: action.data.error,
     sendingSupport: false
   });
 };
 
-reducers[ACTIONS.FETCH_BLOCK_SUCCESS] = function (state, action) {
+reducers[ACTIONS.FETCH_BLOCK_SUCCESS] = function (state /*: WalletState*/, action) {
   var _action$data = action.data,
       block = _action$data.block,
       height = _action$data.block.height;
@@ -6692,6 +7163,108 @@ reducers[ACTIONS.FETCH_BLOCK_SUCCESS] = function (state, action) {
   blocks[height] = block;
 
   return Object.assign({}, state, { blocks: blocks });
+};
+
+reducers[ACTIONS.WALLET_STATUS_COMPLETED] = function (state /*: WalletState*/, action) {
+  return Object.assign({}, state, {
+    walletIsEncrypted: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_ENCRYPT_START] = function (state /*: WalletState*/) {
+  return Object.assign({}, state, {
+    walletEncryptPending: true,
+    walletEncryptSucceded: null,
+    walletEncryptResult: null
+  });
+};
+
+reducers[ACTIONS.WALLET_ENCRYPT_COMPLETED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletEncryptPending: false,
+    walletEncryptSucceded: true,
+    walletEncryptResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_ENCRYPT_FAILED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletEncryptPending: false,
+    walletEncryptSucceded: false,
+    walletEncryptResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_DECRYPT_START] = function (state /*: WalletState*/) {
+  return Object.assign({}, state, {
+    walletDecryptPending: true,
+    walletDecryptSucceded: null,
+    walletDecryptResult: null
+  });
+};
+
+reducers[ACTIONS.WALLET_DECRYPT_COMPLETED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletDecryptPending: false,
+    walletDecryptSucceded: true,
+    walletDecryptResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_DECRYPT_FAILED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletDecryptPending: false,
+    walletDecryptSucceded: false,
+    walletDecryptResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_UNLOCK_START] = function (state /*: WalletState*/) {
+  return Object.assign({}, state, {
+    walletUnlockPending: true,
+    walletUnlockSucceded: null,
+    walletUnlockResult: null
+  });
+};
+
+reducers[ACTIONS.WALLET_UNLOCK_COMPLETED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletUnlockPending: false,
+    walletUnlockSucceded: true,
+    walletUnlockResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_UNLOCK_FAILED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletUnlockPending: false,
+    walletUnlockSucceded: false,
+    walletUnlockResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_LOCK_START] = function (state /*: WalletState*/) {
+  return Object.assign({}, state, {
+    walletLockPending: false,
+    walletLockSucceded: null,
+    walletLockResult: null
+  });
+};
+
+reducers[ACTIONS.WALLET_LOCK_COMPLETED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletLockPending: false,
+    walletLockSucceded: true,
+    walletLockResult: action.result
+  });
+};
+
+reducers[ACTIONS.WALLET_LOCK_FAILED] = function (state /*: WalletState*/, action /*: ActionResult*/) {
+  return Object.assign({}, state, {
+    walletLockPending: false,
+    walletLockSucceded: false,
+    walletLockResult: action.result
+  });
 };
 
 function walletReducer() {
@@ -6704,7 +7277,7 @@ function walletReducer() {
 }
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6723,7 +7296,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(36);
+var _reduxUtils = __webpack_require__(38);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -6763,7 +7336,7 @@ var blacklistReducer = exports.blacklistReducer = (0, _reduxUtils.handleActions)
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6785,7 +7358,7 @@ var selectBlackListedOutpoints = exports.selectBlackListedOutpoints = (0, _resel
 });
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6825,7 +7398,7 @@ selectNotification, function (notification) {
 });
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6869,7 +7442,7 @@ var makeSelectFetchingCostInfoForUri = exports.makeSelectFetchingCostInfoForUri 
 };
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6885,7 +7458,7 @@ var COMPLETE = exports.COMPLETE = 'complete';
 var MANUAL = exports.MANUAL = 'manual';
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7718,6 +8291,7 @@ exports.doFetchInviteStatus = doFetchInviteStatus;
 exports.doInstallNew = doInstallNew;
 exports.doAuthenticate = doAuthenticate;
 exports.doUserFetch = doUserFetch;
+exports.doUserEmailToVerify = doUserEmailToVerify;
 exports.doUserEmailNew = doUserEmailNew;
 exports.doUserEmailVerifyFailure = doUserEmailVerifyFailure;
 exports.doUserEmailVerify = doUserEmailVerify;
@@ -7819,6 +8393,15 @@ function doUserFetch() {
         type: _lbryRedux.ACTIONS.USER_FETCH_FAILURE,
         data: { error: error }
       });
+    });
+  };
+}
+
+function doUserEmailToVerify(email) {
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SET,
+      data: { email: email }
     });
   };
 }
@@ -8265,6 +8848,12 @@ reducers[_lbryRedux.ACTIONS.USER_EMAIL_VERIFY_FAILURE] = function (state, action
   return Object.assign({}, state, {
     emailVerifyIsPending: false,
     emailVerifyErrorMessage: action.data.error
+  });
+};
+
+reducers[_lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SET] = function (state, action) {
+  return Object.assign({}, state, {
+    emailToVerify: action.data.email
   });
 };
 
