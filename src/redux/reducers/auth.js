@@ -18,7 +18,7 @@ reducers[ACTIONS.GENERATE_AUTH_TOKEN_STARTED] = state =>
 
 reducers[ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS] = (state, action) =>
   Object.assign({}, state, {
-    authToken: action.authToken,
+    authToken: action.data.authToken,
     authenticating: false,
   });
 

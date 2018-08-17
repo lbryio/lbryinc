@@ -127,6 +127,7 @@ Lbryio.authenticate = () => {
             return reject();
           });
         })
+        .then(Lbryio.getCurrentUser)
         .then(resolve, reject);
     });
   }
