@@ -1,11 +1,12 @@
 import * as LBRYINC_ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
+import rewards from 'rewards';
 
 // constants
 export { LBRYINC_ACTIONS };
 
-// Lbryio
-export { Lbryio };
+// Lbryio and rewards
+export { Lbryio, rewards };
 
 // actions
 export { doGenerateAuthToken } from 'redux/actions/auth';
