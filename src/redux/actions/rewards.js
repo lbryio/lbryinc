@@ -62,6 +62,7 @@ export function doClaimRewardType(rewardType, options) {
       });
       if (successReward.reward_type === rewards.TYPE_NEW_USER) {
         const action = doNotify({
+          message: 'You just earned your first reward!',
           id: MODALS.FIRST_REWARD,
           isError: false,
         });

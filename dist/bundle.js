@@ -7783,6 +7783,7 @@ function doClaimRewardType(rewardType, options) {
       });
       if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER) {
         var _action = (0, _lbryRedux.doNotify)({
+          message: 'You just earned your first reward!',
           id: _lbryRedux.MODALS.FIRST_REWARD,
           isError: false
         });
