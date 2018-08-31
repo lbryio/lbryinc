@@ -25,6 +25,10 @@ export {
   doUserEmailToVerify,
   doUserEmailVerifyFailure,
   doUserEmailVerify,
+  doUserPhoneNew,
+  doUserPhoneReset,
+  doUserPhoneVerifyFailure,
+  doUserPhoneVerify,
   doFetchAccessToken,
 } from 'redux/actions/user';
 
@@ -66,9 +70,11 @@ export {
   selectEmailNewIsPending,
   selectEmailNewErrorMessage,
   selectPhoneNewErrorMessage,
+  selectPhoneNewIsPending,
   selectEmailVerifyIsPending,
   selectEmailVerifyErrorMessage,
   selectPhoneVerifyErrorMessage,
+  selectPhoneVerifyIsPending,
   selectIdentityVerifyIsPending,
   selectIdentityVerifyErrorMessage,
   selectUserIsVerificationCandidate,
