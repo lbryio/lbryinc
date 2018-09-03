@@ -33,22 +33,22 @@ export function doFetchInviteStatus() {
   };
 }
 
-export function doInstallNew(appVersion, deviceId = null) {
-  const payload = { app_version: appVersion, device_id: deviceId };
+export function doInstallNew(appVersion, os = null) {
+  const payload = { app_version: appVersion };
   Lbry.status().then(status => {
     payload.app_id = status.installation_id;
     payload.node_id = status.lbry_id;
     Lbry.version().then(version => {
       payload.daemon_version = version.lbrynet_version;
-      payload.operating_system = version.os_system;
+      payload.operating_system = os || version.os_system;
       payload.platform = version.platform;
       Lbryio.call('install', 'new', payload);
     });
   });
 }
 
-// TODO: Call doInstallNew separately so we don't have to pass appVersion and deviceId params?
-export function doAuthenticate(appVersion, deviceId = null) {
+// TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
+export function doAuthenticate(appVersion, os = null) {
   return dispatch => {
     dispatch({
       type: ACTIONS.AUTHENTICATION_STARTED,
@@ -62,7 +62,7 @@ export function doAuthenticate(appVersion, deviceId = null) {
         });
         dispatch(doRewardList());
         dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, deviceId);
+        doInstallNew(appVersion, os);
       })
       .catch(error => {
         dispatch(doNotify({ id: MODALS.AUTHENTICATION_FAILURE }));
