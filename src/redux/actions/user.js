@@ -1,6 +1,11 @@
-import { ACTIONS, MODALS, Lbry, doNotify } from 'lbry-redux';
-import { selectEmailToVerify } from 'redux/selectors/user';
-import { doRewardList } from 'redux/actions/rewards';
+import { ACTIONS, MODALS, Lbry, doNotify, doHideNotification } from 'lbry-redux';
+import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
+import {
+  selectEmailToVerify,
+  selectPhoneToVerify,
+  selectUserCountryCode,
+} from 'redux/selectors/user';
+import rewards from 'rewards';
 import Lbryio from 'lbryio';
 
 export function doFetchInviteStatus() {
@@ -90,6 +95,83 @@ export function doUserFetch() {
           data: { error },
         });
       });
+  };
+}
+
+export function doUserPhoneReset() {
+  return {
+    type: ACTIONS.USER_PHONE_RESET,
+  };
+}
+
+export function doUserPhoneNew(phone, countryCode) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_PHONE_NEW_STARTED,
+      data: { phone, country_code: countryCode },
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_PHONE_NEW_SUCCESS,
+        data: { phone },
+      });
+    };
+
+    const failure = error => {
+      dispatch({
+        type: ACTIONS.USER_PHONE_NEW_FAILURE,
+        data: { error },
+      });
+    };
+
+    Lbryio.call(
+      'user',
+      'phone_number_new',
+      { phone_number: phone, country_code: countryCode },
+      'post'
+    ).then(success, failure);
+  };
+}
+
+export function doUserPhoneVerifyFailure(error) {
+  return {
+    type: ACTIONS.USER_PHONE_VERIFY_FAILURE,
+    data: { error },
+  };
+}
+
+export function doUserPhoneVerify(verificationCode) {
+  return (dispatch, getState) => {
+    const phoneNumber = selectPhoneToVerify(getState());
+    const countryCode = selectUserCountryCode(getState());
+
+    dispatch({
+      type: ACTIONS.USER_PHONE_VERIFY_STARTED,
+      code: verificationCode,
+    });
+
+    Lbryio.call(
+      'user',
+      'phone_number_confirm',
+      {
+        verification_code: verificationCode,
+        phone_number: phoneNumber,
+        country_code: countryCode,
+      },
+      'post'
+    )
+      .then(user => {
+        if (user.is_identity_verified) {
+          dispatch({
+            type: ACTIONS.USER_PHONE_VERIFY_SUCCESS,
+            data: { user },
+          });
+          dispatch(doHideNotification());
+          dispatch(doClaimRewardType(rewards.TYPE_NEW_USER));
+        }
+      })
+      .catch(error => dispatch(doUserPhoneVerifyFailure(error)));
   };
 }
 

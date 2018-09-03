@@ -68,6 +68,16 @@ export const selectEmailVerifyErrorMessage = createSelector(
   state => state.emailVerifyErrorMessage
 );
 
+export const selectPhoneNewIsPending = createSelector(
+  selectState,
+  state => state.phoneNewIsPending
+);
+
+export const selectPhoneVerifyIsPending = createSelector(
+  selectState,
+  state => state.phoneVerifyIsPending
+);
+
 export const selectPhoneVerifyErrorMessage = createSelector(
   selectState,
   state => state.phoneVerifyErrorMessage

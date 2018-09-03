@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -190,6 +190,30 @@ Object.defineProperty(exports, 'doUserEmailVerify', {
   enumerable: true,
   get: function get() {
     return _user.doUserEmailVerify;
+  }
+});
+Object.defineProperty(exports, 'doUserPhoneNew', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserPhoneNew;
+  }
+});
+Object.defineProperty(exports, 'doUserPhoneReset', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserPhoneReset;
+  }
+});
+Object.defineProperty(exports, 'doUserPhoneVerifyFailure', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserPhoneVerifyFailure;
+  }
+});
+Object.defineProperty(exports, 'doUserPhoneVerify', {
+  enumerable: true,
+  get: function get() {
+    return _user.doUserPhoneVerify;
   }
 });
 Object.defineProperty(exports, 'doFetchAccessToken', {
@@ -414,6 +438,12 @@ Object.defineProperty(exports, 'selectPhoneNewErrorMessage', {
     return _user3.selectPhoneNewErrorMessage;
   }
 });
+Object.defineProperty(exports, 'selectPhoneNewIsPending', {
+  enumerable: true,
+  get: function get() {
+    return _user3.selectPhoneNewIsPending;
+  }
+});
 Object.defineProperty(exports, 'selectEmailVerifyIsPending', {
   enumerable: true,
   get: function get() {
@@ -430,6 +460,12 @@ Object.defineProperty(exports, 'selectPhoneVerifyErrorMessage', {
   enumerable: true,
   get: function get() {
     return _user3.selectPhoneVerifyErrorMessage;
+  }
+});
+Object.defineProperty(exports, 'selectPhoneVerifyIsPending', {
+  enumerable: true,
+  get: function get() {
+    return _user3.selectPhoneVerifyIsPending;
   }
 });
 Object.defineProperty(exports, 'selectIdentityVerifyIsPending', {
@@ -8114,7 +8150,7 @@ function createStructuredSelector(selectors) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
 
 var _reselect = __webpack_require__(11);
 
@@ -8176,6 +8212,14 @@ var selectEmailVerifyIsPending = exports.selectEmailVerifyIsPending = (0, _resel
 
 var selectEmailVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
   return state.emailVerifyErrorMessage;
+});
+
+var selectPhoneNewIsPending = exports.selectPhoneNewIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.phoneNewIsPending;
+});
+
+var selectPhoneVerifyIsPending = exports.selectPhoneVerifyIsPending = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.phoneVerifyIsPending;
 });
 
 var selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
@@ -8340,6 +8384,10 @@ exports.doFetchInviteStatus = doFetchInviteStatus;
 exports.doInstallNew = doInstallNew;
 exports.doAuthenticate = doAuthenticate;
 exports.doUserFetch = doUserFetch;
+exports.doUserPhoneReset = doUserPhoneReset;
+exports.doUserPhoneNew = doUserPhoneNew;
+exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
+exports.doUserPhoneVerify = doUserPhoneVerify;
 exports.doUserEmailToVerify = doUserEmailToVerify;
 exports.doUserEmailNew = doUserEmailNew;
 exports.doUserEmailVerifyFailure = doUserEmailVerifyFailure;
@@ -8348,9 +8396,13 @@ exports.doFetchAccessToken = doFetchAccessToken;
 
 var _lbryRedux = __webpack_require__(5);
 
+var _rewards = __webpack_require__(9);
+
 var _user = __webpack_require__(12);
 
-var _rewards = __webpack_require__(9);
+var _rewards2 = __webpack_require__(13);
+
+var _rewards3 = _interopRequireDefault(_rewards2);
 
 var _lbryio = __webpack_require__(3);
 
@@ -8442,6 +8494,73 @@ function doUserFetch() {
         type: _lbryRedux.ACTIONS.USER_FETCH_FAILURE,
         data: { error: error }
       });
+    });
+  };
+}
+
+function doUserPhoneReset() {
+  return {
+    type: _lbryRedux.ACTIONS.USER_PHONE_RESET
+  };
+}
+
+function doUserPhoneNew(phone, countryCode) {
+  return function (dispatch) {
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_PHONE_NEW_STARTED,
+      data: { phone: phone, country_code: countryCode }
+    });
+
+    var success = function success() {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_PHONE_NEW_SUCCESS,
+        data: { phone: phone }
+      });
+    };
+
+    var failure = function failure(error) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.USER_PHONE_NEW_FAILURE,
+        data: { error: error }
+      });
+    };
+
+    _lbryio2.default.call('user', 'phone_number_new', { phone_number: phone, country_code: countryCode }, 'post').then(success, failure);
+  };
+}
+
+function doUserPhoneVerifyFailure(error) {
+  return {
+    type: _lbryRedux.ACTIONS.USER_PHONE_VERIFY_FAILURE,
+    data: { error: error }
+  };
+}
+
+function doUserPhoneVerify(verificationCode) {
+  return function (dispatch, getState) {
+    var phoneNumber = (0, _user.selectPhoneToVerify)(getState());
+    var countryCode = (0, _user.selectUserCountryCode)(getState());
+
+    dispatch({
+      type: _lbryRedux.ACTIONS.USER_PHONE_VERIFY_STARTED,
+      code: verificationCode
+    });
+
+    _lbryio2.default.call('user', 'phone_number_confirm', {
+      verification_code: verificationCode,
+      phone_number: phoneNumber,
+      country_code: countryCode
+    }, 'post').then(function (user) {
+      if (user.is_identity_verified) {
+        dispatch({
+          type: _lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS,
+          data: { user: user }
+        });
+        dispatch((0, _lbryRedux.doHideNotification)());
+        dispatch((0, _rewards.doClaimRewardType)(_rewards3.default.TYPE_NEW_USER));
+      }
+    }).catch(function (error) {
+      return dispatch(doUserPhoneVerifyFailure(error));
     });
   };
 }
