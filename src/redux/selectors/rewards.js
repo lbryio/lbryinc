@@ -62,3 +62,8 @@ export const makeSelectRewardByType = () => createSelector(selectRewardByType, r
 
 export const makeSelectRewardAmountByType = () =>
   createSelector(selectRewardByType, reward => (reward ? reward.reward_amount : 0));
+
+export const selectRewardContentClaimIds = createSelector(
+  selectState,
+  state => state.rewardedContentClaimIds
+);

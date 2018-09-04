@@ -15,6 +15,7 @@ export {
   doClaimRewardType,
   doClaimEligiblePurchaseRewards,
   doClaimRewardClearError,
+  doFetchRewardedContent,
 } from 'redux/actions/rewards';
 export {
   doFetchInviteStatus,
@@ -56,6 +57,7 @@ export {
   selectClaimErrorsByType,
   selectClaimRewardError,
   selectRewardByType,
+  selectRewardContentClaimIds,
 } from 'redux/selectors/rewards';
 export {
   selectAuthenticationIsPending,

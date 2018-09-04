@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -139,6 +139,12 @@ Object.defineProperty(exports, 'doClaimRewardClearError', {
   enumerable: true,
   get: function get() {
     return _rewards.doClaimRewardClearError;
+  }
+});
+Object.defineProperty(exports, 'doFetchRewardedContent', {
+  enumerable: true,
+  get: function get() {
+    return _rewards.doFetchRewardedContent;
   }
 });
 
@@ -361,6 +367,12 @@ Object.defineProperty(exports, 'selectRewardByType', {
   enumerable: true,
   get: function get() {
     return _rewards3.selectRewardByType;
+  }
+});
+Object.defineProperty(exports, 'selectRewardContentClaimIds', {
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectRewardContentClaimIds;
   }
 });
 
@@ -7783,6 +7795,7 @@ exports.doRewardList = doRewardList;
 exports.doClaimRewardType = doClaimRewardType;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
+exports.doFetchRewardedContent = doFetchRewardedContent;
 
 var _lbryio = __webpack_require__(3);
 
@@ -7911,6 +7924,32 @@ function doClaimRewardClearError(reward) {
   };
 }
 
+function doFetchRewardedContent() {
+  return function (dispatch) {
+    var success = function success(nameToClaimId) {
+      dispatch({
+        type: _lbryRedux.ACTIONS.FETCH_REWARD_CONTENT_COMPLETED,
+        data: {
+          claimIds: Object.values(nameToClaimId),
+          success: true
+        }
+      });
+    };
+
+    var failure = function failure() {
+      dispatch({
+        type: _lbryRedux.ACTIONS.FETCH_REWARD_CONTENT_COMPLETED,
+        data: {
+          claimIds: [],
+          success: false
+        }
+      });
+    };
+
+    _lbryio2.default.call('reward', 'list_featured').then(success, failure);
+  };
+}
+
 /***/ }),
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -7921,7 +7960,7 @@ function doClaimRewardClearError(reward) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
+exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
 
 var _reselect = __webpack_require__(11);
 
@@ -8008,6 +8047,10 @@ var makeSelectRewardAmountByType = exports.makeSelectRewardAmountByType = functi
     return reward ? reward.reward_amount : 0;
   });
 };
+
+var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.rewardedContentClaimIds;
+});
 
 /***/ }),
 /* 11 */
@@ -8434,7 +8477,7 @@ function doFetchInviteStatus() {
 }
 
 function doInstallNew(appVersion) {
-  var os_system = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   var payload = { app_version: appVersion };
   _lbryRedux.Lbry.status().then(function (status) {
@@ -8442,7 +8485,7 @@ function doInstallNew(appVersion) {
     payload.node_id = status.lbry_id;
     _lbryRedux.Lbry.version().then(function (version) {
       payload.daemon_version = version.lbrynet_version;
-      payload.operating_system = os_system || version.os_system;
+      payload.operating_system = os || version.os_system;
       payload.platform = version.platform;
       _lbryio2.default.call('install', 'new', payload);
     });
@@ -8451,7 +8494,7 @@ function doInstallNew(appVersion) {
 
 // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 function doAuthenticate(appVersion) {
-  var os_system = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
   return function (dispatch) {
     dispatch({
@@ -8465,7 +8508,7 @@ function doAuthenticate(appVersion) {
       });
       dispatch((0, _rewards.doRewardList)());
       dispatch(doFetchInviteStatus());
-      doInstallNew(appVersion, os_system);
+      doInstallNew(appVersion, os);
     }).catch(function (error) {
       dispatch((0, _lbryRedux.doNotify)({ id: _lbryRedux.MODALS.AUTHENTICATION_FAILURE }));
       dispatch({
@@ -8731,7 +8774,8 @@ var defaultState = {
   claimedRewardsById: {}, // id => reward
   unclaimedRewards: [],
   claimPendingByType: {},
-  claimErrorsByType: {}
+  claimErrorsByType: {},
+  rewardedContentClaimIds: []
 };
 
 reducers[_lbryRedux.ACTIONS.FETCH_REWARDS_STARTED] = function (state) {
@@ -8826,6 +8870,15 @@ reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_CLEAR_ERROR] = function (state, action)
 
 
   return setClaimRewardState(state, reward, state.claimPendingByType[reward.reward_type], '');
+};
+
+reducers[_lbryRedux.ACTIONS.FETCH_REWARD_CONTENT_COMPLETED] = function (state, action) {
+  var claimIds = action.data.claimIds;
+
+
+  return Object.assign({}, state, {
+    rewardedContentClaimIds: claimIds
+  });
 };
 
 function rewardsReducer() {

@@ -7,6 +7,7 @@ const defaultState = {
   unclaimedRewards: [],
   claimPendingByType: {},
   claimErrorsByType: {},
+  rewardedContentClaimIds: [],
 };
 
 reducers[ACTIONS.FETCH_REWARDS_STARTED] = state =>
@@ -89,6 +90,14 @@ reducers[ACTIONS.CLAIM_REWARD_CLEAR_ERROR] = (state, action) => {
   const { reward } = action.data;
 
   return setClaimRewardState(state, reward, state.claimPendingByType[reward.reward_type], '');
+};
+
+reducers[ACTIONS.FETCH_REWARD_CONTENT_COMPLETED] = (state, action) => {
+  const { claimIds } = action.data;
+
+  return Object.assign({}, state, {
+    rewardedContentClaimIds: claimIds,
+  });
 };
 
 export function rewardsReducer(state = defaultState, action) {
