@@ -222,6 +222,38 @@ export function doUserEmailNew(email) {
   };
 }
 
+export function doUserResendVerificationEmail(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_VERIFY_RETRY,
+      email,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email },
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error },
+      });
+    };
+
+    Lbryio.call('user_email', 'resend_token', { email }, 'post')
+      .catch(error => {
+        if (error.response && error.response.status === 409) {
+          throw error;
+        }
+      })
+      .then(success, failure);
+  };
+}
+
 export function doUserEmailVerifyFailure(error) {
   return {
     type: ACTIONS.USER_EMAIL_VERIFY_FAILURE,
@@ -272,5 +304,64 @@ export function doFetchAccessToken() {
         data: { token },
       });
     Lbryio.getAuthToken().then(success);
+  };
+}
+
+export function doUserIdentityVerify(stripeToken) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_IDENTITY_VERIFY_STARTED,
+      token: stripeToken,
+    });
+
+    Lbryio.call('user', 'verify_identity', { stripe_token: stripeToken }, 'post')
+      .then(user => {
+        if (user.is_identity_verified) {
+          dispatch({
+            type: ACTIONS.USER_IDENTITY_VERIFY_SUCCESS,
+            data: { user },
+          });
+          dispatch(doClaimRewardType(rewards.TYPE_NEW_USER));
+        } else {
+          throw new Error('Your identity is still not verified. This should not happen.'); // shouldn't happen
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_IDENTITY_VERIFY_FAILURE,
+          data: { error: error.toString() },
+        });
+      });
+  };
+}
+
+export function doUserInviteNew(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_INVITE_NEW_STARTED,
+    });
+
+    Lbryio.call('user', 'invite', { email }, 'post')
+      .then(() => {
+        dispatch({
+          type: ACTIONS.USER_INVITE_NEW_SUCCESS,
+          data: { email },
+        });
+
+        dispatch(
+          doNotify({
+            displayType: ['snackbar'],
+            message: __('Invite sent to %s', email),
+          })
+        );
+
+        dispatch(doFetchInviteStatus());
+      })
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_INVITE_NEW_FAILURE,
+          data: { error },
+        });
+      });
   };
 }

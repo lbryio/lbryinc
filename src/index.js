@@ -31,6 +31,9 @@ export {
   doUserPhoneVerifyFailure,
   doUserPhoneVerify,
   doFetchAccessToken,
+  doUserResendVerificationEmail,
+  doUserIdentityVerify,
+  doUserInviteNew,
 } from 'redux/actions/user';
 
 // reducers
