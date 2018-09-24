@@ -70,6 +70,10 @@ Lbryio.getAuthToken = () =>
   new Promise(resolve => {
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
+    } else if (Lbryio.overrides.getAuthToken) {
+      Lbryio.overrides.getAuthToken().then(token => {
+        resolve(token);
+      });
     } else {
       const { store } = window;
       if (store) {
@@ -118,6 +122,10 @@ Lbryio.authenticate = () => {
           }
 
           return Lbry.status().then(status => {
+            if (Lbryio.overrides.setAuthToken) {
+              return Lbryio.overrides.setAuthToken(status);
+            }
+
             const { store } = window;
             if (store) {
               store.dispatch(doGenerateAuthToken(status.installation_id));
@@ -139,5 +147,12 @@ Lbryio.getStripeToken = () =>
   CONNECTION_STRING.startsWith('http://localhost:')
     ? 'pk_test_NoL1JWL7i1ipfhVId5KfDZgo'
     : 'pk_live_e8M4dRNnCCbmpZzduEUZBgJO';
+
+// Allow overriding lbryio methods
+// The desktop app will need to use it for getAuthToken because we use electron's ipcRenderer
+Lbryio.overrides = {};
+Lbryio.setOverride = (methodName, newMethod) => {
+  Lbryio.overrides[methodName] = newMethod;
+};
 
 export default Lbryio;
