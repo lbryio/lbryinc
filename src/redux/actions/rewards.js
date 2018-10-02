@@ -26,16 +26,21 @@ export function doRewardList() {
   };
 }
 
-export function doClaimRewardType(rewardType, options) {
+export function doClaimRewardType(rewardType, options = {}) {
   return (dispatch, getState) => {
     const state = getState();
-    const unclaimedRewards = selectUnclaimedRewards(state);
-    const reward = unclaimedRewards.find(ur => ur.reward_type === rewardType);
     const userIsRewardApproved = selectUserIsRewardApproved(state);
+    const unclaimedRewards = selectUnclaimedRewards(state);
+    const reward =
+      rewardType === rewards.TYPE_REWARD_CODE
+        ? { reward_type: rewards.TYPE_REWARD_CODE }
+        : unclaimedRewards.find(ur => ur.reward_type === rewardType);
 
-    if (!reward || reward.transaction_id) {
-      // already claimed or doesn't exist, do nothing
-      return;
+    if (!rewards.TYPE_REWARD_CODE) {
+      if (!reward || reward.transaction_id) {
+        // already claimed or doesn't exist, do nothing
+        return;
+      }
     }
 
     if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
@@ -80,7 +85,7 @@ export function doClaimRewardType(rewardType, options) {
       });
     };
 
-    rewards.claimReward(rewardType).then(success, failure);
+    rewards.claimReward(rewardType, options.params).then(success, failure);
   };
 }
 

@@ -1,4 +1,4 @@
-import { Lbry, doNotify } from 'lbry-redux';
+import { Lbry, doNotify, doHideNotification } from 'lbry-redux';
 import Lbryio from 'lbryio';
 
 const rewards = {};
@@ -12,17 +12,24 @@ rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
 rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 
-rewards.claimReward = type => {
+rewards.claimReward = (type, rewardParams) => {
   function requestReward(resolve, reject, params) {
     if (!Lbryio.enabled) {
       reject(new Error(__('Rewards are not enabled.')));
       return;
     }
+
     Lbryio.call('reward', 'new', params, 'post').then(reward => {
       const message =
         reward.reward_notification || `You have claimed a ${reward.reward_amount} LBC reward.`;
+
+      // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
+      if (type === rewards.TYPE_REWARD_CODE) {
+        window.store.dispatch(doHideNotification());
+      }
 
       // Display global notice
       const action = doNotify({
@@ -45,6 +52,7 @@ rewards.claimReward = type => {
       const params = {
         reward_type: type,
         wallet_address: address,
+        ...rewardParams,
       };
 
       switch (type) {
