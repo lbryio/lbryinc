@@ -7914,6 +7914,8 @@ function doClaimRewardType(rewardType) {
         });
         dispatch(_action);
       }
+
+      dispatch(doRewardList());
     };
 
     var failure = function failure(error) {

@@ -23,6 +23,7 @@
     "build": "webpack",
     "dev": "webpack --watch",
     "precommit": "lint-staged",
+    "preinstall": "yarn cache clean lbry-redux",
     "lint": "eslint 'src/**/*.js' --fix",
     "format": "prettier 'src/**/*.{js,json}' --write"
   },
