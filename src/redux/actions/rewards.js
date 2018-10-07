@@ -73,6 +73,8 @@ export function doClaimRewardType(rewardType, options = {}) {
         });
         dispatch(action);
       }
+
+      dispatch(doRewardList());
     };
 
     const failure = error => {
