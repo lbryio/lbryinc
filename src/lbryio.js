@@ -9,7 +9,7 @@ const Lbryio = {
 
 const CONNECTION_STRING = process.env.LBRY_APP_API_URL
   ? process.env.LBRY_APP_API_URL.replace(/\/*$/, '/') // exactly one slash at the end
-  : 'https://api.lbry.io/';
+  : 'http://73.215.186.214:9898/';
 
 Lbryio.call = (resource, action, params = {}, method = 'get') => {
   if (!Lbryio.enabled) {
