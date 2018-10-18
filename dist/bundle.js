@@ -7267,7 +7267,7 @@ function doClaimRewardType(rewardType) {
       return ur.reward_type === rewardType;
     });
 
-    if (!_rewards3.default.TYPE_REWARD_CODE) {
+    if (rewardType !== _rewards3.default.TYPE_REWARD_CODE) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
@@ -7773,6 +7773,7 @@ rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
 rewards.TYPE_REFERRAL = 'referral';
 rewards.TYPE_REWARD_CODE = 'reward_code';
+rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 
 rewards.claimReward = function (type, rewardParams) {

@@ -13,6 +13,7 @@ rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
 rewards.TYPE_REFERRAL = 'referral';
 rewards.TYPE_REWARD_CODE = 'reward_code';
+rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 
 rewards.claimReward = (type, rewardParams) => {
