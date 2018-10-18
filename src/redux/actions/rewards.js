@@ -36,7 +36,7 @@ export function doClaimRewardType(rewardType, options = {}) {
         ? { reward_type: rewards.TYPE_REWARD_CODE }
         : unclaimedRewards.find(ur => ur.reward_type === rewardType);
 
-    if (!rewards.TYPE_REWARD_CODE) {
+    if (rewardType !== rewards.TYPE_REWARD_CODE) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
