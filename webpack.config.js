@@ -4,6 +4,7 @@ const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin');
 
 module.exports = {
   mode: 'none',
+  target: 'node',
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',

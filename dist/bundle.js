@@ -7,7 +7,7 @@
 		var a = factory();
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(window, function() {
+})(global, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -115,7 +115,7 @@ Object.defineProperty(exports, 'doGenerateAuthToken', {
   }
 });
 
-var _rewards = __webpack_require__(9);
+var _rewards = __webpack_require__(6);
 
 Object.defineProperty(exports, 'doRewardList', {
   enumerable: true,
@@ -148,7 +148,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _user = __webpack_require__(14);
+var _user = __webpack_require__(11);
 
 Object.defineProperty(exports, 'doFetchInviteStatus', {
   enumerable: true,
@@ -247,7 +247,7 @@ Object.defineProperty(exports, 'doUserInviteNew', {
   }
 });
 
-var _auth2 = __webpack_require__(15);
+var _auth2 = __webpack_require__(12);
 
 Object.defineProperty(exports, 'authReducer', {
   enumerable: true,
@@ -256,7 +256,7 @@ Object.defineProperty(exports, 'authReducer', {
   }
 });
 
-var _rewards2 = __webpack_require__(16);
+var _rewards2 = __webpack_require__(13);
 
 Object.defineProperty(exports, 'rewardsReducer', {
   enumerable: true,
@@ -265,7 +265,7 @@ Object.defineProperty(exports, 'rewardsReducer', {
   }
 });
 
-var _user2 = __webpack_require__(17);
+var _user2 = __webpack_require__(14);
 
 Object.defineProperty(exports, 'userReducer', {
   enumerable: true,
@@ -274,7 +274,7 @@ Object.defineProperty(exports, 'userReducer', {
   }
 });
 
-var _auth3 = __webpack_require__(18);
+var _auth3 = __webpack_require__(15);
 
 Object.defineProperty(exports, 'selectAuthToken', {
   enumerable: true,
@@ -289,7 +289,7 @@ Object.defineProperty(exports, 'selectIsAuthenticating', {
   }
 });
 
-var _rewards3 = __webpack_require__(10);
+var _rewards3 = __webpack_require__(7);
 
 Object.defineProperty(exports, 'makeSelectClaimRewardError', {
   enumerable: true,
@@ -394,7 +394,7 @@ Object.defineProperty(exports, 'selectRewardContentClaimIds', {
   }
 });
 
-var _user3 = __webpack_require__(12);
+var _user3 = __webpack_require__(9);
 
 Object.defineProperty(exports, 'selectAuthenticationIsPending', {
   enumerable: true,
@@ -567,7 +567,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _rewards4 = __webpack_require__(13);
+var _rewards4 = __webpack_require__(10);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
@@ -657,7 +657,7 @@ var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERAT
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -665,11 +665,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var _auth = __webpack_require__(1);
 
-var _querystring = __webpack_require__(6);
+var _querystring = __webpack_require__(5);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
@@ -837,207 +837,16 @@ Lbryio.setOverride = function (methodName, newMethod) {
 };
 
 exports.default = Lbryio;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory();
 	else { var i, a; }
-})(window, function() {
+})(global, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1254,7 +1063,7 @@ Object.defineProperty(exports, 'doFetchTrendingUris', {
   }
 });
 
-var _cost_info = __webpack_require__(22);
+var _cost_info = __webpack_require__(18);
 
 Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   enumerable: true,
@@ -1263,7 +1072,7 @@ Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   }
 });
 
-var _file_info = __webpack_require__(23);
+var _file_info = __webpack_require__(19);
 
 Object.defineProperty(exports, 'doFetchFileInfo', {
   enumerable: true,
@@ -1290,7 +1099,7 @@ Object.defineProperty(exports, 'doSetFileListSort', {
   }
 });
 
-var _search = __webpack_require__(25);
+var _search = __webpack_require__(21);
 
 Object.defineProperty(exports, 'doSearch', {
   enumerable: true,
@@ -1317,7 +1126,7 @@ Object.defineProperty(exports, 'doBlurSearchInput', {
   }
 });
 
-var _blacklist = __webpack_require__(27);
+var _blacklist = __webpack_require__(23);
 
 Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   enumerable: true,
@@ -1326,7 +1135,7 @@ Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   }
 });
 
-var _wallet = __webpack_require__(28);
+var _wallet = __webpack_require__(24);
 
 Object.defineProperty(exports, 'doUpdateBalance', {
   enumerable: true,
@@ -1419,7 +1228,7 @@ Object.defineProperty(exports, 'doSetTransactionListFilter', {
   }
 });
 
-var _batchActions = __webpack_require__(21);
+var _batchActions = __webpack_require__(17);
 
 Object.defineProperty(exports, 'batchActions', {
   enumerable: true,
@@ -1428,7 +1237,7 @@ Object.defineProperty(exports, 'batchActions', {
   }
 });
 
-var _query_params = __webpack_require__(17);
+var _query_params = __webpack_require__(13);
 
 Object.defineProperty(exports, 'parseQueryParams', {
   enumerable: true,
@@ -1443,7 +1252,7 @@ Object.defineProperty(exports, 'toQueryString', {
   }
 });
 
-var _formatCredits = __webpack_require__(31);
+var _formatCredits = __webpack_require__(27);
 
 Object.defineProperty(exports, 'formatCredits', {
   enumerable: true,
@@ -1464,7 +1273,7 @@ Object.defineProperty(exports, 'creditsToString', {
   }
 });
 
-var _claims2 = __webpack_require__(32);
+var _claims2 = __webpack_require__(28);
 
 Object.defineProperty(exports, 'claimsReducer', {
   enumerable: true,
@@ -1473,7 +1282,7 @@ Object.defineProperty(exports, 'claimsReducer', {
   }
 });
 
-var _cost_info2 = __webpack_require__(33);
+var _cost_info2 = __webpack_require__(29);
 
 Object.defineProperty(exports, 'costInfoReducer', {
   enumerable: true,
@@ -1482,7 +1291,7 @@ Object.defineProperty(exports, 'costInfoReducer', {
   }
 });
 
-var _file_info2 = __webpack_require__(34);
+var _file_info2 = __webpack_require__(30);
 
 Object.defineProperty(exports, 'fileInfoReducer', {
   enumerable: true,
@@ -1491,7 +1300,7 @@ Object.defineProperty(exports, 'fileInfoReducer', {
   }
 });
 
-var _notifications2 = __webpack_require__(37);
+var _notifications2 = __webpack_require__(33);
 
 Object.defineProperty(exports, 'notificationsReducer', {
   enumerable: true,
@@ -1500,7 +1309,7 @@ Object.defineProperty(exports, 'notificationsReducer', {
   }
 });
 
-var _search2 = __webpack_require__(39);
+var _search2 = __webpack_require__(35);
 
 Object.defineProperty(exports, 'searchReducer', {
   enumerable: true,
@@ -1509,7 +1318,7 @@ Object.defineProperty(exports, 'searchReducer', {
   }
 });
 
-var _wallet2 = __webpack_require__(41);
+var _wallet2 = __webpack_require__(37);
 
 Object.defineProperty(exports, 'walletReducer', {
   enumerable: true,
@@ -1518,7 +1327,7 @@ Object.defineProperty(exports, 'walletReducer', {
   }
 });
 
-var _blacklist2 = __webpack_require__(42);
+var _blacklist2 = __webpack_require__(38);
 
 Object.defineProperty(exports, 'blacklistReducer', {
   enumerable: true,
@@ -1527,7 +1336,7 @@ Object.defineProperty(exports, 'blacklistReducer', {
   }
 });
 
-var _blacklist3 = __webpack_require__(43);
+var _blacklist3 = __webpack_require__(39);
 
 Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   enumerable: true,
@@ -1536,7 +1345,7 @@ Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   }
 });
 
-var _notifications3 = __webpack_require__(44);
+var _notifications3 = __webpack_require__(40);
 
 Object.defineProperty(exports, 'selectNotification', {
   enumerable: true,
@@ -1557,7 +1366,7 @@ Object.defineProperty(exports, 'selectSnack', {
   }
 });
 
-var _claims3 = __webpack_require__(14);
+var _claims3 = __webpack_require__(10);
 
 Object.defineProperty(exports, 'makeSelectClaimForUri', {
   enumerable: true,
@@ -1800,7 +1609,7 @@ Object.defineProperty(exports, 'selectChannelClaimCounts', {
   }
 });
 
-var _cost_info3 = __webpack_require__(45);
+var _cost_info3 = __webpack_require__(41);
 
 Object.defineProperty(exports, 'makeSelectFetchingCostInfoForUri', {
   enumerable: true,
@@ -1833,7 +1642,7 @@ Object.defineProperty(exports, 'selectFetchingCostInfo', {
   }
 });
 
-var _file_info3 = __webpack_require__(24);
+var _file_info3 = __webpack_require__(20);
 
 Object.defineProperty(exports, 'makeSelectFileInfoForUri', {
   enumerable: true,
@@ -1920,7 +1729,7 @@ Object.defineProperty(exports, 'selectFileListPublishedSort', {
   }
 });
 
-var _navigation = __webpack_require__(15);
+var _navigation = __webpack_require__(11);
 
 Object.defineProperty(exports, 'computePageFromPath', {
   enumerable: true,
@@ -2001,7 +1810,7 @@ Object.defineProperty(exports, 'selectActiveHistoryEntry', {
   }
 });
 
-var _search3 = __webpack_require__(18);
+var _search3 = __webpack_require__(14);
 
 Object.defineProperty(exports, 'makeSelectSearchUris', {
   enumerable: true,
@@ -2052,7 +1861,7 @@ Object.defineProperty(exports, 'selectSearchSuggestions', {
   }
 });
 
-var _wallet3 = __webpack_require__(29);
+var _wallet3 = __webpack_require__(25);
 
 Object.defineProperty(exports, 'makeSelectBlockDate', {
   enumerable: true,
@@ -2221,31 +2030,31 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _modal_types = __webpack_require__(38);
+var _modal_types = __webpack_require__(34);
 
 var MODALS = _interopRequireWildcard(_modal_types);
 
-var _thumbnail_upload_statuses = __webpack_require__(46);
+var _thumbnail_upload_statuses = __webpack_require__(42);
 
 var THUMBNAIL_STATUSES = _interopRequireWildcard(_thumbnail_upload_statuses);
 
-var _search4 = __webpack_require__(19);
+var _search4 = __webpack_require__(15);
 
 var SEARCH_TYPES = _interopRequireWildcard(_search4);
 
-var _settings = __webpack_require__(47);
+var _settings = __webpack_require__(43);
 
 var SETTINGS = _interopRequireWildcard(_settings);
 
-var _transaction_types = __webpack_require__(30);
+var _transaction_types = __webpack_require__(26);
 
 var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
-var _sort_options = __webpack_require__(35);
+var _sort_options = __webpack_require__(31);
 
 var SORT_OPTIONS = _interopRequireWildcard(_sort_options);
 
-var _pages = __webpack_require__(36);
+var _pages = __webpack_require__(32);
 
 var PAGES = _interopRequireWildcard(_pages);
 
@@ -2253,7 +2062,7 @@ var _lbry = __webpack_require__(6);
 
 var _lbry2 = _interopRequireDefault(_lbry);
 
-var _lbryapi = __webpack_require__(9);
+var _lbryapi = __webpack_require__(8);
 
 var _lbryapi2 = _interopRequireDefault(_lbryapi);
 
@@ -2846,7 +2655,7 @@ var _lbry = __webpack_require__(6);
 
 var _lbry2 = _interopRequireDefault(_lbry);
 
-var _lbryapi = __webpack_require__(9);
+var _lbryapi = __webpack_require__(8);
 
 var _lbryapi2 = _interopRequireDefault(_lbryapi);
 
@@ -2854,9 +2663,9 @@ var _lbryURI = __webpack_require__(2);
 
 var _notifications = __webpack_require__(3);
 
-var _claims = __webpack_require__(14);
+var _claims = __webpack_require__(10);
 
-var _batchActions = __webpack_require__(21);
+var _batchActions = __webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3366,7 +3175,7 @@ exports.default = lbryProxy;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {/*
+/*
  * Copyright 2016 Google Inc. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -3541,40 +3350,13 @@ exports.default = lbryProxy;
   scope['Proxy'] = scope.Proxy;
 })(typeof module !== 'undefined' && module['exports'] ? global : window);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(8)))
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -3582,7 +3364,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _querystring = __webpack_require__(11);
+var _querystring = __webpack_require__(9);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
@@ -3673,394 +3455,15 @@ Lbryapi.call = function (resource, action) {
 };
 
 exports.default = Lbryapi;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10)))
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = __webpack_require__(5);
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.decode = exports.parse = __webpack_require__(12);
-exports.encode = exports.stringify = __webpack_require__(13);
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-// If obj.hasOwnProperty has been overridden, then calling
-// obj.hasOwnProperty(prop) will break.
-// See: https://github.com/joyent/node/issues/1707
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-module.exports = function(qs, sep, eq, options) {
-  sep = sep || '&';
-  eq = eq || '=';
-  var obj = {};
-
-  if (typeof qs !== 'string' || qs.length === 0) {
-    return obj;
-  }
-
-  var regexp = /\+/g;
-  qs = qs.split(sep);
-
-  var maxKeys = 1000;
-  if (options && typeof options.maxKeys === 'number') {
-    maxKeys = options.maxKeys;
-  }
-
-  var len = qs.length;
-  // maxKeys <= 0 means that we should not limit keys count
-  if (maxKeys > 0 && len > maxKeys) {
-    len = maxKeys;
-  }
-
-  for (var i = 0; i < len; ++i) {
-    var x = qs[i].replace(regexp, '%20'),
-        idx = x.indexOf(eq),
-        kstr, vstr, k, v;
-
-    if (idx >= 0) {
-      kstr = x.substr(0, idx);
-      vstr = x.substr(idx + 1);
-    } else {
-      kstr = x;
-      vstr = '';
-    }
-
-    k = decodeURIComponent(kstr);
-    v = decodeURIComponent(vstr);
-
-    if (!hasOwnProperty(obj, k)) {
-      obj[k] = v;
-    } else if (isArray(obj[k])) {
-      obj[k].push(v);
-    } else {
-      obj[k] = [obj[k], v];
-    }
-  }
-
-  return obj;
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-var stringifyPrimitive = function(v) {
-  switch (typeof v) {
-    case 'string':
-      return v;
-
-    case 'boolean':
-      return v ? 'true' : 'false';
-
-    case 'number':
-      return isFinite(v) ? v : '';
-
-    default:
-      return '';
-  }
-};
-
-module.exports = function(obj, sep, eq, name) {
-  sep = sep || '&';
-  eq = eq || '=';
-  if (obj === null) {
-    obj = undefined;
-  }
-
-  if (typeof obj === 'object') {
-    return map(objectKeys(obj), function(k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-      if (isArray(obj[k])) {
-        return map(obj[k], function(v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
-        }).join(sep);
-      } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-      }
-    }).join(sep);
-
-  }
-
-  if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-         encodeURIComponent(stringifyPrimitive(obj));
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-function map (xs, f) {
-  if (xs.map) return xs.map(f);
-  var res = [];
-  for (var i = 0; i < xs.length; i++) {
-    res.push(f(xs[i], i));
-  }
-  return res;
-}
-
-var objectKeys = Object.keys || function (obj) {
-  var res = [];
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
-  }
-  return res;
-};
-
-
-/***/ }),
-/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4073,13 +3476,13 @@ exports.makeSelectChannelForClaimUri = exports.makeSelectRecommendedContentForUr
 
 var _lbryURI = __webpack_require__(2);
 
-var _navigation = __webpack_require__(15);
+var _navigation = __webpack_require__(11);
 
-var _search = __webpack_require__(18);
+var _search = __webpack_require__(14);
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
-var _claim = __webpack_require__(20);
+var _claim = __webpack_require__(16);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -4116,11 +3519,11 @@ var selectAllClaimsByChannel = exports.selectAllClaimsByChannel = (0, _reselect.
 });
 
 var selectPendingById = exports.selectPendingById = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.pendingById;
+  return state.pendingById || {};
 });
 
 var selectPendingClaims = exports.selectPendingClaims = (0, _reselect.createSelector)(selectState, function (state) {
-  return Object.values(state.pendingById || {});
+  return Object.values(state.pendingById || []);
 });
 
 var makeSelectClaimIsPending = exports.makeSelectClaimIsPending = function makeSelectClaimIsPending(uri) {
@@ -4417,7 +3820,7 @@ var makeSelectChannelForClaimUri = exports.makeSelectChannelForClaimUri = functi
 };
 
 /***/ }),
-/* 15 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4428,9 +3831,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectPageTitle = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsHome = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.makeSelectCurrentParam = exports.selectCurrentParams = exports.selectCurrentPage = exports.computePageFromPath = exports.selectCurrentPath = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
-var _query_params = __webpack_require__(17);
+var _query_params = __webpack_require__(13);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.navigation || {};
@@ -4498,7 +3901,7 @@ var selectPageTitle = exports.selectPageTitle = (0, _reselect.createSelector)(se
 });
 
 /***/ }),
-/* 16 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4629,7 +4032,7 @@ function createStructuredSelector(selectors) {
 }
 
 /***/ }),
-/* 17 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4674,7 +4077,7 @@ function toQueryString(params) {
 }
 
 /***/ }),
-/* 18 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4685,15 +4088,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.makeSelectSearchUris = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchQuery = exports.selectSuggestions = exports.selectSearchValue = exports.selectState = undefined;
 
-var _search = __webpack_require__(19);
+var _search = __webpack_require__(15);
 
 var SEARCH_TYPES = _interopRequireWildcard(_search);
 
 var _lbryURI = __webpack_require__(2);
 
-var _navigation = __webpack_require__(15);
+var _navigation = __webpack_require__(11);
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -4818,7 +4221,7 @@ var selectSearchSuggestions = exports.selectSearchSuggestions = (0, _reselect.cr
 });
 
 /***/ }),
-/* 19 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4832,7 +4235,7 @@ var CHANNEL = exports.CHANNEL = 'channel';
 var SEARCH = exports.SEARCH = 'search';
 
 /***/ }),
-/* 20 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4846,7 +4249,7 @@ var isClaimNsfw = exports.isClaimNsfw = function isClaimNsfw(claim) {
 };
 
 /***/ }),
-/* 21 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4869,7 +4272,7 @@ function batchActions() {
 }
 
 /***/ }),
-/* 22 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4884,11 +4287,11 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _lbryapi = __webpack_require__(9);
+var _lbryapi = __webpack_require__(8);
 
 var _lbryapi2 = _interopRequireDefault(_lbryapi);
 
-var _claims = __webpack_require__(14);
+var _claims = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4929,7 +4332,7 @@ function doFetchCostInfoForUri(uri) {
 }
 
 /***/ }),
-/* 23 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4953,9 +4356,9 @@ var _lbry2 = _interopRequireDefault(_lbry);
 
 var _claims = __webpack_require__(5);
 
-var _claims2 = __webpack_require__(14);
+var _claims2 = __webpack_require__(10);
 
-var _file_info = __webpack_require__(24);
+var _file_info = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5030,7 +4433,7 @@ function doSetFileListSort(page, value) {
 }
 
 /***/ }),
-/* 24 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5041,9 +4444,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectFileListDownloadedSort = exports.selectFileListPublishedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.makeSelectLoadingForUri = exports.selectUrisLoading = exports.makeSelectDownloadingForUri = exports.selectDownloadingByOutpoint = exports.makeSelectFileInfoForUri = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.selectState = undefined;
 
-var _claims = __webpack_require__(14);
+var _claims = __webpack_require__(10);
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
 var _lbryURI = __webpack_require__(2);
 
@@ -5245,7 +4648,7 @@ var selectFileListDownloadedSort = exports.selectFileListDownloadedSort = (0, _r
 });
 
 /***/ }),
-/* 25 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5264,11 +4667,11 @@ var _lbryURI = __webpack_require__(2);
 
 var _claims = __webpack_require__(5);
 
-var _search = __webpack_require__(18);
+var _search = __webpack_require__(14);
 
-var _batchActions = __webpack_require__(21);
+var _batchActions = __webpack_require__(17);
 
-var _handleFetch = __webpack_require__(26);
+var _handleFetch = __webpack_require__(22);
 
 var _handleFetch2 = _interopRequireDefault(_handleFetch);
 
@@ -5410,7 +4813,7 @@ var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput()
 };
 
 /***/ }),
-/* 26 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5425,7 +4828,7 @@ function handleFetchResponse(response) {
 }
 
 /***/ }),
-/* 27 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5440,7 +4843,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 exports.doFetchBlackListedOutpoints = doFetchBlackListedOutpoints;
 exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
 
-var _lbryapi = __webpack_require__(9);
+var _lbryapi = __webpack_require__(8);
 
 var _lbryapi2 = _interopRequireDefault(_lbryapi);
 
@@ -5508,7 +4911,7 @@ function doBlackListedOutpointsSubscribe() {
 }
 
 /***/ }),
-/* 28 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5544,9 +4947,9 @@ var _lbry2 = _interopRequireDefault(_lbry);
 
 var _notifications = __webpack_require__(3);
 
-var _wallet = __webpack_require__(29);
+var _wallet = __webpack_require__(25);
 
-var _formatCredits = __webpack_require__(31);
+var _formatCredits = __webpack_require__(27);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5893,7 +5296,7 @@ function doSetTransactionListFilter(filterOption) {
 }
 
 /***/ }),
-/* 29 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5904,9 +5307,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectTransactionListFilter = exports.makeSelectBlockDate = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.selectWalletLockResult = exports.selectWalletLockSucceeded = exports.selectWalletLockPending = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletIsEncrypted = exports.selectWalletState = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
-var _transaction_types = __webpack_require__(30);
+var _transaction_types = __webpack_require__(26);
 
 var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
@@ -6096,7 +5499,7 @@ var selectTransactionListFilter = exports.selectTransactionListFilter = (0, _res
 });
 
 /***/ }),
-/* 30 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6117,7 +5520,7 @@ var UPDATE = exports.UPDATE = 'update';
 var ABANDON = exports.ABANDON = 'abandon';
 
 /***/ }),
-/* 31 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6130,7 +5533,8 @@ exports.formatCredits = formatCredits;
 exports.formatFullPrice = formatFullPrice;
 exports.creditsToString = creditsToString;
 function formatCredits(amount, precision) {
-  return amount.toFixed(precision || 1).replace(/\.?0+$/, '');
+  if (Number.isNaN(parseFloat(amount))) return '0';
+  return parseFloat(amount).toFixed(precision || 1).replace(/\.?0+$/, '');
 }
 
 function formatFullPrice(amount) {
@@ -6165,7 +5569,7 @@ function creditsToString(amount) {
 }
 
 /***/ }),
-/* 32 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6256,13 +5660,13 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = function (state, action) {
   var byId = Object.assign({}, state.byId);
   var pendingById = Object.assign({}, state.pendingById);
 
-  claims.filter(function (claim) {
-    return claim.type && claim.type.match(/claim|update/);
-  }).forEach(function (claim) {
-    if (claim.confirmations < 1) {
-      pendingById[claim.claim_id] = claim;
-    } else {
-      byId[claim.claim_id] = claim;
+  claims.forEach(function (claim) {
+    if (claim.type && claim.type.match(/claim|update/)) {
+      if (claim.confirmations < 1) {
+        pendingById[claim.claim_id] = claim;
+      } else {
+        byId[claim.claim_id] = claim;
+      }
     }
   });
 
@@ -6481,7 +5885,7 @@ function claimsReducer() {
 }
 
 /***/ }),
-/* 33 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6539,7 +5943,7 @@ function costInfoReducer() {
 }
 
 /***/ }),
-/* 34 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6557,11 +5961,11 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _sort_options = __webpack_require__(35);
+var _sort_options = __webpack_require__(31);
 
 var SORT_OPTIONS = _interopRequireWildcard(_sort_options);
 
-var _pages = __webpack_require__(36);
+var _pages = __webpack_require__(32);
 
 var PAGES = _interopRequireWildcard(_pages);
 
@@ -6781,7 +6185,7 @@ function fileInfoReducer() {
 }
 
 /***/ }),
-/* 35 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6796,7 +6200,7 @@ var TITLE = exports.TITLE = 'title';
 var FILENAME = exports.FILENAME = 'filename';
 
 /***/ }),
-/* 36 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6828,7 +6232,7 @@ var HISTORY = exports.HISTORY = 'user_history';
 var WALLET = exports.WALLET = 'wallet';
 
 /***/ }),
-/* 37 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6843,7 +6247,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _modal_types = __webpack_require__(38);
+var _modal_types = __webpack_require__(34);
 
 var MODALS = _interopRequireWildcard(_modal_types);
 
@@ -6914,7 +6318,7 @@ function notificationsReducer() {
 }
 
 /***/ }),
-/* 38 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6955,7 +6359,7 @@ var WALLET_DECRYPT = exports.WALLET_DECRYPT = 'wallet_decrypt';
 var WALLET_UNLOCK = exports.WALLET_UNLOCK = 'wallet_unlock';
 
 /***/ }),
-/* 39 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6975,7 +6379,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(40);
+var _reduxUtils = __webpack_require__(36);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7080,7 +6484,7 @@ var searchReducer = exports.searchReducer = (0, _reduxUtils.handleActions)((_han
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 40 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7113,7 +6517,7 @@ var handleActions = exports.handleActions = function handleActions(actionMap, de
 };
 
 /***/ }),
-/* 41 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7448,7 +6852,7 @@ function walletReducer() {
 }
 
 /***/ }),
-/* 42 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7467,7 +6871,7 @@ var _action_types = __webpack_require__(4);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(40);
+var _reduxUtils = __webpack_require__(36);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7507,7 +6911,7 @@ var blacklistReducer = exports.blacklistReducer = (0, _reduxUtils.handleActions)
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 43 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7518,7 +6922,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectBlackListedOutpoints = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.blacklist || {};
@@ -7529,7 +6933,7 @@ var selectBlackListedOutpoints = exports.selectBlackListedOutpoints = (0, _resel
 });
 
 /***/ }),
-/* 44 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7540,7 +6944,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectSnack = exports.selectNotificationProps = exports.selectNotification = exports.selectNotificationData = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.notifications || {};
@@ -7569,7 +6973,7 @@ selectNotification, function (notification) {
 });
 
 /***/ }),
-/* 45 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7580,9 +6984,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.makeSelectFetchingCostInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.makeSelectCostInfoForUri = exports.selectAllCostInfoByUri = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(16);
+var _reselect = __webpack_require__(12);
 
-var _navigation = __webpack_require__(15);
+var _navigation = __webpack_require__(11);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.costInfo || {};
@@ -7613,7 +7017,7 @@ var makeSelectFetchingCostInfoForUri = exports.makeSelectFetchingCostInfoForUri 
 };
 
 /***/ }),
-/* 46 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7629,7 +7033,7 @@ var COMPLETE = exports.COMPLETE = 'complete';
 var MANUAL = exports.MANUAL = 'manual';
 
 /***/ }),
-/* 47 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7663,201 +7067,13 @@ var KEEP_DAEMON_RUNNING = exports.KEEP_DAEMON_RUNNING = 'keepDaemonRunning';
 });
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = require("querystring");
+
+/***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.decode = exports.parse = __webpack_require__(7);
-exports.encode = exports.stringify = __webpack_require__(8);
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-// If obj.hasOwnProperty has been overridden, then calling
-// obj.hasOwnProperty(prop) will break.
-// See: https://github.com/joyent/node/issues/1707
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-module.exports = function(qs, sep, eq, options) {
-  sep = sep || '&';
-  eq = eq || '=';
-  var obj = {};
-
-  if (typeof qs !== 'string' || qs.length === 0) {
-    return obj;
-  }
-
-  var regexp = /\+/g;
-  qs = qs.split(sep);
-
-  var maxKeys = 1000;
-  if (options && typeof options.maxKeys === 'number') {
-    maxKeys = options.maxKeys;
-  }
-
-  var len = qs.length;
-  // maxKeys <= 0 means that we should not limit keys count
-  if (maxKeys > 0 && len > maxKeys) {
-    len = maxKeys;
-  }
-
-  for (var i = 0; i < len; ++i) {
-    var x = qs[i].replace(regexp, '%20'),
-        idx = x.indexOf(eq),
-        kstr, vstr, k, v;
-
-    if (idx >= 0) {
-      kstr = x.substr(0, idx);
-      vstr = x.substr(idx + 1);
-    } else {
-      kstr = x;
-      vstr = '';
-    }
-
-    k = decodeURIComponent(kstr);
-    v = decodeURIComponent(vstr);
-
-    if (!hasOwnProperty(obj, k)) {
-      obj[k] = v;
-    } else if (isArray(obj[k])) {
-      obj[k].push(v);
-    } else {
-      obj[k] = [obj[k], v];
-    }
-  }
-
-  return obj;
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
-var stringifyPrimitive = function(v) {
-  switch (typeof v) {
-    case 'string':
-      return v;
-
-    case 'boolean':
-      return v ? 'true' : 'false';
-
-    case 'number':
-      return isFinite(v) ? v : '';
-
-    default:
-      return '';
-  }
-};
-
-module.exports = function(obj, sep, eq, name) {
-  sep = sep || '&';
-  eq = eq || '=';
-  if (obj === null) {
-    obj = undefined;
-  }
-
-  if (typeof obj === 'object') {
-    return map(objectKeys(obj), function(k) {
-      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-      if (isArray(obj[k])) {
-        return map(obj[k], function(v) {
-          return ks + encodeURIComponent(stringifyPrimitive(v));
-        }).join(sep);
-      } else {
-        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-      }
-    }).join(sep);
-
-  }
-
-  if (!name) return '';
-  return encodeURIComponent(stringifyPrimitive(name)) + eq +
-         encodeURIComponent(stringifyPrimitive(obj));
-};
-
-var isArray = Array.isArray || function (xs) {
-  return Object.prototype.toString.call(xs) === '[object Array]';
-};
-
-function map (xs, f) {
-  if (xs.map) return xs.map(f);
-  var res = [];
-  for (var i = 0; i < xs.length; i++) {
-    res.push(f(xs[i], i));
-  }
-  return res;
-}
-
-var objectKeys = Object.keys || function (obj) {
-  var res = [];
-  for (var key in obj) {
-    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
-  }
-  return res;
-};
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7876,13 +7092,13 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
-var _rewards = __webpack_require__(10);
+var _rewards = __webpack_require__(7);
 
-var _user = __webpack_require__(12);
+var _user = __webpack_require__(9);
 
-var _rewards2 = __webpack_require__(13);
+var _rewards2 = __webpack_require__(10);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8034,7 +7250,7 @@ function doFetchRewardedContent() {
 }
 
 /***/ }),
-/* 10 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8045,7 +7261,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(8);
 
 var selectState = function selectState(state) {
   return state.rewards || {};
@@ -8136,7 +7352,7 @@ var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _res
 });
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8267,7 +7483,7 @@ function createStructuredSelector(selectors) {
 }
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8278,7 +7494,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(8);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.user || {};
@@ -8393,7 +7609,7 @@ var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = 
 });
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8405,7 +7621,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var _lbryio = __webpack_require__(3);
 
@@ -8507,7 +7723,7 @@ rewards.claimReward = function (type, rewardParams) {
 exports.default = rewards;
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8533,13 +7749,13 @@ exports.doFetchAccessToken = doFetchAccessToken;
 exports.doUserIdentityVerify = doUserIdentityVerify;
 exports.doUserInviteNew = doUserInviteNew;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
-var _rewards = __webpack_require__(9);
+var _rewards = __webpack_require__(6);
 
-var _user = __webpack_require__(12);
+var _user = __webpack_require__(9);
 
-var _rewards2 = __webpack_require__(13);
+var _rewards2 = __webpack_require__(10);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8877,7 +8093,7 @@ function doUserInviteNew(email) {
 }
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8929,7 +8145,7 @@ function authReducer() {
 }
 
 /***/ }),
-/* 16 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8943,7 +8159,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.rewardsReducer = rewardsReducer;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -9070,7 +8286,7 @@ function rewardsReducer() {
 }
 
 /***/ }),
-/* 17 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9081,7 +8297,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userReducer = userReducer;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var reducers = {};
 
@@ -9341,7 +8557,7 @@ function userReducer() {
 }
 
 /***/ }),
-/* 18 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9352,7 +8568,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectIsAuthenticating = exports.selectAuthToken = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(8);
 
 var selectState = function selectState(state) {
   return state.auth || {};
