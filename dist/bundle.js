@@ -115,7 +115,7 @@ Object.defineProperty(exports, 'doGenerateAuthToken', {
   }
 });
 
-var _rewards = __webpack_require__(6);
+var _rewards = __webpack_require__(10);
 
 Object.defineProperty(exports, 'doRewardList', {
   enumerable: true,
@@ -148,7 +148,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _user = __webpack_require__(11);
+var _user = __webpack_require__(15);
 
 Object.defineProperty(exports, 'doFetchInviteStatus', {
   enumerable: true,
@@ -247,7 +247,7 @@ Object.defineProperty(exports, 'doUserInviteNew', {
   }
 });
 
-var _auth2 = __webpack_require__(12);
+var _auth2 = __webpack_require__(16);
 
 Object.defineProperty(exports, 'authReducer', {
   enumerable: true,
@@ -256,7 +256,7 @@ Object.defineProperty(exports, 'authReducer', {
   }
 });
 
-var _rewards2 = __webpack_require__(13);
+var _rewards2 = __webpack_require__(17);
 
 Object.defineProperty(exports, 'rewardsReducer', {
   enumerable: true,
@@ -265,7 +265,7 @@ Object.defineProperty(exports, 'rewardsReducer', {
   }
 });
 
-var _user2 = __webpack_require__(14);
+var _user2 = __webpack_require__(18);
 
 Object.defineProperty(exports, 'userReducer', {
   enumerable: true,
@@ -274,7 +274,7 @@ Object.defineProperty(exports, 'userReducer', {
   }
 });
 
-var _auth3 = __webpack_require__(15);
+var _auth3 = __webpack_require__(19);
 
 Object.defineProperty(exports, 'selectAuthToken', {
   enumerable: true,
@@ -289,7 +289,7 @@ Object.defineProperty(exports, 'selectIsAuthenticating', {
   }
 });
 
-var _rewards3 = __webpack_require__(7);
+var _rewards3 = __webpack_require__(11);
 
 Object.defineProperty(exports, 'makeSelectClaimRewardError', {
   enumerable: true,
@@ -394,7 +394,7 @@ Object.defineProperty(exports, 'selectRewardContentClaimIds', {
   }
 });
 
-var _user3 = __webpack_require__(9);
+var _user3 = __webpack_require__(13);
 
 Object.defineProperty(exports, 'selectAuthenticationIsPending', {
   enumerable: true,
@@ -567,7 +567,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _rewards4 = __webpack_require__(10);
+var _rewards4 = __webpack_require__(14);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
@@ -657,7 +657,7 @@ var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERAT
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -665,11 +665,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
 var _auth = __webpack_require__(1);
 
-var _querystring = __webpack_require__(5);
+var _querystring = __webpack_require__(7);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
@@ -837,12 +837,203 @@ Lbryio.setOverride = function (methodName, newMethod) {
 };
 
 exports.default = Lbryio;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackUniversalModuleDefinition(root, factory) {
+/* WEBPACK VAR INJECTION */(function(global, process) {(function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory();
 	else { var i, a; }
@@ -3460,7 +3651,7 @@ exports.default = Lbryapi;
 /* 9 */
 /***/ (function(module, exports) {
 
-module.exports = __webpack_require__(5);
+module.exports = __webpack_require__(7);
 
 /***/ }),
 /* 10 */
@@ -7065,15 +7256,230 @@ var KEEP_DAEMON_RUNNING = exports.KEEP_DAEMON_RUNNING = 'keepDaemonRunning';
 /***/ })
 /******/ ]);
 });
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("querystring");
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6), __webpack_require__(4)))
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.decode = exports.parse = __webpack_require__(8);
+exports.encode = exports.stringify = __webpack_require__(9);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+// If obj.hasOwnProperty has been overridden, then calling
+// obj.hasOwnProperty(prop) will break.
+// See: https://github.com/joyent/node/issues/1707
+function hasOwnProperty(obj, prop) {
+  return Object.prototype.hasOwnProperty.call(obj, prop);
+}
+
+module.exports = function(qs, sep, eq, options) {
+  sep = sep || '&';
+  eq = eq || '=';
+  var obj = {};
+
+  if (typeof qs !== 'string' || qs.length === 0) {
+    return obj;
+  }
+
+  var regexp = /\+/g;
+  qs = qs.split(sep);
+
+  var maxKeys = 1000;
+  if (options && typeof options.maxKeys === 'number') {
+    maxKeys = options.maxKeys;
+  }
+
+  var len = qs.length;
+  // maxKeys <= 0 means that we should not limit keys count
+  if (maxKeys > 0 && len > maxKeys) {
+    len = maxKeys;
+  }
+
+  for (var i = 0; i < len; ++i) {
+    var x = qs[i].replace(regexp, '%20'),
+        idx = x.indexOf(eq),
+        kstr, vstr, k, v;
+
+    if (idx >= 0) {
+      kstr = x.substr(0, idx);
+      vstr = x.substr(idx + 1);
+    } else {
+      kstr = x;
+      vstr = '';
+    }
+
+    k = decodeURIComponent(kstr);
+    v = decodeURIComponent(vstr);
+
+    if (!hasOwnProperty(obj, k)) {
+      obj[k] = v;
+    } else if (isArray(obj[k])) {
+      obj[k].push(v);
+    } else {
+      obj[k] = [obj[k], v];
+    }
+  }
+
+  return obj;
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+
+var stringifyPrimitive = function(v) {
+  switch (typeof v) {
+    case 'string':
+      return v;
+
+    case 'boolean':
+      return v ? 'true' : 'false';
+
+    case 'number':
+      return isFinite(v) ? v : '';
+
+    default:
+      return '';
+  }
+};
+
+module.exports = function(obj, sep, eq, name) {
+  sep = sep || '&';
+  eq = eq || '=';
+  if (obj === null) {
+    obj = undefined;
+  }
+
+  if (typeof obj === 'object') {
+    return map(objectKeys(obj), function(k) {
+      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+      if (isArray(obj[k])) {
+        return map(obj[k], function(v) {
+          return ks + encodeURIComponent(stringifyPrimitive(v));
+        }).join(sep);
+      } else {
+        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+      }
+    }).join(sep);
+
+  }
+
+  if (!name) return '';
+  return encodeURIComponent(stringifyPrimitive(name)) + eq +
+         encodeURIComponent(stringifyPrimitive(obj));
+};
+
+var isArray = Array.isArray || function (xs) {
+  return Object.prototype.toString.call(xs) === '[object Array]';
+};
+
+function map (xs, f) {
+  if (xs.map) return xs.map(f);
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    res.push(f(xs[i], i));
+  }
+  return res;
+}
+
+var objectKeys = Object.keys || function (obj) {
+  var res = [];
+  for (var key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
+  }
+  return res;
+};
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7092,13 +7498,13 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
-var _rewards = __webpack_require__(7);
+var _rewards = __webpack_require__(11);
 
-var _user = __webpack_require__(9);
+var _user = __webpack_require__(13);
 
-var _rewards2 = __webpack_require__(10);
+var _rewards2 = __webpack_require__(14);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -7250,7 +7656,7 @@ function doFetchRewardedContent() {
 }
 
 /***/ }),
-/* 7 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7261,7 +7667,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
 
-var _reselect = __webpack_require__(8);
+var _reselect = __webpack_require__(12);
 
 var selectState = function selectState(state) {
   return state.rewards || {};
@@ -7352,7 +7758,7 @@ var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _res
 });
 
 /***/ }),
-/* 8 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7483,7 +7889,7 @@ function createStructuredSelector(selectors) {
 }
 
 /***/ }),
-/* 9 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7494,7 +7900,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(8);
+var _reselect = __webpack_require__(12);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.user || {};
@@ -7609,7 +8015,7 @@ var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = 
 });
 
 /***/ }),
-/* 10 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7621,7 +8027,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
 var _lbryio = __webpack_require__(3);
 
@@ -7723,7 +8129,7 @@ rewards.claimReward = function (type, rewardParams) {
 exports.default = rewards;
 
 /***/ }),
-/* 11 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7749,13 +8155,13 @@ exports.doFetchAccessToken = doFetchAccessToken;
 exports.doUserIdentityVerify = doUserIdentityVerify;
 exports.doUserInviteNew = doUserInviteNew;
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
-var _rewards = __webpack_require__(6);
+var _rewards = __webpack_require__(10);
 
-var _user = __webpack_require__(9);
+var _user = __webpack_require__(13);
 
-var _rewards2 = __webpack_require__(10);
+var _rewards2 = __webpack_require__(14);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8093,7 +8499,7 @@ function doUserInviteNew(email) {
 }
 
 /***/ }),
-/* 12 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8145,7 +8551,7 @@ function authReducer() {
 }
 
 /***/ }),
-/* 13 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8159,7 +8565,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.rewardsReducer = rewardsReducer;
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -8286,7 +8692,7 @@ function rewardsReducer() {
 }
 
 /***/ }),
-/* 14 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8297,7 +8703,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userReducer = userReducer;
 
-var _lbryRedux = __webpack_require__(4);
+var _lbryRedux = __webpack_require__(5);
 
 var reducers = {};
 
@@ -8557,7 +8963,7 @@ function userReducer() {
 }
 
 /***/ }),
-/* 15 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8568,7 +8974,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectIsAuthenticating = exports.selectAuthToken = undefined;
 
-var _reselect = __webpack_require__(8);
+var _reselect = __webpack_require__(12);
 
 var selectState = function selectState(state) {
   return state.auth || {};
