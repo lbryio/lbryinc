@@ -3358,9 +3358,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-lbry-redux@lbryio/lbry-redux#9a20637926970b239bb08083c9027fac340ce82b:
+lbry-redux@lbryio/lbry-redux#b2253796205d943eb63419d203e0915d09df2e61:
   version "0.0.1"
-  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/9a20637926970b239bb08083c9027fac340ce82b"
+  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/b2253796205d943eb63419d203e0915d09df2e61"
   dependencies:
     proxy-polyfill "0.1.6"
     reselect "^3.0.0"
