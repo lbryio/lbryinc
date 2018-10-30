@@ -753,7 +753,7 @@ Lbryio.getAuthToken = function () {
       Lbryio.overrides.getAuthToken().then(function (token) {
         resolve(token);
       });
-    } else if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
+    } else if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
       var _window = window,
           store = _window.store;
 
@@ -1039,7 +1039,7 @@ process.umask = function() { return 0; };
 	if(true)
 		module.exports = factory();
 	else { var i, a; }
-})((typeof window !== 'undefined' ? window : this), function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -8445,7 +8445,7 @@ rewards.claimReward = function (type, rewardParams) {
 
       // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
       if (type === rewards.TYPE_REWARD_CODE) {
-        if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
+        if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
           window.store.dispatch((0, _lbryRedux.doHideNotification)());
         }
       }
@@ -8458,7 +8458,7 @@ rewards.claimReward = function (type, rewardParams) {
         isError: false,
         displayType: ['snackbar']
       });
-      if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
+      if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
         window.store.dispatch(action);
       }
 
