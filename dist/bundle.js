@@ -1037,7 +1037,7 @@ process.umask = function() { return 0; };
 	if(true)
 		module.exports = factory();
 	else { var i, a; }
-})(window, function() {
+})((typeof window !== 'undefined' ? window : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -4116,11 +4116,11 @@ var selectAllClaimsByChannel = exports.selectAllClaimsByChannel = (0, _reselect.
 });
 
 var selectPendingById = exports.selectPendingById = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.pendingById;
+  return state.pendingById || {};
 });
 
 var selectPendingClaims = exports.selectPendingClaims = (0, _reselect.createSelector)(selectState, function (state) {
-  return Object.values(state.pendingById || {});
+  return Object.values(state.pendingById || []);
 });
 
 var makeSelectClaimIsPending = exports.makeSelectClaimIsPending = function makeSelectClaimIsPending(uri) {
@@ -6130,7 +6130,8 @@ exports.formatCredits = formatCredits;
 exports.formatFullPrice = formatFullPrice;
 exports.creditsToString = creditsToString;
 function formatCredits(amount, precision) {
-  return amount.toFixed(precision || 1).replace(/\.?0+$/, '');
+  if (Number.isNaN(parseFloat(amount))) return '0';
+  return parseFloat(amount).toFixed(precision || 1).replace(/\.?0+$/, '');
 }
 
 function formatFullPrice(amount) {
@@ -6256,13 +6257,13 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = function (state, action) {
   var byId = Object.assign({}, state.byId);
   var pendingById = Object.assign({}, state.pendingById);
 
-  claims.filter(function (claim) {
-    return claim.type && claim.type.match(/claim|update/);
-  }).forEach(function (claim) {
-    if (claim.confirmations < 1) {
-      pendingById[claim.claim_id] = claim;
-    } else {
-      byId[claim.claim_id] = claim;
+  claims.forEach(function (claim) {
+    if (claim.type && claim.type.match(/claim|update/)) {
+      if (claim.confirmations < 1) {
+        pendingById[claim.claim_id] = claim;
+      } else {
+        byId[claim.claim_id] = claim;
+      }
     }
   });
 
