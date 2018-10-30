@@ -74,7 +74,7 @@ Lbryio.getAuthToken = () =>
       Lbryio.overrides.getAuthToken().then(token => {
         resolve(token);
       });
-    } else {
+    } else if (typeof window === 'object') {
       const { store } = window;
       if (store) {
         const state = store.getState();
@@ -82,9 +82,9 @@ Lbryio.getAuthToken = () =>
         Lbryio.authToken = token;
         resolve(token);
       }
-
-      resolve(null);
     }
+
+    resolve(null);
   });
 
 Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');

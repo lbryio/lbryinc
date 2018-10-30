@@ -7,7 +7,7 @@
 		var a = factory();
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})((typeof window !== 'undefined' ? window : this), function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -663,6 +663,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _lbryRedux = __webpack_require__(5);
@@ -751,7 +753,7 @@ Lbryio.getAuthToken = function () {
       Lbryio.overrides.getAuthToken().then(function (token) {
         resolve(token);
       });
-    } else {
+    } else if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
       var _window = window,
           store = _window.store;
 
@@ -761,9 +763,9 @@ Lbryio.getAuthToken = function () {
         Lbryio.authToken = token;
         resolve(token);
       }
-
-      resolve(null);
     }
+
+    resolve(null);
   });
 };
 
@@ -8406,6 +8408,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _lbryRedux = __webpack_require__(5);
 
 var _lbryio = __webpack_require__(3);
@@ -8441,7 +8445,9 @@ rewards.claimReward = function (type, rewardParams) {
 
       // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
       if (type === rewards.TYPE_REWARD_CODE) {
-        window.store.dispatch((0, _lbryRedux.doHideNotification)());
+        if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
+          window.store.dispatch((0, _lbryRedux.doHideNotification)());
+        }
       }
 
       // Display global notice
@@ -8452,7 +8458,9 @@ rewards.claimReward = function (type, rewardParams) {
         isError: false,
         displayType: ['snackbar']
       });
-      window.store.dispatch(action);
+      if ((typeof window === 'undefined' ? 'undefined' : _typeof(window)) === "object") {
+        window.store.dispatch(action);
+      }
 
       // Add more events here to display other places
 

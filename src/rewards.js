@@ -29,7 +29,9 @@ rewards.claimReward = (type, rewardParams) => {
 
       // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
       if (type === rewards.TYPE_REWARD_CODE) {
-        window.store.dispatch(doHideNotification());
+        if (typeof window === 'object') {
+          window.store.dispatch(doHideNotification());
+        }
       }
 
       // Display global notice
@@ -40,7 +42,9 @@ rewards.claimReward = (type, rewardParams) => {
         isError: false,
         displayType: ['snackbar'],
       });
-      window.store.dispatch(action);
+      if (typeof window === 'object') {
+        window.store.dispatch(action);
+      }
 
       // Add more events here to display other places
 
