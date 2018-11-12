@@ -49,7 +49,7 @@ rewards.claimReward = (type, rewardParams) => {
   }
 
   return new Promise((resolve, reject) => {
-    Lbry.wallet_unused_address().then(address => {
+    Lbry.address_unused().then(address => {
       const params = {
         reward_type: type,
         wallet_address: address,
@@ -67,7 +67,7 @@ rewards.claimReward = (type, rewardParams) => {
                     foundClaim.name.length &&
                     foundClaim.name[0] === '@' &&
                     foundClaim.txid.length &&
-                    foundClaim.category === 'claim'
+                    foundClaim.type === 'claim'
                 );
               if (claim) {
                 params.transaction_id = claim.txid;
@@ -89,7 +89,7 @@ rewards.claimReward = (type, rewardParams) => {
                     foundClaim.name.length &&
                     foundClaim.name[0] !== '@' &&
                     foundClaim.txid.length &&
-                    foundClaim.category === 'claim'
+                    foundClaim.type === 'claim'
                 );
               if (claim) {
                 params.transaction_id = claim.txid;
