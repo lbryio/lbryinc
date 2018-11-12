@@ -4116,11 +4116,11 @@ var selectAllClaimsByChannel = exports.selectAllClaimsByChannel = (0, _reselect.
 });
 
 var selectPendingById = exports.selectPendingById = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.pendingById;
+  return state.pendingById || {};
 });
 
 var selectPendingClaims = exports.selectPendingClaims = (0, _reselect.createSelector)(selectState, function (state) {
-  return Object.values(state.pendingById || {});
+  return Object.values(state.pendingById || []);
 });
 
 var makeSelectClaimIsPending = exports.makeSelectClaimIsPending = function makeSelectClaimIsPending(uri) {
@@ -6130,7 +6130,8 @@ exports.formatCredits = formatCredits;
 exports.formatFullPrice = formatFullPrice;
 exports.creditsToString = creditsToString;
 function formatCredits(amount, precision) {
-  return amount.toFixed(precision || 1).replace(/\.?0+$/, '');
+  if (Number.isNaN(parseFloat(amount))) return '0';
+  return parseFloat(amount).toFixed(precision || 1).replace(/\.?0+$/, '');
 }
 
 function formatFullPrice(amount) {
@@ -6256,13 +6257,13 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = function (state, action) {
   var byId = Object.assign({}, state.byId);
   var pendingById = Object.assign({}, state.pendingById);
 
-  claims.filter(function (claim) {
-    return claim.type && claim.type.match(/claim|update/);
-  }).forEach(function (claim) {
-    if (claim.confirmations < 1) {
-      pendingById[claim.claim_id] = claim;
-    } else {
-      byId[claim.claim_id] = claim;
+  claims.forEach(function (claim) {
+    if (claim.type && claim.type.match(/claim|update/)) {
+      if (claim.confirmations < 1) {
+        pendingById[claim.claim_id] = claim;
+      } else {
+        byId[claim.claim_id] = claim;
+      }
     }
   });
 
@@ -8460,7 +8461,7 @@ rewards.claimReward = function (type, rewardParams) {
   }
 
   return new Promise(function (resolve, reject) {
-    _lbryRedux.Lbry.wallet_unused_address().then(function (address) {
+    _lbryRedux.Lbry.address_unused().then(function (address) {
       var params = _extends({
         reward_type: type,
         wallet_address: address
@@ -8470,7 +8471,7 @@ rewards.claimReward = function (type, rewardParams) {
         case rewards.TYPE_FIRST_CHANNEL:
           _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
             var claim = claims.reverse().find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.category === 'claim';
+              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });
             if (claim) {
               params.transaction_id = claim.txid;
@@ -8484,7 +8485,7 @@ rewards.claimReward = function (type, rewardParams) {
         case rewards.TYPE_FIRST_PUBLISH:
           _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
             var claim = claims.reverse().find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.category === 'claim';
+              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });
             if (claim) {
               params.transaction_id = claim.txid;
