@@ -1119,8 +1119,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectTransactionListFilter = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletState = exports.selectWalletIsEncrypted = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectFileListPublishedSort = exports.selectFileListDownloadedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = undefined;
-exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.selectPendingById = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.makeSelectChannelForClaimUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectSnack = exports.selectNotificationProps = exports.selectNotification = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.creditsToString = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doSetTransactionListFilter = exports.doWalletStatus = exports.doWalletUnlock = exports.doWalletDecrypt = exports.doWalletEncrypt = exports.doSendTip = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doSetFileListSort = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doHideNotification = exports.doNotify = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.PAGES = exports.SORT_OPTIONS = exports.TRANSACTIONS = exports.SETTINGS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.MODALS = exports.ACTIONS = exports.Notification = undefined;
+exports.selectTransactionListFilter = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletState = exports.selectWalletIsEncrypted = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectFileListPublishedSort = exports.selectFileListDownloadedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = undefined;
+exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.selectPendingById = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.makeSelectChannelForClaimUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectSnack = exports.selectNotificationProps = exports.selectNotification = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.creditsToString = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doUpdateBlockHeight = exports.doSetTransactionListFilter = exports.doWalletStatus = exports.doWalletUnlock = exports.doWalletDecrypt = exports.doWalletEncrypt = exports.doSendTip = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doSetFileListSort = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doHideNotification = exports.doNotify = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.PAGES = exports.SORT_OPTIONS = exports.TRANSACTIONS = exports.SETTINGS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.MODALS = exports.ACTIONS = exports.Notification = undefined;
 
 var _Notification = __webpack_require__(1);
 
@@ -1254,7 +1254,7 @@ Object.defineProperty(exports, 'doFetchTrendingUris', {
   }
 });
 
-var _cost_info = __webpack_require__(22);
+var _cost_info = __webpack_require__(26);
 
 Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   enumerable: true,
@@ -1263,7 +1263,7 @@ Object.defineProperty(exports, 'doFetchCostInfoForUri', {
   }
 });
 
-var _file_info = __webpack_require__(23);
+var _file_info = __webpack_require__(27);
 
 Object.defineProperty(exports, 'doFetchFileInfo', {
   enumerable: true,
@@ -1290,7 +1290,7 @@ Object.defineProperty(exports, 'doSetFileListSort', {
   }
 });
 
-var _search = __webpack_require__(25);
+var _search = __webpack_require__(29);
 
 Object.defineProperty(exports, 'doSearch', {
   enumerable: true,
@@ -1317,7 +1317,7 @@ Object.defineProperty(exports, 'doBlurSearchInput', {
   }
 });
 
-var _blacklist = __webpack_require__(27);
+var _blacklist = __webpack_require__(31);
 
 Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   enumerable: true,
@@ -1326,7 +1326,7 @@ Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   }
 });
 
-var _wallet = __webpack_require__(28);
+var _wallet = __webpack_require__(22);
 
 Object.defineProperty(exports, 'doUpdateBalance', {
   enumerable: true,
@@ -1418,6 +1418,12 @@ Object.defineProperty(exports, 'doSetTransactionListFilter', {
     return _wallet.doSetTransactionListFilter;
   }
 });
+Object.defineProperty(exports, 'doUpdateBlockHeight', {
+  enumerable: true,
+  get: function get() {
+    return _wallet.doUpdateBlockHeight;
+  }
+});
 
 var _batchActions = __webpack_require__(21);
 
@@ -1443,7 +1449,7 @@ Object.defineProperty(exports, 'toQueryString', {
   }
 });
 
-var _formatCredits = __webpack_require__(31);
+var _formatCredits = __webpack_require__(25);
 
 Object.defineProperty(exports, 'formatCredits', {
   enumerable: true,
@@ -1833,7 +1839,7 @@ Object.defineProperty(exports, 'selectFetchingCostInfo', {
   }
 });
 
-var _file_info3 = __webpack_require__(24);
+var _file_info3 = __webpack_require__(28);
 
 Object.defineProperty(exports, 'makeSelectFileInfoForUri', {
   enumerable: true,
@@ -2052,7 +2058,7 @@ Object.defineProperty(exports, 'selectSearchSuggestions', {
   }
 });
 
-var _wallet3 = __webpack_require__(29);
+var _wallet3 = __webpack_require__(23);
 
 Object.defineProperty(exports, 'makeSelectBlockDate', {
   enumerable: true,
@@ -2237,7 +2243,7 @@ var _settings = __webpack_require__(47);
 
 var SETTINGS = _interopRequireWildcard(_settings);
 
-var _transaction_types = __webpack_require__(30);
+var _transaction_types = __webpack_require__(24);
 
 var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
@@ -2662,6 +2668,7 @@ var WALLET_LOCK_FAILED = exports.WALLET_LOCK_FAILED = 'WALLET_LOCK_FAILED';
 var WALLET_STATUS_START = exports.WALLET_STATUS_START = 'WALLET_STATUS_START';
 var WALLET_STATUS_COMPLETED = exports.WALLET_STATUS_COMPLETED = 'WALLET_STATUS_COMPLETED';
 var SET_TRANSACTION_LIST_FILTER = exports.SET_TRANSACTION_LIST_FILTER = 'SET_TRANSACTION_LIST_FILTER';
+var UPDATE_CURRENT_HEIGHT = exports.UPDATE_CURRENT_HEIGHT = 'UPDATE_CURRENT_HEIGHT';
 
 // Claims
 var FETCH_FEATURED_CONTENT_STARTED = exports.FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
@@ -2858,6 +2865,8 @@ var _claims = __webpack_require__(14);
 
 var _batchActions = __webpack_require__(21);
 
+var _wallet = __webpack_require__(22);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -2942,8 +2951,7 @@ function doAbandonClaim(txid, nout) {
     var _myClaims$find = myClaims.find(function (claim) {
       return claim.txid === txid && claim.nout === nout;
     }),
-        claimId = _myClaims$find.claim_id,
-        name = _myClaims$find.name;
+        claimId = _myClaims$find.claim_id;
 
     dispatch({
       type: ACTIONS.ABANDON_CLAIM_STARTED,
@@ -2955,28 +2963,36 @@ function doAbandonClaim(txid, nout) {
     var errorCallback = function errorCallback() {
       dispatch((0, _notifications.doNotify)({
         title: 'Transaction failed',
-        message: 'Transaction failed',
+        message: 'Error abandoning claim',
         type: 'error',
-        displayType: ['modal', 'toast']
+        displayType: ['snackbar', 'toast']
       }));
     };
 
     var successCallback = function successCallback(results) {
-      if (results.txid) {
+      if (results.success === true) {
         dispatch({
           type: ACTIONS.ABANDON_CLAIM_SUCCEEDED,
           data: {
             claimId: claimId
           }
         });
-        dispatch(doResolveUri((0, _lbryURI.buildURI)({ name: name, claimId: claimId })));
+        dispatch((0, _notifications.doNotify)({
+          title: 'Transaction successful',
+          message: 'Successfully abandoned your claim',
+          displayType: ['snackbar', 'toast']
+        }));
+
+        // After abandoning, call claim_list_mine to show the claim as abandoned
+        // Also fetch transactions to show the new abandon transaction
         dispatch(doFetchClaimListMine());
+        dispatch((0, _wallet.doFetchTransactions)());
       } else {
         dispatch((0, _notifications.doNotify)({
           title: 'Transaction failed',
-          message: 'Transaction failed',
+          message: 'Error abandoning claim',
           type: 'error',
-          displayType: ['modal', 'toast']
+          displayType: ['snackbar', 'toast']
         }));
       }
     };
@@ -4336,8 +4352,9 @@ var makeSelectTotalItemsForChannel = exports.makeSelectTotalItemsForChannel = fu
 };
 
 var makeSelectTotalPagesForChannel = exports.makeSelectTotalPagesForChannel = function makeSelectTotalPagesForChannel(uri) {
+  var pageSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 10;
   return (0, _reselect.createSelector)(selectChannelClaimCounts, function (byUri) {
-    return byUri && byUri[uri] && Math.ceil(byUri[uri] / 10);
+    return byUri && byUri[uri] && Math.ceil(byUri[uri] / pageSize);
   });
 };
 
@@ -4378,18 +4395,16 @@ var makeSelectRecommendedContentForUri = exports.makeSelectRecommendedContentFor
 
     var recommendedContent = void 0;
     if (claim) {
+      // If we are at a vanity uri, build the full uri so we can properly filter
+      var currentUri = atVanityURI ? (0, _lbryURI.buildURI)({ claimId: claim.claim_id, claimName: claim.name }) : uri;
+
       var title = claim.value.stream.metadata.title;
+
 
       var searchUris = searchUrisByQuery[title.replace(/\//, ' ')];
       if (searchUris) {
-        // If we are at a vanity uri, we can't do a uri match
-        // The first search result _should_ be the same as the claim a user is on
-        if (atVanityURI) {
-          searchUris = searchUris.slice(1);
-        }
-
         searchUris = searchUris.filter(function (searchUri) {
-          return searchUri !== uri;
+          return searchUri !== currentUri;
         });
         recommendedContent = searchUris;
       }
@@ -4878,645 +4893,6 @@ function batchActions() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
-
-var _action_types = __webpack_require__(4);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _lbryapi = __webpack_require__(9);
-
-var _lbryapi2 = _interopRequireDefault(_lbryapi);
-
-var _claims = __webpack_require__(14);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// eslint-disable-next-line import/prefer-default-export
-function doFetchCostInfoForUri(uri) {
-  return function (dispatch, getState) {
-    var state = getState();
-    var claim = (0, _claims.selectClaimsByUri)(state)[uri];
-
-    if (!claim) return;
-
-    function resolve(costInfo) {
-      dispatch({
-        type: ACTIONS.FETCH_COST_INFO_COMPLETED,
-        data: {
-          uri: uri,
-          costInfo: costInfo
-        }
-      });
-    }
-
-    var fee = claim.value && claim.value.stream && claim.value.stream.metadata ? claim.value.stream.metadata.fee : undefined;
-
-    if (fee === undefined) {
-      resolve({ cost: 0, includesData: true });
-    } else if (fee.currency === 'LBC') {
-      resolve({ cost: fee.amount, includesData: true });
-    } else {
-      _lbryapi2.default.getExchangeRates().then(function (_ref) {
-        var LBC_USD = _ref.LBC_USD;
-
-        resolve({ cost: fee.amount / LBC_USD, includesData: true });
-      });
-    }
-  };
-}
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.doFetchFileInfo = doFetchFileInfo;
-exports.doFileList = doFileList;
-exports.doFetchFileInfosAndPublishedClaims = doFetchFileInfosAndPublishedClaims;
-exports.doSetFileListSort = doSetFileListSort;
-
-var _action_types = __webpack_require__(4);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _lbry = __webpack_require__(6);
-
-var _lbry2 = _interopRequireDefault(_lbry);
-
-var _claims = __webpack_require__(5);
-
-var _claims2 = __webpack_require__(14);
-
-var _file_info = __webpack_require__(24);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function doFetchFileInfo(uri) {
-  return function (dispatch, getState) {
-    var state = getState();
-    var claim = (0, _claims2.selectClaimsByUri)(state)[uri];
-    var outpoint = claim ? claim.txid + ':' + claim.nout : null;
-    var alreadyFetching = !!(0, _file_info.selectUrisLoading)(state)[uri];
-
-    if (!alreadyFetching) {
-      dispatch({
-        type: ACTIONS.FETCH_FILE_INFO_STARTED,
-        data: {
-          outpoint: outpoint
-        }
-      });
-
-      _lbry2.default.file_list({ outpoint: outpoint, full_status: true }).then(function (fileInfos) {
-        dispatch({
-          type: ACTIONS.FETCH_FILE_INFO_COMPLETED,
-          data: {
-            outpoint: outpoint,
-            fileInfo: fileInfos && fileInfos.length ? fileInfos[0] : null
-          }
-        });
-      });
-    }
-  };
-}
-
-function doFileList() {
-  return function (dispatch, getState) {
-    var state = getState();
-    var isFetching = (0, _file_info.selectIsFetchingFileList)(state);
-
-    if (!isFetching) {
-      dispatch({
-        type: ACTIONS.FILE_LIST_STARTED
-      });
-
-      _lbry2.default.file_list().then(function (fileInfos) {
-        dispatch({
-          type: ACTIONS.FILE_LIST_SUCCEEDED,
-          data: {
-            fileInfos: fileInfos
-          }
-        });
-      });
-    }
-  };
-}
-
-function doFetchFileInfosAndPublishedClaims() {
-  return function (dispatch, getState) {
-    var state = getState();
-    var isFetchingClaimListMine = (0, _claims2.selectIsFetchingClaimListMine)(state);
-    var isFetchingFileInfo = (0, _file_info.selectIsFetchingFileList)(state);
-
-    if (!isFetchingClaimListMine) dispatch((0, _claims.doFetchClaimListMine)());
-    if (!isFetchingFileInfo) dispatch(doFileList());
-  };
-}
-
-function doSetFileListSort(page, value) {
-  return {
-    type: ACTIONS.SET_FILE_LIST_SORT,
-    data: { page: page, value: value }
-  };
-}
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.selectFileListDownloadedSort = exports.selectFileListPublishedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.makeSelectLoadingForUri = exports.selectUrisLoading = exports.makeSelectDownloadingForUri = exports.selectDownloadingByOutpoint = exports.makeSelectFileInfoForUri = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.selectState = undefined;
-
-var _claims = __webpack_require__(14);
-
-var _reselect = __webpack_require__(16);
-
-var _lbryURI = __webpack_require__(2);
-
-var selectState = exports.selectState = function selectState(state) {
-  return state.fileInfo || {};
-};
-
-var selectFileInfosByOutpoint = exports.selectFileInfosByOutpoint = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.byOutpoint || {};
-});
-
-var selectIsFetchingFileList = exports.selectIsFetchingFileList = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.isFetchingFileList;
-});
-
-var selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileListDownloadedOrPublished = (0, _reselect.createSelector)(selectIsFetchingFileList, _claims.selectIsFetchingClaimListMine, function (isFetchingFileList, isFetchingClaimListMine) {
-  return isFetchingFileList || isFetchingClaimListMine;
-});
-
-var makeSelectFileInfoForUri = exports.makeSelectFileInfoForUri = function makeSelectFileInfoForUri(uri) {
-  return (0, _reselect.createSelector)(_claims.selectClaimsByUri, selectFileInfosByOutpoint, function (claims, byOutpoint) {
-    var claim = claims[uri];
-    var outpoint = claim ? claim.txid + ':' + claim.nout : undefined;
-    return outpoint ? byOutpoint[outpoint] : undefined;
-  });
-};
-
-var selectDownloadingByOutpoint = exports.selectDownloadingByOutpoint = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.downloadingByOutpoint || {};
-});
-
-var makeSelectDownloadingForUri = exports.makeSelectDownloadingForUri = function makeSelectDownloadingForUri(uri) {
-  return (0, _reselect.createSelector)(selectDownloadingByOutpoint, makeSelectFileInfoForUri(uri), function (byOutpoint, fileInfo) {
-    if (!fileInfo) return false;
-    return byOutpoint[fileInfo.outpoint];
-  });
-};
-
-var selectUrisLoading = exports.selectUrisLoading = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.urisLoading || {};
-});
-
-var makeSelectLoadingForUri = exports.makeSelectLoadingForUri = function makeSelectLoadingForUri(uri) {
-  return (0, _reselect.createSelector)(selectUrisLoading, function (byUri) {
-    return byUri && byUri[uri];
-  });
-};
-
-var selectFileInfosDownloaded = exports.selectFileInfosDownloaded = (0, _reselect.createSelector)(selectFileInfosByOutpoint, _claims.selectMyClaims, function (byOutpoint, myClaims) {
-  return Object.values(byOutpoint).filter(function (fileInfo) {
-    var myClaimIds = myClaims.map(function (claim) {
-      return claim.claim_id;
-    });
-
-    return fileInfo && myClaimIds.indexOf(fileInfo.claim_id) === -1 && (fileInfo.completed || fileInfo.written_bytes);
-  });
-});
-
-// export const selectFileInfoForUri = (state, props) => {
-//   const claims = selectClaimsByUri(state),
-//     claim = claims[props.uri],
-//     fileInfos = selectAllFileInfos(state),
-//     outpoint = claim ? `${claim.txid}:${claim.nout}` : undefined;
-
-//   return outpoint && fileInfos ? fileInfos[outpoint] : undefined;
-// };
-
-var selectDownloadingFileInfos = exports.selectDownloadingFileInfos = (0, _reselect.createSelector)(selectDownloadingByOutpoint, selectFileInfosByOutpoint, function (downloadingByOutpoint, fileInfosByOutpoint) {
-  var outpoints = Object.keys(downloadingByOutpoint);
-  var fileInfos = [];
-
-  outpoints.forEach(function (outpoint) {
-    var fileInfo = fileInfosByOutpoint[outpoint];
-
-    if (fileInfo) fileInfos.push(fileInfo);
-  });
-
-  return fileInfos;
-});
-
-var selectTotalDownloadProgress = exports.selectTotalDownloadProgress = (0, _reselect.createSelector)(selectDownloadingFileInfos, function (fileInfos) {
-  var progress = [];
-
-  fileInfos.forEach(function (fileInfo) {
-    progress.push(fileInfo.written_bytes / fileInfo.total_bytes * 100);
-  });
-
-  var totalProgress = progress.reduce(function (a, b) {
-    return a + b;
-  }, 0);
-
-  if (fileInfos.length > 0) return totalProgress / fileInfos.length / 100.0;
-  return -1;
-});
-
-var selectSearchDownloadUris = exports.selectSearchDownloadUris = function selectSearchDownloadUris(query) {
-  return (0, _reselect.createSelector)(selectFileInfosDownloaded, _claims.selectClaimsById, function (fileInfos, claimsById) {
-    if (!query || !fileInfos.length) {
-      return null;
-    }
-
-    var queryParts = query.toLowerCase().split(' ');
-    var searchQueryDictionary = {};
-    queryParts.forEach(function (subQuery) {
-      searchQueryDictionary[subQuery] = subQuery;
-    });
-
-    var arrayContainsQueryPart = function arrayContainsQueryPart(array) {
-      for (var i = 0; i < array.length; i += 1) {
-        var subQuery = array[i];
-        if (searchQueryDictionary[subQuery]) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    var downloadResultsFromQuery = [];
-    fileInfos.forEach(function (fileInfo) {
-      var channelName = fileInfo.channel_name,
-          claimName = fileInfo.claim_name,
-          metadata = fileInfo.metadata;
-      var author = metadata.author,
-          description = metadata.description,
-          title = metadata.title;
-
-
-      if (channelName) {
-        var lowerCaseChannel = channelName.toLowerCase();
-        var strippedOutChannelName = lowerCaseChannel.slice(1); // trim off the @
-        if (searchQueryDictionary[channelName] || searchQueryDictionary[strippedOutChannelName]) {
-          downloadResultsFromQuery.push(fileInfo);
-          return;
-        }
-      }
-
-      var nameParts = claimName.toLowerCase().split('-');
-      if (arrayContainsQueryPart(nameParts)) {
-        downloadResultsFromQuery.push(fileInfo);
-        return;
-      }
-
-      var titleParts = title.toLowerCase().split(' ');
-      if (arrayContainsQueryPart(titleParts)) {
-        downloadResultsFromQuery.push(fileInfo);
-        return;
-      }
-
-      if (author) {
-        var authorParts = author.toLowerCase().split(' ');
-        if (arrayContainsQueryPart(authorParts)) {
-          downloadResultsFromQuery.push(fileInfo);
-          return;
-        }
-      }
-
-      if (description) {
-        var descriptionParts = description.toLowerCase().split(' ');
-        if (arrayContainsQueryPart(descriptionParts)) {
-          downloadResultsFromQuery.push(fileInfo);
-        }
-      }
-    });
-
-    return downloadResultsFromQuery.length ? downloadResultsFromQuery.map(function (fileInfo) {
-      var channelName = fileInfo.channel_name,
-          claimId = fileInfo.claim_id,
-          claimName = fileInfo.claim_name;
-
-
-      var uriParams = {};
-
-      if (channelName) {
-        var claim = claimsById[claimId];
-        if (claim && claim.value) {
-          uriParams.claimId = claim.value.publisherSignature.certificateId;
-        } else {
-          uriParams.claimId = claimId;
-        }
-        uriParams.channelName = channelName;
-        uriParams.contentName = claimName;
-      } else {
-        uriParams.claimId = claimId;
-        uriParams.claimName = claimName;
-      }
-
-      var uri = (0, _lbryURI.buildURI)(uriParams);
-      return uri;
-    }) : null;
-  });
-};
-
-var selectFileListPublishedSort = exports.selectFileListPublishedSort = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.fileListPublishedSort;
-});
-
-var selectFileListDownloadedSort = exports.selectFileListDownloadedSort = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.fileListDownloadedSort;
-});
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.getSearchSuggestions = exports.doSearch = undefined;
-
-var _action_types = __webpack_require__(4);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _lbryURI = __webpack_require__(2);
-
-var _claims = __webpack_require__(5);
-
-var _search = __webpack_require__(18);
-
-var _batchActions = __webpack_require__(21);
-
-var _handleFetch = __webpack_require__(26);
-
-var _handleFetch2 = _interopRequireDefault(_handleFetch);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// @flow
-var DEFAULTSEARCHRESULTSIZE = 10;
-var DEFAULTSEARCHRESULTFROM = 0;
-/*:: type Dispatch = (action: any) => any;*/
-/*:: type GetState = () => {};*/
-var doSearch = exports.doSearch = function doSearch(rawQuery) {
-  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
-  var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
-  var isBackgroundSearch = arguments[3];
-  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
-    var state = getState();
-    var query = rawQuery.replace(/^lbry:\/\//i, '').replace(/\//, ' ');
-
-    if (!query) {
-      dispatch({
-        type: ACTIONS.SEARCH_FAIL
-      });
-      return;
-    }
-
-    // If we have already searched for something, we don't need to do anything
-    var urisForQuery = (0, _search.makeSelectSearchUris)(query)(state);
-    if (urisForQuery && !!urisForQuery.length) {
-      return;
-    }
-
-    dispatch({
-      type: ACTIONS.SEARCH_START
-    });
-
-    // If the user is on the file page with a pre-populated uri and they select
-    // the search option without typing anything, searchQuery will be empty
-    // We need to populate it so the input is filled on the search page
-    // isBackgroundSearch means the search is happening in the background, don't update the search query
-    if (!state.search.searchQuery && !isBackgroundSearch) {
-      dispatch({
-        type: ACTIONS.UPDATE_SEARCH_QUERY,
-        data: { searchQuery: query }
-      });
-    }
-
-    var encodedQuery = encodeURIComponent(query);
-    fetch('https://lighthouse.lbry.io/search?s=' + encodedQuery + '&size=' + size + '&from=' + from).then(_handleFetch2.default).then(function (data) {
-      var uris = [];
-      var actions = [];
-
-      data.forEach(function (result) {
-        var uri = (0, _lbryURI.buildURI)({
-          claimName: result.name,
-          claimId: result.claimId
-        });
-        actions.push((0, _claims.doResolveUri)(uri));
-        uris.push(uri);
-      });
-
-      actions.push({
-        type: ACTIONS.SEARCH_SUCCESS,
-        data: {
-          query: query,
-          uris: uris
-        }
-      });
-      dispatch(_batchActions.batchActions.apply(undefined, actions));
-    }).catch(function () {
-      dispatch({
-        type: ACTIONS.SEARCH_FAIL
-      });
-    });
-  };
-};
-
-var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSuggestions(value /*: string*/) {
-  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
-    var query = value.trim();
-
-    // strip out any basic stuff for more accurate search results
-    var searchValue = query.replace(/lbry:\/\//g, '').replace(/-/g, ' ');
-    if (searchValue.includes('#')) {
-      // This should probably be more robust, but I think it's fine for now
-      // Remove everything after # to get rid of the claim id
-      searchValue = searchValue.substring(0, searchValue.indexOf('#'));
-    }
-
-    var suggestions = (0, _search.selectSuggestions)(getState());
-    if (suggestions[searchValue]) {
-      return;
-    }
-
-    fetch('https://lighthouse.lbry.io/autocomplete?s=' + searchValue).then(_handleFetch2.default).then(function (apiSuggestions) {
-      dispatch({
-        type: ACTIONS.UPDATE_SEARCH_SUGGESTIONS,
-        data: {
-          query: searchValue,
-          suggestions: apiSuggestions
-        }
-      });
-    }).catch(function () {
-      // If the fetch fails, do nothing
-      // Basic search suggestions are already populated at this point
-    });
-  };
-};
-
-var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQuery(query /*: string*/, shouldSkipSuggestions /*: ?boolean*/) {
-  return function (dispatch /*: Dispatch*/) {
-    dispatch({
-      type: ACTIONS.UPDATE_SEARCH_QUERY,
-      data: { query: query }
-    });
-
-    // Don't fetch new suggestions if the user just added a space
-    if (!query.endsWith(' ') || !shouldSkipSuggestions) {
-      dispatch(getSearchSuggestions(query));
-    }
-  };
-};
-
-var doFocusSearchInput = exports.doFocusSearchInput = function doFocusSearchInput() {
-  return function (dispatch /*: Dispatch*/) {
-    return dispatch({
-      type: ACTIONS.SEARCH_FOCUS
-    });
-  };
-};
-
-var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput() {
-  return function (dispatch /*: Dispatch*/) {
-    return dispatch({
-      type: ACTIONS.SEARCH_BLUR
-    });
-  };
-};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = handleFetchResponse;
-function handleFetchResponse(response) {
-  return response.status === 200 ? Promise.resolve(response.json()) : Promise.reject(new Error(response.statusText));
-}
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-exports.doFetchBlackListedOutpoints = doFetchBlackListedOutpoints;
-exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
-
-var _lbryapi = __webpack_require__(9);
-
-var _lbryapi2 = _interopRequireDefault(_lbryapi);
-
-var _action_types = __webpack_require__(4);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CHECK_BLACK_LISTED_CONTENT_INTERVAL = 60 * 60 * 1000;
-
-function doFetchBlackListedOutpoints() {
-  return function (dispatch) {
-    dispatch({
-      type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_STARTED
-    });
-
-    var success = function success(_ref) {
-      var outpoints = _ref.outpoints;
-
-      var splitedOutpoints = [];
-
-      outpoints.forEach(function (outpoint, index) {
-        var _outpoint$split = outpoint.split(':'),
-            _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
-            txid = _outpoint$split2[0],
-            nout = _outpoint$split2[1];
-
-        splitedOutpoints[index] = { txid: txid, nout: Number.parseInt(nout, 10) };
-      });
-      dispatch({
-        type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_COMPLETED,
-        data: {
-          outpoints: splitedOutpoints,
-          success: true
-        }
-      });
-    };
-
-    var failure = function failure(_ref2) {
-      var error = _ref2.error;
-
-      dispatch({
-        type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_FAILED,
-        data: {
-          error: error,
-          success: false
-        }
-      });
-    };
-
-    _lbryapi2.default.call('file', 'list_blocked').then(success, failure);
-  };
-}
-
-function doBlackListedOutpointsSubscribe() {
-  return function (dispatch) {
-    dispatch(doFetchBlackListedOutpoints());
-    setInterval(function () {
-      return dispatch(doFetchBlackListedOutpoints());
-    }, CHECK_BLACK_LISTED_CONTENT_INTERVAL);
-  };
-}
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.doUpdateBalance = doUpdateBalance;
 exports.doBalanceSubscribe = doBalanceSubscribe;
 exports.doFetchTransactions = doFetchTransactions;
@@ -5533,6 +4909,7 @@ exports.doWalletLock = doWalletLock;
 exports.doWalletDecrypt = doWalletDecrypt;
 exports.doWalletStatus = doWalletStatus;
 exports.doSetTransactionListFilter = doSetTransactionListFilter;
+exports.doUpdateBlockHeight = doUpdateBlockHeight;
 
 var _action_types = __webpack_require__(4);
 
@@ -5544,9 +4921,9 @@ var _lbry2 = _interopRequireDefault(_lbry);
 
 var _notifications = __webpack_require__(3);
 
-var _wallet = __webpack_require__(29);
+var _wallet = __webpack_require__(23);
 
-var _formatCredits = __webpack_require__(31);
+var _formatCredits = __webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -5892,8 +5269,21 @@ function doSetTransactionListFilter(filterOption) {
   };
 }
 
+function doUpdateBlockHeight() {
+  return function (dispatch) {
+    return _lbry2.default.status().then(function (status) {
+      if (status.wallet) {
+        dispatch({
+          type: ACTIONS.UPDATE_CURRENT_HEIGHT,
+          data: status.wallet.blocks
+        });
+      }
+    });
+  };
+}
+
 /***/ }),
-/* 29 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5902,11 +5292,11 @@ function doSetTransactionListFilter(filterOption) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectTransactionListFilter = exports.makeSelectBlockDate = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.selectWalletLockResult = exports.selectWalletLockSucceeded = exports.selectWalletLockPending = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletIsEncrypted = exports.selectWalletState = exports.selectState = undefined;
+exports.selectTransactionListFilter = exports.makeSelectBlockDate = exports.selectCurrentHeight = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.selectWalletLockResult = exports.selectWalletLockSucceeded = exports.selectWalletLockPending = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletIsEncrypted = exports.selectWalletState = exports.selectState = undefined;
 
 var _reselect = __webpack_require__(16);
 
-var _transaction_types = __webpack_require__(30);
+var _transaction_types = __webpack_require__(24);
 
 var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
@@ -6024,23 +5414,40 @@ var selectTransactionItems = exports.selectTransactionItems = (0, _reselect.crea
 
       return {
         txid: txid,
+        timestamp: tx.timestamp,
         date: tx.timestamp ? new Date(Number(tx.timestamp) * 1000) : null,
         amount: amount,
         fee: amount < 0 ? -1 * tx.fee / append.length : 0,
         claim_id: item.claim_id,
         claim_name: item.claim_name,
         type: item.type || TRANSACTIONS.SPEND,
-        nout: item.nout
+        nout: item.nout,
+        confirmations: tx.confirmations
       };
     })));
   });
-  return items;
+
+  return items.sort(function (tx1, tx2) {
+    if (!tx1.timestamp && !tx2.timestamp) {
+      return 0;
+    } else if (!tx1.timestamp && tx2.timestamp) {
+      return -1;
+    } else if (tx1.timestamp && !tx2.timestamp) {
+      return 1;
+    }
+
+    return tx2.timestamp - tx1.timestamp;
+  });
 });
 
 var selectRecentTransactions = exports.selectRecentTransactions = (0, _reselect.createSelector)(selectTransactionItems, function (transactions) {
   var threshold = new Date();
   threshold.setDate(threshold.getDate() - 7);
   return transactions.filter(function (transaction) {
+    if (!transaction.date) {
+      return true; // pending transaction
+    }
+
     return transaction.date > threshold;
   });
 });
@@ -6085,9 +5492,29 @@ var selectBlocks = exports.selectBlocks = (0, _reselect.createSelector)(selectSt
   return state.blocks;
 });
 
+var selectCurrentHeight = exports.selectCurrentHeight = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.latestBlock;
+});
+
 var makeSelectBlockDate = exports.makeSelectBlockDate = function makeSelectBlockDate(block) {
-  return (0, _reselect.createSelector)(selectBlocks, function (blocks) {
-    return blocks && blocks[block] ? new Date(blocks[block].time * 1000) : undefined;
+  return (0, _reselect.createSelector)(selectBlocks, selectCurrentHeight, function (blocks, latestBlock) {
+    // If we have the block data, look at the actual date,
+    // If not, try to simulate it based on 2.5 minute blocks
+    // Adding this on 11/7/2018 because caling block_show for every claim is causing
+    // performance issues.
+    if (blocks && blocks[block]) {
+      return new Date(blocks[block].time * 1000);
+    }
+
+    // Pending claim
+    if (block < 1) {
+      return null;
+    }
+
+    var difference = latestBlock - block;
+    var msSincePublish = difference * 2.5 * 60 * 1000; // Number of blocks * 2.5 minutes in ms
+    var publishDate = Date.now() - msSincePublish;
+    return new Date(publishDate);
   });
 };
 
@@ -6096,7 +5523,7 @@ var selectTransactionListFilter = exports.selectTransactionListFilter = (0, _res
 });
 
 /***/ }),
-/* 30 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6117,7 +5544,7 @@ var UPDATE = exports.UPDATE = 'update';
 var ABANDON = exports.ABANDON = 'abandon';
 
 /***/ }),
-/* 31 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6157,12 +5584,647 @@ function formatFullPrice(amount) {
 }
 
 function creditsToString(amount) {
-  var creditString = String(amount);
+  var creditString = parseFloat(amount).toFixed(8);
+  return creditString;
+}
 
-  if (creditString.includes('.')) {
-    return creditString;
-  }
-  return creditString + '.0';
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
+
+var _action_types = __webpack_require__(4);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryapi = __webpack_require__(9);
+
+var _lbryapi2 = _interopRequireDefault(_lbryapi);
+
+var _claims = __webpack_require__(14);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// eslint-disable-next-line import/prefer-default-export
+function doFetchCostInfoForUri(uri) {
+  return function (dispatch, getState) {
+    var state = getState();
+    var claim = (0, _claims.selectClaimsByUri)(state)[uri];
+
+    if (!claim) return;
+
+    function resolve(costInfo) {
+      dispatch({
+        type: ACTIONS.FETCH_COST_INFO_COMPLETED,
+        data: {
+          uri: uri,
+          costInfo: costInfo
+        }
+      });
+    }
+
+    var fee = claim.value && claim.value.stream && claim.value.stream.metadata ? claim.value.stream.metadata.fee : undefined;
+
+    if (fee === undefined) {
+      resolve({ cost: 0, includesData: true });
+    } else if (fee.currency === 'LBC') {
+      resolve({ cost: fee.amount, includesData: true });
+    } else {
+      _lbryapi2.default.getExchangeRates().then(function (_ref) {
+        var LBC_USD = _ref.LBC_USD;
+
+        resolve({ cost: fee.amount / LBC_USD, includesData: true });
+      });
+    }
+  };
+}
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doFetchFileInfo = doFetchFileInfo;
+exports.doFileList = doFileList;
+exports.doFetchFileInfosAndPublishedClaims = doFetchFileInfosAndPublishedClaims;
+exports.doSetFileListSort = doSetFileListSort;
+
+var _action_types = __webpack_require__(4);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbry = __webpack_require__(6);
+
+var _lbry2 = _interopRequireDefault(_lbry);
+
+var _claims = __webpack_require__(5);
+
+var _claims2 = __webpack_require__(14);
+
+var _file_info = __webpack_require__(28);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function doFetchFileInfo(uri) {
+  return function (dispatch, getState) {
+    var state = getState();
+    var claim = (0, _claims2.selectClaimsByUri)(state)[uri];
+    var outpoint = claim ? claim.txid + ':' + claim.nout : null;
+    var alreadyFetching = !!(0, _file_info.selectUrisLoading)(state)[uri];
+
+    if (!alreadyFetching) {
+      dispatch({
+        type: ACTIONS.FETCH_FILE_INFO_STARTED,
+        data: {
+          outpoint: outpoint
+        }
+      });
+
+      _lbry2.default.file_list({ outpoint: outpoint, full_status: true }).then(function (fileInfos) {
+        dispatch({
+          type: ACTIONS.FETCH_FILE_INFO_COMPLETED,
+          data: {
+            outpoint: outpoint,
+            fileInfo: fileInfos && fileInfos.length ? fileInfos[0] : null
+          }
+        });
+      });
+    }
+  };
+}
+
+function doFileList() {
+  return function (dispatch, getState) {
+    var state = getState();
+    var isFetching = (0, _file_info.selectIsFetchingFileList)(state);
+
+    if (!isFetching) {
+      dispatch({
+        type: ACTIONS.FILE_LIST_STARTED
+      });
+
+      _lbry2.default.file_list().then(function (fileInfos) {
+        dispatch({
+          type: ACTIONS.FILE_LIST_SUCCEEDED,
+          data: {
+            fileInfos: fileInfos
+          }
+        });
+      });
+    }
+  };
+}
+
+function doFetchFileInfosAndPublishedClaims() {
+  return function (dispatch, getState) {
+    var state = getState();
+    var isFetchingClaimListMine = (0, _claims2.selectIsFetchingClaimListMine)(state);
+    var isFetchingFileInfo = (0, _file_info.selectIsFetchingFileList)(state);
+
+    if (!isFetchingClaimListMine) dispatch((0, _claims.doFetchClaimListMine)());
+    if (!isFetchingFileInfo) dispatch(doFileList());
+  };
+}
+
+function doSetFileListSort(page, value) {
+  return {
+    type: ACTIONS.SET_FILE_LIST_SORT,
+    data: { page: page, value: value }
+  };
+}
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectFileListDownloadedSort = exports.selectFileListPublishedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.makeSelectLoadingForUri = exports.selectUrisLoading = exports.makeSelectDownloadingForUri = exports.selectDownloadingByOutpoint = exports.makeSelectFileInfoForUri = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.selectState = undefined;
+
+var _claims = __webpack_require__(14);
+
+var _reselect = __webpack_require__(16);
+
+var _lbryURI = __webpack_require__(2);
+
+var selectState = exports.selectState = function selectState(state) {
+  return state.fileInfo || {};
+};
+
+var selectFileInfosByOutpoint = exports.selectFileInfosByOutpoint = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.byOutpoint || {};
+});
+
+var selectIsFetchingFileList = exports.selectIsFetchingFileList = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.isFetchingFileList;
+});
+
+var selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileListDownloadedOrPublished = (0, _reselect.createSelector)(selectIsFetchingFileList, _claims.selectIsFetchingClaimListMine, function (isFetchingFileList, isFetchingClaimListMine) {
+  return isFetchingFileList || isFetchingClaimListMine;
+});
+
+var makeSelectFileInfoForUri = exports.makeSelectFileInfoForUri = function makeSelectFileInfoForUri(uri) {
+  return (0, _reselect.createSelector)(_claims.selectClaimsByUri, selectFileInfosByOutpoint, function (claims, byOutpoint) {
+    var claim = claims[uri];
+    var outpoint = claim ? claim.txid + ':' + claim.nout : undefined;
+    return outpoint ? byOutpoint[outpoint] : undefined;
+  });
+};
+
+var selectDownloadingByOutpoint = exports.selectDownloadingByOutpoint = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.downloadingByOutpoint || {};
+});
+
+var makeSelectDownloadingForUri = exports.makeSelectDownloadingForUri = function makeSelectDownloadingForUri(uri) {
+  return (0, _reselect.createSelector)(selectDownloadingByOutpoint, makeSelectFileInfoForUri(uri), function (byOutpoint, fileInfo) {
+    if (!fileInfo) return false;
+    return byOutpoint[fileInfo.outpoint];
+  });
+};
+
+var selectUrisLoading = exports.selectUrisLoading = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.urisLoading || {};
+});
+
+var makeSelectLoadingForUri = exports.makeSelectLoadingForUri = function makeSelectLoadingForUri(uri) {
+  return (0, _reselect.createSelector)(selectUrisLoading, function (byUri) {
+    return byUri && byUri[uri];
+  });
+};
+
+var selectFileInfosDownloaded = exports.selectFileInfosDownloaded = (0, _reselect.createSelector)(selectFileInfosByOutpoint, _claims.selectMyClaims, function (byOutpoint, myClaims) {
+  return Object.values(byOutpoint).filter(function (fileInfo) {
+    var myClaimIds = myClaims.map(function (claim) {
+      return claim.claim_id;
+    });
+
+    return fileInfo && myClaimIds.indexOf(fileInfo.claim_id) === -1 && (fileInfo.completed || fileInfo.written_bytes);
+  });
+});
+
+// export const selectFileInfoForUri = (state, props) => {
+//   const claims = selectClaimsByUri(state),
+//     claim = claims[props.uri],
+//     fileInfos = selectAllFileInfos(state),
+//     outpoint = claim ? `${claim.txid}:${claim.nout}` : undefined;
+
+//   return outpoint && fileInfos ? fileInfos[outpoint] : undefined;
+// };
+
+var selectDownloadingFileInfos = exports.selectDownloadingFileInfos = (0, _reselect.createSelector)(selectDownloadingByOutpoint, selectFileInfosByOutpoint, function (downloadingByOutpoint, fileInfosByOutpoint) {
+  var outpoints = Object.keys(downloadingByOutpoint);
+  var fileInfos = [];
+
+  outpoints.forEach(function (outpoint) {
+    var fileInfo = fileInfosByOutpoint[outpoint];
+
+    if (fileInfo) fileInfos.push(fileInfo);
+  });
+
+  return fileInfos;
+});
+
+var selectTotalDownloadProgress = exports.selectTotalDownloadProgress = (0, _reselect.createSelector)(selectDownloadingFileInfos, function (fileInfos) {
+  var progress = [];
+
+  fileInfos.forEach(function (fileInfo) {
+    progress.push(fileInfo.written_bytes / fileInfo.total_bytes * 100);
+  });
+
+  var totalProgress = progress.reduce(function (a, b) {
+    return a + b;
+  }, 0);
+
+  if (fileInfos.length > 0) return totalProgress / fileInfos.length / 100.0;
+  return -1;
+});
+
+var selectSearchDownloadUris = exports.selectSearchDownloadUris = function selectSearchDownloadUris(query) {
+  return (0, _reselect.createSelector)(selectFileInfosDownloaded, _claims.selectClaimsById, function (fileInfos, claimsById) {
+    if (!query || !fileInfos.length) {
+      return null;
+    }
+
+    var queryParts = query.toLowerCase().split(' ');
+    var searchQueryDictionary = {};
+    queryParts.forEach(function (subQuery) {
+      searchQueryDictionary[subQuery] = subQuery;
+    });
+
+    var arrayContainsQueryPart = function arrayContainsQueryPart(array) {
+      for (var i = 0; i < array.length; i += 1) {
+        var subQuery = array[i];
+        if (searchQueryDictionary[subQuery]) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    var downloadResultsFromQuery = [];
+    fileInfos.forEach(function (fileInfo) {
+      var channelName = fileInfo.channel_name,
+          claimName = fileInfo.claim_name,
+          metadata = fileInfo.metadata;
+      var author = metadata.author,
+          description = metadata.description,
+          title = metadata.title;
+
+
+      if (channelName) {
+        var lowerCaseChannel = channelName.toLowerCase();
+        var strippedOutChannelName = lowerCaseChannel.slice(1); // trim off the @
+        if (searchQueryDictionary[channelName] || searchQueryDictionary[strippedOutChannelName]) {
+          downloadResultsFromQuery.push(fileInfo);
+          return;
+        }
+      }
+
+      var nameParts = claimName.toLowerCase().split('-');
+      if (arrayContainsQueryPart(nameParts)) {
+        downloadResultsFromQuery.push(fileInfo);
+        return;
+      }
+
+      var titleParts = title.toLowerCase().split(' ');
+      if (arrayContainsQueryPart(titleParts)) {
+        downloadResultsFromQuery.push(fileInfo);
+        return;
+      }
+
+      if (author) {
+        var authorParts = author.toLowerCase().split(' ');
+        if (arrayContainsQueryPart(authorParts)) {
+          downloadResultsFromQuery.push(fileInfo);
+          return;
+        }
+      }
+
+      if (description) {
+        var descriptionParts = description.toLowerCase().split(' ');
+        if (arrayContainsQueryPart(descriptionParts)) {
+          downloadResultsFromQuery.push(fileInfo);
+        }
+      }
+    });
+
+    return downloadResultsFromQuery.length ? downloadResultsFromQuery.map(function (fileInfo) {
+      var channelName = fileInfo.channel_name,
+          claimId = fileInfo.claim_id,
+          claimName = fileInfo.claim_name;
+
+
+      var uriParams = {};
+
+      if (channelName) {
+        var claim = claimsById[claimId];
+        if (claim && claim.value) {
+          uriParams.claimId = claim.value.publisherSignature.certificateId;
+        } else {
+          uriParams.claimId = claimId;
+        }
+        uriParams.channelName = channelName;
+        uriParams.contentName = claimName;
+      } else {
+        uriParams.claimId = claimId;
+        uriParams.claimName = claimName;
+      }
+
+      var uri = (0, _lbryURI.buildURI)(uriParams);
+      return uri;
+    }) : null;
+  });
+};
+
+var selectFileListPublishedSort = exports.selectFileListPublishedSort = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.fileListPublishedSort;
+});
+
+var selectFileListDownloadedSort = exports.selectFileListDownloadedSort = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.fileListDownloadedSort;
+});
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.getSearchSuggestions = exports.doSearch = undefined;
+
+var _action_types = __webpack_require__(4);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryURI = __webpack_require__(2);
+
+var _claims = __webpack_require__(5);
+
+var _search = __webpack_require__(18);
+
+var _batchActions = __webpack_require__(21);
+
+var _handleFetch = __webpack_require__(30);
+
+var _handleFetch2 = _interopRequireDefault(_handleFetch);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+// @flow
+var DEFAULTSEARCHRESULTSIZE = 10;
+var DEFAULTSEARCHRESULTFROM = 0;
+/*:: type Dispatch = (action: any) => any;*/
+/*:: type GetState = () => {};*/
+var doSearch = exports.doSearch = function doSearch(rawQuery) {
+  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
+  var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
+  var isBackgroundSearch = arguments[3];
+  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
+    var state = getState();
+    var query = rawQuery.replace(/^lbry:\/\//i, '').replace(/\//, ' ');
+
+    if (!query) {
+      dispatch({
+        type: ACTIONS.SEARCH_FAIL
+      });
+      return;
+    }
+
+    // If we have already searched for something, we don't need to do anything
+    var urisForQuery = (0, _search.makeSelectSearchUris)(query)(state);
+    if (urisForQuery && !!urisForQuery.length) {
+      return;
+    }
+
+    dispatch({
+      type: ACTIONS.SEARCH_START
+    });
+
+    // If the user is on the file page with a pre-populated uri and they select
+    // the search option without typing anything, searchQuery will be empty
+    // We need to populate it so the input is filled on the search page
+    // isBackgroundSearch means the search is happening in the background, don't update the search query
+    if (!state.search.searchQuery && !isBackgroundSearch) {
+      dispatch({
+        type: ACTIONS.UPDATE_SEARCH_QUERY,
+        data: { searchQuery: query }
+      });
+    }
+
+    var encodedQuery = encodeURIComponent(query);
+    fetch('https://lighthouse.lbry.io/search?s=' + encodedQuery + '&size=' + size + '&from=' + from).then(_handleFetch2.default).then(function (data) {
+      var uris = [];
+      var actions = [];
+
+      data.forEach(function (result) {
+        var uri = (0, _lbryURI.buildURI)({
+          claimName: result.name,
+          claimId: result.claimId
+        });
+        actions.push((0, _claims.doResolveUri)(uri));
+        uris.push(uri);
+      });
+
+      actions.push({
+        type: ACTIONS.SEARCH_SUCCESS,
+        data: {
+          query: query,
+          uris: uris
+        }
+      });
+      dispatch(_batchActions.batchActions.apply(undefined, actions));
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.SEARCH_FAIL
+      });
+    });
+  };
+};
+
+var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSuggestions(value /*: string*/) {
+  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
+    var query = value.trim();
+
+    // strip out any basic stuff for more accurate search results
+    var searchValue = query.replace(/lbry:\/\//g, '').replace(/-/g, ' ');
+    if (searchValue.includes('#')) {
+      // This should probably be more robust, but I think it's fine for now
+      // Remove everything after # to get rid of the claim id
+      searchValue = searchValue.substring(0, searchValue.indexOf('#'));
+    }
+
+    var suggestions = (0, _search.selectSuggestions)(getState());
+    if (suggestions[searchValue]) {
+      return;
+    }
+
+    fetch('https://lighthouse.lbry.io/autocomplete?s=' + searchValue).then(_handleFetch2.default).then(function (apiSuggestions) {
+      dispatch({
+        type: ACTIONS.UPDATE_SEARCH_SUGGESTIONS,
+        data: {
+          query: searchValue,
+          suggestions: apiSuggestions
+        }
+      });
+    }).catch(function () {
+      // If the fetch fails, do nothing
+      // Basic search suggestions are already populated at this point
+    });
+  };
+};
+
+var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQuery(query /*: string*/, shouldSkipSuggestions /*: ?boolean*/) {
+  return function (dispatch /*: Dispatch*/) {
+    dispatch({
+      type: ACTIONS.UPDATE_SEARCH_QUERY,
+      data: { query: query }
+    });
+
+    // Don't fetch new suggestions if the user just added a space
+    if (!query.endsWith(' ') || !shouldSkipSuggestions) {
+      dispatch(getSearchSuggestions(query));
+    }
+  };
+};
+
+var doFocusSearchInput = exports.doFocusSearchInput = function doFocusSearchInput() {
+  return function (dispatch /*: Dispatch*/) {
+    return dispatch({
+      type: ACTIONS.SEARCH_FOCUS
+    });
+  };
+};
+
+var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput() {
+  return function (dispatch /*: Dispatch*/) {
+    return dispatch({
+      type: ACTIONS.SEARCH_BLUR
+    });
+  };
+};
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = handleFetchResponse;
+function handleFetchResponse(response) {
+  return response.status === 200 ? Promise.resolve(response.json()) : Promise.reject(new Error(response.statusText));
+}
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.doFetchBlackListedOutpoints = doFetchBlackListedOutpoints;
+exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
+
+var _lbryapi = __webpack_require__(9);
+
+var _lbryapi2 = _interopRequireDefault(_lbryapi);
+
+var _action_types = __webpack_require__(4);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CHECK_BLACK_LISTED_CONTENT_INTERVAL = 60 * 60 * 1000;
+
+function doFetchBlackListedOutpoints() {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_STARTED
+    });
+
+    var success = function success(_ref) {
+      var outpoints = _ref.outpoints;
+
+      var splitedOutpoints = [];
+
+      outpoints.forEach(function (outpoint, index) {
+        var _outpoint$split = outpoint.split(':'),
+            _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
+            txid = _outpoint$split2[0],
+            nout = _outpoint$split2[1];
+
+        splitedOutpoints[index] = { txid: txid, nout: Number.parseInt(nout, 10) };
+      });
+      dispatch({
+        type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_COMPLETED,
+        data: {
+          outpoints: splitedOutpoints,
+          success: true
+        }
+      });
+    };
+
+    var failure = function failure(_ref2) {
+      var error = _ref2.error;
+
+      dispatch({
+        type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_FAILED,
+        data: {
+          error: error,
+          success: false
+        }
+      });
+    };
+
+    _lbryapi2.default.call('file', 'list_blocked').then(success, failure);
+  };
+}
+
+function doBlackListedOutpointsSubscribe() {
+  return function (dispatch) {
+    dispatch(doFetchBlackListedOutpoints());
+    setInterval(function () {
+      return dispatch(doFetchBlackListedOutpoints());
+    }, CHECK_BLACK_LISTED_CONTENT_INTERVAL);
+  };
 }
 
 /***/ }),
@@ -6261,6 +6323,7 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = function (state, action) {
     if (claim.type && claim.type.match(/claim|update/)) {
       if (claim.confirmations < 1) {
         pendingById[claim.claim_id] = claim;
+        delete byId[claim.claim_id];
       } else {
         byId[claim.claim_id] = claim;
       }
@@ -7149,6 +7212,7 @@ var buildDraftTransaction = function buildDraftTransaction() {
 /*:: type WalletState = {
   balance: any,
   blocks: any,
+  latestBlock: number,
   transactions: any,
   fetchingTransactions: boolean,
   gettingNewAddress: boolean,
@@ -7173,6 +7237,7 @@ var buildDraftTransaction = function buildDraftTransaction() {
 var defaultState = {
   balance: undefined,
   blocks: {},
+  latestBlock: undefined,
   transactions: {},
   fetchingTransactions: false,
   gettingNewAddress: false,
@@ -7436,6 +7501,12 @@ reducers[ACTIONS.WALLET_LOCK_FAILED] = function (state /*: WalletState*/, action
 reducers[ACTIONS.SET_TRANSACTION_LIST_FILTER] = function (state /*: WalletState*/, action /*: {}*/) {
   return Object.assign({}, state, {
     transactionListFilter: action.data
+  });
+};
+
+reducers[ACTIONS.UPDATE_CURRENT_HEIGHT] = function (state /*: WalletState*/, action /*: { data: number }*/) {
+  return Object.assign({}, state, {
+    latestBlock: action.data
   });
 };
 
