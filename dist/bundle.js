@@ -8470,7 +8470,7 @@ rewards.claimReward = function (type, rewardParams) {
       switch (type) {
         case rewards.TYPE_FIRST_CHANNEL:
           _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.reverse().find(function (foundClaim) {
+            var claim = claims.find(function (foundClaim) {
               return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });
             if (claim) {
@@ -8484,7 +8484,7 @@ rewards.claimReward = function (type, rewardParams) {
 
         case rewards.TYPE_FIRST_PUBLISH:
           _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.reverse().find(function (foundClaim) {
+            var claim = claims.find(function (foundClaim) {
               return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });
             if (claim) {

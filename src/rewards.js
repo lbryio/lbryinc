@@ -60,15 +60,13 @@ rewards.claimReward = (type, rewardParams) => {
         case rewards.TYPE_FIRST_CHANNEL:
           Lbry.claim_list_mine()
             .then(claims => {
-              const claim = claims
-                .reverse()
-                .find(
-                  foundClaim =>
-                    foundClaim.name.length &&
-                    foundClaim.name[0] === '@' &&
-                    foundClaim.txid.length &&
-                    foundClaim.type === 'claim'
-                );
+              const claim = claims.find(
+                foundClaim =>
+                  foundClaim.name.length &&
+                  foundClaim.name[0] === '@' &&
+                  foundClaim.txid.length &&
+                  foundClaim.type === 'claim'
+              );
               if (claim) {
                 params.transaction_id = claim.txid;
                 requestReward(resolve, reject, params);
@@ -82,15 +80,13 @@ rewards.claimReward = (type, rewardParams) => {
         case rewards.TYPE_FIRST_PUBLISH:
           Lbry.claim_list_mine()
             .then(claims => {
-              const claim = claims
-                .reverse()
-                .find(
-                  foundClaim =>
-                    foundClaim.name.length &&
-                    foundClaim.name[0] !== '@' &&
-                    foundClaim.txid.length &&
-                    foundClaim.type === 'claim'
-                );
+              const claim = claims.find(
+                foundClaim =>
+                  foundClaim.name.length &&
+                  foundClaim.name[0] !== '@' &&
+                  foundClaim.txid.length &&
+                  foundClaim.type === 'claim'
+              );
               if (claim) {
                 params.transaction_id = claim.txid;
                 requestReward(resolve, reject, params);
