@@ -4116,11 +4116,11 @@ var selectAllClaimsByChannel = exports.selectAllClaimsByChannel = (0, _reselect.
 });
 
 var selectPendingById = exports.selectPendingById = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.pendingById || {};
+  return state.pendingById;
 });
 
 var selectPendingClaims = exports.selectPendingClaims = (0, _reselect.createSelector)(selectState, function (state) {
-  return Object.values(state.pendingById || []);
+  return Object.values(state.pendingById || {});
 });
 
 var makeSelectClaimIsPending = exports.makeSelectClaimIsPending = function makeSelectClaimIsPending(uri) {
@@ -6130,8 +6130,7 @@ exports.formatCredits = formatCredits;
 exports.formatFullPrice = formatFullPrice;
 exports.creditsToString = creditsToString;
 function formatCredits(amount, precision) {
-  if (Number.isNaN(parseFloat(amount))) return '0';
-  return parseFloat(amount).toFixed(precision || 1).replace(/\.?0+$/, '');
+  return amount.toFixed(precision || 1).replace(/\.?0+$/, '');
 }
 
 function formatFullPrice(amount) {
@@ -6257,13 +6256,13 @@ reducers[ACTIONS.FETCH_CLAIM_LIST_MINE_COMPLETED] = function (state, action) {
   var byId = Object.assign({}, state.byId);
   var pendingById = Object.assign({}, state.pendingById);
 
-  claims.forEach(function (claim) {
-    if (claim.type && claim.type.match(/claim|update/)) {
-      if (claim.confirmations < 1) {
-        pendingById[claim.claim_id] = claim;
-      } else {
-        byId[claim.claim_id] = claim;
-      }
+  claims.filter(function (claim) {
+    return claim.type && claim.type.match(/claim|update/);
+  }).forEach(function (claim) {
+    if (claim.confirmations < 1) {
+      pendingById[claim.claim_id] = claim;
+    } else {
+      byId[claim.claim_id] = claim;
     }
   });
 
@@ -7928,12 +7927,8 @@ function doClaimRewardType(rewardType) {
     }
 
     if (!userIsRewardApproved && rewardType !== _rewards3.default.TYPE_CONFIRM_EMAIL) {
-      if (!options || !options.failSilently) {
-        var action = (0, _lbryRedux.doNotify)({
-          id: _lbryRedux.MODALS.REWARD_APPROVAL_REQUIRED,
-          isError: false
-        });
-        dispatch(action);
+      if (!options || !options.failSilently && _rewards3.default.callbacks.rewardApprovalRequested) {
+        _rewards3.default.callbacks.rewardApprovalRequested();
       }
 
       return;
@@ -7951,13 +7946,8 @@ function doClaimRewardType(rewardType) {
           reward: successReward
         }
       });
-      if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER) {
-        var _action = (0, _lbryRedux.doNotify)({
-          message: 'You just earned your first reward!',
-          id: _lbryRedux.MODALS.FIRST_REWARD,
-          isError: false
-        });
-        dispatch(_action);
+      if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER && _rewards3.default.callbacks.claimFirstRewardSuccess) {
+        _rewards3.default.callbacks.claimFirstRewardSuccess();
       }
 
       dispatch(doRewardList());
@@ -8439,18 +8429,11 @@ rewards.claimReward = function (type, rewardParams) {
     _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
       var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
 
-      // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
-      if (type === rewards.TYPE_REWARD_CODE) {
-        window.store.dispatch((0, _lbryRedux.doHideNotification)());
-      }
-
       // Display global notice
-      var action = (0, _lbryRedux.doNotify)({
+      var action = (0, _lbryRedux.doToast)({
         message: message,
         linkText: __('Show All'),
-        linkTarget: '/rewards',
-        isError: false,
-        displayType: ['snackbar']
+        linkTarget: '/rewards'
       });
       window.store.dispatch(action);
 
@@ -8503,6 +8486,18 @@ rewards.claimReward = function (type, rewardParams) {
       }
     });
   });
+};
+
+rewards.callbacks = {
+  // Set any callbacks that require code not found in this project
+  // claimRewardSuccess: null,
+  // claimRewardError: null,
+  claimFirstRewardSuccess: null,
+  rewardApprovalRequired: null
+};
+
+rewards.setCallback = function (name, method) {
+  rewards.callbacks[name] = method;
 };
 
 exports.default = rewards;
@@ -8597,6 +8592,7 @@ function doAuthenticate(appVersion) {
     dispatch({
       type: _lbryRedux.ACTIONS.AUTHENTICATION_STARTED
     });
+
     _lbryio2.default.authenticate().then(function (user) {
       // analytics.setUser(user);
       dispatch({
@@ -8607,7 +8603,6 @@ function doAuthenticate(appVersion) {
       dispatch(doFetchInviteStatus());
       doInstallNew(appVersion, os);
     }).catch(function (error) {
-      dispatch((0, _lbryRedux.doNotify)({ id: _lbryRedux.MODALS.AUTHENTICATION_FAILURE }));
       dispatch({
         type: _lbryRedux.ACTIONS.AUTHENTICATION_FAILURE,
         data: { error: error }
@@ -8696,7 +8691,6 @@ function doUserPhoneVerify(verificationCode) {
           type: _lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS,
           data: { user: user }
         });
-        dispatch((0, _lbryRedux.doHideNotification)());
         dispatch((0, _rewards.doClaimRewardType)(_rewards3.default.TYPE_NEW_USER));
       }
     }).catch(function (error) {
@@ -8862,8 +8856,7 @@ function doUserInviteNew(email) {
         data: { email: email }
       });
 
-      dispatch((0, _lbryRedux.doNotify)({
-        displayType: ['snackbar'],
+      dispatch((0, _lbryRedux.doToast)({
         message: __('Invite sent to %s', email)
       }));
 

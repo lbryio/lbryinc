@@ -28,7 +28,7 @@
     "format": "prettier 'src/**/*.{js,json}' --write"
   },
   "dependencies": {
-    "lbry-redux": "lbryio/lbry-redux#2375860d6269d0369418879c2531b1d48c4e47f2",
+    "lbry-redux": "lbryio/lbry-redux#1ed2ea8b2de99bbcba652aa7b00478d02df4a290",
     "reselect": "^3.0.0"
   },
   "devDependencies": {

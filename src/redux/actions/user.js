@@ -1,4 +1,4 @@
-import { ACTIONS, MODALS, Lbry, doNotify, doHideNotification } from 'lbry-redux';
+import { ACTIONS, Lbry, doToast } from 'lbry-redux';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
   selectEmailToVerify,
@@ -53,6 +53,7 @@ export function doAuthenticate(appVersion, os = null) {
     dispatch({
       type: ACTIONS.AUTHENTICATION_STARTED,
     });
+
     Lbryio.authenticate()
       .then(user => {
         // analytics.setUser(user);
@@ -65,7 +66,6 @@ export function doAuthenticate(appVersion, os = null) {
         doInstallNew(appVersion, os);
       })
       .catch(error => {
-        dispatch(doNotify({ id: MODALS.AUTHENTICATION_FAILURE }));
         dispatch({
           type: ACTIONS.AUTHENTICATION_FAILURE,
           data: { error },
@@ -167,7 +167,6 @@ export function doUserPhoneVerify(verificationCode) {
             type: ACTIONS.USER_PHONE_VERIFY_SUCCESS,
             data: { user },
           });
-          dispatch(doHideNotification());
           dispatch(doClaimRewardType(rewards.TYPE_NEW_USER));
         }
       })
@@ -349,8 +348,7 @@ export function doUserInviteNew(email) {
         });
 
         dispatch(
-          doNotify({
-            displayType: ['snackbar'],
+          doToast({
             message: __('Invite sent to %s', email),
           })
         );
