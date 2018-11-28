@@ -1,4 +1,4 @@
-import { Lbry, doNotify, doHideNotification } from 'lbry-redux';
+import { Lbry, doToast } from 'lbry-redux';
 import Lbryio from 'lbryio';
 
 const rewards = {};
@@ -27,18 +27,11 @@ rewards.claimReward = (type, rewardParams) => {
       const message =
         reward.reward_notification || `You have claimed a ${reward.reward_amount} LBC reward.`;
 
-      // We use a modal in the desktop app for this reward code. Dismiss it before showing the snackbar
-      if (type === rewards.TYPE_REWARD_CODE) {
-        window.store.dispatch(doHideNotification());
-      }
-
       // Display global notice
-      const action = doNotify({
+      const action = doToast({
         message,
         linkText: __('Show All'),
         linkTarget: '/rewards',
-        isError: false,
-        displayType: ['snackbar'],
       });
       window.store.dispatch(action);
 
@@ -112,6 +105,18 @@ rewards.claimReward = (type, rewardParams) => {
       }
     });
   });
+};
+
+rewards.callbacks = {
+  // Set any callbacks that require code not found in this project
+  // claimRewardSuccess: null,
+  // claimRewardError: null,
+  claimFirstRewardSuccess: null,
+  rewardApprovalRequired: null,
+};
+
+rewards.setCallback = (name, method) => {
+  rewards.callbacks[name] = method;
 };
 
 export default rewards;

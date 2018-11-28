@@ -1,5 +1,5 @@
 import Lbryio from 'lbryio';
-import { doNotify, ACTIONS, MODALS } from 'lbry-redux';
+import { ACTIONS } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
 import rewards from 'rewards';
@@ -44,12 +44,8 @@ export function doClaimRewardType(rewardType, options = {}) {
     }
 
     if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
-      if (!options || !options.failSilently) {
-        const action = doNotify({
-          id: MODALS.REWARD_APPROVAL_REQUIRED,
-          isError: false,
-        });
-        dispatch(action);
+      if (!options || (!options.failSilently && rewards.callbacks.rewardApprovalRequested)) {
+        rewards.callbacks.rewardApprovalRequested();
       }
 
       return;
@@ -67,13 +63,11 @@ export function doClaimRewardType(rewardType, options = {}) {
           reward: successReward,
         },
       });
-      if (successReward.reward_type === rewards.TYPE_NEW_USER) {
-        const action = doNotify({
-          message: 'You just earned your first reward!',
-          id: MODALS.FIRST_REWARD,
-          isError: false,
-        });
-        dispatch(action);
+      if (
+        successReward.reward_type === rewards.TYPE_NEW_USER &&
+        rewards.callbacks.claimFirstRewardSuccess
+      ) {
+        rewards.callbacks.claimFirstRewardSuccess();
       }
 
       dispatch(doRewardList());
