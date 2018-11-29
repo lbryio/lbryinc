@@ -2540,7 +2540,6 @@ var USER_EMAIL_VERIFY_SET = exports.USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_S
 var USER_EMAIL_VERIFY_STARTED = exports.USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 var USER_EMAIL_VERIFY_SUCCESS = exports.USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 var USER_EMAIL_VERIFY_FAILURE = exports.USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-var USER_EMAIL_VERIFY_RETRY = exports.USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
 var USER_PHONE_RESET = exports.USER_PHONE_RESET = 'USER_PHONE_RESET';
 var USER_PHONE_NEW_STARTED = exports.USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 var USER_PHONE_NEW_SUCCESS = exports.USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -8694,7 +8693,9 @@ rewards.claimReward = function (type, rewardParams) {
       });
       window.store.dispatch(action);
 
-      // Add more events here to display other places
+      if (rewards.callbacks.claimRewardSuccess) {
+        rewards.callbacks.claimRewardSuccess();
+      }
 
       resolve(reward);
     }, reject);
@@ -8744,11 +8745,9 @@ rewards.claimReward = function (type, rewardParams) {
     });
   });
 };
-
 rewards.callbacks = {
   // Set any callbacks that require code not found in this project
-  // claimRewardSuccess: null,
-  // claimRewardError: null,
+  claimRewardSuccess: null,
   claimFirstRewardSuccess: null,
   rewardApprovalRequired: null
 };
