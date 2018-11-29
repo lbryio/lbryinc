@@ -3358,12 +3358,13 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-lbry-redux@lbryio/lbry-redux#9a20637926970b239bb08083c9027fac340ce82b:
+lbry-redux@lbryio/lbry-redux#84b7d396934d57a37802aadbef71db91230a9404:
   version "0.0.1"
-  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/9a20637926970b239bb08083c9027fac340ce82b"
+  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/84b7d396934d57a37802aadbef71db91230a9404"
   dependencies:
     proxy-polyfill "0.1.6"
     reselect "^3.0.0"
+    uuid "^3.3.2"
 
 lcid@^1.0.0:
   version "1.0.0"
@@ -5424,6 +5425,10 @@ util@^0.10.3:
   resolved "https://registry.yarnpkg.com/util/-/util-0.10.4.tgz#3aa0125bfe668a4672de58857d3ace27ecb76901"
   dependencies:
     inherits "2.0.3"
+
+uuid@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 
 v8-compile-cache@^2.0.0:
   version "2.0.0"
