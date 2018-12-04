@@ -14,7 +14,6 @@ Lbryio.setLocalApi = endpoint => {
 };
 
 Lbryio.call = (resource, action, params = {}, method = 'get') => {
-  console.log('call');
   if (!Lbryio.enabled) {
     return Promise.reject(new Error(__('LBRY internal API is disabled')));
   }

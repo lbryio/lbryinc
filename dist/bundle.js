@@ -690,7 +690,6 @@ Lbryio.call = function (resource, action) {
   var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var method = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'get';
 
-  console.log('call');
   if (!Lbryio.enabled) {
     return Promise.reject(new Error(__('LBRY internal API is disabled')));
   }
