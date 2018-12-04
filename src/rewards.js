@@ -35,7 +35,9 @@ rewards.claimReward = (type, rewardParams) => {
       });
       window.store.dispatch(action);
 
-      // Add more events here to display other places
+      if (rewards.callbacks.claimRewardSuccess) {
+        rewards.callbacks.claimRewardSuccess();
+      }
 
       resolve(reward);
     }, reject);
@@ -106,11 +108,9 @@ rewards.claimReward = (type, rewardParams) => {
     });
   });
 };
-
 rewards.callbacks = {
   // Set any callbacks that require code not found in this project
-  // claimRewardSuccess: null,
-  // claimRewardError: null,
+  claimRewardSuccess: null,
   claimFirstRewardSuccess: null,
   rewardApprovalRequired: null,
 };
