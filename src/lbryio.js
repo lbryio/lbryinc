@@ -8,7 +8,7 @@ const Lbryio = {
 };
 
 // We can't use env's because they aren't passed into node_modules
-let CONNECTION_STRING = 'https://api.lbry.io';
+let CONNECTION_STRING = 'https://api.lbry.io/';
 Lbryio.setLocalApi = endpoint => {
   CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
 };
