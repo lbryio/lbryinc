@@ -7,9 +7,11 @@ const Lbryio = {
   authenticationPromise: null,
 };
 
-const CONNECTION_STRING = process.env.LBRY_APP_API_URL
-  ? process.env.LBRY_APP_API_URL.replace(/\/*$/, '/') // exactly one slash at the end
-  : 'https://api.lbry.io/';
+// We can't use env's because they aren't passed into node_modules
+let CONNECTION_STRING = 'https://api.lbry.io';
+Lbryio.setLocalApi = endpoint => {
+  CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
+};
 
 Lbryio.call = (resource, action, params = {}, method = 'get') => {
   if (!Lbryio.enabled) {
