@@ -115,7 +115,7 @@ Object.defineProperty(exports, 'doGenerateAuthToken', {
   }
 });
 
-var _rewards = __webpack_require__(9);
+var _rewards = __webpack_require__(8);
 
 Object.defineProperty(exports, 'doRewardList', {
   enumerable: true,
@@ -148,7 +148,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _user = __webpack_require__(14);
+var _user = __webpack_require__(13);
 
 Object.defineProperty(exports, 'doFetchInviteStatus', {
   enumerable: true,
@@ -247,7 +247,7 @@ Object.defineProperty(exports, 'doUserInviteNew', {
   }
 });
 
-var _auth2 = __webpack_require__(15);
+var _auth2 = __webpack_require__(14);
 
 Object.defineProperty(exports, 'authReducer', {
   enumerable: true,
@@ -256,7 +256,7 @@ Object.defineProperty(exports, 'authReducer', {
   }
 });
 
-var _rewards2 = __webpack_require__(16);
+var _rewards2 = __webpack_require__(15);
 
 Object.defineProperty(exports, 'rewardsReducer', {
   enumerable: true,
@@ -265,7 +265,7 @@ Object.defineProperty(exports, 'rewardsReducer', {
   }
 });
 
-var _user2 = __webpack_require__(17);
+var _user2 = __webpack_require__(16);
 
 Object.defineProperty(exports, 'userReducer', {
   enumerable: true,
@@ -274,7 +274,7 @@ Object.defineProperty(exports, 'userReducer', {
   }
 });
 
-var _auth3 = __webpack_require__(18);
+var _auth3 = __webpack_require__(17);
 
 Object.defineProperty(exports, 'selectAuthToken', {
   enumerable: true,
@@ -289,7 +289,7 @@ Object.defineProperty(exports, 'selectIsAuthenticating', {
   }
 });
 
-var _rewards3 = __webpack_require__(10);
+var _rewards3 = __webpack_require__(9);
 
 Object.defineProperty(exports, 'makeSelectClaimRewardError', {
   enumerable: true,
@@ -394,7 +394,7 @@ Object.defineProperty(exports, 'selectRewardContentClaimIds', {
   }
 });
 
-var _user3 = __webpack_require__(12);
+var _user3 = __webpack_require__(11);
 
 Object.defineProperty(exports, 'selectAuthenticationIsPending', {
   enumerable: true,
@@ -567,7 +567,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _rewards4 = __webpack_require__(13);
+var _rewards4 = __webpack_require__(12);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
@@ -657,7 +657,7 @@ var GENERATE_AUTH_TOKEN_SUCCESS = exports.GENERATE_AUTH_TOKEN_SUCCESS = 'GENERAT
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -665,11 +665,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var _auth = __webpack_require__(1);
 
-var _querystring = __webpack_require__(6);
+var _querystring = __webpack_require__(5);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
@@ -680,13 +680,17 @@ var Lbryio = {
   authenticationPromise: null
 };
 
-var CONNECTION_STRING = process.env.LBRY_APP_API_URL ? process.env.LBRY_APP_API_URL.replace(/\/*$/, '/') // exactly one slash at the end
-: 'https://api.lbry.io/';
+// We can't use env's because they aren't passed into node_modules
+var CONNECTION_STRING = 'https://api.lbry.io';
+Lbryio.setLocalApi = function (endpoint) {
+  CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
+};
 
 Lbryio.call = function (resource, action) {
   var params = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   var method = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'get';
 
+  console.log('call');
   if (!Lbryio.enabled) {
     return Promise.reject(new Error(__('LBRY internal API is disabled')));
   }
@@ -837,200 +841,9 @@ Lbryio.setOverride = function (methodName, newMethod) {
 };
 
 exports.default = Lbryio;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(4)))
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -7920,18 +7733,18 @@ var KEEP_DAEMON_RUNNING = exports.KEEP_DAEMON_RUNNING = 'keepDaemonRunning';
 });
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.decode = exports.parse = __webpack_require__(7);
-exports.encode = exports.stringify = __webpack_require__(8);
+exports.decode = exports.parse = __webpack_require__(6);
+exports.encode = exports.stringify = __webpack_require__(7);
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8022,7 +7835,7 @@ var isArray = Array.isArray || function (xs) {
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8114,7 +7927,7 @@ var objectKeys = Object.keys || function (obj) {
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8133,13 +7946,13 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
-var _rewards = __webpack_require__(10);
+var _rewards = __webpack_require__(9);
 
-var _user = __webpack_require__(12);
+var _user = __webpack_require__(11);
 
-var _rewards2 = __webpack_require__(13);
+var _rewards2 = __webpack_require__(12);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8282,7 +8095,7 @@ function doFetchRewardedContent() {
 }
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8293,7 +8106,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(10);
 
 var selectState = function selectState(state) {
   return state.rewards || {};
@@ -8384,7 +8197,7 @@ var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _res
 });
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8515,7 +8328,7 @@ function createStructuredSelector(selectors) {
 }
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8526,7 +8339,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(10);
 
 var selectState = exports.selectState = function selectState(state) {
   return state.user || {};
@@ -8641,7 +8454,7 @@ var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = 
 });
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8653,7 +8466,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var _lbryio = __webpack_require__(3);
 
@@ -8760,7 +8573,7 @@ rewards.setCallback = function (name, method) {
 exports.default = rewards;
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8786,13 +8599,13 @@ exports.doFetchAccessToken = doFetchAccessToken;
 exports.doUserIdentityVerify = doUserIdentityVerify;
 exports.doUserInviteNew = doUserInviteNew;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
-var _rewards = __webpack_require__(9);
+var _rewards = __webpack_require__(8);
 
-var _user = __webpack_require__(12);
+var _user = __webpack_require__(11);
 
-var _rewards2 = __webpack_require__(13);
+var _rewards2 = __webpack_require__(12);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -9128,7 +8941,7 @@ function doUserInviteNew(email) {
 }
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9180,7 +8993,7 @@ function authReducer() {
 }
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9194,7 +9007,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.rewardsReducer = rewardsReducer;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -9321,7 +9134,7 @@ function rewardsReducer() {
 }
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9332,7 +9145,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userReducer = userReducer;
 
-var _lbryRedux = __webpack_require__(5);
+var _lbryRedux = __webpack_require__(4);
 
 var reducers = {};
 
@@ -9592,7 +9405,7 @@ function userReducer() {
 }
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9603,7 +9416,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.selectIsAuthenticating = exports.selectAuthToken = undefined;
 
-var _reselect = __webpack_require__(11);
+var _reselect = __webpack_require__(10);
 
 var selectState = function selectState(state) {
   return state.auth || {};
