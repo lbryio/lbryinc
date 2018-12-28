@@ -24,8 +24,8 @@ import * as NOTIFICATION_TYPES from 'constants/subscriptions';
 import Lbryio from 'lbryio';
 import rewards from 'rewards';
 import Promise from 'bluebird';
-//import * as SETTINGS from 'constants/settings';
-//import { makeSelectClientSetting } from 'redux/selectors/settings';
+// import * as SETTINGS from 'constants/settings';
+// import { makeSelectClientSetting } from 'redux/selectors/settings';
 
 const CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
 const SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
@@ -243,7 +243,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
   // no dispatching FETCH_CHANNEL_CLAIMS_STARTED; causes loading issues on <SubscriptionsPage>
 
   const state = getState();
-  const shouldAutoDownload = false; //makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
+  const shouldAutoDownload = false; // makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
   const savedSubscription = state.subscriptions.subscriptions.find(
     sub => sub.uri === subscriptionUri
   );
