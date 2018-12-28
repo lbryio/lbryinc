@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "lbry-redux": "lbryio/lbry-redux#84b7d396934d57a37802aadbef71db91230a9404",
+    "bluebird": "^3.5.1",
     "reselect": "^3.0.0"
   },
   "devDependencies": {

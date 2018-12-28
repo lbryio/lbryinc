@@ -1,6 +1,7 @@
 import * as LBRYINC_ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
 import rewards from 'rewards';
+import subscriptionsReducer from 'redux/reducers/subscriptions';
 
 // constants
 export { LBRYINC_ACTIONS };
@@ -17,6 +18,22 @@ export {
   doClaimRewardClearError,
   doFetchRewardedContent,
 } from 'redux/actions/rewards';
+export {
+  doChannelSubscribe,
+  doChannelUnsubscribe,
+  doCheckSubscription,
+  doCheckSubscriptions,
+  doCheckSubscriptionsInit,
+  doCompleteFirstRun,
+  doFetchMySubscriptions,
+  doFetchRecommendedSubscriptions,
+  doRemoveUnreadSubscription,
+  doRemoveUnreadSubscriptions,
+  doSetViewMode,
+  doShowSuggestedSubs,
+  doUpdateUnreadSubscriptions,
+  setSubscriptionLatest,
+} from 'redux/actions/subscriptions';
 export {
   doFetchInviteStatus,
   doInstallNew,
@@ -39,6 +56,7 @@ export {
 // reducers
 export { authReducer } from 'redux/reducers/auth';
 export { rewardsReducer } from 'redux/reducers/rewards';
+export { subscriptionsReducer };
 export { userReducer } from 'redux/reducers/user';
 
 // selectors
@@ -62,6 +80,24 @@ export {
   selectRewardByType,
   selectRewardContentClaimIds,
 } from 'redux/selectors/rewards';
+export {
+  makeSelectIsNew,
+  makeSelectIsSubscribed,
+  makeSelectUnreadByChannel,
+  selectSubscriptions,
+  selectIsFetchingSubscriptions,
+  selectViewMode,
+  selectSuggested,
+  selectIsFetchingSuggested,
+  selectSuggestedChannels,
+  selectFirstRunCompleted,
+  selectShowSuggestedSubs,
+  selectSubscriptionsBeingFetched,
+  selectUnreadByChannel,
+  selectUnreadAmount,
+  selectUnreadSubscriptions,
+  selectSubscriptionClaims,
+} from 'redux/selectors/subscriptions';
 export {
   selectAuthenticationIsPending,
   selectUserIsPending,
