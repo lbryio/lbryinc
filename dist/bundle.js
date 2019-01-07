@@ -8680,8 +8680,17 @@ function doAuthenticate(appVersion) {
   };
 }
 
-function doUserFetch() {
+function doUserFetch(fetchSilently) {
   return function (dispatch) {
+    // If we are doing this in the background, do not set loading = true
+    if (fetchSilently) {
+      return _lbryio2.default.getCurrentUser().then(function (user) {
+        dispatch({
+          type: _lbryRedux.ACTIONS.USER_FETCH_SUCCESS,
+          data: { user: user }
+        });
+      });
+    }
     dispatch({
       type: _lbryRedux.ACTIONS.USER_FETCH_STARTED
     });

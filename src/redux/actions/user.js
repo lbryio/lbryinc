@@ -74,27 +74,37 @@ export function doAuthenticate(appVersion, os = null) {
   };
 }
 
-export function doUserFetch() {
+export function doUserFetch(fetchSilently) {
   return dispatch => {
-    dispatch({
-      type: ACTIONS.USER_FETCH_STARTED,
-    });
-    Lbryio.getCurrentUser()
-      .then(user => {
-        // analytics.setUser(user);
-        dispatch(doRewardList());
-
+    // If we are doing this in the background, do not set loading = true
+    if (fetchSilently) {
+      Lbryio.getCurrentUser().then(user => {
         dispatch({
           type: ACTIONS.USER_FETCH_SUCCESS,
           data: { user },
         });
-      })
-      .catch(error => {
-        dispatch({
-          type: ACTIONS.USER_FETCH_FAILURE,
-          data: { error },
-        });
       });
+    } else {
+      dispatch({
+        type: ACTIONS.USER_FETCH_STARTED,
+      });
+      Lbryio.getCurrentUser()
+        .then(user => {
+          // analytics.setUser(user);
+          dispatch(doRewardList());
+
+          dispatch({
+            type: ACTIONS.USER_FETCH_SUCCESS,
+            data: { user },
+          });
+        })
+        .catch(error => {
+          dispatch({
+            type: ACTIONS.USER_FETCH_FAILURE,
+            data: { error },
+          });
+        });
+    }
   };
 }
 
