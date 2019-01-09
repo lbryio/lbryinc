@@ -23,6 +23,7 @@ export {
   doAuthenticate,
   doUserFetch,
   doUserEmailNew,
+  doUserCheckEmailVerified,
   doUserEmailToVerify,
   doUserEmailVerifyFailure,
   doUserEmailVerify,

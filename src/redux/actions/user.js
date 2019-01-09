@@ -74,37 +74,43 @@ export function doAuthenticate(appVersion, os = null) {
   };
 }
 
-export function doUserFetch(fetchSilently) {
+export function doUserFetch() {
   return dispatch => {
-    // If we are doing this in the background, do not set loading = true
-    if (fetchSilently) {
-      Lbryio.getCurrentUser().then(user => {
+    dispatch({
+      type: ACTIONS.USER_FETCH_STARTED,
+    });
+    Lbryio.getCurrentUser()
+      .then(user => {
+        // analytics.setUser(user);
+        dispatch(doRewardList());
+
         dispatch({
           type: ACTIONS.USER_FETCH_SUCCESS,
           data: { user },
         });
-      });
-    } else {
-      dispatch({
-        type: ACTIONS.USER_FETCH_STARTED,
-      });
-      Lbryio.getCurrentUser()
-        .then(user => {
-          // analytics.setUser(user);
-          dispatch(doRewardList());
-
-          dispatch({
-            type: ACTIONS.USER_FETCH_SUCCESS,
-            data: { user },
-          });
-        })
-        .catch(error => {
-          dispatch({
-            type: ACTIONS.USER_FETCH_FAILURE,
-            data: { error },
-          });
+      })
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_FETCH_FAILURE,
+          data: { error },
         });
-    }
+      });
+  };
+}
+
+export function doUserCheckEmailVerified() {
+  // This will happen in the background so we don't need loading booleans
+  return dispatch => {
+    Lbryio.getCurrentUser().then(user => {
+      if (user.has_verified_email) {
+        dispatch(doRewardList());
+
+        dispatch({
+          type: ACTIONS.USER_FETCH_SUCCESS,
+          data: { user },
+        });
+      }
+    });
   };
 }
 
