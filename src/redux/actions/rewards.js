@@ -1,5 +1,5 @@
 import Lbryio from 'lbryio';
-import { ACTIONS } from 'lbry-redux';
+import { ACTIONS, doError } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
 import rewards from 'rewards';
@@ -81,6 +81,10 @@ export function doClaimRewardType(rewardType, options = {}) {
           error: !options || !options.failSilently ? error : undefined,
         },
       });
+
+      if (options.notifyError) {
+        dispatch(doError(error.message));
+      }
     };
 
     rewards.claimReward(rewardType, options.params).then(success, failure);

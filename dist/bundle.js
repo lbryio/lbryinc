@@ -8036,6 +8036,10 @@ function doClaimRewardType(rewardType) {
           error: !options || !options.failSilently ? error : undefined
         }
       });
+
+      if (options.notifyError) {
+        dispatch((0, _lbryRedux.doError)(error.message));
+      }
     };
 
     _rewards3.default.claimReward(rewardType, options.params).then(success, failure);
@@ -9075,6 +9079,9 @@ function setClaimRewardState(state, reward, isClaiming) {
 
   var newClaimPendingByType = Object.assign({}, state.claimPendingByType);
   var newClaimErrorsByType = Object.assign({}, state.claimErrorsByType);
+
+  // Currently, for multiple rewards of the same type, they will both show "claiming" when one is beacuse we track this by `reward_type`
+  // To fix this we will need to use `claim_code` instead, and change all selectors to match
   if (isClaiming) {
     newClaimPendingByType[reward.reward_type] = isClaiming;
   } else {
@@ -9105,7 +9112,7 @@ reducers[_lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS] = function (state, action) {
 
 
   var index = unclaimedRewards.findIndex(function (ur) {
-    return ur.reward_type === reward.reward_type;
+    return ur.claim_code === reward.claim_code;
   });
   unclaimedRewards.splice(index, 1);
 
