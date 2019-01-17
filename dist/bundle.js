@@ -8009,6 +8009,10 @@ function doClaimRewardType(rewardType) {
       return;
     }
 
+    // Set `claim_code` so the api knows which reward to give if there are multiple of the same type
+    var params = options.params || {};
+    params.claim_code = reward.claim_code;
+
     dispatch({
       type: _lbryRedux.ACTIONS.CLAIM_REWARD_STARTED,
       data: { reward: reward }
@@ -8042,7 +8046,7 @@ function doClaimRewardType(rewardType) {
       }
     };
 
-    _rewards3.default.claimReward(rewardType, options.params).then(success, failure);
+    _rewards3.default.claimReward(rewardType, params).then(success, failure);
   };
 }
 
