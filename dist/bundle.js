@@ -104,8 +104,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = undefined;
-exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectSubscriptionClaims = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = exports.makeSelectUnreadByChannel = exports.makeSelectIsSubscribed = exports.makeSelectIsNew = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.subscriptionsReducer = exports.rewardsReducer = exports.authReducer = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.setSubscriptionLatest = exports.doUpdateUnreadSubscriptions = exports.doShowSuggestedSubs = exports.doSetViewMode = exports.doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscription = exports.doFetchRecommendedSubscriptions = exports.doFetchMySubscriptions = exports.doCompleteFirstRun = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doCheckSubscription = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = undefined;
+exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectSubscriptionClaims = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = exports.selectEnabledChannelNotifications = exports.makeSelectUnreadByChannel = exports.makeSelectIsSubscribed = exports.makeSelectIsNew = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.subscriptionsReducer = exports.rewardsReducer = exports.authReducer = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.setSubscriptionLatest = exports.doUpdateUnreadSubscriptions = exports.doShowSuggestedSubs = exports.doSetViewMode = exports.doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscription = exports.doFetchRecommendedSubscriptions = exports.doFetchMySubscriptions = exports.doCompleteFirstRun = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doCheckSubscription = exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -161,6 +161,18 @@ Object.defineProperty(exports, 'doChannelUnsubscribe', {
   enumerable: true,
   get: function get() {
     return _subscriptions.doChannelUnsubscribe;
+  }
+});
+Object.defineProperty(exports, 'doChannelSubscriptionEnableNotifications', {
+  enumerable: true,
+  get: function get() {
+    return _subscriptions.doChannelSubscriptionEnableNotifications;
+  }
+});
+Object.defineProperty(exports, 'doChannelSubscriptionDisableNotifications', {
+  enumerable: true,
+  get: function get() {
+    return _subscriptions.doChannelSubscriptionDisableNotifications;
   }
 });
 Object.defineProperty(exports, 'doCheckSubscription', {
@@ -500,6 +512,12 @@ Object.defineProperty(exports, 'makeSelectUnreadByChannel', {
   enumerable: true,
   get: function get() {
     return _subscriptions2.makeSelectUnreadByChannel;
+  }
+});
+Object.defineProperty(exports, 'selectEnabledChannelNotifications', {
+  enumerable: true,
+  get: function get() {
+    return _subscriptions2.selectEnabledChannelNotifications;
   }
 });
 Object.defineProperty(exports, 'selectSubscriptions', {
@@ -875,6 +893,8 @@ var CLEAR_CONTENT_HISTORY_ALL = exports.CLEAR_CONTENT_HISTORY_ALL = 'CLEAR_CONTE
 // Subscriptions
 var CHANNEL_SUBSCRIBE = exports.CHANNEL_SUBSCRIBE = 'CHANNEL_SUBSCRIBE';
 var CHANNEL_UNSUBSCRIBE = exports.CHANNEL_UNSUBSCRIBE = 'CHANNEL_UNSUBSCRIBE';
+var CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS = exports.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS = 'CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS';
+var CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS = exports.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS = 'CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS';
 var HAS_FETCHED_SUBSCRIPTIONS = exports.HAS_FETCHED_SUBSCRIPTIONS = 'HAS_FETCHED_SUBSCRIPTIONS';
 var SET_SUBSCRIPTION_LATEST = exports.SET_SUBSCRIPTION_LATEST = 'SET_SUBSCRIPTION_LATEST';
 var UPDATE_SUBSCRIPTION_UNREADS = exports.UPDATE_SUBSCRIPTION_UNREADS = 'UPDATE_SUBSCRIPTION_UNREADS';
@@ -8821,7 +8841,7 @@ exports.default = rewards;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doFetchMySubscriptions = exports.doSetViewMode = undefined;
+exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doFetchMySubscriptions = exports.doSetViewMode = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -8870,9 +8890,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   UnreadSubscription,
 } from 'types/subscription';*/
 
-//import * as SETTINGS from 'constants/settings';
-//import { makeSelectClientSetting } from 'redux/selectors/settings';
-
+// import * as SETTINGS from 'constants/settings';
+// import { makeSelectClientSetting } from 'redux/selectors/settings';
 
 var CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
 var SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
@@ -8998,8 +9017,8 @@ var doUpdateUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = function
     var unreadByChannel = (0, _subscriptions.selectUnreadByChannel)(state);
     var currentUnreadForChannel /*: UnreadSubscription*/ = unreadByChannel[channelUri];
 
-    var newUris /*:Array*/ = [];
-    var newType /*:String*/ = null;
+    var newUris /*: Array*/ = [];
+    var newType /*: string*/ = null;
 
     if (!currentUnreadForChannel) {
       newUris = uris;
@@ -9094,7 +9113,7 @@ var doCheckSubscription = exports.doCheckSubscription = function doCheckSubscrip
     // no dispatching FETCH_CHANNEL_CLAIMS_STARTED; causes loading issues on <SubscriptionsPage>
 
     var state = getState();
-    var shouldAutoDownload = false; //makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
+    var shouldAutoDownload = false; // makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
     var savedSubscription = state.subscriptions.subscriptions.find(function (sub) {
       return sub.uri === subscriptionUri;
     });
@@ -9294,6 +9313,24 @@ var doShowSuggestedSubs = exports.doShowSuggestedSubs = function doShowSuggested
   };
 };
 
+var doChannelSubscriptionEnableNotifications = exports.doChannelSubscriptionEnableNotifications = function doChannelSubscriptionEnableNotifications(channelName /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS,
+      data: channelName
+    });
+  };
+};
+
+var doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionDisableNotifications = function doChannelSubscriptionDisableNotifications(channelName /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS,
+      data: channelName
+    });
+  };
+};
+
 /***/ }),
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9320,7 +9357,7 @@ var PAGE_SIZE = exports.PAGE_SIZE = 20;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeSelectIsNew = exports.makeSelectIsSubscribed = exports.selectSubscriptionClaims = exports.makeSelectUnreadByChannel = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = undefined;
+exports.selectEnabledChannelNotifications = exports.makeSelectIsNew = exports.makeSelectIsSubscribed = exports.selectSubscriptionClaims = exports.makeSelectUnreadByChannel = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -9590,6 +9627,10 @@ var makeSelectIsNew = exports.makeSelectIsNew = function makeSelectIsNew(uri) {
     // If they are subscribed, check to see if this uri is in the list of unreads
   });
 };
+
+var selectEnabledChannelNotifications = exports.selectEnabledChannelNotifications = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.enabledChannelNotifications;
+});
 
 /***/ }),
 /* 16 */
@@ -16314,6 +16355,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   Subscription,
   DoChannelSubscribe,
   DoChannelUnsubscribe,
+  DoChannelSubscriptionEnableNotifications,
+  DoChannelSubscriptionDisableNotifications,
   SetSubscriptionLatest,
   DoUpdateSubscriptionUnreads,
   DoRemoveSubscriptionUnreads,
@@ -16324,6 +16367,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var defaultState /*: SubscriptionState*/ = {
+  enabledChannelNotifications: [],
   subscriptions: [],
   unread: {},
   suggested: {},
@@ -16399,6 +16443,29 @@ exports.default = (0, _reduxUtils.handleActions)((_handleActions = {}, _definePr
 
   return _extends({}, state, {
     unread: _extends({}, newUnread)
+  });
+}), _defineProperty(_handleActions, ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS, function (state /*: SubscriptionState*/, action /*: DoChannelSubscriptionEnableNotifications*/) /*: SubscriptionState*/ {
+  var channelName = action.data;
+
+  var newEnabledChannelNotifications /*: Array<String>*/ = state.enabledChannelNotifications.slice();
+  if (channelName && channelName.trim().length > 0 && newEnabledChannelNotifications.indexOf(channelName) == -1) {
+    newEnabledChannelNotifications.push(channelName);
+  }
+
+  return _extends({}, state, {
+    enabledChannelNotifications: newEnabledChannelNotifications
+  });
+}), _defineProperty(_handleActions, ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS, function (state /*: SubscriptionState*/, action /*: DoChannelSubscriptionDisableNotifications*/) /*: SubscriptionState*/ {
+  var channelName = action.data;
+
+  var newEnabledChannelNotifications /*: Array<String>*/ = state.enabledChannelNotifications.slice();
+  var index = newEnabledChannelNotifications.indexOf(channelName);
+  if (index > -1) {
+    newEnabledChannelNotifications.splice(index, 1);
+  }
+
+  return _extends({}, state, {
+    enabledChannelNotifications: newEnabledChannelNotifications
   });
 }), _defineProperty(_handleActions, ACTIONS.FETCH_SUBSCRIPTIONS_START, function (state /*: SubscriptionState*/) /*: SubscriptionState*/ {
   return _extends({}, state, {

@@ -146,7 +146,7 @@ export const doUpdateUnreadSubscriptions = (
   const currentUnreadForChannel: UnreadSubscription = unreadByChannel[channelUri];
 
   let newUris: Array = [];
-  let newType: String = null;
+  let newType: string = null;
 
   if (!currentUnreadForChannel) {
     newUris = uris;
@@ -453,4 +453,20 @@ export const doCompleteFirstRun = () => (dispatch: ReduxDispatch) =>
 export const doShowSuggestedSubs = () => (dispatch: ReduxDispatch) =>
   dispatch({
     type: ACTIONS.VIEW_SUGGESTED_SUBSCRIPTIONS,
+  });
+
+export const doChannelSubscriptionEnableNotifications = (channelName: string) => (
+  dispatch: ReduxDispatch
+) =>
+  dispatch({
+    type: ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS,
+    data: channelName,
+  });
+
+export const doChannelSubscriptionDisableNotifications = (channelName: string) => (
+  dispatch: ReduxDispatch
+) =>
+  dispatch({
+    type: ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS,
+    data: channelName,
   });

@@ -21,6 +21,8 @@ export {
 export {
   doChannelSubscribe,
   doChannelUnsubscribe,
+  doChannelSubscriptionEnableNotifications,
+  doChannelSubscriptionDisableNotifications,
   doCheckSubscription,
   doCheckSubscriptions,
   doCheckSubscriptionsInit,
@@ -84,6 +86,7 @@ export {
   makeSelectIsNew,
   makeSelectIsSubscribed,
   makeSelectUnreadByChannel,
+  selectEnabledChannelNotifications,
   selectSubscriptions,
   selectIsFetchingSubscriptions,
   selectViewMode,
