@@ -7,6 +7,8 @@ import type {
   Subscription,
   DoChannelSubscribe,
   DoChannelUnsubscribe,
+  DoChannelSubscriptionEnableNotifications,
+  DoChannelSubscriptionDisableNotifications,
   SetSubscriptionLatest,
   DoUpdateSubscriptionUnreads,
   DoRemoveSubscriptionUnreads,
@@ -16,6 +18,7 @@ import type {
 } from 'types/subscription';
 
 const defaultState: SubscriptionState = {
+  enabledChannelNotifications: [],
   subscriptions: [],
   unread: {},
   suggested: {},
@@ -115,6 +118,47 @@ export default handleActions(
         unread: {
           ...newUnread,
         },
+      };
+    },
+    [ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS]: (
+      state: SubscriptionState,
+      action: DoChannelSubscriptionEnableNotifications
+    ): SubscriptionState => {
+      const channelName = action.data;
+
+      const newEnabledChannelNotifications: Array<
+        string
+      > = state.enabledChannelNotifications.slice();
+      if (
+        channelName &&
+        channelName.trim().length > 0 &&
+        newEnabledChannelNotifications.indexOf(channelName) === -1
+      ) {
+        newEnabledChannelNotifications.push(channelName);
+      }
+
+      return {
+        ...state,
+        enabledChannelNotifications: newEnabledChannelNotifications,
+      };
+    },
+    [ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS]: (
+      state: SubscriptionState,
+      action: DoChannelSubscriptionDisableNotifications
+    ): SubscriptionState => {
+      const channelName = action.data;
+
+      const newEnabledChannelNotifications: Array<
+        string
+      > = state.enabledChannelNotifications.slice();
+      const index = newEnabledChannelNotifications.indexOf(channelName);
+      if (index > -1) {
+        newEnabledChannelNotifications.splice(index, 1);
+      }
+
+      return {
+        ...state,
+        enabledChannelNotifications: newEnabledChannelNotifications,
       };
     },
     [ACTIONS.FETCH_SUBSCRIPTIONS_START]: (state: SubscriptionState): SubscriptionState => ({

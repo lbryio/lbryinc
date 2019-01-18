@@ -276,3 +276,8 @@ export const makeSelectIsNew = uri =>
       // If they are subscribed, check to see if this uri is in the list of unreads
     }
   );
+
+export const selectEnabledChannelNotifications = createSelector(
+  selectState,
+  state => state.enabledChannelNotifications
+);

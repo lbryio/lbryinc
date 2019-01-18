@@ -41,6 +41,7 @@ export type SuggestedSubscriptions = {
 };
 
 export type SubscriptionState = {
+  enabledChannelNotifications: Array<string>,
   subscriptions: Array<Subscription>,
   unread: UnreadSubscriptions,
   loading: boolean,
@@ -54,6 +55,16 @@ export type SubscriptionState = {
 //
 // Action types
 //
+export type DoChannelSubscriptionEnableNotifications = {
+  type: ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS,
+  data: string,
+};
+
+export type DoChannelSubscriptionDisableNotifications = {
+  type: ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS,
+  data: string,
+};
+
 export type DoChannelSubscribe = {
   type: ACTIONS.CHANNEL_SUBSCRIBE,
   data: Subscription,
