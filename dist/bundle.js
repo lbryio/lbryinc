@@ -907,7 +907,6 @@ var UPDATE_SUBSCRIPTION_UNREADS = exports.UPDATE_SUBSCRIPTION_UNREADS = 'UPDATE_
 var REMOVE_SUBSCRIPTION_UNREADS = exports.REMOVE_SUBSCRIPTION_UNREADS = 'REMOVE_SUBSCRIPTION_UNREADS';
 var CHECK_SUBSCRIPTION_STARTED = exports.CHECK_SUBSCRIPTION_STARTED = 'CHECK_SUBSCRIPTION_STARTED';
 var CHECK_SUBSCRIPTION_COMPLETED = exports.CHECK_SUBSCRIPTION_COMPLETED = 'CHECK_SUBSCRIPTION_COMPLETED';
-var CHECK_SUBSCRIPTIONS_SUBSCRIBE = exports.CHECK_SUBSCRIPTIONS_SUBSCRIBE = 'CHECK_SUBSCRIPTIONS_SUBSCRIBE';
 var FETCH_SUBSCRIPTIONS_START = exports.FETCH_SUBSCRIPTIONS_START = 'FETCH_SUBSCRIPTIONS_START';
 var FETCH_SUBSCRIPTIONS_FAIL = exports.FETCH_SUBSCRIPTIONS_FAIL = 'FETCH_SUBSCRIPTIONS_FAIL';
 var FETCH_SUBSCRIPTIONS_SUCCESS = exports.FETCH_SUBSCRIPTIONS_SUCCESS = 'FETCH_SUBSCRIPTIONS_SUCCESS';
@@ -8855,7 +8854,7 @@ exports.default = rewards;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doFetchMySubscriptions = exports.doSetViewMode = undefined;
+exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doFetchMySubscriptions = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doSetViewMode = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -8915,99 +8914,6 @@ var doSetViewMode = exports.doSetViewMode = function doSetViewMode(viewMode /*: 
     return dispatch({
       type: ACTIONS.SET_VIEW_MODE,
       data: viewMode
-    });
-  };
-};
-
-var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
-    var reduxSubscriptions = state.subscriptions.subscriptions;
-
-    // default to true if daemonSettings not found
-
-    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
-
-    if (!isSharingData && isSharingData !== undefined) {
-      // They aren't sharing their data, subscriptions will be handled by persisted redux state
-      return;
-    }
-
-    // most of this logic comes from scenarios where the db isn't synced with redux
-    // this will happen if the user stops sharing data
-    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
-
-    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
-      var storedSubscriptions = dbSubscriptions || [];
-
-      // User has no subscriptions in db or redux
-      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
-        return [];
-      }
-
-      // There is some mismatch between redux state and db state
-      // If something is in the db, but not in redux, add it to redux
-      // If something is in redux, but not in the db, add it to the db
-      if (storedSubscriptions.length !== reduxSubscriptions.length) {
-        var dbSubMap = {};
-        var reduxSubMap = {};
-        var subsNotInDB = [];
-        var subscriptionsToReturn = reduxSubscriptions.slice();
-
-        storedSubscriptions.forEach(function (sub) {
-          dbSubMap[sub.claim_id] = 1;
-        });
-
-        reduxSubscriptions.forEach(function (sub) {
-          var _parseURI = (0, _lbryRedux.parseURI)(sub.uri),
-              claimId = _parseURI.claimId;
-
-          reduxSubMap[claimId] = 1;
-
-          if (!dbSubMap[claimId]) {
-            subsNotInDB.push({
-              claim_id: claimId,
-              channel_name: sub.channelName
-            });
-          }
-        });
-
-        storedSubscriptions.forEach(function (sub) {
-          if (!reduxSubMap[sub.claim_id]) {
-            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
-            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
-          }
-        });
-
-        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
-          return _lbryio2.default.call('subscription', 'new', payload);
-        })).then(function () {
-          return subscriptionsToReturn;
-        }).catch(function () {
-          return (
-            // let it fail, we will try again when the navigate to the subscriptions page
-            subscriptionsToReturn
-          );
-        });
-      }
-
-      // DB is already synced, just return the subscriptions in redux
-      return reduxSubscriptions;
-    }).then(function (subscriptions /*: Array<Subscription>*/) {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
-        data: subscriptions
-      });
-
-      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
-        var uri = _ref.uri;
-        return uri;
-      })));
-      dispatch(doCheckSubscriptions());
-    }).catch(function () {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
-      });
     });
   };
 };
@@ -9086,7 +8992,7 @@ var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function
     var currentChannelUnread = unreadByChannel[channelUri];
     if (!currentChannelUnread || !currentChannelUnread.uris) {
       // Channel passed in doesn't have any unreads
-      return;
+      return null;
     }
 
     // For each uri passed in, remove it from the list of unread uris
@@ -9105,7 +9011,7 @@ var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function
       newUris = null;
     }
 
-    dispatch({
+    return dispatch({
       type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
       data: {
         channel: channelUri,
@@ -9222,8 +9128,8 @@ var doChannelSubscribe = exports.doChannelSubscribe = function doChannelSubscrib
 
     // if the user isn't sharing data, keep the subscriptions entirely in the app
     if (isSharingData) {
-      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI2.claimId;
+      var _parseURI = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI.claimId;
       // They are sharing data, we can store their subscriptions in our internal database
 
 
@@ -9252,8 +9158,8 @@ var doChannelUnsubscribe = exports.doChannelUnsubscribe = function doChannelUnsu
     });
 
     if (isSharingData) {
-      var _parseURI3 = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI3.claimId;
+      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI2.claimId;
 
       _lbryio2.default.call('subscription', 'delete', {
         claim_id: claimId
@@ -9273,6 +9179,99 @@ var doCheckSubscriptions = exports.doCheckSubscriptions = function doCheckSubscr
   };
 };
 
+var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
+    var reduxSubscriptions = state.subscriptions.subscriptions;
+
+    // default to true if daemonSettings not found
+
+    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
+
+    if (!isSharingData && isSharingData !== undefined) {
+      // They aren't sharing their data, subscriptions will be handled by persisted redux state
+      return;
+    }
+
+    // most of this logic comes from scenarios where the db isn't synced with redux
+    // this will happen if the user stops sharing data
+    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
+
+    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
+      var storedSubscriptions = dbSubscriptions || [];
+
+      // User has no subscriptions in db or redux
+      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
+        return [];
+      }
+
+      // There is some mismatch between redux state and db state
+      // If something is in the db, but not in redux, add it to redux
+      // If something is in redux, but not in the db, add it to the db
+      if (storedSubscriptions.length !== reduxSubscriptions.length) {
+        var dbSubMap = {};
+        var reduxSubMap = {};
+        var subsNotInDB = [];
+        var subscriptionsToReturn = reduxSubscriptions.slice();
+
+        storedSubscriptions.forEach(function (sub) {
+          dbSubMap[sub.claim_id] = 1;
+        });
+
+        reduxSubscriptions.forEach(function (sub) {
+          var _parseURI3 = (0, _lbryRedux.parseURI)(sub.uri),
+              claimId = _parseURI3.claimId;
+
+          reduxSubMap[claimId] = 1;
+
+          if (!dbSubMap[claimId]) {
+            subsNotInDB.push({
+              claim_id: claimId,
+              channel_name: sub.channelName
+            });
+          }
+        });
+
+        storedSubscriptions.forEach(function (sub) {
+          if (!reduxSubMap[sub.claim_id]) {
+            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
+            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
+          }
+        });
+
+        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
+          return _lbryio2.default.call('subscription', 'new', payload);
+        })).then(function () {
+          return subscriptionsToReturn;
+        }).catch(function () {
+          return (
+            // let it fail, we will try again when the navigate to the subscriptions page
+            subscriptionsToReturn
+          );
+        });
+      }
+
+      // DB is already synced, just return the subscriptions in redux
+      return reduxSubscriptions;
+    }).then(function (subscriptions /*: Array<Subscription>*/) {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
+        data: subscriptions
+      });
+
+      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
+        var uri = _ref.uri;
+        return uri;
+      })));
+      dispatch(doCheckSubscriptions());
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
+      });
+    });
+  };
+};
+
 var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doCheckSubscriptionsInit() {
   return function (dispatch /*: ReduxDispatch*/) {
     // doCheckSubscriptionsInit is called by doDaemonReady
@@ -9281,13 +9280,9 @@ var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doChe
     setTimeout(function () {
       return dispatch(doFetchMySubscriptions());
     }, 5000);
-    var checkSubscriptionsTimer = setInterval(function () {
+    setInterval(function () {
       return dispatch(doCheckSubscriptions());
     }, CHECK_SUBSCRIPTIONS_INTERVAL);
-    dispatch({
-      type: ACTIONS.CHECK_SUBSCRIPTIONS_SUBSCRIBE,
-      data: { checkSubscriptionsTimer: checkSubscriptionsTimer }
-    });
   };
 };
 
@@ -9698,7 +9693,7 @@ function swapKeyAndValue(dict) {
 /* WEBPACK VAR INJECTION */(function(process, global, setImmediate) {/* @preserve
  * The MIT License (MIT)
  * 
- * Copyright (c) 2013-2017 Petka Antonov
+ * Copyright (c) 2013-2015 Petka Antonov
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -9720,7 +9715,7 @@ function swapKeyAndValue(dict) {
  * 
  */
 /**
- * bluebird build version 3.5.1
+ * bluebird build version 3.4.7
  * Features enabled: core, race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, using, timers, filter, any, each
 */
 !function(e){if(true)module.exports=e();else { var f; }}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -10344,10 +10339,7 @@ Promise.prototype.suppressUnhandledRejections = function() {
 Promise.prototype._ensurePossibleRejectionHandled = function () {
     if ((this._bitField & 524288) !== 0) return;
     this._setRejectionIsUnhandled();
-    var self = this;
-    setTimeout(function() {
-        self._notifyUnhandledRejection();
-    }, 1);
+    async.invokeLater(this._notifyUnhandledRejection, this, undefined);
 };
 
 Promise.prototype._notifyUnhandledRejectionIsHandled = function () {
@@ -11520,11 +11512,10 @@ Promise.filter = function (promises, fn, options) {
 
 },{}],15:[function(_dereq_,module,exports){
 "use strict";
-module.exports = function(Promise, tryConvertToPromise, NEXT_FILTER) {
+module.exports = function(Promise, tryConvertToPromise) {
 var util = _dereq_("./util");
 var CancellationError = Promise.CancellationError;
 var errorObj = util.errorObj;
-var catchFilter = _dereq_("./catch_filter")(NEXT_FILTER);
 
 function PassThroughHandlerContext(promise, type, handler) {
     this.promise = promise;
@@ -11576,9 +11567,7 @@ function finallyHandler(reasonOrValue) {
         var ret = this.isFinallyHandler()
             ? handler.call(promise._boundValue())
             : handler.call(promise._boundValue(), reasonOrValue);
-        if (ret === NEXT_FILTER) {
-            return ret;
-        } else if (ret !== undefined) {
+        if (ret !== undefined) {
             promise._setReturnedNonUndefined();
             var maybePromise = tryConvertToPromise(ret, promise);
             if (maybePromise instanceof Promise) {
@@ -11627,46 +11616,14 @@ Promise.prototype["finally"] = function (handler) {
                              finallyHandler);
 };
 
-
 Promise.prototype.tap = function (handler) {
     return this._passThrough(handler, 1, finallyHandler);
-};
-
-Promise.prototype.tapCatch = function (handlerOrPredicate) {
-    var len = arguments.length;
-    if(len === 1) {
-        return this._passThrough(handlerOrPredicate,
-                                 1,
-                                 undefined,
-                                 finallyHandler);
-    } else {
-         var catchInstances = new Array(len - 1),
-            j = 0, i;
-        for (i = 0; i < len - 1; ++i) {
-            var item = arguments[i];
-            if (util.isObject(item)) {
-                catchInstances[j++] = item;
-            } else {
-                return Promise.reject(new TypeError(
-                    "tapCatch statement predicate: "
-                    + "expecting an object but got " + util.classString(item)
-                ));
-            }
-        }
-        catchInstances.length = j;
-        var handler = arguments[i];
-        return this._passThrough(catchFilter(catchInstances, handler, this),
-                                 1,
-                                 undefined,
-                                 finallyHandler);
-    }
-
 };
 
 return PassThroughHandlerContext;
 };
 
-},{"./catch_filter":7,"./util":36}],16:[function(_dereq_,module,exports){
+},{"./util":36}],16:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(Promise,
                           apiRejection,
@@ -11826,7 +11783,7 @@ PromiseSpawn.prototype._continue = function (result) {
             if (maybePromise === null) {
                 this._promiseRejected(
                     new TypeError(
-                        "A value %s was yielded that could not be treated as a promise\u000a\u000a    See http://goo.gl/MqrFmX\u000a\u000a".replace("%s", String(value)) +
+                        "A value %s was yielded that could not be treated as a promise\u000a\u000a    See http://goo.gl/MqrFmX\u000a\u000a".replace("%s", value) +
                         "From coroutine:\u000a" +
                         this._stack.split("\n").slice(1, -7).join("\n")
                     )
@@ -12314,31 +12271,30 @@ var createContext = Context.create;
 var debug = _dereq_("./debuggability")(Promise, Context);
 var CapturedTrace = debug.CapturedTrace;
 var PassThroughHandlerContext =
-    _dereq_("./finally")(Promise, tryConvertToPromise, NEXT_FILTER);
+    _dereq_("./finally")(Promise, tryConvertToPromise);
 var catchFilter = _dereq_("./catch_filter")(NEXT_FILTER);
 var nodebackForPromise = _dereq_("./nodeback");
 var errorObj = util.errorObj;
 var tryCatch = util.tryCatch;
 function check(self, executor) {
-    if (self == null || self.constructor !== Promise) {
-        throw new TypeError("the promise constructor cannot be invoked directly\u000a\u000a    See http://goo.gl/MqrFmX\u000a");
-    }
     if (typeof executor !== "function") {
         throw new TypeError("expecting a function but got " + util.classString(executor));
     }
-
+    if (self.constructor !== Promise) {
+        throw new TypeError("the promise constructor cannot be invoked directly\u000a\u000a    See http://goo.gl/MqrFmX\u000a");
+    }
 }
 
 function Promise(executor) {
-    if (executor !== INTERNAL) {
-        check(this, executor);
-    }
     this._bitField = 0;
     this._fulfillmentHandler0 = undefined;
     this._rejectionHandler0 = undefined;
     this._promise0 = undefined;
     this._receiver0 = undefined;
-    this._resolveFromExecutor(executor);
+    if (executor !== INTERNAL) {
+        check(this, executor);
+        this._resolveFromExecutor(executor);
+    }
     this._promiseCreated();
     this._fireEvent("promiseCreated", this);
 }
@@ -12357,8 +12313,8 @@ Promise.prototype.caught = Promise.prototype["catch"] = function (fn) {
             if (util.isObject(item)) {
                 catchInstances[j++] = item;
             } else {
-                return apiRejection("Catch statement predicate: " +
-                    "expecting an object but got " + util.classString(item));
+                return apiRejection("expecting an object but got " +
+                    "A catch statement predicate " + util.classString(item));
             }
         }
         catchInstances.length = j;
@@ -12737,7 +12693,6 @@ function(reason, synchronous, ignoreNonErrorWarnings) {
 };
 
 Promise.prototype._resolveFromExecutor = function (executor) {
-    if (executor === INTERNAL) return;
     var promise = this;
     this._captureStackTrace();
     this._pushContext();
@@ -12995,7 +12950,7 @@ _dereq_("./synchronous_inspection")(Promise);
 _dereq_("./join")(
     Promise, PromiseArray, tryConvertToPromise, INTERNAL, async, getDomain);
 Promise.Promise = Promise;
-Promise.version = "3.5.1";
+Promise.version = "3.4.7";
 _dereq_('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug);
 _dereq_('./call_get.js')(Promise);
 _dereq_('./using.js')(Promise, apiRejection, tryConvertToPromise, createContext, INTERNAL, debug);
@@ -13047,7 +13002,6 @@ function toResolutionValue(val) {
     switch(val) {
     case -2: return [];
     case -3: return {};
-    case -6: return new Map();
     }
 }
 
@@ -13477,7 +13431,7 @@ function PropertiesPromiseArray(obj) {
     }
     this.constructor$(entries);
     this._isMap = isMap;
-    this._init$(undefined, isMap ? -6 : -3);
+    this._init$(undefined, -3);
 }
 util.inherits(PropertiesPromiseArray, PromiseArray);
 
@@ -13876,11 +13830,11 @@ if (util.isNode && typeof MutationObserver === "undefined") {
 
         var scheduleToggle = function() {
             if (toggleScheduled) return;
-            toggleScheduled = true;
-            div2.classList.toggle("foo");
-        };
+                toggleScheduled = true;
+                div2.classList.toggle("foo");
+            };
 
-        return function schedule(fn) {
+            return function schedule(fn) {
             var o = new MutationObserver(function() {
                 o.disconnect();
                 fn();
@@ -14839,11 +14793,10 @@ function safeToString(obj) {
 }
 
 function isError(obj) {
-    return obj instanceof Error ||
-        (obj !== null &&
+    return obj !== null &&
            typeof obj === "object" &&
            typeof obj.message === "string" &&
-           typeof obj.name === "string");
+           typeof obj.name === "string";
 }
 
 function markAsOriginatingFromRejection(e) {
