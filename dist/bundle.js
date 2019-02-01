@@ -148,7 +148,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _user = __webpack_require__(13);
+var _user = __webpack_require__(12);
 
 Object.defineProperty(exports, 'doFetchInviteStatus', {
   enumerable: true,
@@ -573,7 +573,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _rewards4 = __webpack_require__(12);
+var _rewards4 = __webpack_require__(13);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
@@ -7957,7 +7957,9 @@ var _rewards = __webpack_require__(9);
 
 var _user = __webpack_require__(11);
 
-var _rewards2 = __webpack_require__(12);
+var _user2 = __webpack_require__(12);
+
+var _rewards2 = __webpack_require__(13);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8027,6 +8029,8 @@ function doClaimRewardType(rewardType) {
       });
       if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER && _rewards3.default.callbacks.claimFirstRewardSuccess) {
         _rewards3.default.callbacks.claimFirstRewardSuccess();
+      } else if (successReward.reward_type === _rewards3.default.TYPE_REFERRAL) {
+        dispatch((0, _user2.doFetchInviteStatus)());
       }
 
       dispatch(doRewardList());
@@ -8476,125 +8480,6 @@ var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _lbryRedux = __webpack_require__(4);
-
-var _lbryio = __webpack_require__(3);
-
-var _lbryio2 = _interopRequireDefault(_lbryio);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var rewards = {};
-
-rewards.TYPE_NEW_DEVELOPER = 'new_developer';
-rewards.TYPE_NEW_USER = 'new_user';
-rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
-rewards.TYPE_FIRST_CHANNEL = 'new_channel';
-rewards.TYPE_FIRST_STREAM = 'first_stream';
-rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
-rewards.TYPE_FIRST_PUBLISH = 'first_publish';
-rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
-rewards.TYPE_REFERRAL = 'referral';
-rewards.TYPE_REWARD_CODE = 'reward_code';
-rewards.TYPE_SUBSCRIPTION = 'subscription';
-rewards.YOUTUBE_CREATOR = 'youtube_creator';
-
-rewards.claimReward = function (type, rewardParams) {
-  function requestReward(resolve, reject, params) {
-    if (!_lbryio2.default.enabled) {
-      reject(new Error(__('Rewards are not enabled.')));
-      return;
-    }
-
-    _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
-      var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
-
-      // Display global notice
-      var action = (0, _lbryRedux.doToast)({
-        message: message,
-        linkText: __('Show All'),
-        linkTarget: '/rewards'
-      });
-      window.store.dispatch(action);
-
-      if (rewards.callbacks.claimRewardSuccess) {
-        rewards.callbacks.claimRewardSuccess();
-      }
-
-      resolve(reward);
-    }, reject);
-  }
-
-  return new Promise(function (resolve, reject) {
-    _lbryRedux.Lbry.address_unused().then(function (address) {
-      var params = _extends({
-        reward_type: type,
-        wallet_address: address
-      }, rewardParams);
-
-      switch (type) {
-        case rewards.TYPE_FIRST_CHANNEL:
-          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(new Error(__('Please create a channel identity first.')));
-            }
-          }).catch(reject);
-          break;
-
-        case rewards.TYPE_FIRST_PUBLISH:
-          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
-            }
-          }).catch(reject);
-          break;
-
-        case rewards.TYPE_FIRST_STREAM:
-        case rewards.TYPE_NEW_USER:
-        default:
-          requestReward(resolve, reject, params);
-      }
-    });
-  });
-};
-rewards.callbacks = {
-  // Set any callbacks that require code not found in this project
-  claimRewardSuccess: null,
-  claimFirstRewardSuccess: null,
-  rewardApprovalRequired: null
-};
-
-rewards.setCallback = function (name, method) {
-  rewards.callbacks[name] = method;
-};
-
-exports.default = rewards;
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.doFetchInviteStatus = doFetchInviteStatus;
 exports.doInstallNew = doInstallNew;
 exports.doAuthenticate = doAuthenticate;
@@ -8619,7 +8504,7 @@ var _rewards = __webpack_require__(8);
 
 var _user = __webpack_require__(11);
 
-var _rewards2 = __webpack_require__(12);
+var _rewards2 = __webpack_require__(13);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8969,6 +8854,125 @@ function doUserInviteNew(email) {
     });
   };
 }
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _lbryRedux = __webpack_require__(4);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rewards = {};
+
+rewards.TYPE_NEW_DEVELOPER = 'new_developer';
+rewards.TYPE_NEW_USER = 'new_user';
+rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
+rewards.TYPE_FIRST_CHANNEL = 'new_channel';
+rewards.TYPE_FIRST_STREAM = 'first_stream';
+rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
+rewards.TYPE_FIRST_PUBLISH = 'first_publish';
+rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
+rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REWARD_CODE = 'reward_code';
+rewards.TYPE_SUBSCRIPTION = 'subscription';
+rewards.YOUTUBE_CREATOR = 'youtube_creator';
+
+rewards.claimReward = function (type, rewardParams) {
+  function requestReward(resolve, reject, params) {
+    if (!_lbryio2.default.enabled) {
+      reject(new Error(__('Rewards are not enabled.')));
+      return;
+    }
+
+    _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
+      var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
+
+      // Display global notice
+      var action = (0, _lbryRedux.doToast)({
+        message: message,
+        linkText: __('Show All'),
+        linkTarget: '/rewards'
+      });
+      window.store.dispatch(action);
+
+      if (rewards.callbacks.claimRewardSuccess) {
+        rewards.callbacks.claimRewardSuccess();
+      }
+
+      resolve(reward);
+    }, reject);
+  }
+
+  return new Promise(function (resolve, reject) {
+    _lbryRedux.Lbry.address_unused().then(function (address) {
+      var params = _extends({
+        reward_type: type,
+        wallet_address: address
+      }, rewardParams);
+
+      switch (type) {
+        case rewards.TYPE_FIRST_CHANNEL:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(new Error(__('Please create a channel identity first.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_PUBLISH:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_STREAM:
+        case rewards.TYPE_NEW_USER:
+        default:
+          requestReward(resolve, reject, params);
+      }
+    });
+  });
+};
+rewards.callbacks = {
+  // Set any callbacks that require code not found in this project
+  claimRewardSuccess: null,
+  claimFirstRewardSuccess: null,
+  rewardApprovalRequired: null
+};
+
+rewards.setCallback = function (name, method) {
+  rewards.callbacks[name] = method;
+};
+
+exports.default = rewards;
 
 /***/ }),
 /* 14 */

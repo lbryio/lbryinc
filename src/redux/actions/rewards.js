@@ -2,6 +2,7 @@ import Lbryio from 'lbryio';
 import { ACTIONS, doError } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
+import { doFetchInviteStatus } from 'redux/actions/user';
 import rewards from 'rewards';
 
 export function doRewardList() {
@@ -72,6 +73,8 @@ export function doClaimRewardType(rewardType, options = {}) {
         rewards.callbacks.claimFirstRewardSuccess
       ) {
         rewards.callbacks.claimFirstRewardSuccess();
+      } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+        dispatch(doFetchInviteStatus());
       }
 
       dispatch(doRewardList());
