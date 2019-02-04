@@ -802,14 +802,14 @@ Lbryio.authenticate = function () {
         }
 
         // check that token works
-        return Lbryio.getCurrentUser().then(function () {
-          return true;
+        return Lbryio.getCurrentUser().then(function (user) {
+          return user;
         }).catch(function () {
           return false;
         });
-      }).then(function (isTokenValid) {
-        if (isTokenValid) {
-          return reject;
+      }).then(function (user) {
+        if (user) {
+          return user;
         }
 
         return _lbryRedux.Lbry.status().then(function (status) {
@@ -827,7 +827,12 @@ Lbryio.authenticate = function () {
 
           return reject();
         });
-      }).then(Lbryio.getCurrentUser).then(resolve, reject);
+      }).then(function (user) {
+        if (!user) {
+          return Lbryio.getCurrentUser();
+        }
+        return user;
+      }).then(resolve, reject);
     });
   }
 
