@@ -110,17 +110,17 @@ Lbryio.authenticate = () => {
       Lbryio.getAuthToken()
         .then(token => {
           if (!token || token.length > 60) {
-            return false;
+            return [false];
           }
 
           // check that token works
           return Lbryio.getCurrentUser()
-            .then(() => true)
+            .then(user => user)
             .catch(() => false);
         })
-        .then(isTokenValid => {
-          if (isTokenValid) {
-            return reject;
+        .then(user => {
+          if (user) {
+            return user;
           }
 
           return Lbry.status().then(status => {
@@ -137,7 +137,12 @@ Lbryio.authenticate = () => {
             return reject();
           });
         })
-        .then(Lbryio.getCurrentUser)
+        .then(user => {
+          if (!user) {
+            return Lbryio.getCurrentUser();
+          }
+          return user;
+        })
         .then(resolve, reject);
     });
   }
