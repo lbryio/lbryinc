@@ -798,18 +798,18 @@ Lbryio.authenticate = function () {
     Lbryio.authenticationPromise = new Promise(function (resolve, reject) {
       Lbryio.getAuthToken().then(function (token) {
         if (!token || token.length > 60) {
-          return false;
+          return [false];
         }
 
         // check that token works
-        return Lbryio.getCurrentUser().then(function () {
-          return true;
+        return Lbryio.getCurrentUser().then(function (user) {
+          return user;
         }).catch(function () {
           return false;
         });
-      }).then(function (isTokenValid) {
-        if (isTokenValid) {
-          return reject;
+      }).then(function (user) {
+        if (user) {
+          return user;
         }
 
         return _lbryRedux.Lbry.status().then(function (status) {
@@ -827,7 +827,12 @@ Lbryio.authenticate = function () {
 
           return reject();
         });
-      }).then(Lbryio.getCurrentUser).then(resolve, reject);
+      }).then(function (user) {
+        if (!user) {
+          return Lbryio.getCurrentUser();
+        }
+        return user;
+      }).then(resolve, reject);
     });
   }
 
