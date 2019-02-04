@@ -8658,6 +8658,8 @@ function doFetchInviteStatus() {
     });
 
     _lbryio2.default.call('user', 'invite_status').then(function (status) {
+      dispatch((0, _rewards.doRewardList)());
+
       dispatch({
         type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
         data: {

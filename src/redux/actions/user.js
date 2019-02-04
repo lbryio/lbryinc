@@ -16,6 +16,8 @@ export function doFetchInviteStatus() {
 
     Lbryio.call('user', 'invite_status')
       .then(status => {
+        dispatch(doRewardList());
+
         dispatch({
           type: ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
           data: {
