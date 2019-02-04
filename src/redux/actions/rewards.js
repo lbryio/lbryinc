@@ -1,5 +1,5 @@
 import Lbryio from 'lbryio';
-import { ACTIONS, doError } from 'lbry-redux';
+import { ACTIONS, doToast } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
 import { doFetchInviteStatus } from 'redux/actions/user';
@@ -90,7 +90,7 @@ export function doClaimRewardType(rewardType, options = {}) {
       });
 
       if (options.notifyError) {
-        dispatch(doError(error.message));
+        dispatch(doToast({ message: error.message, isError: true }));
       }
     };
 

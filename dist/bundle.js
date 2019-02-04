@@ -8052,7 +8052,7 @@ function doClaimRewardType(rewardType) {
       });
 
       if (options.notifyError) {
-        dispatch((0, _lbryRedux.doError)(error.message));
+        dispatch((0, _lbryRedux.doToast)({ message: error.message, isError: true }));
       }
     };
 
