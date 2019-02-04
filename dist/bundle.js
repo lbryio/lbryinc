@@ -104,7 +104,7 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserCheckEmailVerified = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectReferralReward = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.userReducer = exports.rewardsReducer = exports.authReducer = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserCheckEmailVerified = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -399,8 +399,14 @@ Object.defineProperty(exports, 'selectRewardContentClaimIds', {
     return _rewards3.selectRewardContentClaimIds;
   }
 });
+Object.defineProperty(exports, 'selectReferralReward', {
+  enumerable: true,
+  get: function get() {
+    return _rewards3.selectReferralReward;
+  }
+});
 
-var _user3 = __webpack_require__(11);
+var _user3 = __webpack_require__(12);
 
 Object.defineProperty(exports, 'selectAuthenticationIsPending', {
   enumerable: true,
@@ -573,7 +579,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _rewards4 = __webpack_require__(12);
+var _rewards4 = __webpack_require__(11);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
@@ -7960,9 +7966,11 @@ var _lbryRedux = __webpack_require__(4);
 
 var _rewards = __webpack_require__(9);
 
-var _user = __webpack_require__(11);
+var _user = __webpack_require__(12);
 
-var _rewards2 = __webpack_require__(12);
+var _user2 = __webpack_require__(13);
+
+var _rewards2 = __webpack_require__(11);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8032,6 +8040,8 @@ function doClaimRewardType(rewardType) {
       });
       if (successReward.reward_type === _rewards3.default.TYPE_NEW_USER && _rewards3.default.callbacks.claimFirstRewardSuccess) {
         _rewards3.default.callbacks.claimFirstRewardSuccess();
+      } else if (successReward.reward_type === _rewards3.default.TYPE_REFERRAL) {
+        dispatch((0, _user2.doFetchInviteStatus)());
       }
 
       dispatch(doRewardList());
@@ -8047,7 +8057,7 @@ function doClaimRewardType(rewardType) {
       });
 
       if (options.notifyError) {
-        dispatch((0, _lbryRedux.doError)(error.message));
+        dispatch((0, _lbryRedux.doToast)({ message: error.message, isError: true }));
       }
     };
 
@@ -8122,9 +8132,15 @@ function doFetchRewardedContent() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
+exports.selectReferralReward = exports.selectRewardContentClaimIds = exports.makeSelectRewardAmountByType = exports.makeSelectRewardByType = exports.makeSelectClaimRewardError = exports.selectClaimErrorsByType = exports.makeSelectIsRewardClaimPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = undefined;
 
 var _reselect = __webpack_require__(10);
+
+var _rewards = __webpack_require__(11);
+
+var _rewards2 = _interopRequireDefault(_rewards);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var selectState = function selectState(state) {
   return state.rewards || {};
@@ -8212,6 +8228,12 @@ var makeSelectRewardAmountByType = exports.makeSelectRewardAmountByType = functi
 
 var selectRewardContentClaimIds = exports.selectRewardContentClaimIds = (0, _reselect.createSelector)(selectState, function (state) {
   return state.rewardedContentClaimIds;
+});
+
+var selectReferralReward = exports.selectReferralReward = (0, _reselect.createSelector)(selectUnclaimedRewards, function (unclaimedRewards) {
+  return unclaimedRewards.filter(function (reward) {
+    return reward.reward_type === _rewards2.default.TYPE_REFERRAL;
+  })[0];
 });
 
 /***/ }),
@@ -8355,6 +8377,125 @@ function createStructuredSelector(selectors) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _lbryRedux = __webpack_require__(4);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rewards = {};
+
+rewards.TYPE_NEW_DEVELOPER = 'new_developer';
+rewards.TYPE_NEW_USER = 'new_user';
+rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
+rewards.TYPE_FIRST_CHANNEL = 'new_channel';
+rewards.TYPE_FIRST_STREAM = 'first_stream';
+rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
+rewards.TYPE_FIRST_PUBLISH = 'first_publish';
+rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
+rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REWARD_CODE = 'reward_code';
+rewards.TYPE_SUBSCRIPTION = 'subscription';
+rewards.YOUTUBE_CREATOR = 'youtube_creator';
+
+rewards.claimReward = function (type, rewardParams) {
+  function requestReward(resolve, reject, params) {
+    if (!_lbryio2.default.enabled) {
+      reject(new Error(__('Rewards are not enabled.')));
+      return;
+    }
+
+    _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
+      var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
+
+      // Display global notice
+      var action = (0, _lbryRedux.doToast)({
+        message: message,
+        linkText: __('Show All'),
+        linkTarget: '/rewards'
+      });
+      window.store.dispatch(action);
+
+      if (rewards.callbacks.claimRewardSuccess) {
+        rewards.callbacks.claimRewardSuccess();
+      }
+
+      resolve(reward);
+    }, reject);
+  }
+
+  return new Promise(function (resolve, reject) {
+    _lbryRedux.Lbry.address_unused().then(function (address) {
+      var params = _extends({
+        reward_type: type,
+        wallet_address: address
+      }, rewardParams);
+
+      switch (type) {
+        case rewards.TYPE_FIRST_CHANNEL:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(new Error(__('Please create a channel identity first.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_PUBLISH:
+          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
+            var claim = claims.find(function (foundClaim) {
+              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
+            });
+            if (claim) {
+              params.transaction_id = claim.txid;
+              requestReward(resolve, reject, params);
+            } else {
+              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
+            }
+          }).catch(reject);
+          break;
+
+        case rewards.TYPE_FIRST_STREAM:
+        case rewards.TYPE_NEW_USER:
+        default:
+          requestReward(resolve, reject, params);
+      }
+    });
+  });
+};
+rewards.callbacks = {
+  // Set any callbacks that require code not found in this project
+  claimRewardSuccess: null,
+  claimFirstRewardSuccess: null,
+  rewardApprovalRequired: null
+};
+
+rewards.setCallback = function (name, method) {
+  rewards.callbacks[name] = method;
+};
+
+exports.default = rewards;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectPhoneVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectState = undefined;
 
 var _reselect = __webpack_require__(10);
@@ -8472,125 +8613,6 @@ var selectUserInviteNewErrorMessage = exports.selectUserInviteNewErrorMessage = 
 });
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _lbryRedux = __webpack_require__(4);
-
-var _lbryio = __webpack_require__(3);
-
-var _lbryio2 = _interopRequireDefault(_lbryio);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var rewards = {};
-
-rewards.TYPE_NEW_DEVELOPER = 'new_developer';
-rewards.TYPE_NEW_USER = 'new_user';
-rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
-rewards.TYPE_FIRST_CHANNEL = 'new_channel';
-rewards.TYPE_FIRST_STREAM = 'first_stream';
-rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
-rewards.TYPE_FIRST_PUBLISH = 'first_publish';
-rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
-rewards.TYPE_REFERRAL = 'referral';
-rewards.TYPE_REWARD_CODE = 'reward_code';
-rewards.TYPE_SUBSCRIPTION = 'subscription';
-rewards.YOUTUBE_CREATOR = 'youtube_creator';
-
-rewards.claimReward = function (type, rewardParams) {
-  function requestReward(resolve, reject, params) {
-    if (!_lbryio2.default.enabled) {
-      reject(new Error(__('Rewards are not enabled.')));
-      return;
-    }
-
-    _lbryio2.default.call('reward', 'new', params, 'post').then(function (reward) {
-      var message = reward.reward_notification || 'You have claimed a ' + reward.reward_amount + ' LBC reward.';
-
-      // Display global notice
-      var action = (0, _lbryRedux.doToast)({
-        message: message,
-        linkText: __('Show All'),
-        linkTarget: '/rewards'
-      });
-      window.store.dispatch(action);
-
-      if (rewards.callbacks.claimRewardSuccess) {
-        rewards.callbacks.claimRewardSuccess();
-      }
-
-      resolve(reward);
-    }, reject);
-  }
-
-  return new Promise(function (resolve, reject) {
-    _lbryRedux.Lbry.address_unused().then(function (address) {
-      var params = _extends({
-        reward_type: type,
-        wallet_address: address
-      }, rewardParams);
-
-      switch (type) {
-        case rewards.TYPE_FIRST_CHANNEL:
-          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(new Error(__('Please create a channel identity first.')));
-            }
-          }).catch(reject);
-          break;
-
-        case rewards.TYPE_FIRST_PUBLISH:
-          _lbryRedux.Lbry.claim_list_mine().then(function (claims) {
-            var claim = claims.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
-            }
-          }).catch(reject);
-          break;
-
-        case rewards.TYPE_FIRST_STREAM:
-        case rewards.TYPE_NEW_USER:
-        default:
-          requestReward(resolve, reject, params);
-      }
-    });
-  });
-};
-rewards.callbacks = {
-  // Set any callbacks that require code not found in this project
-  claimRewardSuccess: null,
-  claimFirstRewardSuccess: null,
-  rewardApprovalRequired: null
-};
-
-rewards.setCallback = function (name, method) {
-  rewards.callbacks[name] = method;
-};
-
-exports.default = rewards;
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8622,9 +8644,9 @@ var _lbryRedux = __webpack_require__(4);
 
 var _rewards = __webpack_require__(8);
 
-var _user = __webpack_require__(11);
+var _user = __webpack_require__(12);
 
-var _rewards2 = __webpack_require__(12);
+var _rewards2 = __webpack_require__(11);
 
 var _rewards3 = _interopRequireDefault(_rewards2);
 
@@ -8641,6 +8663,8 @@ function doFetchInviteStatus() {
     });
 
     _lbryio2.default.call('user', 'invite_status').then(function (status) {
+      dispatch((0, _rewards.doRewardList)());
+
       dispatch({
         type: _lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
         data: {

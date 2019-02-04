@@ -62,6 +62,7 @@ export {
   selectClaimRewardError,
   selectRewardByType,
   selectRewardContentClaimIds,
+  selectReferralReward,
 } from 'redux/selectors/rewards';
 export {
   selectAuthenticationIsPending,

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import REWARDS from 'rewards';
 
 const selectState = state => state.rewards || {};
 
@@ -66,4 +67,10 @@ export const makeSelectRewardAmountByType = () =>
 export const selectRewardContentClaimIds = createSelector(
   selectState,
   state => state.rewardedContentClaimIds
+);
+
+export const selectReferralReward = createSelector(
+  selectUnclaimedRewards,
+  unclaimedRewards =>
+    unclaimedRewards.filter(reward => reward.reward_type === REWARDS.TYPE_REFERRAL)[0]
 );
