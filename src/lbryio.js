@@ -110,7 +110,7 @@ Lbryio.authenticate = () => {
       Lbryio.getAuthToken()
         .then(token => {
           if (!token || token.length > 60) {
-            return [false];
+            return false;
           }
 
           // check that token works

@@ -804,7 +804,7 @@ Lbryio.authenticate = function () {
     Lbryio.authenticationPromise = new Promise(function (resolve, reject) {
       Lbryio.getAuthToken().then(function (token) {
         if (!token || token.length > 60) {
-          return [false];
+          return false;
         }
 
         // check that token works
