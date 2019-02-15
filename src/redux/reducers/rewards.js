@@ -38,6 +38,9 @@ reducers[ACTIONS.FETCH_REWARDS_COMPLETED] = (state, action) => {
 function setClaimRewardState(state, reward, isClaiming, errorMessage = '') {
   const newClaimPendingByType = Object.assign({}, state.claimPendingByType);
   const newClaimErrorsByType = Object.assign({}, state.claimErrorsByType);
+
+  // Currently, for multiple rewards of the same type, they will both show "claiming" when one is beacuse we track this by `reward_type`
+  // To fix this we will need to use `claim_code` instead, and change all selectors to match
   if (isClaiming) {
     newClaimPendingByType[reward.reward_type] = isClaiming;
   } else {
@@ -65,7 +68,7 @@ reducers[ACTIONS.CLAIM_REWARD_SUCCESS] = (state, action) => {
   const { reward } = action.data;
   const { unclaimedRewards } = state;
 
-  const index = unclaimedRewards.findIndex(ur => ur.reward_type === reward.reward_type);
+  const index = unclaimedRewards.findIndex(ur => ur.claim_code === reward.claim_code);
   unclaimedRewards.splice(index, 1);
 
   const { claimedRewardsById } = state;

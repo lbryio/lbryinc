@@ -1,7 +1,8 @@
 import Lbryio from 'lbryio';
-import { ACTIONS } from 'lbry-redux';
+import { ACTIONS, doToast } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
+import { doFetchInviteStatus } from 'redux/actions/user';
 import rewards from 'rewards';
 
 export function doRewardList() {
@@ -51,6 +52,10 @@ export function doClaimRewardType(rewardType, options = {}) {
       return;
     }
 
+    // Set `claim_code` so the api knows which reward to give if there are multiple of the same type
+    const params = options.params || {};
+    params.claim_code = reward.claim_code;
+
     dispatch({
       type: ACTIONS.CLAIM_REWARD_STARTED,
       data: { reward },
@@ -68,6 +73,8 @@ export function doClaimRewardType(rewardType, options = {}) {
         rewards.callbacks.claimFirstRewardSuccess
       ) {
         rewards.callbacks.claimFirstRewardSuccess();
+      } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+        dispatch(doFetchInviteStatus());
       }
 
       dispatch(doRewardList());
@@ -81,9 +88,13 @@ export function doClaimRewardType(rewardType, options = {}) {
           error: !options || !options.failSilently ? error : undefined,
         },
       });
+
+      if (options.notifyError) {
+        dispatch(doToast({ message: error.message, isError: true }));
+      }
     };
 
-    rewards.claimReward(rewardType, options.params).then(success, failure);
+    rewards.claimReward(rewardType, params).then(success, failure);
   };
 }
 

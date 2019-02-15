@@ -42,6 +42,7 @@ export {
   doAuthenticate,
   doUserFetch,
   doUserEmailNew,
+  doUserCheckEmailVerified,
   doUserEmailToVerify,
   doUserEmailVerifyFailure,
   doUserEmailVerify,
@@ -81,6 +82,7 @@ export {
   selectClaimRewardError,
   selectRewardByType,
   selectRewardContentClaimIds,
+  selectReferralReward,
 } from 'redux/selectors/rewards';
 export {
   makeSelectIsNew,

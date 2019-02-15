@@ -16,6 +16,8 @@ export function doFetchInviteStatus() {
 
     Lbryio.call('user', 'invite_status')
       .then(status => {
+        dispatch(doRewardList());
+
         dispatch({
           type: ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
           data: {
@@ -95,6 +97,22 @@ export function doUserFetch() {
           data: { error },
         });
       });
+  };
+}
+
+export function doUserCheckEmailVerified() {
+  // This will happen in the background so we don't need loading booleans
+  return dispatch => {
+    Lbryio.getCurrentUser().then(user => {
+      if (user.has_verified_email) {
+        dispatch(doRewardList());
+
+        dispatch({
+          type: ACTIONS.USER_FETCH_SUCCESS,
+          data: { user },
+        });
+      }
+    });
   };
 }
 
