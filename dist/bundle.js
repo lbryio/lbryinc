@@ -9269,7 +9269,7 @@ function doUserInviteNew(email) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doFetchMySubscriptions = exports.doSetViewMode = undefined;
+exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doFetchMySubscriptions = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doSetViewMode = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -9329,99 +9329,6 @@ var doSetViewMode = exports.doSetViewMode = function doSetViewMode(viewMode /*: 
     return dispatch({
       type: ACTIONS.SET_VIEW_MODE,
       data: viewMode
-    });
-  };
-};
-
-var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
-    var reduxSubscriptions = state.subscriptions.subscriptions;
-
-    // default to true if daemonSettings not found
-
-    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
-
-    if (!isSharingData && isSharingData !== undefined) {
-      // They aren't sharing their data, subscriptions will be handled by persisted redux state
-      return;
-    }
-
-    // most of this logic comes from scenarios where the db isn't synced with redux
-    // this will happen if the user stops sharing data
-    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
-
-    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
-      var storedSubscriptions = dbSubscriptions || [];
-
-      // User has no subscriptions in db or redux
-      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
-        return [];
-      }
-
-      // There is some mismatch between redux state and db state
-      // If something is in the db, but not in redux, add it to redux
-      // If something is in redux, but not in the db, add it to the db
-      if (storedSubscriptions.length !== reduxSubscriptions.length) {
-        var dbSubMap = {};
-        var reduxSubMap = {};
-        var subsNotInDB = [];
-        var subscriptionsToReturn = reduxSubscriptions.slice();
-
-        storedSubscriptions.forEach(function (sub) {
-          dbSubMap[sub.claim_id] = 1;
-        });
-
-        reduxSubscriptions.forEach(function (sub) {
-          var _parseURI = (0, _lbryRedux.parseURI)(sub.uri),
-              claimId = _parseURI.claimId;
-
-          reduxSubMap[claimId] = 1;
-
-          if (!dbSubMap[claimId]) {
-            subsNotInDB.push({
-              claim_id: claimId,
-              channel_name: sub.channelName
-            });
-          }
-        });
-
-        storedSubscriptions.forEach(function (sub) {
-          if (!reduxSubMap[sub.claim_id]) {
-            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
-            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
-          }
-        });
-
-        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
-          return _lbryio2.default.call('subscription', 'new', payload);
-        })).then(function () {
-          return subscriptionsToReturn;
-        }).catch(function () {
-          return (
-            // let it fail, we will try again when the navigate to the subscriptions page
-            subscriptionsToReturn
-          );
-        });
-      }
-
-      // DB is already synced, just return the subscriptions in redux
-      return reduxSubscriptions;
-    }).then(function (subscriptions /*: Array<Subscription>*/) {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
-        data: subscriptions
-      });
-
-      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
-        var uri = _ref.uri;
-        return uri;
-      })));
-      dispatch(doCheckSubscriptions());
-    }).catch(function () {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
-      });
     });
   };
 };
@@ -9500,7 +9407,7 @@ var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function
     var currentChannelUnread = unreadByChannel[channelUri];
     if (!currentChannelUnread || !currentChannelUnread.uris) {
       // Channel passed in doesn't have any unreads
-      return;
+      return null;
     }
 
     // For each uri passed in, remove it from the list of unread uris
@@ -9519,7 +9426,7 @@ var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function
       newUris = null;
     }
 
-    dispatch({
+    return dispatch({
       type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
       data: {
         channel: channelUri,
@@ -9636,8 +9543,8 @@ var doChannelSubscribe = exports.doChannelSubscribe = function doChannelSubscrib
 
     // if the user isn't sharing data, keep the subscriptions entirely in the app
     if (isSharingData) {
-      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI2.claimId;
+      var _parseURI = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI.claimId;
       // They are sharing data, we can store their subscriptions in our internal database
 
 
@@ -9666,8 +9573,8 @@ var doChannelUnsubscribe = exports.doChannelUnsubscribe = function doChannelUnsu
     });
 
     if (isSharingData) {
-      var _parseURI3 = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI3.claimId;
+      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI2.claimId;
 
       _lbryio2.default.call('subscription', 'delete', {
         claim_id: claimId
@@ -9687,6 +9594,99 @@ var doCheckSubscriptions = exports.doCheckSubscriptions = function doCheckSubscr
   };
 };
 
+var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
+    var reduxSubscriptions = state.subscriptions.subscriptions;
+
+    // default to true if daemonSettings not found
+
+    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
+
+    if (!isSharingData && isSharingData !== undefined) {
+      // They aren't sharing their data, subscriptions will be handled by persisted redux state
+      return;
+    }
+
+    // most of this logic comes from scenarios where the db isn't synced with redux
+    // this will happen if the user stops sharing data
+    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
+
+    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
+      var storedSubscriptions = dbSubscriptions || [];
+
+      // User has no subscriptions in db or redux
+      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
+        return [];
+      }
+
+      // There is some mismatch between redux state and db state
+      // If something is in the db, but not in redux, add it to redux
+      // If something is in redux, but not in the db, add it to the db
+      if (storedSubscriptions.length !== reduxSubscriptions.length) {
+        var dbSubMap = {};
+        var reduxSubMap = {};
+        var subsNotInDB = [];
+        var subscriptionsToReturn = reduxSubscriptions.slice();
+
+        storedSubscriptions.forEach(function (sub) {
+          dbSubMap[sub.claim_id] = 1;
+        });
+
+        reduxSubscriptions.forEach(function (sub) {
+          var _parseURI3 = (0, _lbryRedux.parseURI)(sub.uri),
+              claimId = _parseURI3.claimId;
+
+          reduxSubMap[claimId] = 1;
+
+          if (!dbSubMap[claimId]) {
+            subsNotInDB.push({
+              claim_id: claimId,
+              channel_name: sub.channelName
+            });
+          }
+        });
+
+        storedSubscriptions.forEach(function (sub) {
+          if (!reduxSubMap[sub.claim_id]) {
+            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
+            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
+          }
+        });
+
+        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
+          return _lbryio2.default.call('subscription', 'new', payload);
+        })).then(function () {
+          return subscriptionsToReturn;
+        }).catch(function () {
+          return (
+            // let it fail, we will try again when the navigate to the subscriptions page
+            subscriptionsToReturn
+          );
+        });
+      }
+
+      // DB is already synced, just return the subscriptions in redux
+      return reduxSubscriptions;
+    }).then(function (subscriptions /*: Array<Subscription>*/) {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
+        data: subscriptions
+      });
+
+      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
+        var uri = _ref.uri;
+        return uri;
+      })));
+      dispatch(doCheckSubscriptions());
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
+      });
+    });
+  };
+};
+
 var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doCheckSubscriptionsInit() {
   return function (dispatch /*: ReduxDispatch*/) {
     // doCheckSubscriptionsInit is called by doDaemonReady
@@ -9702,6 +9702,9 @@ var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doChe
       type: ACTIONS.CHECK_SUBSCRIPTIONS_SUBSCRIBE,
       data: { checkSubscriptionsTimer: checkSubscriptionsTimer }
     });
+    setInterval(function () {
+      return dispatch(doCheckSubscriptions());
+    }, CHECK_SUBSCRIPTIONS_INTERVAL);
   };
 };
 
