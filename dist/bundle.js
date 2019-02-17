@@ -937,15 +937,19 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _lbryRedux = __webpack_require__(4);
+var _action_types = __webpack_require__(2);
 
-var _auth = __webpack_require__(1);
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryRedux = __webpack_require__(4);
 
 var _querystring = __webpack_require__(5);
 
 var _querystring2 = _interopRequireDefault(_querystring);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var Lbryio = {
   enabled: true,
@@ -1083,15 +1087,33 @@ Lbryio.authenticate = function () {
             return Lbryio.overrides.setAuthToken(status);
           }
 
-          var _window2 = window,
-              store = _window2.store;
+          // simply call the logic to create a new user, and obtain the auth token
+          return new Promise(function (resolve, reject) {
+            Lbryio.call('user', 'new', {
+              auth_token: '',
+              language: 'en',
+              app_id: status.installation_id
+            }, 'post').then(function (response) {
+              if (!response.auth_token) {
+                throw new Error('auth_token was not set in the response');
+              }
 
-          if (store) {
-            store.dispatch((0, _auth.doGenerateAuthToken)(status.installation_id));
-            return resolve();
-          }
+              var _window2 = window,
+                  store = _window2.store;
 
-          return reject();
+              if (store) {
+                store.dispatch({
+                  type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+                  data: { authToken: response.auth_token }
+                });
+              }
+
+              Lbryio.authToken = response.auth_token;
+              resolve(response);
+            }).catch(function () {
+              return reject();
+            });
+          });
         });
       }).then(function (user) {
         if (!user) {
