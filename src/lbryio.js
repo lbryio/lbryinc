@@ -1,5 +1,5 @@
+import * as ACTIONS from 'constants/action_types';
 import { Lbry } from 'lbry-redux';
-import { doGenerateAuthToken } from 'redux/actions/auth';
 import querystring from 'querystring';
 
 const Lbryio = {
@@ -128,13 +128,36 @@ Lbryio.authenticate = () => {
               return Lbryio.overrides.setAuthToken(status);
             }
 
-            const { store } = window;
-            if (store) {
-              store.dispatch(doGenerateAuthToken(status.installation_id));
-              return resolve();
-            }
+            // simply call the logic to create a new user, and obtain the auth token
+            return new Promise((res, rej) => {
+              Lbryio.call(
+                'user',
+                'new',
+                {
+                  auth_token: '',
+                  language: 'en',
+                  app_id: status.installation_id,
+                },
+                'post'
+              )
+                .then(response => {
+                  if (!response.auth_token) {
+                    throw new Error('auth_token was not set in the response');
+                  }
 
-            return reject();
+                  const { store } = window;
+                  if (store) {
+                    store.dispatch({
+                      type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+                      data: { authToken: response.auth_token },
+                    });
+                  }
+
+                  Lbryio.authToken = response.auth_token;
+                  res(response);
+                })
+                .catch(() => rej());
+            });
           });
         })
         .then(user => {
