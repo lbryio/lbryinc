@@ -131,4 +131,5 @@ export {
   selectUserInviteStatusFailed,
   selectUserInviteNewIsPending,
   selectUserInviteNewErrorMessage,
+  selectUserInviteReferralLink,
 } from 'redux/selectors/user';

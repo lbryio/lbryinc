@@ -126,3 +126,8 @@ export const selectUserInviteNewErrorMessage = createSelector(
   selectState,
   state => state.inviteNewErrorMessage
 );
+
+export const selectUserInviteReferralLink = createSelector(
+  selectState,
+  state => state.referralLink
+);

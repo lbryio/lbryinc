@@ -5,12 +5,12 @@ import querystring from 'querystring';
 const Lbryio = {
   enabled: true,
   authenticationPromise: null,
+  CONNECTION_STRING: 'https://api.lbry.io/',
 };
 
 // We can't use env's because they aren't passed into node_modules
-let CONNECTION_STRING = 'https://api.lbry.io/';
 Lbryio.setLocalApi = endpoint => {
-  CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
+  Lbryio.CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
 };
 
 Lbryio.call = (resource, action, params = {}, method = 'get') => {
@@ -45,7 +45,7 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
   return Lbryio.getAuthToken().then(token => {
     const fullParams = { auth_token: token, ...params };
     const qs = querystring.stringify(fullParams);
-    let url = `${CONNECTION_STRING}${resource}/${action}?${qs}`;
+    let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
 
     let options = {
       method: 'GET',
@@ -59,7 +59,7 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
         },
         body: qs,
       };
-      url = `${CONNECTION_STRING}${resource}/${action}`;
+      url = `${Lbryio.CONNECTION_STRING}${resource}/${action}`;
     }
 
     return makeRequest(url, options).then(response => response.data);
@@ -174,7 +174,7 @@ Lbryio.authenticate = () => {
 };
 
 Lbryio.getStripeToken = () =>
-  CONNECTION_STRING.startsWith('http://localhost:')
+  Lbryio.CONNECTION_STRING.startsWith('http://localhost:')
     ? 'pk_test_NoL1JWL7i1ipfhVId5KfDZgo'
     : 'pk_live_e8M4dRNnCCbmpZzduEUZBgJO';
 
