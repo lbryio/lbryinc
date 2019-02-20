@@ -193,6 +193,7 @@ reducers[ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS] = (state, action) =>
     inviteStatusIsPending: false,
     invitesRemaining: action.data.invitesRemaining,
     invitees: action.data.invitees,
+    referralLink: action.data.referralLink,
   });
 
 reducers[ACTIONS.USER_INVITE_NEW_STARTED] = state =>

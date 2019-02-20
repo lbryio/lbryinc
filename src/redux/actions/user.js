@@ -7,6 +7,7 @@ import {
 } from 'redux/selectors/user';
 import rewards from 'rewards';
 import Lbryio from 'lbryio';
+import Promise from 'bluebird';
 
 export function doFetchInviteStatus() {
   return dispatch => {
@@ -14,8 +15,8 @@ export function doFetchInviteStatus() {
       type: ACTIONS.USER_INVITE_STATUS_FETCH_STARTED,
     });
 
-    Lbryio.call('user', 'invite_status')
-      .then(status => {
+    Promise.all([Lbryio.call('user', 'invite_status'), Lbryio.call('user_referral_code', 'list')])
+      .then(([status, code]) => {
         dispatch(doRewardList());
 
         dispatch({
@@ -23,6 +24,7 @@ export function doFetchInviteStatus() {
           data: {
             invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
             invitees: status.invitees,
+            referralLink: `${Lbryio.CONNECTION_STRING}user/refer?r=${code}`,
           },
         });
       })
