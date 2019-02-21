@@ -149,7 +149,7 @@ Object.defineProperty(exports, 'doFetchRewardedContent', {
   }
 });
 
-var _subscriptions = __webpack_require__(14);
+var _subscriptions = __webpack_require__(19);
 
 Object.defineProperty(exports, 'doChannelSubscribe', {
   enumerable: true,
@@ -506,7 +506,7 @@ Object.defineProperty(exports, 'selectReferralReward', {
   }
 });
 
-var _subscriptions2 = __webpack_require__(16);
+var _subscriptions2 = __webpack_require__(21);
 
 Object.defineProperty(exports, 'makeSelectIsNew', {
   enumerable: true,
@@ -1154,7 +1154,7 @@ exports.default = Lbryio;
 	if(true)
 		module.exports = factory();
 	else { var i, a; }
-})(window, function() {
+})((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -1236,8 +1236,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectTransactionListFilter = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletState = exports.selectWalletIsEncrypted = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectFileListPublishedSort = exports.selectFileListDownloadedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = undefined;
-exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.selectPendingById = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.makeSelectChannelForClaimUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectError = exports.selectToast = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.creditsToString = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doUpdateBlockHeight = exports.doSetTransactionListFilter = exports.doWalletStatus = exports.doWalletUnlock = exports.doWalletDecrypt = exports.doWalletEncrypt = exports.doSendTip = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doSetFileListSort = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doDismissError = exports.doError = exports.doDismissToast = exports.doToast = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.PAGES = exports.SORT_OPTIONS = exports.TRANSACTIONS = exports.SETTINGS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.ACTIONS = exports.Toast = undefined;
+exports.selectTransactionListFilter = exports.selectWalletUnlockResult = exports.selectWalletUnlockSucceeded = exports.selectWalletUnlockPending = exports.selectWalletDecryptResult = exports.selectWalletDecryptSucceeded = exports.selectWalletDecryptPending = exports.selectWalletEncryptResult = exports.selectWalletEncryptSucceeded = exports.selectWalletEncryptPending = exports.selectWalletState = exports.selectWalletIsEncrypted = exports.selectBlocks = exports.selectDraftTransactionError = exports.selectDraftTransactionAddress = exports.selectDraftTransactionAmount = exports.selectDraftTransaction = exports.selectGettingNewAddress = exports.selectReceiveAddress = exports.selectIsSendingSupport = exports.selectIsFetchingTransactions = exports.selectHasTransactions = exports.selectRecentTransactions = exports.selectTransactionItems = exports.selectTransactionsById = exports.selectBalance = exports.makeSelectBlockDate = exports.makeSelectQueryWithOptions = exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchOptions = exports.selectSearchValue = exports.selectSearchQuery = exports.makeSelectSearchUris = exports.selectSearchState = exports.selectActiveHistoryEntry = exports.selectHistoryStack = exports.selectHistoryIndex = exports.selectIsForwardDisabled = exports.selectIsBackDisabled = exports.selectPathAfterAuth = exports.selectPageTitle = exports.selectHeaderLinks = exports.selectCurrentParams = exports.selectCurrentPage = exports.selectCurrentPath = exports.makeSelectCurrentParam = exports.computePageFromPath = exports.selectFileListPublishedSort = exports.selectFileListDownloadedSort = exports.selectSearchDownloadUris = exports.selectTotalDownloadProgress = exports.selectDownloadingFileInfos = exports.selectFileInfosDownloaded = exports.selectUrisLoading = exports.selectDownloadingByOutpoint = exports.selectIsFetchingFileListDownloadedOrPublished = exports.selectIsFetchingFileList = exports.selectFileInfosByOutpoint = exports.makeSelectLoadingForUri = exports.makeSelectDownloadingForUri = exports.makeSelectFileInfoForUri = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectCurrentChannelPage = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectPendingClaims = exports.selectIsFetchingClaimListMine = exports.selectAllFetchingChannelClaims = exports.selectMyActiveClaims = exports.selectAbandoningIds = undefined;
+exports.selectMyClaimsRaw = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = exports.selectPendingById = exports.makeSelectClaimsInChannelForCurrentPageState = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.makeSelectChannelForClaimUri = exports.makeSelectFirstRecommendedFileForUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.makeSelectIsUriResolving = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForPage = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.makeSelectClaimForUri = exports.selectError = exports.selectToast = exports.selectBlackListedOutpoints = exports.blacklistReducer = exports.walletReducer = exports.searchReducer = exports.notificationsReducer = exports.fileInfoReducer = exports.costInfoReducer = exports.claimsReducer = exports.creditsToString = exports.formatFullPrice = exports.formatCredits = exports.toQueryString = exports.parseQueryParams = exports.batchActions = exports.doUpdateBlockHeight = exports.doSetTransactionListFilter = exports.doWalletStatus = exports.doWalletUnlock = exports.doWalletDecrypt = exports.doWalletEncrypt = exports.doSendTip = exports.doSetDraftTransactionAddress = exports.doSetDraftTransactionAmount = exports.doSendDraftTransaction = exports.doCheckAddressIsMine = exports.doGetNewAddress = exports.doFetchBlock = exports.doFetchTransactions = exports.doBalanceSubscribe = exports.doUpdateBalance = exports.doBlackListedOutpointsSubscribe = exports.doUpdateSearchOptions = exports.setSearchApi = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.doSearch = exports.doSetFileListSort = exports.doFetchFileInfosAndPublishedClaims = exports.doFileList = exports.doFetchFileInfo = exports.doFetchCostInfoForUri = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doResolveUri = exports.doResolveUris = exports.doAbandonClaim = exports.doFetchClaimListMine = exports.doFetchClaimCountByChannel = exports.doFetchClaimsByChannel = exports.doDismissError = exports.doError = exports.doDismissToast = exports.doToast = exports.convertToShareLink = exports.isNameValid = exports.isURIClaimable = exports.isURIValid = exports.normalizeURI = exports.buildURI = exports.parseURI = exports.regexAddress = exports.regexInvalidURI = exports.Lbryapi = exports.Lbry = exports.PAGES = exports.SORT_OPTIONS = exports.TRANSACTIONS = exports.SETTINGS = exports.SEARCH_OPTIONS = exports.SEARCH_TYPES = exports.THUMBNAIL_STATUSES = exports.ACTIONS = exports.Toast = undefined;
 
 var _Notification = __webpack_require__(1);
 
@@ -1445,8 +1445,20 @@ Object.defineProperty(exports, 'doBlurSearchInput', {
     return _search.doBlurSearchInput;
   }
 });
+Object.defineProperty(exports, 'setSearchApi', {
+  enumerable: true,
+  get: function get() {
+    return _search.setSearchApi;
+  }
+});
+Object.defineProperty(exports, 'doUpdateSearchOptions', {
+  enumerable: true,
+  get: function get() {
+    return _search.doUpdateSearchOptions;
+  }
+});
 
-var _blacklist = __webpack_require__(34);
+var _blacklist = __webpack_require__(35);
 
 Object.defineProperty(exports, 'doBlackListedOutpointsSubscribe', {
   enumerable: true,
@@ -1599,7 +1611,7 @@ Object.defineProperty(exports, 'creditsToString', {
   }
 });
 
-var _claims2 = __webpack_require__(35);
+var _claims2 = __webpack_require__(36);
 
 Object.defineProperty(exports, 'claimsReducer', {
   enumerable: true,
@@ -1608,7 +1620,7 @@ Object.defineProperty(exports, 'claimsReducer', {
   }
 });
 
-var _cost_info2 = __webpack_require__(36);
+var _cost_info2 = __webpack_require__(37);
 
 Object.defineProperty(exports, 'costInfoReducer', {
   enumerable: true,
@@ -1617,7 +1629,7 @@ Object.defineProperty(exports, 'costInfoReducer', {
   }
 });
 
-var _file_info2 = __webpack_require__(37);
+var _file_info2 = __webpack_require__(38);
 
 Object.defineProperty(exports, 'fileInfoReducer', {
   enumerable: true,
@@ -1626,7 +1638,7 @@ Object.defineProperty(exports, 'fileInfoReducer', {
   }
 });
 
-var _notifications2 = __webpack_require__(40);
+var _notifications2 = __webpack_require__(41);
 
 Object.defineProperty(exports, 'notificationsReducer', {
   enumerable: true,
@@ -1635,7 +1647,7 @@ Object.defineProperty(exports, 'notificationsReducer', {
   }
 });
 
-var _search2 = __webpack_require__(42);
+var _search2 = __webpack_require__(43);
 
 Object.defineProperty(exports, 'searchReducer', {
   enumerable: true,
@@ -1644,7 +1656,7 @@ Object.defineProperty(exports, 'searchReducer', {
   }
 });
 
-var _wallet2 = __webpack_require__(43);
+var _wallet2 = __webpack_require__(44);
 
 Object.defineProperty(exports, 'walletReducer', {
   enumerable: true,
@@ -1653,7 +1665,7 @@ Object.defineProperty(exports, 'walletReducer', {
   }
 });
 
-var _blacklist2 = __webpack_require__(44);
+var _blacklist2 = __webpack_require__(45);
 
 Object.defineProperty(exports, 'blacklistReducer', {
   enumerable: true,
@@ -1662,7 +1674,7 @@ Object.defineProperty(exports, 'blacklistReducer', {
   }
 });
 
-var _blacklist3 = __webpack_require__(45);
+var _blacklist3 = __webpack_require__(46);
 
 Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   enumerable: true,
@@ -1671,7 +1683,7 @@ Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   }
 });
 
-var _notifications3 = __webpack_require__(46);
+var _notifications3 = __webpack_require__(47);
 
 Object.defineProperty(exports, 'selectToast', {
   enumerable: true,
@@ -1772,6 +1784,12 @@ Object.defineProperty(exports, 'makeSelectRecommendedContentForUri', {
     return _claims3.makeSelectRecommendedContentForUri;
   }
 });
+Object.defineProperty(exports, 'makeSelectFirstRecommendedFileForUri', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.makeSelectFirstRecommendedFileForUri;
+  }
+});
 Object.defineProperty(exports, 'makeSelectChannelForClaimUri', {
   enumerable: true,
   get: function get() {
@@ -1788,6 +1806,12 @@ Object.defineProperty(exports, 'makeSelectPendingByUri', {
   enumerable: true,
   get: function get() {
     return _claims3.makeSelectPendingByUri;
+  }
+});
+Object.defineProperty(exports, 'makeSelectClaimsInChannelForCurrentPageState', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.makeSelectClaimsInChannelForCurrentPageState;
   }
 });
 Object.defineProperty(exports, 'selectPendingById', {
@@ -1928,8 +1952,14 @@ Object.defineProperty(exports, 'selectChannelClaimCounts', {
     return _claims3.selectChannelClaimCounts;
   }
 });
+Object.defineProperty(exports, 'selectCurrentChannelPage', {
+  enumerable: true,
+  get: function get() {
+    return _claims3.selectCurrentChannelPage;
+  }
+});
 
-var _cost_info3 = __webpack_require__(47);
+var _cost_info3 = __webpack_require__(48);
 
 Object.defineProperty(exports, 'makeSelectFetchingCostInfoForUri', {
   enumerable: true,
@@ -2130,7 +2160,7 @@ Object.defineProperty(exports, 'selectActiveHistoryEntry', {
   }
 });
 
-var _search3 = __webpack_require__(21);
+var _search3 = __webpack_require__(22);
 
 Object.defineProperty(exports, 'makeSelectSearchUris', {
   enumerable: true,
@@ -2148,6 +2178,12 @@ Object.defineProperty(exports, 'selectSearchValue', {
   enumerable: true,
   get: function get() {
     return _search3.selectSearchValue;
+  }
+});
+Object.defineProperty(exports, 'selectSearchOptions', {
+  enumerable: true,
+  get: function get() {
+    return _search3.selectSearchOptions;
   }
 });
 Object.defineProperty(exports, 'selectIsSearching', {
@@ -2178,6 +2214,12 @@ Object.defineProperty(exports, 'selectSearchSuggestions', {
   enumerable: true,
   get: function get() {
     return _search3.selectSearchSuggestions;
+  }
+});
+Object.defineProperty(exports, 'makeSelectQueryWithOptions', {
+  enumerable: true,
+  get: function get() {
+    return _search3.makeSelectQueryWithOptions;
   }
 });
 
@@ -2350,15 +2392,11 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _thumbnail_upload_statuses = __webpack_require__(48);
+var _thumbnail_upload_statuses = __webpack_require__(49);
 
 var THUMBNAIL_STATUSES = _interopRequireWildcard(_thumbnail_upload_statuses);
 
-var _search4 = __webpack_require__(22);
-
-var SEARCH_TYPES = _interopRequireWildcard(_search4);
-
-var _settings = __webpack_require__(49);
+var _settings = __webpack_require__(50);
 
 var SETTINGS = _interopRequireWildcard(_settings);
 
@@ -2366,13 +2404,15 @@ var _transaction_types = __webpack_require__(27);
 
 var TRANSACTIONS = _interopRequireWildcard(_transaction_types);
 
-var _sort_options = __webpack_require__(38);
+var _sort_options = __webpack_require__(39);
 
 var SORT_OPTIONS = _interopRequireWildcard(_sort_options);
 
-var _pages = __webpack_require__(39);
+var _pages = __webpack_require__(40);
 
 var PAGES = _interopRequireWildcard(_pages);
+
+var _search4 = __webpack_require__(21);
 
 var _lbry = __webpack_require__(9);
 
@@ -2389,7 +2429,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 // constants
 exports.ACTIONS = ACTIONS;
 exports.THUMBNAIL_STATUSES = THUMBNAIL_STATUSES;
-exports.SEARCH_TYPES = SEARCH_TYPES;
+exports.SEARCH_TYPES = _search4.SEARCH_TYPES;
+exports.SEARCH_OPTIONS = _search4.SEARCH_OPTIONS;
 exports.SETTINGS = SETTINGS;
 exports.TRANSACTIONS = TRANSACTIONS;
 exports.SORT_OPTIONS = SORT_OPTIONS;
@@ -2635,6 +2676,7 @@ var SEARCH_START = exports.SEARCH_START = 'SEARCH_START';
 var SEARCH_SUCCESS = exports.SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 var SEARCH_FAIL = exports.SEARCH_FAIL = 'SEARCH_FAIL';
 var UPDATE_SEARCH_QUERY = exports.UPDATE_SEARCH_QUERY = 'UPDATE_SEARCH_QUERY';
+var UPDATE_SEARCH_OPTIONS = exports.UPDATE_SEARCH_OPTIONS = 'UPDATE_SEARCH_OPTIONS';
 var UPDATE_SEARCH_SUGGESTIONS = exports.UPDATE_SEARCH_SUGGESTIONS = 'UPDATE_SEARCH_SUGGESTIONS';
 var SEARCH_FOCUS = exports.SEARCH_FOCUS = 'SEARCH_FOCUS';
 var SEARCH_BLUR = exports.SEARCH_BLUR = 'SEARCH_BLUR';
@@ -3091,9 +3133,11 @@ module.exports = v4;
 // and inconsistent support for the `crypto` API.  We do the best we can via
 // feature-detection
 
-// getRandomValues needs to be invoked in a context where "this" is a Crypto implementation.
-var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues.bind(crypto)) ||
-                      (typeof(msCrypto) != 'undefined' && msCrypto.getRandomValues.bind(msCrypto));
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
 if (getRandomValues) {
   // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
   var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
@@ -3136,14 +3180,15 @@ for (var i = 0; i < 256; ++i) {
 function bytesToUuid(buf, offset) {
   var i = offset || 0;
   var bth = byteToHex;
-  return bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]];
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
 }
 
 module.exports = bytesToUuid;
@@ -3200,14 +3245,20 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function doResolveUris(uris) {
+  var returnCachedClaims = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
   return function (dispatch, getState) {
     var normalizedUris = uris.map(_lbryURI.normalizeURI);
     var state = getState();
 
-    // Filter out URIs that are already resolving
     var resolvingUris = (0, _claims.selectResolvingUris)(state);
+    var claimsByUri = (0, _claims.selectClaimsByUri)(state);
     var urisToResolve = normalizedUris.filter(function (uri) {
-      return !resolvingUris.includes(uri);
+      if (resolvingUris.includes(uri)) {
+        return false;
+      }
+
+      return returnCachedClaims ? !claimsByUri[uri] : true;
     });
 
     if (urisToResolve.length === 0) {
@@ -3220,7 +3271,7 @@ function doResolveUris(uris) {
     });
 
     var resolveInfo = {};
-    _lbry2.default.resolve({ uris: urisToResolve }).then(function (result) {
+    _lbry2.default.resolve({ urls: urisToResolve }).then(function (result) {
       Object.entries(result).forEach(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             uri = _ref2[0],
@@ -3325,6 +3376,8 @@ function doAbandonClaim(txid, nout) {
 }
 
 function doFetchFeaturedUris() {
+  var offloadResolve = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
   return function (dispatch) {
     dispatch({
       type: ACTIONS.FETCH_FEATURED_CONTENT_STARTED
@@ -3338,13 +3391,17 @@ function doFetchFeaturedUris() {
         urisToResolve = [].concat(_toConsumableArray(urisToResolve), _toConsumableArray(Uris[category]));
       });
 
-      var actions = [doResolveUris(urisToResolve), {
+      var actions = [{
         type: ACTIONS.FETCH_FEATURED_CONTENT_COMPLETED,
         data: {
           uris: Uris,
           success: true
         }
       }];
+      if (urisToResolve.length && !offloadResolve) {
+        actions.push(doResolveUris(urisToResolve));
+      }
+
       dispatch(_batchActions.batchActions.apply(undefined, actions));
     };
 
@@ -3535,6 +3592,9 @@ Lbry.file_set_status = function () {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return daemonCallWithResult('file_set_status', params);
 };
+Lbry.stop = function () {
+  return daemonCallWithResult('stop', {});
+};
 
 // claims
 Lbry.claim_list_by_channel = function () {
@@ -3585,6 +3645,10 @@ Lbry.claim_tip = function () {
 Lbry.transaction_list = function () {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return daemonCallWithResult('transaction_list', params);
+};
+Lbry.utxo_release = function () {
+  var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return daemonCallWithResult('utxo_release', params);
 };
 
 Lbry.connectPromise = null;
@@ -3670,12 +3734,7 @@ Lbry.resolve = function () {
   var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return new Promise(function (resolve, reject) {
     apiCall('resolve', params, function (data) {
-      if ('uri' in params) {
-        // If only a single URI was requested, don't nest the results in an object
-        resolve(data && data[params.uri] ? data[params.uri] : {});
-      } else {
-        resolve(data || {});
-      }
+      resolve(data || {});
     }, reject);
   });
 };
@@ -4405,17 +4464,19 @@ var objectKeys = Object.keys || function (obj) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeSelectChannelForClaimUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.makeSelectIsUriResolving = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectIsFetchingClaimListMine = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectClaimsInChannelForPage = exports.makeSelectFetchingChannelClaims = exports.selectAllFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.makeSelectClaimForUri = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.selectPendingClaims = exports.selectPendingById = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectClaimsById = undefined;
+exports.makeSelectChannelForClaimUri = exports.makeSelectFirstRecommendedFileForUri = exports.makeSelectRecommendedContentForUri = exports.makeSelectNsfwCountForChannel = exports.makeSelectNsfwCountFromUris = exports.makeSelectTotalPagesForChannel = exports.makeSelectTotalItemsForChannel = exports.selectChannelClaimCounts = exports.selectPlayingUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.makeSelectIsUriResolving = exports.selectResolvingUris = exports.selectMyChannelClaims = exports.selectFetchingMyChannels = exports.selectMyClaimsOutpoints = exports.selectAllMyClaimsByOutpoint = exports.selectMyClaimsWithoutChannels = exports.selectMyClaims = exports.selectIsFetchingClaimListMine = exports.makeSelectContentTypeForUri = exports.makeSelectTitleForUri = exports.makeSelectMetadataForUri = exports.makeSelectClaimsInChannelForCurrentPageState = exports.makeSelectClaimsInChannelForCurrentPage = exports.makeSelectClaimsInChannelForPage = exports.makeSelectFetchingChannelClaims = exports.selectAllFetchingChannelClaims = exports.makeSelectClaimIsMine = exports.selectMyActiveClaims = exports.selectAbandoningIds = exports.selectMyClaimsRaw = exports.makeSelectClaimForUri = exports.makeSelectPendingByUri = exports.makeSelectClaimIsPending = exports.selectPendingClaims = exports.selectPendingById = exports.selectAllClaimsByChannel = exports.selectClaimsByUri = exports.selectCurrentChannelPage = exports.selectClaimsById = undefined;
 
 var _lbryURI = __webpack_require__(3);
 
 var _navigation = __webpack_require__(18);
 
-var _search = __webpack_require__(21);
+var _search = __webpack_require__(22);
 
 var _reselect = __webpack_require__(19);
 
 var _claim = __webpack_require__(23);
+
+var _query_params = __webpack_require__(20);
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -4425,6 +4486,10 @@ var selectState = function selectState(state) {
 
 var selectClaimsById = exports.selectClaimsById = (0, _reselect.createSelector)(selectState, function (state) {
   return state.byId || {};
+});
+
+var selectCurrentChannelPage = exports.selectCurrentChannelPage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.currentChannelPage || 1;
 });
 
 var selectClaimsByUri = exports.selectClaimsByUri = (0, _reselect.createSelector)(selectState, selectClaimsById, function (state, byId) {
@@ -4543,6 +4608,19 @@ var makeSelectClaimsInChannelForCurrentPage = exports.makeSelectClaimsInChannelF
   var pageSelector = (0, _navigation.makeSelectCurrentParam)('page');
 
   return (0, _reselect.createSelector)(selectClaimsById, selectAllClaimsByChannel, pageSelector, function (byId, allClaims, page) {
+    var byChannel = allClaims[uri] || {};
+    var claimIds = byChannel[page || 1];
+
+    if (!claimIds) return claimIds;
+
+    return claimIds.map(function (claimId) {
+      return byId[claimId];
+    });
+  });
+};
+
+var makeSelectClaimsInChannelForCurrentPageState = exports.makeSelectClaimsInChannelForCurrentPageState = function makeSelectClaimsInChannelForCurrentPageState(uri) {
+  return (0, _reselect.createSelector)(selectClaimsById, selectAllClaimsByChannel, selectCurrentChannelPage, function (byId, allClaims, page) {
     var byChannel = allClaims[uri] || {};
     var claimIds = byChannel[page || 1];
 
@@ -4721,7 +4799,9 @@ var makeSelectRecommendedContentForUri = exports.makeSelectRecommendedContentFor
       var title = claim.value.stream.metadata.title;
 
 
-      var searchUris = searchUrisByQuery[title.replace(/\//, ' ')];
+      var searchQuery = (0, _query_params.getSearchQueryString)(title.replace(/\//, ' '));
+
+      var searchUris = searchUrisByQuery[searchQuery];
       if (searchUris) {
         searchUris = searchUris.filter(function (searchUri) {
           return searchUri !== currentUri;
@@ -4731,6 +4811,12 @@ var makeSelectRecommendedContentForUri = exports.makeSelectRecommendedContentFor
     }
 
     return recommendedContent;
+  });
+};
+
+var makeSelectFirstRecommendedFileForUri = exports.makeSelectFirstRecommendedFileForUri = function makeSelectFirstRecommendedFileForUri(uri) {
+  return (0, _reselect.createSelector)(makeSelectRecommendedContentForUri(uri), function (recommendedContent) {
+    return recommendedContent ? recommendedContent[0] : null;
   });
 };
 
@@ -4776,7 +4862,7 @@ var selectCurrentPath = exports.selectCurrentPath = (0, _reselect.createSelector
 });
 
 var computePageFromPath = exports.computePageFromPath = function computePageFromPath(path) {
-  return path.replace(/^\//, '').split('?')[0];
+  return path ? path.replace(/^\//, '').split('?')[0] : '';
 };
 
 var selectCurrentPage = exports.selectCurrentPage = (0, _reselect.createSelector)(selectCurrentPath, function (path) {
@@ -4973,12 +5059,20 @@ function createStructuredSelector(selectors) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getSearchQueryString = undefined;
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); // @flow
+
 
 exports.parseQueryParams = parseQueryParams;
 exports.toQueryString = toQueryString;
-function parseQueryParams(queryString) {
+
+var _search = __webpack_require__(21);
+
+var DEFAULT_SEARCH_RESULT_FROM = 0;
+var DEFAULT_SEARCH_SIZE = 20;
+
+function parseQueryParams(queryString /*: string*/) {
   if (queryString === '') return {};
   var parts = queryString.split('?').pop().split('&').map(function (p) {
     return p.split('=');
@@ -4995,7 +5089,7 @@ function parseQueryParams(queryString) {
   return params;
 }
 
-function toQueryString(params) {
+function toQueryString(params /*: { [string]: string | number }*/) {
   if (!params) return '';
 
   var parts = [];
@@ -5008,6 +5102,27 @@ function toQueryString(params) {
   return parts.join('&');
 }
 
+var getSearchQueryString = exports.getSearchQueryString = function getSearchQueryString(query /*: string*/) {
+  var options /*: any*/ = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var includeUserOptions /*: boolean*/ = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+  var encodedQuery = encodeURIComponent(query);
+  var queryParams = ['s=' + encodedQuery, 'size=' + (options.size || DEFAULT_SEARCH_SIZE), 'from=' + (options.from || DEFAULT_SEARCH_RESULT_FROM)];
+
+  if (includeUserOptions) {
+    queryParams.push('claimType=' + options[_search.SEARCH_OPTIONS.CLAIM_TYPE]);
+
+    // If they are only searching for channels, strip out the media info
+    if (options[_search.SEARCH_OPTIONS.CLAIM_TYPE] !== _search.SEARCH_OPTIONS.INCLUDE_CHANNELS) {
+      queryParams.push('mediaType=' + [_search.SEARCH_OPTIONS.MEDIA_FILE, _search.SEARCH_OPTIONS.MEDIA_AUDIO, _search.SEARCH_OPTIONS.MEDIA_VIDEO, _search.SEARCH_OPTIONS.MEDIA_TEXT, _search.SEARCH_OPTIONS.MEDIA_IMAGE, _search.SEARCH_OPTIONS.MEDIA_APPLICATION].reduce(function (acc, currentOption) {
+        return options[currentOption] ? '' + acc + currentOption + ',' : acc;
+      }, ''));
+    }
+  }
+
+  return queryParams.join('&');
+};
+
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -5018,139 +5133,24 @@ function toQueryString(params) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.makeSelectSearchUris = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchQuery = exports.selectSuggestions = exports.selectSearchValue = exports.selectState = undefined;
-
-var _search = __webpack_require__(22);
-
-var SEARCH_TYPES = _interopRequireWildcard(_search);
-
-var _lbryURI = __webpack_require__(3);
-
-var _navigation = __webpack_require__(18);
-
-var _reselect = __webpack_require__(19);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var selectState = exports.selectState = function selectState(state) {
-  return state.search || {};
+var SEARCH_TYPES = exports.SEARCH_TYPES = {
+  FILE: 'file',
+  CHANNEL: 'channel',
+  SEARCH: 'search'
 };
 
-var selectSearchValue = exports.selectSearchValue = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.searchQuery;
-});
-
-var selectSuggestions = exports.selectSuggestions = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.suggestions;
-});
-
-var selectSearchQuery = exports.selectSearchQuery = (0, _reselect.createSelector)(_navigation.selectCurrentPage, _navigation.selectCurrentParams, function (page, params) {
-  return page === 'search' ? params && params.query : null;
-});
-
-var selectIsSearching = exports.selectIsSearching = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.searching;
-});
-
-var selectSearchUrisByQuery = exports.selectSearchUrisByQuery = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.urisByQuery;
-});
-
-var makeSelectSearchUris = exports.makeSelectSearchUris = function makeSelectSearchUris(query) {
-  return (
-    // replace statement below is kind of ugly, and repeated in doSearch action
-    (0, _reselect.createSelector)(selectSearchUrisByQuery, function (byQuery) {
-      return byQuery[query ? query.replace(/^lbry:\/\//i, '').replace(/\//, ' ') : query];
-    })
-  );
+var SEARCH_OPTIONS = exports.SEARCH_OPTIONS = {
+  RESULT_COUNT: 'size',
+  CLAIM_TYPE: 'claimType',
+  INCLUDE_FILES: 'file',
+  INCLUDE_CHANNELS: 'channel',
+  INCLUDE_FILES_AND_CHANNELS: 'file,channel',
+  MEDIA_AUDIO: 'audio',
+  MEDIA_VIDEO: 'video',
+  MEDIA_TEXT: 'text',
+  MEDIA_IMAGE: 'image',
+  MEDIA_APPLICATION: 'application'
 };
-
-var selectWunderBarAddress = exports.selectWunderBarAddress = (0, _reselect.createSelector)(_navigation.selectCurrentPage, selectSearchQuery, _navigation.selectCurrentParams, function (page, query, params) {
-  // only populate the wunderbar address if we are on the file/channel pages
-  // or show the search query
-  if (page === 'show') {
-    return params.uri;
-  }
-  return query;
-});
-
-var selectSearchBarFocused = exports.selectSearchBarFocused = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.focused;
-});
-// export const selectSear
-
-var selectSearchSuggestions = exports.selectSearchSuggestions = (0, _reselect.createSelector)(selectSearchValue, selectSuggestions, function (query, suggestions) {
-  if (!query) {
-    return [];
-  }
-
-  var queryIsPrefix = query === 'lbry:' || query === 'lbry:/' || query === 'lbry://';
-
-  if (query.startsWith('lbry://') && query !== 'lbry://') {
-    // If it starts with a prefix, don't show any autocomplete results
-    // They are probably typing/pasting in a lbry uri
-    return [{
-      value: query,
-      type: SEARCH_TYPES.FILE
-    }];
-  } else if (queryIsPrefix) {
-    // If it is a prefix, wait until something else comes to figure out what to do
-    return [];
-  }
-
-  var searchSuggestions = [];
-  try {
-    var uri = (0, _lbryURI.normalizeURI)(query);
-
-    var _parseURI = (0, _lbryURI.parseURI)(uri),
-        claimName = _parseURI.claimName,
-        isChannel = _parseURI.isChannel;
-
-    searchSuggestions.push({
-      value: claimName,
-      type: SEARCH_TYPES.SEARCH
-    }, {
-      value: uri,
-      shorthand: isChannel ? claimName.slice(1) : claimName,
-      type: isChannel ? SEARCH_TYPES.CHANNEL : SEARCH_TYPES.FILE
-    });
-  } catch (e) {
-    searchSuggestions.push({
-      value: query,
-      type: SEARCH_TYPES.SEARCH
-    });
-  }
-
-  var apiSuggestions = suggestions[query] || [];
-  if (apiSuggestions.length) {
-    searchSuggestions = searchSuggestions.concat(apiSuggestions.filter(function (suggestion) {
-      return suggestion !== query;
-    }).map(function (suggestion) {
-      // determine if it's a channel
-      try {
-        var _uri = (0, _lbryURI.normalizeURI)(suggestion);
-
-        var _parseURI2 = (0, _lbryURI.parseURI)(_uri),
-            _claimName = _parseURI2.claimName,
-            _isChannel = _parseURI2.isChannel;
-
-        return {
-          value: _uri,
-          shorthand: _isChannel ? _claimName.slice(1) : _claimName,
-          type: _isChannel ? SEARCH_TYPES.CHANNEL : SEARCH_TYPES.FILE
-        };
-      } catch (e) {
-        // search result includes some character that isn't valid in claim names
-        return {
-          value: suggestion,
-          type: SEARCH_TYPES.SEARCH
-        };
-      }
-    }));
-  }
-
-  return searchSuggestions;
-});
 
 /***/ }),
 /* 22 */
@@ -5162,9 +5162,162 @@ var selectSearchSuggestions = exports.selectSearchSuggestions = (0, _reselect.cr
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var FILE = exports.FILE = 'file';
-var CHANNEL = exports.CHANNEL = 'channel';
-var SEARCH = exports.SEARCH = 'search';
+exports.makeSelectQueryWithOptions = exports.selectSearchSuggestions = exports.selectSearchBarFocused = exports.selectWunderBarAddress = exports.makeSelectSearchUris = exports.selectSearchUrisByQuery = exports.selectIsSearching = exports.selectSearchQuery = exports.selectSuggestions = exports.selectSearchOptions = exports.selectSearchValue = exports.selectState = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _search = __webpack_require__(21);
+
+var _query_params = __webpack_require__(20);
+
+var _lbryURI = __webpack_require__(3);
+
+var _navigation = __webpack_require__(18);
+
+var _reselect = __webpack_require__(19);
+
+// @flow
+/*:: import type { SearchState, SearchOptions, SearchSuggestion } from 'types/Search';*/
+/*:: type State = { search: SearchState };*/
+var selectState = exports.selectState = function selectState(state /*: State*/) /*: SearchState*/ {
+  return state.search;
+};
+
+var selectSearchValue /*: (state: State) => string*/ = exports.selectSearchValue = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.searchQuery;
+});
+
+var selectSearchOptions /*: (state: State) => SearchOptions*/ = exports.selectSearchOptions = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.options;
+});
+
+var selectSuggestions /*: (
+                        state: State
+                      ) => { [string]: Array<SearchSuggestion> }*/ = exports.selectSuggestions = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.suggestions;
+});
+
+var selectSearchQuery /*: (state: State) => ?string*/ = exports.selectSearchQuery = (0, _reselect.createSelector)(_navigation.selectCurrentPage, _navigation.selectCurrentParams, function (page /*: string*/, params /*: ?{ query: string }*/) {
+  return page === 'search' ? params && params.query : null;
+});
+
+var selectIsSearching /*: (state: State) => boolean*/ = exports.selectIsSearching = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.searching;
+});
+
+var selectSearchUrisByQuery /*: (
+                              state: State
+                            ) => { [string]: Array<string> }*/ = exports.selectSearchUrisByQuery = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.urisByQuery;
+});
+
+var makeSelectSearchUris = exports.makeSelectSearchUris = function makeSelectSearchUris(query
+// replace statement below is kind of ugly, and repeated in doSearch action
+/*: string*/) /*: ((state: State) => Array<string>)*/ {
+  return (0, _reselect.createSelector)(selectSearchUrisByQuery, function (byQuery) {
+    return byQuery[query ? query.replace(/^lbry:\/\//i, '').replace(/\//, ' ') : query];
+  });
+};
+
+var selectWunderBarAddress = exports.selectWunderBarAddress = (0, _reselect.createSelector)(_navigation.selectCurrentPage, selectSearchQuery, _navigation.selectCurrentParams, function (page /*: string*/, query /*: string*/, params /*: { uri: string }*/) {
+  // only populate the wunderbar address if we are on the file/channel pages
+  // or show the search query
+  if (page === 'show') {
+    return params.uri;
+  }
+  return query;
+});
+
+var selectSearchBarFocused /*: boolean*/ = exports.selectSearchBarFocused = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.focused;
+});
+
+var selectSearchSuggestions /*: Array<SearchSuggestion>*/ = exports.selectSearchSuggestions = (0, _reselect.createSelector)(selectSearchValue, selectSuggestions, function (query /*: string*/, suggestions /*: { [string]: Array<string> }*/) {
+  if (!query) {
+    return [];
+  }
+
+  var queryIsPrefix = query === 'lbry:' || query === 'lbry:/' || query === 'lbry://';
+
+  if (query.startsWith('lbry://') && query !== 'lbry://') {
+    // If it starts with a prefix, don't show any autocomplete results
+    // They are probably typing/pasting in a lbry uri
+    return [{
+      value: query,
+      type: _search.SEARCH_TYPES.FILE
+    }];
+  } else if (queryIsPrefix) {
+    // If it is a prefix, wait until something else comes to figure out what to do
+    return [];
+  }
+
+  var searchSuggestions = [];
+  try {
+    var _uri = (0, _lbryURI.normalizeURI)(query);
+
+    var _parseURI = (0, _lbryURI.parseURI)(_uri),
+        claimName = _parseURI.claimName,
+        isChannel = _parseURI.isChannel;
+
+    searchSuggestions.push({
+      value: claimName,
+      type: _search.SEARCH_TYPES.SEARCH
+    }, {
+      value: _uri,
+      shorthand: isChannel ? claimName.slice(1) : claimName,
+      type: isChannel ? _search.SEARCH_TYPES.CHANNEL : _search.SEARCH_TYPES.FILE
+    });
+  } catch (e) {
+    searchSuggestions.push({
+      value: query,
+      type: _search.SEARCH_TYPES.SEARCH
+    });
+  }
+
+  var apiSuggestions = suggestions[query] || [];
+  if (apiSuggestions.length) {
+    searchSuggestions = searchSuggestions.concat(apiSuggestions.filter(function (suggestion) {
+      return suggestion !== query;
+    }).map(function (suggestion) {
+      // determine if it's a channel
+      try {
+        var _uri2 = (0, _lbryURI.normalizeURI)(suggestion);
+
+        var _parseURI2 = (0, _lbryURI.parseURI)(_uri2),
+            _claimName = _parseURI2.claimName,
+            _isChannel = _parseURI2.isChannel;
+
+        return {
+          value: _uri2,
+          shorthand: _isChannel ? _claimName.slice(1) : _claimName,
+          type: _isChannel ? _search.SEARCH_TYPES.CHANNEL : _search.SEARCH_TYPES.FILE
+        };
+      } catch (e) {
+        // search result includes some character that isn't valid in claim names
+        return {
+          value: suggestion,
+          type: _search.SEARCH_TYPES.SEARCH
+        };
+      }
+    }));
+  }
+
+  return searchSuggestions;
+});
+
+// Creates a query string based on the state in the search reducer
+// Can be overrided by passing in custom sizes/from values for other areas pagination
+var makeSelectQueryWithOptions = exports.makeSelectQueryWithOptions = function makeSelectQueryWithOptions(customQuery /*: ?string*/, customSize /*: ?number*/, customFrom // If it's a background search, don't use the users settings
+/*: ?number*/) {
+  var isBackgroundSearch /*: boolean*/ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  return (0, _reselect.createSelector)(selectSearchQuery, selectSearchOptions, function (query, options) {
+    var size = customSize || options[_search.SEARCH_OPTIONS.RESULT_COUNT];
+
+    var queryString = (0, _query_params.getSearchQueryString)(customQuery || query, _extends({}, options, { size: size, from: customFrom }), !isBackgroundSearch);
+
+    return queryString;
+  });
+};
 
 /***/ }),
 /* 23 */
@@ -5254,7 +5407,9 @@ function doUpdateBalance() {
     var _getState = getState(),
         balanceInStore = _getState.wallet.balance;
 
-    _lbry2.default.account_balance().then(function (balance) {
+    _lbry2.default.account_balance().then(function (balanceAsString) {
+      var balance = parseFloat(balanceAsString);
+
       if (balanceInStore !== balance) {
         dispatch({
           type: ACTIONS.UPDATE_BALANCE,
@@ -5282,7 +5437,9 @@ function doFetchTransactions() {
       type: ACTIONS.FETCH_TRANSACTIONS_STARTED
     });
 
-    _lbry2.default.transaction_list().then(function (results) {
+    _lbry2.default.utxo_release().then(function () {
+      return _lbry2.default.transaction_list();
+    }).then(function (results) {
       dispatch({
         type: ACTIONS.FETCH_TRANSACTIONS_COMPLETED,
         data: {
@@ -5718,14 +5875,17 @@ var selectTransactionItems = exports.selectTransactionItems = (0, _reselect.crea
     items.push.apply(items, _toConsumableArray(append.map(function (item) {
       // value on transaction, amount on outpoint
       // amount is always positive, but should match sign of value
-      var amount = parseFloat(item.balance_delta ? item.balance_delta : item.value);
+      var balanceDelta = parseFloat(item.balance_delta);
+      var value = parseFloat(item.value);
+      var amount = balanceDelta || value;
+      var fee = parseFloat(tx.fee);
 
       return {
         txid: txid,
         timestamp: tx.timestamp,
         date: tx.timestamp ? new Date(Number(tx.timestamp) * 1000) : null,
         amount: amount,
-        fee: amount < 0 ? -1 * tx.fee / append.length : 0,
+        fee: fee,
         claim_id: item.claim_id,
         claim_name: item.claim_name,
         type: item.type || TRANSACTIONS.SPEND,
@@ -6282,7 +6442,7 @@ var selectFileListDownloadedSort = exports.selectFileListDownloadedSort = (0, _r
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.getSearchSuggestions = exports.doSearch = undefined;
+exports.doUpdateSearchOptions = exports.doBlurSearchInput = exports.doFocusSearchInput = exports.doUpdateSearchQuery = exports.getSearchSuggestions = exports.doSearch = exports.setSearchApi = undefined;
 
 var _action_types = __webpack_require__(2);
 
@@ -6292,11 +6452,15 @@ var _lbryURI = __webpack_require__(3);
 
 var _claims = __webpack_require__(8);
 
-var _search = __webpack_require__(21);
+var _search = __webpack_require__(22);
 
 var _batchActions = __webpack_require__(24);
 
-var _handleFetch = __webpack_require__(33);
+var _debounce = __webpack_require__(33);
+
+var _debounce2 = _interopRequireDefault(_debounce);
+
+var _handleFetch = __webpack_require__(34);
 
 var _handleFetch2 = _interopRequireDefault(_handleFetch);
 
@@ -6305,16 +6469,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 // @flow
-var DEFAULTSEARCHRESULTSIZE = 10;
-var DEFAULTSEARCHRESULTFROM = 0;
+/*:: import type { SearchState, SearchOptions } from 'types/Search';*/
+
+
+var DEBOUNCED_SEARCH_SUGGESTION_MS = 300;
 /*:: type Dispatch = (action: any) => any;*/
-/*:: type GetState = () => {};*/
-var doSearch = exports.doSearch = function doSearch(rawQuery) {
-  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULTSEARCHRESULTSIZE;
-  var from = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : DEFAULTSEARCHRESULTFROM;
-  var isBackgroundSearch = arguments[3];
+
+
+// We can't use env's because they aren't passed into node_modules
+/*:: type GetState = () => { search: SearchState };*/
+var CONNECTION_STRING = 'https://lighthouse.lbry.io/';
+
+var setSearchApi = exports.setSearchApi = function setSearchApi(endpoint /*: string*/) {
+  CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
+};
+
+var doSearch = exports.doSearch = function doSearch(rawQuery /*: string*/, size /*: ?number*/, from /*: ?number*/) {
+  var isBackgroundSearch /*: boolean*/ = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
-    var state = getState();
     var query = rawQuery.replace(/^lbry:\/\//i, '').replace(/\//, ' ');
 
     if (!query) {
@@ -6324,8 +6496,11 @@ var doSearch = exports.doSearch = function doSearch(rawQuery) {
       return;
     }
 
+    var state = getState();
+    var queryWithOptions = (0, _search.makeSelectQueryWithOptions)(query, size, from, isBackgroundSearch)(state);
+
     // If we have already searched for something, we don't need to do anything
-    var urisForQuery = (0, _search.makeSelectSearchUris)(query)(state);
+    var urisForQuery = (0, _search.makeSelectSearchUris)(queryWithOptions)(state);
     if (urisForQuery && !!urisForQuery.length) {
       return;
     }
@@ -6345,8 +6520,7 @@ var doSearch = exports.doSearch = function doSearch(rawQuery) {
       });
     }
 
-    var encodedQuery = encodeURIComponent(query);
-    fetch('https://lighthouse.lbry.io/search?s=' + encodedQuery + '&size=' + size + '&from=' + from).then(_handleFetch2.default).then(function (data) {
+    fetch(CONNECTION_STRING + 'search?' + queryWithOptions).then(_handleFetch2.default).then(function (data) {
       var uris = [];
       var actions = [];
 
@@ -6362,7 +6536,7 @@ var doSearch = exports.doSearch = function doSearch(rawQuery) {
       actions.push({
         type: ACTIONS.SEARCH_SUCCESS,
         data: {
-          query: query,
+          query: queryWithOptions,
           uris: uris
         }
       });
@@ -6392,7 +6566,7 @@ var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSugg
       return;
     }
 
-    fetch('https://lighthouse.lbry.io/autocomplete?s=' + searchValue).then(_handleFetch2.default).then(function (apiSuggestions) {
+    fetch(CONNECTION_STRING + 'autocomplete?s=' + searchValue).then(_handleFetch2.default).then(function (apiSuggestions) {
       dispatch({
         type: ACTIONS.UPDATE_SEARCH_SUGGESTIONS,
         data: {
@@ -6407,6 +6581,10 @@ var getSearchSuggestions = exports.getSearchSuggestions = function getSearchSugg
   };
 };
 
+var throttledSearchSuggestions = (0, _debounce2.default)(function (dispatch, query) {
+  dispatch(getSearchSuggestions(query));
+}, DEBOUNCED_SEARCH_SUGGESTION_MS);
+
 var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQuery(query /*: string*/, shouldSkipSuggestions /*: ?boolean*/) {
   return function (dispatch /*: Dispatch*/) {
     dispatch({
@@ -6416,7 +6594,7 @@ var doUpdateSearchQuery = exports.doUpdateSearchQuery = function doUpdateSearchQ
 
     // Don't fetch new suggestions if the user just added a space
     if (!query.endsWith(' ') || !shouldSkipSuggestions) {
-      dispatch(getSearchSuggestions(query));
+      throttledSearchSuggestions(dispatch, query);
     }
   };
 };
@@ -6437,8 +6615,58 @@ var doBlurSearchInput = exports.doBlurSearchInput = function doBlurSearchInput()
   };
 };
 
+var doUpdateSearchOptions = exports.doUpdateSearchOptions = function doUpdateSearchOptions(newOptions /*: SearchOptions*/) {
+  return function (dispatch /*: Dispatch*/, getState /*: GetState*/) {
+    var state = getState();
+    var searchQuery = (0, _search.selectSearchQuery)(state);
+
+    dispatch({
+      type: ACTIONS.UPDATE_SEARCH_OPTIONS,
+      data: newOptions
+    });
+
+    if (searchQuery) {
+      // After updating, perform a search with the new options
+      dispatch(doSearch(searchQuery));
+    }
+  };
+};
+
 /***/ }),
 /* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = debouce;
+// Returns a function, that, as long as it continues to be invoked, will not
+// be triggered. The function will be called after it stops being called for
+// N milliseconds. If `immediate` is passed, trigger the function on the
+// leading edge, instead of the trailing.
+function debouce(func, wait, immediate) {
+  var timeout = void 0;
+
+  return function () {
+    var context = this;
+    var args = arguments;
+    var later = function later() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
+/***/ }),
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6453,7 +6681,7 @@ function handleFetchResponse(response) {
 }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6536,7 +6764,7 @@ function doBlackListedOutpointsSubscribe() {
 }
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6693,7 +6921,8 @@ reducers[ACTIONS.FETCH_CHANNEL_CLAIMS_STARTED] = function (state, action) {
   fetchingChannelClaims[uri] = page;
 
   return Object.assign({}, state, {
-    fetchingChannelClaims: fetchingChannelClaims
+    fetchingChannelClaims: fetchingChannelClaims,
+    currentChannelPage: page
   });
 };
 
@@ -6730,7 +6959,8 @@ reducers[ACTIONS.FETCH_CHANNEL_CLAIMS_COMPLETED] = function (state, action) {
     claimsByChannel: claimsByChannel,
     byId: byId,
     fetchingChannelClaims: fetchingChannelClaims,
-    claimsByUri: claimsByUri
+    claimsByUri: claimsByUri,
+    currentChannelPage: page
   });
 };
 
@@ -6861,7 +7091,7 @@ function claimsReducer() {
 }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6919,7 +7149,7 @@ function costInfoReducer() {
 }
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6937,11 +7167,11 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _sort_options = __webpack_require__(38);
+var _sort_options = __webpack_require__(39);
 
 var SORT_OPTIONS = _interopRequireWildcard(_sort_options);
 
-var _pages = __webpack_require__(39);
+var _pages = __webpack_require__(40);
 
 var PAGES = _interopRequireWildcard(_pages);
 
@@ -7161,7 +7391,7 @@ function fileInfoReducer() {
 }
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7176,7 +7406,7 @@ var TITLE = exports.TITLE = 'title';
 var FILENAME = exports.FILENAME = 'filename';
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7208,7 +7438,7 @@ var HISTORY = exports.HISTORY = 'user_history';
 var WALLET = exports.WALLET = 'wallet';
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7227,7 +7457,7 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(41);
+var _reduxUtils = __webpack_require__(42);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7237,6 +7467,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*:: import type {
   NotificationState,
   DoToast,
+  DoError,
   DoNotification,
   DoEditNotification,
   DoDeleteNotification,
@@ -7295,7 +7526,7 @@ var notificationsReducer = (0, _reduxUtils.handleActions)((_handleActions = {}, 
   return _extends({}, state, {
     notifications: newNotifications
   });
-}), _defineProperty(_handleActions, ACTIONS.CREATE_ERROR, function (state /*: NotificationState*/, action /*: DoToast*/) {
+}), _defineProperty(_handleActions, ACTIONS.CREATE_ERROR, function (state /*: NotificationState*/, action /*: DoError*/) {
   var error = action.data;
   var newErrors = state.errors.slice();
   newErrors.push(error);
@@ -7315,7 +7546,7 @@ var notificationsReducer = (0, _reduxUtils.handleActions)((_handleActions = {}, 
 exports.notificationsReducer = notificationsReducer;
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7348,7 +7579,7 @@ var handleActions = exports.handleActions = function handleActions(actionMap, de
 };
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7359,66 +7590,38 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.searchReducer = undefined;
 
-var _handleActions;
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // @flow
-
+var _options, _handleActions;
 
 var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(41);
+var _reduxUtils = __webpack_require__(42);
+
+var _search = __webpack_require__(21);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } // @flow
 
-/*:: type SearchSuccess = {
-  type: ACTIONS.SEARCH_SUCCESS,
-  data: {
-    query: string,
-    uris: Array<string>,
-  },
-};*/
-/*:: type UpdateSearchQuery = {
-  type: ACTIONS.UPDATE_SEARCH_QUERY,
-  data: {
-    query: string,
-  },
-};*/
-/*:: type SearchSuggestion = {
-  value: string,
-  shorthand: string,
-  type: string,
-};*/
-/*:: type UpdateSearchSuggestions = {
-  type: ACTIONS.UPDATE_SEARCH_SUGGESTIONS,
-  data: {
-    query: string,
-    suggestions: Array<SearchSuggestion>,
-  },
-};*/
-/*:: type SearchState = {
-  isActive: boolean,
-  searchQuery: string,
-  suggestions: Array<SearchSuggestion>,
-  urisByQuery: {},
-};*/
-/*:: type HistoryNavigate = {
-  type: ACTIONS.HISTORY_NAVIGATE,
-  data: {
-    url: string,
-    index?: number,
-    scrollY?: number,
-  },
-};*/
+
+/*:: import type {
+  SearchState,
+  SearchSuccess,
+  UpdateSearchQuery,
+  UpdateSearchSuggestions,
+  HistoryNavigate,
+  UpdateSearchOptions,
+} from 'types/Search';*/
 
 
 var defaultState = {
   isActive: false, // does the user have any typed text in the search input
   focused: false, // is the search input focused
   searchQuery: '', // needs to be an empty string for input focusing
+  options: (_options = {}, _defineProperty(_options, _search.SEARCH_OPTIONS.RESULT_COUNT, 30), _defineProperty(_options, _search.SEARCH_OPTIONS.CLAIM_TYPE, _search.SEARCH_OPTIONS.INCLUDE_FILES_AND_CHANNELS), _defineProperty(_options, _search.SEARCH_OPTIONS.MEDIA_AUDIO, true), _defineProperty(_options, _search.SEARCH_OPTIONS.MEDIA_VIDEO, true), _defineProperty(_options, _search.SEARCH_OPTIONS.MEDIA_TEXT, true), _defineProperty(_options, _search.SEARCH_OPTIONS.MEDIA_IMAGE, true), _defineProperty(_options, _search.SEARCH_OPTIONS.MEDIA_APPLICATION, true), _options),
   suggestions: {},
   urisByQuery: {}
 };
@@ -7470,10 +7673,18 @@ var searchReducer = exports.searchReducer = (0, _reduxUtils.handleActions)((_han
   return _extends({}, state, {
     focused: false
   });
+}), _defineProperty(_handleActions, ACTIONS.UPDATE_SEARCH_OPTIONS, function (state /*: SearchState*/, action /*: UpdateSearchOptions*/) /*: SearchState*/ {
+  var oldOptions = state.options;
+
+  var newOptions = action.data;
+  var options = _extends({}, oldOptions, newOptions);
+  return _extends({}, state, {
+    options: options
+  });
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7508,7 +7719,7 @@ var buildDraftTransaction = function buildDraftTransaction() {
 /*:: type WalletState = {
   balance: any,
   blocks: any,
-  latestBlock: number,
+  latestBlock: ?number,
   transactions: any,
   fetchingTransactions: boolean,
   gettingNewAddress: boolean,
@@ -7816,7 +8027,7 @@ function walletReducer() {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7835,7 +8046,7 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(41);
+var _reduxUtils = __webpack_require__(42);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -7875,7 +8086,7 @@ var blacklistReducer = exports.blacklistReducer = (0, _reduxUtils.handleActions)
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7897,7 +8108,7 @@ var selectBlackListedOutpoints = exports.selectBlackListedOutpoints = (0, _resel
 });
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7943,7 +8154,7 @@ var selectError = exports.selectError = (0, _reselect.createSelector)(selectStat
 });
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7987,7 +8198,7 @@ var makeSelectFetchingCostInfoForUri = exports.makeSelectFetchingCostInfoForUri 
 };
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8003,7 +8214,7 @@ var COMPLETE = exports.COMPLETE = 'complete';
 var MANUAL = exports.MANUAL = 'manual';
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8949,7 +9160,7 @@ var _lbryio = __webpack_require__(3);
 
 var _lbryio2 = _interopRequireDefault(_lbryio);
 
-var _bluebird = __webpack_require__(19);
+var _bluebird = __webpack_require__(14);
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
@@ -9307,859 +9518,10 @@ function doUserInviteNew(email) {
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doFetchMySubscriptions = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doSetViewMode = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _claim = __webpack_require__(15);
-
-var _rewards = __webpack_require__(8);
-
-var _subscriptions = __webpack_require__(16);
-
-var _lbryRedux = __webpack_require__(4);
-
-var _action_types = __webpack_require__(2);
-
-var ACTIONS = _interopRequireWildcard(_action_types);
-
-var _subscriptions2 = __webpack_require__(17);
-
-var NOTIFICATION_TYPES = _interopRequireWildcard(_subscriptions2);
-
-var _lbryio = __webpack_require__(3);
-
-var _lbryio2 = _interopRequireDefault(_lbryio);
-
-var _rewards2 = __webpack_require__(11);
-
-var _rewards3 = _interopRequireDefault(_rewards2);
-
-var _bluebird = __webpack_require__(19);
-
-var _bluebird2 = _interopRequireDefault(_bluebird);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-// @flow
-/*:: import type { GetState } from 'types/redux';*/
-/*:: import type {
-  Dispatch as ReduxDispatch,
-  SubscriptionState,
-  Subscription,
-  SubscriptionNotificationType,
-  ViewMode,
-  UnreadSubscription,
-} from 'types/subscription';*/
-
-// import * as SETTINGS from 'constants/settings';
-// import { makeSelectClientSetting } from 'redux/selectors/settings';
-
-var CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
-var SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
-
-var doSetViewMode = exports.doSetViewMode = function doSetViewMode(viewMode /*: ViewMode*/) {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.SET_VIEW_MODE,
-      data: viewMode
-    });
-  };
-};
-
-var setSubscriptionLatest = exports.setSubscriptionLatest = function setSubscriptionLatest(subscription /*: Subscription*/, uri /*: string*/) {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.SET_SUBSCRIPTION_LATEST,
-      data: {
-        subscription: subscription,
-        uri: uri
-      }
-    });
-  };
-};
-
-// Populate a channels unread subscriptions or update the type
-var doUpdateUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = function doUpdateUnreadSubscriptions(channelUri /*: string*/, uris /*: ?Array<string>*/, type /*: ?SubscriptionNotificationType*/) {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state = getState();
-    var unreadByChannel = (0, _subscriptions.selectUnreadByChannel)(state);
-    var currentUnreadForChannel /*: UnreadSubscription*/ = unreadByChannel[channelUri];
-
-    var newUris /*: Array*/ = [];
-    var newType /*: string*/ = null;
-
-    if (!currentUnreadForChannel) {
-      newUris = uris;
-      newType = type;
-    } else {
-      if (uris) {
-        // If a channel currently has no unread uris, just add them all
-        if (!currentUnreadForChannel.uris || !currentUnreadForChannel.uris.length) {
-          newUris = uris;
-        } else {
-          // They already have unreads and now there are new ones
-          // Add the new ones to the beginning of the list
-          // Make sure there are no duplicates
-          var currentUnreadUris = currentUnreadForChannel.uris;
-          newUris = uris.filter(function (uri) {
-            return !currentUnreadUris.includes(uri);
-          }).concat(currentUnreadUris);
-        }
-      } else {
-        newUris = currentUnreadForChannel.uris;
-      }
-
-      newType = type || currentUnreadForChannel.type;
-    }
-
-    dispatch({
-      type: ACTIONS.UPDATE_SUBSCRIPTION_UNREADS,
-      data: {
-        channel: channelUri,
-        uris: newUris,
-        type: newType
-      }
-    });
-  };
-};
-
-// Remove multiple files (or all) from a channels unread subscriptions
-var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function doRemoveUnreadSubscriptions(channelUri /*: ?string*/, readUris /*: ?Array<string>*/) {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state = getState();
-    var unreadByChannel = (0, _subscriptions.selectUnreadByChannel)(state);
-
-    // If no channel is passed in, remove all unread subscriptions from all channels
-    if (!channelUri) {
-      return dispatch({
-        type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
-        data: { channel: null }
-      });
-    }
-
-    var currentChannelUnread = unreadByChannel[channelUri];
-    if (!currentChannelUnread || !currentChannelUnread.uris) {
-      // Channel passed in doesn't have any unreads
-      return null;
-    }
-
-    // For each uri passed in, remove it from the list of unread uris
-    // If no uris are passed in, remove them all
-    var newUris = void 0;
-    if (readUris) {
-      var urisToRemoveMap = readUris.reduce(function (acc, val) {
-        return _extends({}, acc, _defineProperty({}, val, true));
-      }, {});
-
-      var filteredUris = currentChannelUnread.uris.filter(function (uri) {
-        return !urisToRemoveMap[uri];
-      });
-      newUris = filteredUris.length ? filteredUris : null;
-    } else {
-      newUris = null;
-    }
-
-    return dispatch({
-      type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
-      data: {
-        channel: channelUri,
-        uris: newUris
-      }
-    });
-  };
-};
-
-// Remove a single file from a channels unread subscriptions
-var doRemoveUnreadSubscription = exports.doRemoveUnreadSubscription = function doRemoveUnreadSubscription(channelUri /*: string*/, readUri /*: string*/) {
-  return function (dispatch /*: ReduxDispatch*/) {
-    dispatch(doRemoveUnreadSubscriptions(channelUri, [readUri]));
-  };
-};
-
-var doCheckSubscription = exports.doCheckSubscription = function doCheckSubscription(subscriptionUri /*: string*/, shouldNotify /*:: ?: boolean*/) {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    // no dispatching FETCH_CHANNEL_CLAIMS_STARTED; causes loading issues on <SubscriptionsPage>
-
-    var state = getState();
-    var shouldAutoDownload = false; // makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
-    var savedSubscription = state.subscriptions.subscriptions.find(function (sub) {
-      return sub.uri === subscriptionUri;
-    });
-
-    if (!savedSubscription) {
-      throw Error('Trying to find new content for ' + subscriptionUri + ' but it doesn\'t exist in your subscriptions');
-    }
-
-    // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
-    _lbryRedux.Lbry.claim_list_by_channel({ uri: subscriptionUri, page: 1, page_size: _claim.PAGE_SIZE }).then(function (claimListByChannel) {
-      var claimResult = claimListByChannel[subscriptionUri] || {};
-      var claimsInChannel = claimResult.claims_in_channel;
-
-      // may happen if subscribed to an abandoned channel or an empty channel
-
-      if (!claimsInChannel || !claimsInChannel.length) {
-        return;
-      }
-
-      // Determine if the latest subscription currently saved is actually the latest subscription
-      var latestIndex = claimsInChannel.findIndex(function (claim) {
-        return claim.name + '#' + claim.claim_id === savedSubscription.latest;
-      });
-
-      // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
-      var latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex;
-
-      // If latest is 0, nothing has changed
-      // Do not download/notify about new content, it would download/notify 10 claims per channel
-      if (latestIndex !== 0 && savedSubscription.latest) {
-        var downloadCount = 0;
-
-        var newUnread = [];
-        claimsInChannel.slice(0, latestIndexToNotify).forEach(function (claim) {
-          var uri = (0, _lbryRedux.buildURI)({ contentName: claim.name, claimId: claim.claim_id }, true);
-          var shouldDownload = shouldAutoDownload && Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.stream.metadata.fee);
-
-          // Add the new content to the list of "un-read" subscriptions
-          if (shouldNotify) {
-            newUnread.push(uri);
-          }
-
-          if (shouldDownload) {
-            downloadCount += 1;
-            dispatch((0, _lbryRedux.doPurchaseUri)(uri, { cost: 0 }, true));
-          }
-        });
-
-        dispatch(doUpdateUnreadSubscriptions(subscriptionUri, newUnread, downloadCount > 0 ? NOTIFICATION_TYPES.DOWNLOADING : NOTIFICATION_TYPES.NOTIFY_ONLY));
-      }
-
-      // Set the latest piece of content for a channel
-      // This allows the app to know if there has been new content since it was last set
-      dispatch(setSubscriptionLatest({
-        channelName: claimsInChannel[0].channel_name,
-        uri: (0, _lbryRedux.buildURI)({
-          channelName: claimsInChannel[0].channel_name,
-          claimId: claimsInChannel[0].claim_id
-        }, false)
-      }, (0, _lbryRedux.buildURI)({ contentName: claimsInChannel[0].name, claimId: claimsInChannel[0].claim_id }, false)));
-
-      // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
-      // means it will delete a non-existant fetchingChannelClaims[uri]
-      dispatch({
-        type: ACTIONS.FETCH_CHANNEL_CLAIMS_COMPLETED,
-        data: {
-          uri: subscriptionUri,
-          claims: claimsInChannel || [],
-          page: 1
-        }
-      });
-    });
-  };
-};
-
-var doChannelSubscribe = exports.doChannelSubscribe = function doChannelSubscribe(subscription /*: Subscription*/) {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var _getState = getState(),
-        daemonSettings = _getState.settings.daemonSettings;
-
-    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
-
-    var subscriptionUri = subscription.uri;
-    if (!subscriptionUri.startsWith('lbry://')) {
-      throw Error('Subscription uris must inclue the "lbry://" prefix.\nTried to subscribe to ' + subscriptionUri);
-    }
-
-    dispatch({
-      type: ACTIONS.CHANNEL_SUBSCRIBE,
-      data: subscription
-    });
-
-    // if the user isn't sharing data, keep the subscriptions entirely in the app
-    if (isSharingData) {
-      var _parseURI = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI.claimId;
-      // They are sharing data, we can store their subscriptions in our internal database
-
-
-      _lbryio2.default.call('subscription', 'new', {
-        channel_name: subscription.channelName,
-        claim_id: claimId
-      });
-
-      dispatch((0, _rewards.doClaimRewardType)(_rewards3.default.TYPE_SUBSCRIPTION, { failSilently: true }));
-    }
-
-    dispatch(doCheckSubscription(subscription.uri, true));
-  };
-};
-
-var doChannelUnsubscribe = exports.doChannelUnsubscribe = function doChannelUnsubscribe(subscription /*: Subscription*/) {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var _getState2 = getState(),
-        daemonSettings = _getState2.settings.daemonSettings;
-
-    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
-
-    dispatch({
-      type: ACTIONS.CHANNEL_UNSUBSCRIBE,
-      data: subscription
-    });
-
-    if (isSharingData) {
-      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
-          claimId = _parseURI2.claimId;
-
-      _lbryio2.default.call('subscription', 'delete', {
-        claim_id: claimId
-      });
-    }
-  };
-};
-
-var doCheckSubscriptions = exports.doCheckSubscriptions = function doCheckSubscriptions() {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state = getState();
-    var subscriptions = (0, _subscriptions.selectSubscriptions)(state);
-
-    subscriptions.forEach(function (sub /*: Subscription*/) {
-      dispatch(doCheckSubscription(sub.uri, true));
-    });
-  };
-};
-
-var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
-  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
-    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
-    var reduxSubscriptions = state.subscriptions.subscriptions;
-
-    // default to true if daemonSettings not found
-
-    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
-
-    if (!isSharingData && isSharingData !== undefined) {
-      // They aren't sharing their data, subscriptions will be handled by persisted redux state
-      return;
-    }
-
-    // most of this logic comes from scenarios where the db isn't synced with redux
-    // this will happen if the user stops sharing data
-    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
-
-    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
-      var storedSubscriptions = dbSubscriptions || [];
-
-      // User has no subscriptions in db or redux
-      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
-        return [];
-      }
-
-      // There is some mismatch between redux state and db state
-      // If something is in the db, but not in redux, add it to redux
-      // If something is in redux, but not in the db, add it to the db
-      if (storedSubscriptions.length !== reduxSubscriptions.length) {
-        var dbSubMap = {};
-        var reduxSubMap = {};
-        var subsNotInDB = [];
-        var subscriptionsToReturn = reduxSubscriptions.slice();
-
-        storedSubscriptions.forEach(function (sub) {
-          dbSubMap[sub.claim_id] = 1;
-        });
-
-        reduxSubscriptions.forEach(function (sub) {
-          var _parseURI3 = (0, _lbryRedux.parseURI)(sub.uri),
-              claimId = _parseURI3.claimId;
-
-          reduxSubMap[claimId] = 1;
-
-          if (!dbSubMap[claimId]) {
-            subsNotInDB.push({
-              claim_id: claimId,
-              channel_name: sub.channelName
-            });
-          }
-        });
-
-        storedSubscriptions.forEach(function (sub) {
-          if (!reduxSubMap[sub.claim_id]) {
-            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
-            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
-          }
-        });
-
-        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
-          return _lbryio2.default.call('subscription', 'new', payload);
-        })).then(function () {
-          return subscriptionsToReturn;
-        }).catch(function () {
-          return (
-            // let it fail, we will try again when the navigate to the subscriptions page
-            subscriptionsToReturn
-          );
-        });
-      }
-
-      // DB is already synced, just return the subscriptions in redux
-      return reduxSubscriptions;
-    }).then(function (subscriptions /*: Array<Subscription>*/) {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
-        data: subscriptions
-      });
-
-      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
-        var uri = _ref.uri;
-        return uri;
-      })));
-      dispatch(doCheckSubscriptions());
-    }).catch(function () {
-      dispatch({
-        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
-      });
-    });
-  };
-};
-
-var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doCheckSubscriptionsInit() {
-  return function (dispatch /*: ReduxDispatch*/) {
-    // doCheckSubscriptionsInit is called by doDaemonReady
-    // setTimeout below is a hack to ensure redux is hydrated when subscriptions are checked
-    // this will be replaced with <PersistGate> which reqiures a package upgrade
-    setTimeout(function () {
-      return dispatch(doFetchMySubscriptions());
-    }, 5000);
-    var checkSubscriptionsTimer = setInterval(function () {
-      return dispatch(doCheckSubscriptions());
-    }, CHECK_SUBSCRIPTIONS_INTERVAL);
-    dispatch({
-      type: ACTIONS.CHECK_SUBSCRIPTIONS_SUBSCRIBE,
-      data: { checkSubscriptionsTimer: checkSubscriptionsTimer }
-    });
-    setInterval(function () {
-      return dispatch(doCheckSubscriptions());
-    }, CHECK_SUBSCRIPTIONS_INTERVAL);
-  };
-};
-
-var doFetchRecommendedSubscriptions = exports.doFetchRecommendedSubscriptions = function doFetchRecommendedSubscriptions() {
-  return function (dispatch /*: ReduxDispatch*/) {
-    dispatch({
-      type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_START
-    });
-
-    return _lbryio2.default.call('subscription', 'suggest').then(function (suggested) {
-      return dispatch({
-        type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_SUCCESS,
-        data: suggested
-      });
-    }).catch(function (error) {
-      return dispatch({
-        type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_FAIL,
-        error: error
-      });
-    });
-  };
-};
-
-var doCompleteFirstRun = exports.doCompleteFirstRun = function doCompleteFirstRun() {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.SUBSCRIPTION_FIRST_RUN_COMPLETED
-    });
-  };
-};
-
-var doShowSuggestedSubs = exports.doShowSuggestedSubs = function doShowSuggestedSubs() {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.VIEW_SUGGESTED_SUBSCRIPTIONS
-    });
-  };
-};
-
-var doChannelSubscriptionEnableNotifications = exports.doChannelSubscriptionEnableNotifications = function doChannelSubscriptionEnableNotifications(channelName /*: string*/) {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS,
-      data: channelName
-    });
-  };
-};
-
-var doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionDisableNotifications = function doChannelSubscriptionDisableNotifications(channelName /*: string*/) {
-  return function (dispatch /*: ReduxDispatch*/) {
-    return dispatch({
-      type: ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS,
-      data: channelName
-    });
-  };
-};
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var MINIMUM_PUBLISH_BID = exports.MINIMUM_PUBLISH_BID = 0.00000001;
-
-var CHANNEL_ANONYMOUS = exports.CHANNEL_ANONYMOUS = 'anonymous';
-var CHANNEL_NEW = exports.CHANNEL_NEW = 'new';
-var PAGE_SIZE = exports.PAGE_SIZE = 20;
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.selectEnabledChannelNotifications = exports.makeSelectIsNew = exports.makeSelectIsSubscribed = exports.selectSubscriptionClaims = exports.makeSelectUnreadByChannel = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _subscriptions = __webpack_require__(17);
-
-var _reselect = __webpack_require__(10);
-
-var _lbryRedux = __webpack_require__(4);
-
-var _swapJson = __webpack_require__(18);
-
-// Returns the entire subscriptions state
-var selectState = function selectState(state) {
-  return state.subscriptions || {};
-};
-
-// Returns the list of channel uris a user is subscribed to
-var selectSubscriptions = exports.selectSubscriptions = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.subscriptions;
-});
-
-// Fetching list of users subscriptions
-var selectIsFetchingSubscriptions = exports.selectIsFetchingSubscriptions = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.loading;
-});
-
-// The current view mode on the subscriptions page
-var selectViewMode = exports.selectViewMode = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.viewMode;
-});
-
-// Suggested subscriptions from internal apis
-var selectSuggested = exports.selectSuggested = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.suggested;
-});
-var selectIsFetchingSuggested = exports.selectIsFetchingSuggested = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.loadingSuggested;
-});
-var selectSuggestedChannels = exports.selectSuggestedChannels = (0, _reselect.createSelector)(selectSubscriptions, selectSuggested, function (userSubscriptions, suggested) {
-  if (!suggested) {
-    return null;
-  }
-
-  // Swap the key/value because we will use the uri for everything, this just makes it easier
-  // suggested is returned from the api with the form:
-  // {
-  //   featured: { "Channel label": uri, ... },
-  //   top_subscribed: { "@channel": uri, ... }
-  //   top_bid: { "@channel": uri, ... }
-  // }
-  // To properly compare the suggested subscriptions from our current subscribed channels
-  // We only care about the uri, not the label
-
-  // We also only care about top_subscribed and featured
-  // top_bid could just be porn or a channel with no content
-  var topSubscribedSuggestions = (0, _swapJson.swapKeyAndValue)(suggested[_subscriptions.SUGGESTED_TOP_SUBSCRIBED]);
-  var featuredSuggestions = (0, _swapJson.swapKeyAndValue)(suggested[_subscriptions.SUGGESTED_FEATURED]);
-
-  // Make sure there are no duplicates
-  // If a uri isn't already in the suggested object, add it
-  var suggestedChannels = _extends({}, topSubscribedSuggestions);
-
-  Object.keys(featuredSuggestions).forEach(function (uri) {
-    if (!suggestedChannels[uri]) {
-      var channelLabel = featuredSuggestions[uri];
-      suggestedChannels[uri] = channelLabel;
-    }
-  });
-
-  userSubscriptions.forEach(function (_ref) {
-    var uri = _ref.uri;
-
-    // Note to passer bys:
-    // Maybe we should just remove the `lbry://` prefix from subscription uris
-    // Most places don't store them like that
-    var subscribedUri = uri.slice('lbry://'.length);
-
-    if (suggestedChannels[subscribedUri]) {
-      delete suggestedChannels[subscribedUri];
-    }
-  });
-
-  return Object.keys(suggestedChannels).map(function (uri) {
-    return {
-      uri: uri,
-      label: suggestedChannels[uri]
-    };
-  }).slice(0, 5);
-});
-
-var selectFirstRunCompleted = exports.selectFirstRunCompleted = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.firstRunCompleted;
-});
-var selectShowSuggestedSubs = exports.selectShowSuggestedSubs = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.showSuggestedSubs;
-});
-
-// Fetching any claims that are a part of a users subscriptions
-var selectSubscriptionsBeingFetched = exports.selectSubscriptionsBeingFetched = (0, _reselect.createSelector)(selectSubscriptions, _lbryRedux.selectAllFetchingChannelClaims, function (subscriptions, fetchingChannelClaims) {
-  var fetchingSubscriptionMap = {};
-  subscriptions.forEach(function (sub) {
-    var isFetching = fetchingChannelClaims && fetchingChannelClaims[sub.uri];
-    if (isFetching) {
-      fetchingSubscriptionMap[sub.uri] = true;
-    }
-  });
-
-  return fetchingSubscriptionMap;
-});
-
-var selectUnreadByChannel = exports.selectUnreadByChannel = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.unread;
-});
-
-// Returns the current total of unread subscriptions
-var selectUnreadAmount = exports.selectUnreadAmount = (0, _reselect.createSelector)(selectUnreadByChannel, function (unreadByChannel) {
-  var unreadChannels = Object.keys(unreadByChannel);
-  var badges = 0;
-
-  if (!unreadChannels.length) {
-    return badges;
-  }
-
-  unreadChannels.forEach(function (channel) {
-    badges += unreadByChannel[channel].uris.length;
-  });
-
-  return badges;
-});
-
-// Returns the uris with channels as an array with the channel with the newest content first
-// If you just want the `unread` state, use selectUnread
-var selectUnreadSubscriptions = exports.selectUnreadSubscriptions = (0, _reselect.createSelector)(selectUnreadAmount, selectUnreadByChannel, _lbryRedux.selectClaimsByUri, function (unreadAmount, unreadByChannel, claimsByUri) {
-  // determine which channel has the newest content
-  var unreadList = [];
-  if (!unreadAmount) {
-    return unreadList;
-  }
-
-  var channelUriList = Object.keys(unreadByChannel);
-
-  // There is only one channel with unread notifications
-  if (unreadAmount === 1) {
-    channelUriList.forEach(function (channel) {
-      var unreadChannel = {
-        channel: channel,
-        uris: unreadByChannel[channel].uris
-      };
-      unreadList.push(unreadChannel);
-    });
-
-    return unreadList;
-  }
-
-  channelUriList.sort(function (channel1, channel2) {
-    var latestUriFromChannel1 = unreadByChannel[channel1].uris[0];
-    var latestClaimFromChannel1 = claimsByUri[latestUriFromChannel1] || {};
-    var latestUriFromChannel2 = unreadByChannel[channel2].uris[0];
-    var latestClaimFromChannel2 = claimsByUri[latestUriFromChannel2] || {};
-
-    var latestHeightFromChannel1 = latestClaimFromChannel1.height || 0;
-    var latestHeightFromChannel2 = latestClaimFromChannel2.height || 0;
-
-    if (latestHeightFromChannel1 !== latestHeightFromChannel2) {
-      return latestHeightFromChannel2 - latestHeightFromChannel1;
-    }
-
-    return 0;
-  }).forEach(function (channel) {
-    var unreadSubscription = unreadByChannel[channel];
-    var unreadChannel = {
-      channel: channel,
-      uris: unreadSubscription.uris
-    };
-
-    unreadList.push(unreadChannel);
-  });
-
-  return unreadList;
-});
-
-// Returns all unread subscriptions for a uri passed in
-var makeSelectUnreadByChannel = exports.makeSelectUnreadByChannel = function makeSelectUnreadByChannel(uri) {
-  return (0, _reselect.createSelector)(selectUnreadByChannel, function (unread) {
-    return unread[uri];
-  });
-};
-
-// Returns the first page of claims for every channel a user is subscribed to
-var selectSubscriptionClaims = exports.selectSubscriptionClaims = (0, _reselect.createSelector)(_lbryRedux.selectAllClaimsByChannel, _lbryRedux.selectClaimsById, selectSubscriptions, selectUnreadByChannel, function (channelIds, allClaims, savedSubscriptions, unreadByChannel) {
-  // no claims loaded yet
-  if (!Object.keys(channelIds).length) {
-    return [];
-  }
-
-  var fetchedSubscriptions = [];
-
-  savedSubscriptions.forEach(function (subscription) {
-    var channelClaims = [];
-
-    // if subscribed channel has content
-    if (channelIds[subscription.uri] && channelIds[subscription.uri]['1']) {
-      // This will need to be more robust, we will want to be able to load more than the first page
-
-      // Strip out any ids that will be shown as notifications
-      var pageOneChannelIds = channelIds[subscription.uri]['1'];
-
-      // we have the channel ids and the corresponding claims
-      // loop over the list of ids and grab the claim
-      pageOneChannelIds.forEach(function (id) {
-        var grabbedClaim = allClaims[id];
-
-        if (unreadByChannel[subscription.uri] && unreadByChannel[subscription.uri].uris.some(function (uri) {
-          return uri.includes(id);
-        })) {
-          grabbedClaim.isNew = true;
-        }
-
-        channelClaims = channelClaims.concat([grabbedClaim]);
-      });
-    }
-
-    fetchedSubscriptions = fetchedSubscriptions.concat(channelClaims);
-  });
-
-  return fetchedSubscriptions;
-});
-
-// Returns true if a user is subscribed to the channel associated with the uri passed in
-// Accepts content or channel uris
-var makeSelectIsSubscribed = exports.makeSelectIsSubscribed = function makeSelectIsSubscribed(uri) {
-  return (0, _reselect.createSelector)(selectSubscriptions, (0, _lbryRedux.makeSelectChannelForClaimUri)(uri, true), function (subscriptions, channelUri) {
-    if (channelUri) {
-      return subscriptions.some(function (sub) {
-        return sub.uri === channelUri;
-      });
-    }
-
-    // If we couldn't get a channel uri from the claim uri, the uri passed in might be a channel already
-
-    var _parseURI = (0, _lbryRedux.parseURI)(uri),
-        isChannel = _parseURI.isChannel;
-
-    if (isChannel) {
-      var uriWithPrefix = uri.startsWith('lbry://') ? uri : 'lbry://' + uri;
-      return subscriptions.some(function (sub) {
-        return sub.uri === uriWithPrefix;
-      });
-    }
-
-    return false;
-  });
-};
-
-var makeSelectIsNew = exports.makeSelectIsNew = function makeSelectIsNew(uri) {
-  return (0, _reselect.createSelector)(makeSelectIsSubscribed(uri), (0, _lbryRedux.makeSelectChannelForClaimUri)(uri), selectUnreadByChannel, function (isSubscribed, channel, unreadByChannel) {
-    if (!isSubscribed) {
-      return false;
-    }
-
-    var unreadForChannel = unreadByChannel['lbry://' + channel];
-    if (unreadForChannel) {
-      return unreadForChannel.uris.includes(uri);
-    }
-
-    return false;
-    // If they are subscribed, check to see if this uri is in the list of unreads
-  });
-};
-
-var selectEnabledChannelNotifications = exports.selectEnabledChannelNotifications = (0, _reselect.createSelector)(selectState, function (state) {
-  return state.enabledChannelNotifications;
-});
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var VIEW_ALL = exports.VIEW_ALL = 'view_all';
-var VIEW_LATEST_FIRST = exports.VIEW_LATEST_FIRST = 'view_latest_first';
-
-// Types for unreads
-var DOWNLOADING = exports.DOWNLOADING = 'DOWNLOADING';
-var DOWNLOADED = exports.DOWNLOADED = 'DOWNLOADED';
-var NOTIFY_ONLY = exports.NOTIFY_ONLY = 'NOTIFY_ONLY;';
-
-// Suggested types
-var SUGGESTED_TOP_BID = exports.SUGGESTED_TOP_BID = 'top_bid';
-var SUGGESTED_TOP_SUBSCRIBED = exports.SUGGESTED_TOP_SUBSCRIBED = 'top_subscribed';
-var SUGGESTED_FEATURED = exports.SUGGESTED_FEATURED = 'featured';
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.swapKeyAndValue = swapKeyAndValue;
-function swapKeyAndValue(dict) {
-  var ret = {};
-  // eslint-disable-next-line no-restricted-syntax
-  for (var key in dict) {
-    if (dict.hasOwnProperty(key)) {
-      ret[dict[key]] = key;
-    }
-  }
-  return ret;
-}
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(process, global, setImmediate) {/* @preserve
  * The MIT License (MIT)
  * 
- * Copyright (c) 2013-2015 Petka Antonov
+ * Copyright (c) 2013-2017 Petka Antonov
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -10181,7 +9543,7 @@ function swapKeyAndValue(dict) {
  * 
  */
 /**
- * bluebird build version 3.4.7
+ * bluebird build version 3.5.1
  * Features enabled: core, race, call_get, generators, map, nodeify, promisify, props, reduce, settle, some, using, timers, filter, any, each
 */
 !function(e){if(true)module.exports=e();else { var f; }}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -10805,7 +10167,10 @@ Promise.prototype.suppressUnhandledRejections = function() {
 Promise.prototype._ensurePossibleRejectionHandled = function () {
     if ((this._bitField & 524288) !== 0) return;
     this._setRejectionIsUnhandled();
-    async.invokeLater(this._notifyUnhandledRejection, this, undefined);
+    var self = this;
+    setTimeout(function() {
+        self._notifyUnhandledRejection();
+    }, 1);
 };
 
 Promise.prototype._notifyUnhandledRejectionIsHandled = function () {
@@ -11978,10 +11343,11 @@ Promise.filter = function (promises, fn, options) {
 
 },{}],15:[function(_dereq_,module,exports){
 "use strict";
-module.exports = function(Promise, tryConvertToPromise) {
+module.exports = function(Promise, tryConvertToPromise, NEXT_FILTER) {
 var util = _dereq_("./util");
 var CancellationError = Promise.CancellationError;
 var errorObj = util.errorObj;
+var catchFilter = _dereq_("./catch_filter")(NEXT_FILTER);
 
 function PassThroughHandlerContext(promise, type, handler) {
     this.promise = promise;
@@ -12033,7 +11399,9 @@ function finallyHandler(reasonOrValue) {
         var ret = this.isFinallyHandler()
             ? handler.call(promise._boundValue())
             : handler.call(promise._boundValue(), reasonOrValue);
-        if (ret !== undefined) {
+        if (ret === NEXT_FILTER) {
+            return ret;
+        } else if (ret !== undefined) {
             promise._setReturnedNonUndefined();
             var maybePromise = tryConvertToPromise(ret, promise);
             if (maybePromise instanceof Promise) {
@@ -12082,14 +11450,46 @@ Promise.prototype["finally"] = function (handler) {
                              finallyHandler);
 };
 
+
 Promise.prototype.tap = function (handler) {
     return this._passThrough(handler, 1, finallyHandler);
+};
+
+Promise.prototype.tapCatch = function (handlerOrPredicate) {
+    var len = arguments.length;
+    if(len === 1) {
+        return this._passThrough(handlerOrPredicate,
+                                 1,
+                                 undefined,
+                                 finallyHandler);
+    } else {
+         var catchInstances = new Array(len - 1),
+            j = 0, i;
+        for (i = 0; i < len - 1; ++i) {
+            var item = arguments[i];
+            if (util.isObject(item)) {
+                catchInstances[j++] = item;
+            } else {
+                return Promise.reject(new TypeError(
+                    "tapCatch statement predicate: "
+                    + "expecting an object but got " + util.classString(item)
+                ));
+            }
+        }
+        catchInstances.length = j;
+        var handler = arguments[i];
+        return this._passThrough(catchFilter(catchInstances, handler, this),
+                                 1,
+                                 undefined,
+                                 finallyHandler);
+    }
+
 };
 
 return PassThroughHandlerContext;
 };
 
-},{"./util":36}],16:[function(_dereq_,module,exports){
+},{"./catch_filter":7,"./util":36}],16:[function(_dereq_,module,exports){
 "use strict";
 module.exports = function(Promise,
                           apiRejection,
@@ -12249,7 +11649,7 @@ PromiseSpawn.prototype._continue = function (result) {
             if (maybePromise === null) {
                 this._promiseRejected(
                     new TypeError(
-                        "A value %s was yielded that could not be treated as a promise\u000a\u000a    See http://goo.gl/MqrFmX\u000a\u000a".replace("%s", value) +
+                        "A value %s was yielded that could not be treated as a promise\u000a\u000a    See http://goo.gl/MqrFmX\u000a\u000a".replace("%s", String(value)) +
                         "From coroutine:\u000a" +
                         this._stack.split("\n").slice(1, -7).join("\n")
                     )
@@ -12737,30 +12137,31 @@ var createContext = Context.create;
 var debug = _dereq_("./debuggability")(Promise, Context);
 var CapturedTrace = debug.CapturedTrace;
 var PassThroughHandlerContext =
-    _dereq_("./finally")(Promise, tryConvertToPromise);
+    _dereq_("./finally")(Promise, tryConvertToPromise, NEXT_FILTER);
 var catchFilter = _dereq_("./catch_filter")(NEXT_FILTER);
 var nodebackForPromise = _dereq_("./nodeback");
 var errorObj = util.errorObj;
 var tryCatch = util.tryCatch;
 function check(self, executor) {
+    if (self == null || self.constructor !== Promise) {
+        throw new TypeError("the promise constructor cannot be invoked directly\u000a\u000a    See http://goo.gl/MqrFmX\u000a");
+    }
     if (typeof executor !== "function") {
         throw new TypeError("expecting a function but got " + util.classString(executor));
     }
-    if (self.constructor !== Promise) {
-        throw new TypeError("the promise constructor cannot be invoked directly\u000a\u000a    See http://goo.gl/MqrFmX\u000a");
-    }
+
 }
 
 function Promise(executor) {
+    if (executor !== INTERNAL) {
+        check(this, executor);
+    }
     this._bitField = 0;
     this._fulfillmentHandler0 = undefined;
     this._rejectionHandler0 = undefined;
     this._promise0 = undefined;
     this._receiver0 = undefined;
-    if (executor !== INTERNAL) {
-        check(this, executor);
-        this._resolveFromExecutor(executor);
-    }
+    this._resolveFromExecutor(executor);
     this._promiseCreated();
     this._fireEvent("promiseCreated", this);
 }
@@ -12779,8 +12180,8 @@ Promise.prototype.caught = Promise.prototype["catch"] = function (fn) {
             if (util.isObject(item)) {
                 catchInstances[j++] = item;
             } else {
-                return apiRejection("expecting an object but got " +
-                    "A catch statement predicate " + util.classString(item));
+                return apiRejection("Catch statement predicate: " +
+                    "expecting an object but got " + util.classString(item));
             }
         }
         catchInstances.length = j;
@@ -13159,6 +12560,7 @@ function(reason, synchronous, ignoreNonErrorWarnings) {
 };
 
 Promise.prototype._resolveFromExecutor = function (executor) {
+    if (executor === INTERNAL) return;
     var promise = this;
     this._captureStackTrace();
     this._pushContext();
@@ -13416,7 +12818,7 @@ _dereq_("./synchronous_inspection")(Promise);
 _dereq_("./join")(
     Promise, PromiseArray, tryConvertToPromise, INTERNAL, async, getDomain);
 Promise.Promise = Promise;
-Promise.version = "3.4.7";
+Promise.version = "3.5.1";
 _dereq_('./map.js')(Promise, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug);
 _dereq_('./call_get.js')(Promise);
 _dereq_('./using.js')(Promise, apiRejection, tryConvertToPromise, createContext, INTERNAL, debug);
@@ -13468,6 +12870,7 @@ function toResolutionValue(val) {
     switch(val) {
     case -2: return [];
     case -3: return {};
+    case -6: return new Map();
     }
 }
 
@@ -13897,7 +13300,7 @@ function PropertiesPromiseArray(obj) {
     }
     this.constructor$(entries);
     this._isMap = isMap;
-    this._init$(undefined, -3);
+    this._init$(undefined, isMap ? -6 : -3);
 }
 util.inherits(PropertiesPromiseArray, PromiseArray);
 
@@ -14296,11 +13699,11 @@ if (util.isNode && typeof MutationObserver === "undefined") {
 
         var scheduleToggle = function() {
             if (toggleScheduled) return;
-                toggleScheduled = true;
-                div2.classList.toggle("foo");
-            };
+            toggleScheduled = true;
+            div2.classList.toggle("foo");
+        };
 
-            return function schedule(fn) {
+        return function schedule(fn) {
             var o = new MutationObserver(function() {
                 o.disconnect();
                 fn();
@@ -15259,10 +14662,11 @@ function safeToString(obj) {
 }
 
 function isError(obj) {
-    return obj !== null &&
+    return obj instanceof Error ||
+        (obj !== null &&
            typeof obj === "object" &&
            typeof obj.message === "string" &&
-           typeof obj.name === "string";
+           typeof obj.name === "string");
 }
 
 function markAsOriginatingFromRejection(e) {
@@ -15416,10 +14820,10 @@ module.exports = ret;
 
 },{"./es5":13}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20), __webpack_require__(21), __webpack_require__(22).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15), __webpack_require__(16), __webpack_require__(17).setImmediate))
 
 /***/ }),
-/* 20 */
+/* 15 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -15609,7 +15013,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 21 */
+/* 16 */
 /***/ (function(module, exports) {
 
 var g;
@@ -15635,7 +15039,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 22 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -15691,7 +15095,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(23);
+__webpack_require__(18);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -15702,10 +15106,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(16)))
 
 /***/ }),
-/* 23 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -15895,7 +15299,856 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(21), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(16), __webpack_require__(15)))
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doShowSuggestedSubs = exports.doCompleteFirstRun = exports.doFetchRecommendedSubscriptions = exports.doCheckSubscriptionsInit = exports.doFetchMySubscriptions = exports.doCheckSubscriptions = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doCheckSubscription = exports.doRemoveUnreadSubscription = exports.doRemoveUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = exports.setSubscriptionLatest = exports.doSetViewMode = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _claim = __webpack_require__(20);
+
+var _rewards = __webpack_require__(8);
+
+var _subscriptions = __webpack_require__(21);
+
+var _lbryRedux = __webpack_require__(4);
+
+var _action_types = __webpack_require__(2);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _subscriptions2 = __webpack_require__(22);
+
+var NOTIFICATION_TYPES = _interopRequireWildcard(_subscriptions2);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+var _rewards2 = __webpack_require__(11);
+
+var _rewards3 = _interopRequireDefault(_rewards2);
+
+var _bluebird = __webpack_require__(14);
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+// @flow
+/*:: import type { GetState } from 'types/redux';*/
+/*:: import type {
+  Dispatch as ReduxDispatch,
+  SubscriptionState,
+  Subscription,
+  SubscriptionNotificationType,
+  ViewMode,
+  UnreadSubscription,
+} from 'types/subscription';*/
+
+// import * as SETTINGS from 'constants/settings';
+// import { makeSelectClientSetting } from 'redux/selectors/settings';
+
+var CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
+var SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
+
+var doSetViewMode = exports.doSetViewMode = function doSetViewMode(viewMode /*: ViewMode*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.SET_VIEW_MODE,
+      data: viewMode
+    });
+  };
+};
+
+var setSubscriptionLatest = exports.setSubscriptionLatest = function setSubscriptionLatest(subscription /*: Subscription*/, uri /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.SET_SUBSCRIPTION_LATEST,
+      data: {
+        subscription: subscription,
+        uri: uri
+      }
+    });
+  };
+};
+
+// Populate a channels unread subscriptions or update the type
+var doUpdateUnreadSubscriptions = exports.doUpdateUnreadSubscriptions = function doUpdateUnreadSubscriptions(channelUri /*: string*/, uris /*: ?Array<string>*/, type /*: ?SubscriptionNotificationType*/) {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state = getState();
+    var unreadByChannel = (0, _subscriptions.selectUnreadByChannel)(state);
+    var currentUnreadForChannel /*: UnreadSubscription*/ = unreadByChannel[channelUri];
+
+    var newUris /*: Array*/ = [];
+    var newType /*: string*/ = null;
+
+    if (!currentUnreadForChannel) {
+      newUris = uris;
+      newType = type;
+    } else {
+      if (uris) {
+        // If a channel currently has no unread uris, just add them all
+        if (!currentUnreadForChannel.uris || !currentUnreadForChannel.uris.length) {
+          newUris = uris;
+        } else {
+          // They already have unreads and now there are new ones
+          // Add the new ones to the beginning of the list
+          // Make sure there are no duplicates
+          var currentUnreadUris = currentUnreadForChannel.uris;
+          newUris = uris.filter(function (uri) {
+            return !currentUnreadUris.includes(uri);
+          }).concat(currentUnreadUris);
+        }
+      } else {
+        newUris = currentUnreadForChannel.uris;
+      }
+
+      newType = type || currentUnreadForChannel.type;
+    }
+
+    dispatch({
+      type: ACTIONS.UPDATE_SUBSCRIPTION_UNREADS,
+      data: {
+        channel: channelUri,
+        uris: newUris,
+        type: newType
+      }
+    });
+  };
+};
+
+// Remove multiple files (or all) from a channels unread subscriptions
+var doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscriptions = function doRemoveUnreadSubscriptions(channelUri /*: ?string*/, readUris /*: ?Array<string>*/) {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state = getState();
+    var unreadByChannel = (0, _subscriptions.selectUnreadByChannel)(state);
+
+    // If no channel is passed in, remove all unread subscriptions from all channels
+    if (!channelUri) {
+      return dispatch({
+        type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
+        data: { channel: null }
+      });
+    }
+
+    var currentChannelUnread = unreadByChannel[channelUri];
+    if (!currentChannelUnread || !currentChannelUnread.uris) {
+      // Channel passed in doesn't have any unreads
+      return null;
+    }
+
+    // For each uri passed in, remove it from the list of unread uris
+    // If no uris are passed in, remove them all
+    var newUris = void 0;
+    if (readUris) {
+      var urisToRemoveMap = readUris.reduce(function (acc, val) {
+        return _extends({}, acc, _defineProperty({}, val, true));
+      }, {});
+
+      var filteredUris = currentChannelUnread.uris.filter(function (uri) {
+        return !urisToRemoveMap[uri];
+      });
+      newUris = filteredUris.length ? filteredUris : null;
+    } else {
+      newUris = null;
+    }
+
+    return dispatch({
+      type: ACTIONS.REMOVE_SUBSCRIPTION_UNREADS,
+      data: {
+        channel: channelUri,
+        uris: newUris
+      }
+    });
+  };
+};
+
+// Remove a single file from a channels unread subscriptions
+var doRemoveUnreadSubscription = exports.doRemoveUnreadSubscription = function doRemoveUnreadSubscription(channelUri /*: string*/, readUri /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    dispatch(doRemoveUnreadSubscriptions(channelUri, [readUri]));
+  };
+};
+
+var doCheckSubscription = exports.doCheckSubscription = function doCheckSubscription(subscriptionUri /*: string*/, shouldNotify /*:: ?: boolean*/) {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    // no dispatching FETCH_CHANNEL_CLAIMS_STARTED; causes loading issues on <SubscriptionsPage>
+
+    var state = getState();
+    var shouldAutoDownload = false; // makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
+    var savedSubscription = state.subscriptions.subscriptions.find(function (sub) {
+      return sub.uri === subscriptionUri;
+    });
+
+    if (!savedSubscription) {
+      throw Error('Trying to find new content for ' + subscriptionUri + ' but it doesn\'t exist in your subscriptions');
+    }
+
+    // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
+    _lbryRedux.Lbry.claim_list_by_channel({ uri: subscriptionUri, page: 1, page_size: _claim.PAGE_SIZE }).then(function (claimListByChannel) {
+      var claimResult = claimListByChannel[subscriptionUri] || {};
+      var claimsInChannel = claimResult.claims_in_channel;
+
+      // may happen if subscribed to an abandoned channel or an empty channel
+
+      if (!claimsInChannel || !claimsInChannel.length) {
+        return;
+      }
+
+      // Determine if the latest subscription currently saved is actually the latest subscription
+      var latestIndex = claimsInChannel.findIndex(function (claim) {
+        return claim.name + '#' + claim.claim_id === savedSubscription.latest;
+      });
+
+      // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
+      var latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex;
+
+      // If latest is 0, nothing has changed
+      // Do not download/notify about new content, it would download/notify 10 claims per channel
+      if (latestIndex !== 0 && savedSubscription.latest) {
+        var downloadCount = 0;
+
+        var newUnread = [];
+        claimsInChannel.slice(0, latestIndexToNotify).forEach(function (claim) {
+          var uri = (0, _lbryRedux.buildURI)({ contentName: claim.name, claimId: claim.claim_id }, true);
+          var shouldDownload = shouldAutoDownload && Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.stream.metadata.fee);
+
+          // Add the new content to the list of "un-read" subscriptions
+          if (shouldNotify) {
+            newUnread.push(uri);
+          }
+
+          if (shouldDownload) {
+            downloadCount += 1;
+            dispatch((0, _lbryRedux.doPurchaseUri)(uri, { cost: 0 }, true));
+          }
+        });
+
+        dispatch(doUpdateUnreadSubscriptions(subscriptionUri, newUnread, downloadCount > 0 ? NOTIFICATION_TYPES.DOWNLOADING : NOTIFICATION_TYPES.NOTIFY_ONLY));
+      }
+
+      // Set the latest piece of content for a channel
+      // This allows the app to know if there has been new content since it was last set
+      dispatch(setSubscriptionLatest({
+        channelName: claimsInChannel[0].channel_name,
+        uri: (0, _lbryRedux.buildURI)({
+          channelName: claimsInChannel[0].channel_name,
+          claimId: claimsInChannel[0].claim_id
+        }, false)
+      }, (0, _lbryRedux.buildURI)({ contentName: claimsInChannel[0].name, claimId: claimsInChannel[0].claim_id }, false)));
+
+      // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
+      // means it will delete a non-existant fetchingChannelClaims[uri]
+      dispatch({
+        type: ACTIONS.FETCH_CHANNEL_CLAIMS_COMPLETED,
+        data: {
+          uri: subscriptionUri,
+          claims: claimsInChannel || [],
+          page: 1
+        }
+      });
+    });
+  };
+};
+
+var doChannelSubscribe = exports.doChannelSubscribe = function doChannelSubscribe(subscription /*: Subscription*/) {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var _getState = getState(),
+        daemonSettings = _getState.settings.daemonSettings;
+
+    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
+
+    var subscriptionUri = subscription.uri;
+    if (!subscriptionUri.startsWith('lbry://')) {
+      throw Error('Subscription uris must inclue the "lbry://" prefix.\nTried to subscribe to ' + subscriptionUri);
+    }
+
+    dispatch({
+      type: ACTIONS.CHANNEL_SUBSCRIBE,
+      data: subscription
+    });
+
+    // if the user isn't sharing data, keep the subscriptions entirely in the app
+    if (isSharingData) {
+      var _parseURI = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI.claimId;
+      // They are sharing data, we can store their subscriptions in our internal database
+
+
+      _lbryio2.default.call('subscription', 'new', {
+        channel_name: subscription.channelName,
+        claim_id: claimId
+      });
+
+      dispatch((0, _rewards.doClaimRewardType)(_rewards3.default.TYPE_SUBSCRIPTION, { failSilently: true }));
+    }
+
+    dispatch(doCheckSubscription(subscription.uri, true));
+  };
+};
+
+var doChannelUnsubscribe = exports.doChannelUnsubscribe = function doChannelUnsubscribe(subscription /*: Subscription*/) {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var _getState2 = getState(),
+        daemonSettings = _getState2.settings.daemonSettings;
+
+    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
+
+    dispatch({
+      type: ACTIONS.CHANNEL_UNSUBSCRIBE,
+      data: subscription
+    });
+
+    if (isSharingData) {
+      var _parseURI2 = (0, _lbryRedux.parseURI)(subscription.uri),
+          claimId = _parseURI2.claimId;
+
+      _lbryio2.default.call('subscription', 'delete', {
+        claim_id: claimId
+      });
+    }
+  };
+};
+
+var doCheckSubscriptions = exports.doCheckSubscriptions = function doCheckSubscriptions() {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state = getState();
+    var subscriptions = (0, _subscriptions.selectSubscriptions)(state);
+
+    subscriptions.forEach(function (sub /*: Subscription*/) {
+      dispatch(doCheckSubscription(sub.uri, true));
+    });
+  };
+};
+
+var doFetchMySubscriptions = exports.doFetchMySubscriptions = function doFetchMySubscriptions() {
+  return function (dispatch /*: ReduxDispatch*/, getState /*: GetState*/) {
+    var state /*: { subscriptions: SubscriptionState, settings: any }*/ = getState();
+    var reduxSubscriptions = state.subscriptions.subscriptions;
+
+    // default to true if daemonSettings not found
+
+    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
+
+    if (!isSharingData && isSharingData !== undefined) {
+      // They aren't sharing their data, subscriptions will be handled by persisted redux state
+      return;
+    }
+
+    // most of this logic comes from scenarios where the db isn't synced with redux
+    // this will happen if the user stops sharing data
+    dispatch({ type: ACTIONS.FETCH_SUBSCRIPTIONS_START });
+
+    _lbryio2.default.call('subscription', 'list').then(function (dbSubscriptions) {
+      var storedSubscriptions = dbSubscriptions || [];
+
+      // User has no subscriptions in db or redux
+      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
+        return [];
+      }
+
+      // There is some mismatch between redux state and db state
+      // If something is in the db, but not in redux, add it to redux
+      // If something is in redux, but not in the db, add it to the db
+      if (storedSubscriptions.length !== reduxSubscriptions.length) {
+        var dbSubMap = {};
+        var reduxSubMap = {};
+        var subsNotInDB = [];
+        var subscriptionsToReturn = reduxSubscriptions.slice();
+
+        storedSubscriptions.forEach(function (sub) {
+          dbSubMap[sub.claim_id] = 1;
+        });
+
+        reduxSubscriptions.forEach(function (sub) {
+          var _parseURI3 = (0, _lbryRedux.parseURI)(sub.uri),
+              claimId = _parseURI3.claimId;
+
+          reduxSubMap[claimId] = 1;
+
+          if (!dbSubMap[claimId]) {
+            subsNotInDB.push({
+              claim_id: claimId,
+              channel_name: sub.channelName
+            });
+          }
+        });
+
+        storedSubscriptions.forEach(function (sub) {
+          if (!reduxSubMap[sub.claim_id]) {
+            var uri = 'lbry://' + sub.channel_name + '#' + sub.claim_id;
+            subscriptionsToReturn.push({ uri: uri, channelName: sub.channel_name });
+          }
+        });
+
+        return _bluebird2.default.all(subsNotInDB.map(function (payload) {
+          return _lbryio2.default.call('subscription', 'new', payload);
+        })).then(function () {
+          return subscriptionsToReturn;
+        }).catch(function () {
+          return (
+            // let it fail, we will try again when the navigate to the subscriptions page
+            subscriptionsToReturn
+          );
+        });
+      }
+
+      // DB is already synced, just return the subscriptions in redux
+      return reduxSubscriptions;
+    }).then(function (subscriptions /*: Array<Subscription>*/) {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_SUCCESS,
+        data: subscriptions
+      });
+
+      dispatch((0, _lbryRedux.doResolveUris)(subscriptions.map(function (_ref) {
+        var uri = _ref.uri;
+        return uri;
+      })));
+      dispatch(doCheckSubscriptions());
+    }).catch(function () {
+      dispatch({
+        type: ACTIONS.FETCH_SUBSCRIPTIONS_FAIL
+      });
+    });
+  };
+};
+
+var doCheckSubscriptionsInit = exports.doCheckSubscriptionsInit = function doCheckSubscriptionsInit() {
+  return function (dispatch /*: ReduxDispatch*/) {
+    // doCheckSubscriptionsInit is called by doDaemonReady
+    // setTimeout below is a hack to ensure redux is hydrated when subscriptions are checked
+    // this will be replaced with <PersistGate> which reqiures a package upgrade
+    setTimeout(function () {
+      return dispatch(doFetchMySubscriptions());
+    }, 5000);
+    var checkSubscriptionsTimer = setInterval(function () {
+      return dispatch(doCheckSubscriptions());
+    }, CHECK_SUBSCRIPTIONS_INTERVAL);
+    dispatch({
+      type: ACTIONS.CHECK_SUBSCRIPTIONS_SUBSCRIBE,
+      data: { checkSubscriptionsTimer: checkSubscriptionsTimer }
+    });
+    setInterval(function () {
+      return dispatch(doCheckSubscriptions());
+    }, CHECK_SUBSCRIPTIONS_INTERVAL);
+  };
+};
+
+var doFetchRecommendedSubscriptions = exports.doFetchRecommendedSubscriptions = function doFetchRecommendedSubscriptions() {
+  return function (dispatch /*: ReduxDispatch*/) {
+    dispatch({
+      type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_START
+    });
+
+    return _lbryio2.default.call('subscription', 'suggest').then(function (suggested) {
+      return dispatch({
+        type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_SUCCESS,
+        data: suggested
+      });
+    }).catch(function (error) {
+      return dispatch({
+        type: ACTIONS.GET_SUGGESTED_SUBSCRIPTIONS_FAIL,
+        error: error
+      });
+    });
+  };
+};
+
+var doCompleteFirstRun = exports.doCompleteFirstRun = function doCompleteFirstRun() {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.SUBSCRIPTION_FIRST_RUN_COMPLETED
+    });
+  };
+};
+
+var doShowSuggestedSubs = exports.doShowSuggestedSubs = function doShowSuggestedSubs() {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.VIEW_SUGGESTED_SUBSCRIPTIONS
+    });
+  };
+};
+
+var doChannelSubscriptionEnableNotifications = exports.doChannelSubscriptionEnableNotifications = function doChannelSubscriptionEnableNotifications(channelName /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS,
+      data: channelName
+    });
+  };
+};
+
+var doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionDisableNotifications = function doChannelSubscriptionDisableNotifications(channelName /*: string*/) {
+  return function (dispatch /*: ReduxDispatch*/) {
+    return dispatch({
+      type: ACTIONS.CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS,
+      data: channelName
+    });
+  };
+};
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var MINIMUM_PUBLISH_BID = exports.MINIMUM_PUBLISH_BID = 0.00000001;
+
+var CHANNEL_ANONYMOUS = exports.CHANNEL_ANONYMOUS = 'anonymous';
+var CHANNEL_NEW = exports.CHANNEL_NEW = 'new';
+var PAGE_SIZE = exports.PAGE_SIZE = 20;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectEnabledChannelNotifications = exports.makeSelectIsNew = exports.makeSelectIsSubscribed = exports.selectSubscriptionClaims = exports.makeSelectUnreadByChannel = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _subscriptions = __webpack_require__(22);
+
+var _reselect = __webpack_require__(10);
+
+var _lbryRedux = __webpack_require__(4);
+
+var _swapJson = __webpack_require__(23);
+
+// Returns the entire subscriptions state
+var selectState = function selectState(state) {
+  return state.subscriptions || {};
+};
+
+// Returns the list of channel uris a user is subscribed to
+var selectSubscriptions = exports.selectSubscriptions = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.subscriptions;
+});
+
+// Fetching list of users subscriptions
+var selectIsFetchingSubscriptions = exports.selectIsFetchingSubscriptions = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.loading;
+});
+
+// The current view mode on the subscriptions page
+var selectViewMode = exports.selectViewMode = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.viewMode;
+});
+
+// Suggested subscriptions from internal apis
+var selectSuggested = exports.selectSuggested = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.suggested;
+});
+var selectIsFetchingSuggested = exports.selectIsFetchingSuggested = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.loadingSuggested;
+});
+var selectSuggestedChannels = exports.selectSuggestedChannels = (0, _reselect.createSelector)(selectSubscriptions, selectSuggested, function (userSubscriptions, suggested) {
+  if (!suggested) {
+    return null;
+  }
+
+  // Swap the key/value because we will use the uri for everything, this just makes it easier
+  // suggested is returned from the api with the form:
+  // {
+  //   featured: { "Channel label": uri, ... },
+  //   top_subscribed: { "@channel": uri, ... }
+  //   top_bid: { "@channel": uri, ... }
+  // }
+  // To properly compare the suggested subscriptions from our current subscribed channels
+  // We only care about the uri, not the label
+
+  // We also only care about top_subscribed and featured
+  // top_bid could just be porn or a channel with no content
+  var topSubscribedSuggestions = (0, _swapJson.swapKeyAndValue)(suggested[_subscriptions.SUGGESTED_TOP_SUBSCRIBED]);
+  var featuredSuggestions = (0, _swapJson.swapKeyAndValue)(suggested[_subscriptions.SUGGESTED_FEATURED]);
+
+  // Make sure there are no duplicates
+  // If a uri isn't already in the suggested object, add it
+  var suggestedChannels = _extends({}, topSubscribedSuggestions);
+
+  Object.keys(featuredSuggestions).forEach(function (uri) {
+    if (!suggestedChannels[uri]) {
+      var channelLabel = featuredSuggestions[uri];
+      suggestedChannels[uri] = channelLabel;
+    }
+  });
+
+  userSubscriptions.forEach(function (_ref) {
+    var uri = _ref.uri;
+
+    // Note to passer bys:
+    // Maybe we should just remove the `lbry://` prefix from subscription uris
+    // Most places don't store them like that
+    var subscribedUri = uri.slice('lbry://'.length);
+
+    if (suggestedChannels[subscribedUri]) {
+      delete suggestedChannels[subscribedUri];
+    }
+  });
+
+  return Object.keys(suggestedChannels).map(function (uri) {
+    return {
+      uri: uri,
+      label: suggestedChannels[uri]
+    };
+  }).slice(0, 5);
+});
+
+var selectFirstRunCompleted = exports.selectFirstRunCompleted = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.firstRunCompleted;
+});
+var selectShowSuggestedSubs = exports.selectShowSuggestedSubs = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.showSuggestedSubs;
+});
+
+// Fetching any claims that are a part of a users subscriptions
+var selectSubscriptionsBeingFetched = exports.selectSubscriptionsBeingFetched = (0, _reselect.createSelector)(selectSubscriptions, _lbryRedux.selectAllFetchingChannelClaims, function (subscriptions, fetchingChannelClaims) {
+  var fetchingSubscriptionMap = {};
+  subscriptions.forEach(function (sub) {
+    var isFetching = fetchingChannelClaims && fetchingChannelClaims[sub.uri];
+    if (isFetching) {
+      fetchingSubscriptionMap[sub.uri] = true;
+    }
+  });
+
+  return fetchingSubscriptionMap;
+});
+
+var selectUnreadByChannel = exports.selectUnreadByChannel = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.unread;
+});
+
+// Returns the current total of unread subscriptions
+var selectUnreadAmount = exports.selectUnreadAmount = (0, _reselect.createSelector)(selectUnreadByChannel, function (unreadByChannel) {
+  var unreadChannels = Object.keys(unreadByChannel);
+  var badges = 0;
+
+  if (!unreadChannels.length) {
+    return badges;
+  }
+
+  unreadChannels.forEach(function (channel) {
+    badges += unreadByChannel[channel].uris.length;
+  });
+
+  return badges;
+});
+
+// Returns the uris with channels as an array with the channel with the newest content first
+// If you just want the `unread` state, use selectUnread
+var selectUnreadSubscriptions = exports.selectUnreadSubscriptions = (0, _reselect.createSelector)(selectUnreadAmount, selectUnreadByChannel, _lbryRedux.selectClaimsByUri, function (unreadAmount, unreadByChannel, claimsByUri) {
+  // determine which channel has the newest content
+  var unreadList = [];
+  if (!unreadAmount) {
+    return unreadList;
+  }
+
+  var channelUriList = Object.keys(unreadByChannel);
+
+  // There is only one channel with unread notifications
+  if (unreadAmount === 1) {
+    channelUriList.forEach(function (channel) {
+      var unreadChannel = {
+        channel: channel,
+        uris: unreadByChannel[channel].uris
+      };
+      unreadList.push(unreadChannel);
+    });
+
+    return unreadList;
+  }
+
+  channelUriList.sort(function (channel1, channel2) {
+    var latestUriFromChannel1 = unreadByChannel[channel1].uris[0];
+    var latestClaimFromChannel1 = claimsByUri[latestUriFromChannel1] || {};
+    var latestUriFromChannel2 = unreadByChannel[channel2].uris[0];
+    var latestClaimFromChannel2 = claimsByUri[latestUriFromChannel2] || {};
+
+    var latestHeightFromChannel1 = latestClaimFromChannel1.height || 0;
+    var latestHeightFromChannel2 = latestClaimFromChannel2.height || 0;
+
+    if (latestHeightFromChannel1 !== latestHeightFromChannel2) {
+      return latestHeightFromChannel2 - latestHeightFromChannel1;
+    }
+
+    return 0;
+  }).forEach(function (channel) {
+    var unreadSubscription = unreadByChannel[channel];
+    var unreadChannel = {
+      channel: channel,
+      uris: unreadSubscription.uris
+    };
+
+    unreadList.push(unreadChannel);
+  });
+
+  return unreadList;
+});
+
+// Returns all unread subscriptions for a uri passed in
+var makeSelectUnreadByChannel = exports.makeSelectUnreadByChannel = function makeSelectUnreadByChannel(uri) {
+  return (0, _reselect.createSelector)(selectUnreadByChannel, function (unread) {
+    return unread[uri];
+  });
+};
+
+// Returns the first page of claims for every channel a user is subscribed to
+var selectSubscriptionClaims = exports.selectSubscriptionClaims = (0, _reselect.createSelector)(_lbryRedux.selectAllClaimsByChannel, _lbryRedux.selectClaimsById, selectSubscriptions, selectUnreadByChannel, function (channelIds, allClaims, savedSubscriptions, unreadByChannel) {
+  // no claims loaded yet
+  if (!Object.keys(channelIds).length) {
+    return [];
+  }
+
+  var fetchedSubscriptions = [];
+
+  savedSubscriptions.forEach(function (subscription) {
+    var channelClaims = [];
+
+    // if subscribed channel has content
+    if (channelIds[subscription.uri] && channelIds[subscription.uri]['1']) {
+      // This will need to be more robust, we will want to be able to load more than the first page
+
+      // Strip out any ids that will be shown as notifications
+      var pageOneChannelIds = channelIds[subscription.uri]['1'];
+
+      // we have the channel ids and the corresponding claims
+      // loop over the list of ids and grab the claim
+      pageOneChannelIds.forEach(function (id) {
+        var grabbedClaim = allClaims[id];
+
+        if (unreadByChannel[subscription.uri] && unreadByChannel[subscription.uri].uris.some(function (uri) {
+          return uri.includes(id);
+        })) {
+          grabbedClaim.isNew = true;
+        }
+
+        channelClaims = channelClaims.concat([grabbedClaim]);
+      });
+    }
+
+    fetchedSubscriptions = fetchedSubscriptions.concat(channelClaims);
+  });
+
+  return fetchedSubscriptions;
+});
+
+// Returns true if a user is subscribed to the channel associated with the uri passed in
+// Accepts content or channel uris
+var makeSelectIsSubscribed = exports.makeSelectIsSubscribed = function makeSelectIsSubscribed(uri) {
+  return (0, _reselect.createSelector)(selectSubscriptions, (0, _lbryRedux.makeSelectChannelForClaimUri)(uri, true), function (subscriptions, channelUri) {
+    if (channelUri) {
+      return subscriptions.some(function (sub) {
+        return sub.uri === channelUri;
+      });
+    }
+
+    // If we couldn't get a channel uri from the claim uri, the uri passed in might be a channel already
+
+    var _parseURI = (0, _lbryRedux.parseURI)(uri),
+        isChannel = _parseURI.isChannel;
+
+    if (isChannel) {
+      var uriWithPrefix = uri.startsWith('lbry://') ? uri : 'lbry://' + uri;
+      return subscriptions.some(function (sub) {
+        return sub.uri === uriWithPrefix;
+      });
+    }
+
+    return false;
+  });
+};
+
+var makeSelectIsNew = exports.makeSelectIsNew = function makeSelectIsNew(uri) {
+  return (0, _reselect.createSelector)(makeSelectIsSubscribed(uri), (0, _lbryRedux.makeSelectChannelForClaimUri)(uri), selectUnreadByChannel, function (isSubscribed, channel, unreadByChannel) {
+    if (!isSubscribed) {
+      return false;
+    }
+
+    var unreadForChannel = unreadByChannel['lbry://' + channel];
+    if (unreadForChannel) {
+      return unreadForChannel.uris.includes(uri);
+    }
+
+    return false;
+    // If they are subscribed, check to see if this uri is in the list of unreads
+  });
+};
+
+var selectEnabledChannelNotifications = exports.selectEnabledChannelNotifications = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.enabledChannelNotifications;
+});
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var VIEW_ALL = exports.VIEW_ALL = 'view_all';
+var VIEW_LATEST_FIRST = exports.VIEW_LATEST_FIRST = 'view_latest_first';
+
+// Types for unreads
+var DOWNLOADING = exports.DOWNLOADING = 'DOWNLOADING';
+var DOWNLOADED = exports.DOWNLOADED = 'DOWNLOADED';
+var NOTIFY_ONLY = exports.NOTIFY_ONLY = 'NOTIFY_ONLY;';
+
+// Suggested types
+var SUGGESTED_TOP_BID = exports.SUGGESTED_TOP_BID = 'top_bid';
+var SUGGESTED_TOP_SUBSCRIBED = exports.SUGGESTED_TOP_SUBSCRIBED = 'top_subscribed';
+var SUGGESTED_FEATURED = exports.SUGGESTED_FEATURED = 'featured';
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.swapKeyAndValue = swapKeyAndValue;
+function swapKeyAndValue(dict) {
+  var ret = {};
+  // eslint-disable-next-line no-restricted-syntax
+  for (var key in dict) {
+    if (dict.hasOwnProperty(key)) {
+      ret[dict[key]] = key;
+    }
+  }
+  return ret;
+}
 
 /***/ }),
 /* 24 */
@@ -16411,7 +16664,7 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _subscriptions = __webpack_require__(17);
+var _subscriptions = __webpack_require__(22);
 
 var _reduxUtils = __webpack_require__(29);
 
