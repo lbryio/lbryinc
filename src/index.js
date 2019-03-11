@@ -55,12 +55,18 @@ export {
   doUserIdentityVerify,
   doUserInviteNew,
 } from 'redux/actions/user';
+export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
+export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
+export { doFetchFeaturedUris, doFetchTrendingUris } from 'redux/actions/homepage';
 
 // reducers
 export { authReducer } from 'redux/reducers/auth';
 export { rewardsReducer } from 'redux/reducers/rewards';
 export { subscriptionsReducer };
 export { userReducer } from 'redux/reducers/user';
+export { costInfoReducer } from 'redux/reducers/cost_info';
+export { blacklistReducer } from 'redux/reducers/blacklist';
+export { homepageReducer } from 'redux/reducers/homepage';
 
 // selectors
 export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
@@ -133,3 +139,17 @@ export {
   selectUserInviteNewErrorMessage,
   selectUserInviteReferralLink,
 } from 'redux/selectors/user';
+export {
+  makeSelectFetchingCostInfoForUri,
+  makeSelectCostInfoForUri,
+  selectAllCostInfoByUri,
+  selectCostForCurrentPageUri,
+  selectFetchingCostInfo,
+} from 'redux/selectors/cost_info';
+export { selectBlackListedOutpoints } from 'redux/selectors/blacklist';
+export {
+  selectFeaturedUris,
+  selectFetchingFeaturedUris,
+  selectTrendingUris,
+  selectFetchingTrendingUris,
+} from 'redux/selectors/homepage';

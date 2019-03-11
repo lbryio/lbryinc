@@ -3358,9 +3358,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
-lbry-redux@lbryio/lbry-redux#76d8bbef9640bf8ea5c4f45550e55b77d3944ee3:
+lbry-redux@lbryio/lbry-redux:
   version "0.0.1"
-  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/76d8bbef9640bf8ea5c4f45550e55b77d3944ee3"
+  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/d4e4e71ab15fb33e9f167e8a20ecfa5c85590560"
   dependencies:
     proxy-polyfill "0.1.6"
     reselect "^3.0.0"
@@ -4369,6 +4369,7 @@ promise-inflight@^1.0.1:
 proxy-polyfill@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/proxy-polyfill/-/proxy-polyfill-0.1.6.tgz#ef41ec6c66f534db15db36c54493a62d184b364e"
+  integrity sha1-70HsbGb1NNsV2zbFRJOmLRhLNk4=
 
 prr@~1.0.1:
   version "1.0.1"
@@ -5429,6 +5430,7 @@ util@^0.10.3:
 uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
 v8-compile-cache@^2.0.0:
   version "2.0.0"

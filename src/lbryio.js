@@ -5,8 +5,12 @@ import querystring from 'querystring';
 const Lbryio = {
   enabled: true,
   authenticationPromise: null,
+  exchangePromise: null,
+  exchangeLastFetched: null,
   CONNECTION_STRING: 'https://api.lbry.io/',
 };
+
+const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
 
 // We can't use env's because they aren't passed into node_modules
 Lbryio.setLocalApi = endpoint => {
@@ -177,6 +181,24 @@ Lbryio.getStripeToken = () =>
   Lbryio.CONNECTION_STRING.startsWith('http://localhost:')
     ? 'pk_test_NoL1JWL7i1ipfhVId5KfDZgo'
     : 'pk_live_e8M4dRNnCCbmpZzduEUZBgJO';
+
+Lbryio.getExchangeRates = () => {
+  if (
+    !Lbryio.exchangeLastFetched ||
+    Date.now() - Lbryio.exchangeLastFetched > EXCHANGE_RATE_TIMEOUT
+  ) {
+    Lbryio.exchangePromise = new Promise((resolve, reject) => {
+      Lbryio.call('lbc', 'exchange_rate', {}, 'get', true)
+        .then(({ lbc_usd: LBC_USD, lbc_btc: LBC_BTC, btc_usd: BTC_USD }) => {
+          const rates = { LBC_USD, LBC_BTC, BTC_USD };
+          resolve(rates);
+        })
+        .catch(reject);
+    });
+    Lbryio.exchangeLastFetched = Date.now();
+  }
+  return Lbryio.exchangePromise;
+};
 
 // Allow overriding lbryio methods
 // The desktop app will need to use it for getAuthToken because we use electron's ipcRenderer
