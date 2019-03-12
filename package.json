@@ -28,9 +28,11 @@
     "format": "prettier 'src/**/*.{js,json}' --write"
   },
   "dependencies": {
-    "lbry-redux": "lbryio/lbry-redux#76d8bbef9640bf8ea5c4f45550e55b77d3944ee3",
     "bluebird": "^3.5.1",
     "reselect": "^3.0.0"
+  },
+  "peerDependencies": {
+    "lbry-redux": "lbryio/lbry-redux"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -50,6 +52,7 @@
     "flow-bin": "^0.69.0",
     "flow-typed": "^2.4.0",
     "husky": "^0.14.3",
+    "lbry-redux": "lbryio/lbry-redux",
     "lint-staged": "^7.0.4",
     "prettier": "^1.4.2",
     "webpack": "^4.5.0",
