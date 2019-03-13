@@ -3360,7 +3360,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
 
 lbry-redux@lbryio/lbry-redux:
   version "0.0.1"
-  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/d4e4e71ab15fb33e9f167e8a20ecfa5c85590560"
+  resolved "https://codeload.github.com/lbryio/lbry-redux/tar.gz/f140db38dd73cead9e87549340fa9434da62ba8a"
   dependencies:
     proxy-polyfill "0.1.6"
     reselect "^3.0.0"
