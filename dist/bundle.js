@@ -1135,7 +1135,7 @@ var Lbryio = {
   authenticationPromise: null,
   exchangePromise: null,
   exchangeLastFetched: null,
-  CONNECTION_STRING: 'https://api.lbry.io/'
+  CONNECTION_STRING: 'https://api.lbry.com/'
 };
 
 var EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
