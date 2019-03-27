@@ -145,7 +145,6 @@ export {
   makeSelectFetchingCostInfoForUri,
   makeSelectCostInfoForUri,
   selectAllCostInfoByUri,
-  selectCostForCurrentPageUri,
   selectFetchingCostInfo,
 } from 'redux/selectors/cost_info';
 export { selectBlackListedOutpoints } from 'redux/selectors/blacklist';
