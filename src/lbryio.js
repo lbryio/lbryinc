@@ -7,7 +7,7 @@ const Lbryio = {
   authenticationPromise: null,
   exchangePromise: null,
   exchangeLastFetched: null,
-  CONNECTION_STRING: 'https://api.lbry.com/',
+  CONNECTION_STRING: 'https://api.testnet.lbry.tech/',
 };
 
 const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
@@ -160,7 +160,7 @@ Lbryio.authenticate = () => {
                   Lbryio.authToken = response.auth_token;
                   res(response);
                 })
-                .catch(() => rej());
+                .catch(error => rej());
             });
           });
         })
