@@ -104,8 +104,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.makeSelectViewCountForUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectBlackListedOutpoints = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectUserInviteReferralLink = exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = undefined;
-exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectSubscriptionClaims = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = exports.selectEnabledChannelNotifications = exports.makeSelectUnreadByChannel = exports.makeSelectIsSubscribed = exports.makeSelectIsNew = exports.selectReferralReward = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.statsReducer = exports.homepageReducer = exports.blacklistReducer = exports.costInfoReducer = exports.userReducer = exports.subscriptionsReducer = exports.rewardsReducer = exports.authReducer = exports.doFetchViewCount = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doBlackListedOutpointsSubscribe = exports.doFetchCostInfoForUri = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserCheckEmailVerified = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.setSubscriptionLatest = exports.doUpdateUnreadSubscriptions = exports.doShowSuggestedSubs = exports.doSetViewMode = exports.doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscription = exports.doFetchRecommendedSubscriptions = exports.doFetchMySubscriptions = exports.doCompleteFirstRun = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doCheckSubscription = exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
+exports.selectIsSettingSync = exports.selectIsRetrievingSync = exports.selectSetSyncErrorMessage = exports.selectSyncHash = exports.selectHasWallet = exports.makeSelectViewCountForUri = exports.selectFetchingTrendingUris = exports.selectTrendingUris = exports.selectFetchingFeaturedUris = exports.selectFeaturedUris = exports.selectBlackListedOutpoints = exports.selectFetchingCostInfo = exports.selectCostForCurrentPageUri = exports.selectAllCostInfoByUri = exports.makeSelectCostInfoForUri = exports.makeSelectFetchingCostInfoForUri = exports.selectUserInviteReferralLink = exports.selectUserInviteNewErrorMessage = exports.selectUserInviteNewIsPending = exports.selectUserInviteStatusFailed = exports.selectUserInvitees = exports.selectUserInvitesRemaining = exports.selectUserInviteStatusIsPending = exports.selectAccessToken = exports.selectUserIsVerificationCandidate = exports.selectIdentityVerifyErrorMessage = exports.selectIdentityVerifyIsPending = exports.selectPhoneVerifyIsPending = exports.selectPhoneVerifyErrorMessage = exports.selectEmailVerifyErrorMessage = exports.selectEmailVerifyIsPending = exports.selectPhoneNewIsPending = exports.selectPhoneNewErrorMessage = exports.selectEmailNewErrorMessage = exports.selectEmailNewIsPending = exports.selectUserIsRewardApproved = exports.selectPhoneToVerify = exports.selectEmailToVerify = exports.selectUserCountryCode = undefined;
+exports.selectUserPhone = exports.selectUserEmail = exports.selectUser = exports.selectUserIsPending = exports.selectAuthenticationIsPending = exports.selectSubscriptionClaims = exports.selectUnreadSubscriptions = exports.selectUnreadAmount = exports.selectUnreadByChannel = exports.selectSubscriptionsBeingFetched = exports.selectShowSuggestedSubs = exports.selectFirstRunCompleted = exports.selectSuggestedChannels = exports.selectIsFetchingSuggested = exports.selectSuggested = exports.selectViewMode = exports.selectIsFetchingSubscriptions = exports.selectSubscriptions = exports.selectEnabledChannelNotifications = exports.makeSelectUnreadByChannel = exports.makeSelectIsSubscribed = exports.makeSelectIsNew = exports.selectReferralReward = exports.selectRewardContentClaimIds = exports.selectRewardByType = exports.selectClaimRewardError = exports.selectClaimErrorsByType = exports.selectIsClaimRewardPending = exports.selectClaimsPendingByType = exports.selectUnclaimedRewardValue = exports.selectFetchingRewards = exports.selectUnclaimedRewards = exports.selectClaimedRewardsByTransactionId = exports.selectClaimedRewards = exports.selectClaimedRewardsById = exports.selectUnclaimedRewardsByType = exports.makeSelectRewardByType = exports.makeSelectRewardAmountByType = exports.makeSelectIsRewardClaimPending = exports.makeSelectClaimRewardError = exports.selectIsAuthenticating = exports.selectAuthToken = exports.syncReducer = exports.statsReducer = exports.homepageReducer = exports.blacklistReducer = exports.costInfoReducer = exports.userReducer = exports.subscriptionsReducer = exports.rewardsReducer = exports.authReducer = exports.doSetSync = exports.doGetSync = exports.doFetchViewCount = exports.doFetchTrendingUris = exports.doFetchFeaturedUris = exports.doBlackListedOutpointsSubscribe = exports.doFetchCostInfoForUri = exports.doUserInviteNew = exports.doUserIdentityVerify = exports.doUserResendVerificationEmail = exports.doFetchAccessToken = exports.doUserPhoneVerify = exports.doUserPhoneVerifyFailure = exports.doUserPhoneReset = exports.doUserPhoneNew = exports.doUserEmailVerify = exports.doUserEmailVerifyFailure = exports.doUserEmailToVerify = exports.doUserCheckEmailVerified = exports.doUserEmailNew = exports.doUserFetch = exports.doAuthenticate = exports.doInstallNew = exports.doFetchInviteStatus = exports.setSubscriptionLatest = exports.doUpdateUnreadSubscriptions = exports.doShowSuggestedSubs = exports.doSetViewMode = exports.doRemoveUnreadSubscriptions = exports.doRemoveUnreadSubscription = exports.doFetchRecommendedSubscriptions = exports.doFetchMySubscriptions = exports.doCompleteFirstRun = exports.doCheckSubscriptionsInit = exports.doCheckSubscriptions = exports.doCheckSubscription = exports.doChannelSubscriptionDisableNotifications = exports.doChannelSubscriptionEnableNotifications = exports.doChannelUnsubscribe = exports.doChannelSubscribe = exports.doFetchRewardedContent = exports.doClaimRewardClearError = exports.doClaimEligiblePurchaseRewards = exports.doClaimRewardType = exports.doRewardList = exports.doGenerateAuthToken = exports.rewards = exports.Lbryio = exports.LBRYINC_ACTIONS = undefined;
 
 var _auth = __webpack_require__(1);
 
@@ -395,7 +395,22 @@ Object.defineProperty(exports, 'doFetchViewCount', {
   }
 });
 
-var _auth2 = __webpack_require__(28);
+var _sync = __webpack_require__(28);
+
+Object.defineProperty(exports, 'doGetSync', {
+  enumerable: true,
+  get: function get() {
+    return _sync.doGetSync;
+  }
+});
+Object.defineProperty(exports, 'doSetSync', {
+  enumerable: true,
+  get: function get() {
+    return _sync.doSetSync;
+  }
+});
+
+var _auth2 = __webpack_require__(29);
 
 Object.defineProperty(exports, 'authReducer', {
   enumerable: true,
@@ -404,7 +419,7 @@ Object.defineProperty(exports, 'authReducer', {
   }
 });
 
-var _rewards2 = __webpack_require__(29);
+var _rewards2 = __webpack_require__(30);
 
 Object.defineProperty(exports, 'rewardsReducer', {
   enumerable: true,
@@ -413,7 +428,7 @@ Object.defineProperty(exports, 'rewardsReducer', {
   }
 });
 
-var _user2 = __webpack_require__(30);
+var _user2 = __webpack_require__(31);
 
 Object.defineProperty(exports, 'userReducer', {
   enumerable: true,
@@ -422,7 +437,7 @@ Object.defineProperty(exports, 'userReducer', {
   }
 });
 
-var _cost_info2 = __webpack_require__(31);
+var _cost_info2 = __webpack_require__(32);
 
 Object.defineProperty(exports, 'costInfoReducer', {
   enumerable: true,
@@ -431,7 +446,7 @@ Object.defineProperty(exports, 'costInfoReducer', {
   }
 });
 
-var _blacklist2 = __webpack_require__(33);
+var _blacklist2 = __webpack_require__(34);
 
 Object.defineProperty(exports, 'blacklistReducer', {
   enumerable: true,
@@ -440,7 +455,7 @@ Object.defineProperty(exports, 'blacklistReducer', {
   }
 });
 
-var _homepage2 = __webpack_require__(34);
+var _homepage2 = __webpack_require__(35);
 
 Object.defineProperty(exports, 'homepageReducer', {
   enumerable: true,
@@ -449,7 +464,7 @@ Object.defineProperty(exports, 'homepageReducer', {
   }
 });
 
-var _stats2 = __webpack_require__(35);
+var _stats2 = __webpack_require__(36);
 
 Object.defineProperty(exports, 'statsReducer', {
   enumerable: true,
@@ -458,7 +473,16 @@ Object.defineProperty(exports, 'statsReducer', {
   }
 });
 
-var _auth3 = __webpack_require__(36);
+var _sync2 = __webpack_require__(37);
+
+Object.defineProperty(exports, 'syncReducer', {
+  enumerable: true,
+  get: function get() {
+    return _sync2.syncReducer;
+  }
+});
+
+var _auth3 = __webpack_require__(38);
 
 Object.defineProperty(exports, 'selectAuthToken', {
   enumerable: true,
@@ -860,7 +884,7 @@ Object.defineProperty(exports, 'selectUserInviteReferralLink', {
   }
 });
 
-var _cost_info3 = __webpack_require__(37);
+var _cost_info3 = __webpack_require__(39);
 
 Object.defineProperty(exports, 'makeSelectFetchingCostInfoForUri', {
   enumerable: true,
@@ -893,7 +917,7 @@ Object.defineProperty(exports, 'selectFetchingCostInfo', {
   }
 });
 
-var _blacklist3 = __webpack_require__(38);
+var _blacklist3 = __webpack_require__(40);
 
 Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   enumerable: true,
@@ -902,7 +926,7 @@ Object.defineProperty(exports, 'selectBlackListedOutpoints', {
   }
 });
 
-var _homepage3 = __webpack_require__(39);
+var _homepage3 = __webpack_require__(41);
 
 Object.defineProperty(exports, 'selectFeaturedUris', {
   enumerable: true,
@@ -929,12 +953,45 @@ Object.defineProperty(exports, 'selectFetchingTrendingUris', {
   }
 });
 
-var _stats3 = __webpack_require__(40);
+var _stats3 = __webpack_require__(42);
 
 Object.defineProperty(exports, 'makeSelectViewCountForUri', {
   enumerable: true,
   get: function get() {
     return _stats3.makeSelectViewCountForUri;
+  }
+});
+
+var _sync3 = __webpack_require__(43);
+
+Object.defineProperty(exports, 'selectHasWallet', {
+  enumerable: true,
+  get: function get() {
+    return _sync3.selectHasWallet;
+  }
+});
+Object.defineProperty(exports, 'selectSyncHash', {
+  enumerable: true,
+  get: function get() {
+    return _sync3.selectSyncHash;
+  }
+});
+Object.defineProperty(exports, 'selectSetSyncErrorMessage', {
+  enumerable: true,
+  get: function get() {
+    return _sync3.selectSetSyncErrorMessage;
+  }
+});
+Object.defineProperty(exports, 'selectIsRetrievingSync', {
+  enumerable: true,
+  get: function get() {
+    return _sync3.selectIsRetrievingSync;
+  }
+});
+Object.defineProperty(exports, 'selectIsSettingSync', {
+  enumerable: true,
+  get: function get() {
+    return _sync3.selectIsSettingSync;
   }
 });
 
@@ -950,7 +1007,7 @@ var _rewards4 = __webpack_require__(11);
 
 var _rewards5 = _interopRequireDefault(_rewards4);
 
-var _subscriptions3 = __webpack_require__(41);
+var _subscriptions3 = __webpack_require__(44);
 
 var _subscriptions4 = _interopRequireDefault(_subscriptions3);
 
@@ -1102,6 +1159,13 @@ var FETCH_COST_INFO_COMPLETED = exports.FETCH_COST_INFO_COMPLETED = 'FETCH_COST_
 var FETCH_VIEW_COUNT_STARTED = exports.FETCH_VIEW_COUNT_STARTED = 'FETCH_VIEW_COUNT_STARTED';
 var FETCH_VIEW_COUNT_FAILED = exports.FETCH_VIEW_COUNT_FAILED = 'FETCH_VIEW_COUNT_FAILED';
 var FETCH_VIEW_COUNT_COMPLETED = exports.FETCH_VIEW_COUNT_COMPLETED = 'FETCH_VIEW_COUNT_COMPLETED';
+
+// Cross-device Sync
+var GET_SYNC_STARTED = exports.GET_SYNC_STARTED = 'GET_SYNC_STARTED';
+var GET_SYNC_COMPLETED = exports.GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
+var SET_SYNC_STARTED = exports.SET_SYNC_STARTED = 'SET_SYNC_STARTED';
+var SET_SYNC_FAILED = exports.SET_SYNC_FAILED = 'SET_SYNC_FAILED';
+var SET_SYNC_COMPLETED = exports.SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
 
 /***/ }),
 /* 3 */
@@ -8448,7 +8512,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// @flow
 /*:: import type { GetState } from 'types/redux';*/
 /*:: import type {
   Dispatch as ReduxDispatch,
@@ -9521,7 +9584,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// @flow
 var doFetchViewCount = exports.doFetchViewCount = function doFetchViewCount(claimId /*: string*/) {
   return function (dispatch) {
     dispatch({ type: ACTIONS.FETCH_VIEW_COUNT_STARTED });
@@ -9537,6 +9599,115 @@ var doFetchViewCount = exports.doFetchViewCount = function doFetchViewCount(clai
 
 /***/ }),
 /* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.doSetSync = doSetSync;
+exports.doGetSync = doGetSync;
+
+var _action_types = __webpack_require__(2);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+var _lbryio = __webpack_require__(3);
+
+var _lbryio2 = _interopRequireDefault(_lbryio);
+
+var _lbryRedux = __webpack_require__(4);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function doSetSync(oldHash, newHash, data) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.SET_SYNC_STARTED
+    });
+
+    _lbryio2.default.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data: data }, 'post').then(function (response) {
+      if (!response.success) {
+        return dispatch({
+          type: ACTIONS.SET_SYNC_FAILED,
+          data: { error: response.error }
+        });
+      }
+
+      var syncHash = response.data.hash;
+      dispatch({
+        type: ACTIONS.SET_SYNC_COMPLETED,
+        data: { syncHash: syncHash }
+      });
+    });
+  };
+}
+
+function doGetSync(password) {
+  return function (dispatch) {
+    dispatch({
+      type: ACTIONS.GET_SYNC_STARTED
+    });
+
+    _lbryRedux.Lbry.sync_hash().then(function (hash) {
+      _lbryio2.default.call('sync', 'get', { hash: hash }, 'post').then(function (response) {
+        if (!response.success) {
+          // user doesn't have a synced wallet
+          dispatch({
+            type: ACTIONS.GET_SYNC_COMPLETED,
+            data: { hasWallet: false, syncHash: null }
+          });
+
+          // call sync_apply to get data to sync (first time sync)
+          _lbryRedux.Lbry.sync_apply({ password: password }).then(function (_ref) {
+            var walletHash = _ref.hash,
+                data = _ref.data;
+            return dispatch(doSetSync('null', walletHash, data));
+          });
+          return;
+        }
+
+        var data = { hasWallet: true };
+        if (response.changed) {
+          var syncHash = response.data.hash;
+          data.syncHash = syncHash;
+          _lbryRedux.Lbry.sync_apply({ password: password, data: response.data.data }).then(function (_ref2) {
+            var walletHash = _ref2.hash,
+                data = _ref2.data;
+
+            if (walletHash !== syncHash) {
+              // different local hash, need to synchronise
+              dispatch(doSetSync(syncHash, walletHash, data));
+            }
+          });
+        }
+
+        dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data: data });
+      }).catch(function () {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: ACTIONS.GET_SYNC_COMPLETED,
+          data: { hasWallet: false, syncHash: null }
+        });
+
+        // call sync_apply to get data to sync
+        // first time sync. use any string for old hash
+        _lbryRedux.Lbry.sync_apply({ password: password }).then(function (_ref3) {
+          var walletHash = _ref3.hash,
+              data = _ref3.data;
+          return dispatch(doSetSync('null', walletHash, data));
+        });
+      });
+    });
+  };
+}
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9588,7 +9759,7 @@ function authReducer() {
 }
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9732,7 +9903,7 @@ function rewardsReducer() {
 }
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10004,7 +10175,7 @@ function userReducer() {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10019,7 +10190,7 @@ var _handleActions;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxUtils = __webpack_require__(32);
+var _reduxUtils = __webpack_require__(33);
 
 var _action_types = __webpack_require__(2);
 
@@ -10061,7 +10232,7 @@ var costInfoReducer = exports.costInfoReducer = (0, _reduxUtils.handleActions)((
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10094,7 +10265,7 @@ var handleActions = exports.handleActions = function handleActions(actionMap, de
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10113,7 +10284,7 @@ var _action_types = __webpack_require__(2);
 
 var ACTIONS = _interopRequireWildcard(_action_types);
 
-var _reduxUtils = __webpack_require__(32);
+var _reduxUtils = __webpack_require__(33);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -10153,7 +10324,7 @@ var blacklistReducer = exports.blacklistReducer = (0, _reduxUtils.handleActions)
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10168,7 +10339,7 @@ var _handleActions;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxUtils = __webpack_require__(32);
+var _reduxUtils = __webpack_require__(33);
 
 var _action_types = __webpack_require__(2);
 
@@ -10220,7 +10391,7 @@ var homepageReducer = exports.homepageReducer = (0, _reduxUtils.handleActions)((
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10235,7 +10406,7 @@ var _handleActions;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _reduxUtils = __webpack_require__(32);
+var _reduxUtils = __webpack_require__(33);
 
 var _action_types = __webpack_require__(2);
 
@@ -10271,7 +10442,80 @@ var statsReducer = exports.statsReducer = (0, _reduxUtils.handleActions)((_handl
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 36 */
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.syncReducer = syncReducer;
+
+var _action_types = __webpack_require__(2);
+
+var ACTIONS = _interopRequireWildcard(_action_types);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var reducers = {};
+var defaultState = {
+  hasWallet: false,
+  syncHash: null,
+  setSyncErrorMessage: null,
+  retrievingSync: false,
+  settingSync: false
+};
+
+reducers[ACTIONS.GET_SYNC_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    retrievingSync: true
+  });
+};
+
+reducers[ACTIONS.GET_SYNC_COMPLETED] = function (state, action) {
+  return Object.assign({}, state, {
+    syncHash: action.data.syncHash,
+    hasWallet: action.data.hasWallet,
+    retrievingSync: false
+  });
+};
+
+reducers[ACTIONS.SET_SYNC_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    settingSync: true,
+    setSyncErrorMessage: null
+  });
+};
+
+reducers[ACTIONS.SET_SYNC_FAILED] = function (state, action) {
+  return Object.assign({}, state, {
+    settingSync: true,
+    setSyncErrorMessage: action.data.error
+  });
+};
+
+reducers[ACTIONS.SET_SYNC_COMPLETED] = function (state, action) {
+  return Object.assign({}, state, {
+    settingSync: false,
+    setSyncErrorMessage: null,
+    hasWallet: true, // sync was successful, so the user has a synced wallet at this point
+    syncHash: action.data.syncHash
+  });
+};
+
+function syncReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments[1];
+
+  var handler = reducers[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
+/***/ }),
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10297,7 +10541,7 @@ var selectIsAuthenticating = exports.selectIsAuthenticating = (0, _reselect.crea
 });
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10341,7 +10585,7 @@ var makeSelectFetchingCostInfoForUri = exports.makeSelectFetchingCostInfoForUri 
 };
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10363,7 +10607,7 @@ var selectBlackListedOutpoints = exports.selectBlackListedOutpoints = (0, _resel
 });
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10397,7 +10641,7 @@ var selectFetchingTrendingUris = exports.selectFetchingTrendingUris = (0, _resel
 });
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10426,7 +10670,45 @@ var makeSelectViewCountForUri = exports.makeSelectViewCountForUri = function mak
 };
 
 /***/ }),
-/* 41 */
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.selectIsSettingSync = exports.selectIsRetrievingSync = exports.selectSetSyncErrorMessage = exports.selectSyncHash = exports.selectHasWallet = undefined;
+
+var _reselect = __webpack_require__(10);
+
+var selectState = function selectState(state) {
+  return state.sync || {};
+};
+
+var selectHasWallet = exports.selectHasWallet = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.hasWallet;
+});
+
+var selectSyncHash = exports.selectSyncHash = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.syncHash;
+});
+
+var selectSetSyncErrorMessage = exports.selectSetSyncErrorMessage = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.setSyncErrorMessage;
+});
+
+var selectIsRetrievingSync = exports.selectIsRetrievingSync = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.retrievingSync;
+});
+
+var selectIsSettingSync = exports.selectIsSettingSync = (0, _reselect.createSelector)(selectState, function (state) {
+  return state.settingSync;
+});
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10447,7 +10729,7 @@ var ACTIONS = _interopRequireWildcard(_action_types);
 
 var _subscriptions = __webpack_require__(22);
 
-var _reduxUtils = __webpack_require__(32);
+var _reduxUtils = __webpack_require__(33);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
