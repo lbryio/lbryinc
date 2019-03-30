@@ -8,8 +8,8 @@ export function doSetSync(oldHash, newHash, data) {
       type: ACTIONS.SET_SYNC_STARTED,
     });
 
-    Lbryio.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data }, 'post').then(
-      response => {
+    Lbryio.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data }, 'post')
+      .then(response => {
         if (!response.success) {
           return dispatch({
             type: ACTIONS.SET_SYNC_FAILED,
@@ -17,13 +17,17 @@ export function doSetSync(oldHash, newHash, data) {
           });
         }
 
-        const syncHash = response.data ? response.data.hash : newHash;
         return dispatch({
           type: ACTIONS.SET_SYNC_COMPLETED,
-          data: { syncHash },
+          data: { syncHash: response.hash },
         });
-      }
-    );
+      })
+      .catch(error =>
+        dispatch({
+          type: ACTIONS.SET_SYNC_FAILED,
+          data: { error },
+        })
+      );
   };
 }
 
@@ -36,25 +40,11 @@ export function doGetSync(password) {
     Lbry.sync_hash().then(hash => {
       Lbryio.call('sync', 'get', { hash }, 'post')
         .then(response => {
-          if (!response.success) {
-            // user doesn't have a synced wallet
-            dispatch({
-              type: ACTIONS.GET_SYNC_COMPLETED,
-              data: { hasWallet: false, syncHash: null },
-            });
-
-            // call sync_apply to get data to sync (first time sync)
-            Lbry.sync_apply({ password }).then(({ hash: walletHash, data }) =>
-              dispatch(doSetSync('null', walletHash, data))
-            );
-            return;
-          }
-
           const data = { hasWallet: true };
           if (response.changed) {
-            const syncHash = response.data.hash;
+            const syncHash = response.hash;
             data.syncHash = syncHash;
-            Lbry.sync_apply({ password, data: response.data.data }).then(
+            Lbry.sync_apply({ password, data: response.data }).then(
               ({ hash: walletHash, data: walletData }) => {
                 if (walletHash !== syncHash) {
                   // different local hash, need to synchronise
