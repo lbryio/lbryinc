@@ -1,4 +1,6 @@
 {
-  "presets": ["env", "stage-2"],
-  "plugins": ["transform-flow-comments"]
+  "presets": ["@babel/preset-env"],
+  "plugins": [
+    "@babel/plugin-transform-flow-strip-types"
+  ]
 }

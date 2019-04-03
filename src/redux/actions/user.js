@@ -7,7 +7,6 @@ import {
 } from 'redux/selectors/user';
 import rewards from 'rewards';
 import Lbryio from 'lbryio';
-import Promise from 'bluebird';
 
 export function doFetchInviteStatus() {
   return dispatch => {
