@@ -1199,7 +1199,7 @@ var Lbryio = {
   authenticationPromise: null,
   exchangePromise: null,
   exchangeLastFetched: null,
-  CONNECTION_STRING: 'https://api.testnet.lbry.tech/'
+  CONNECTION_STRING: 'https://api.lbry.com/'
 };
 
 var EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
@@ -1358,7 +1358,7 @@ Lbryio.authenticate = function () {
               Lbryio.authToken = response.auth_token;
               res(response);
             }).catch(function (error) {
-              return rej();
+              return rej(error);
             });
           });
         });
@@ -8512,6 +8512,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// @flow
 /*:: import type { GetState } from 'types/redux';*/
 /*:: import type {
   Dispatch as ReduxDispatch,
@@ -9584,6 +9585,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// @flow
 var doFetchViewCount = exports.doFetchViewCount = function doFetchViewCount(claimId /*: string*/) {
   return function (dispatch) {
     dispatch({ type: ACTIONS.FETCH_VIEW_COUNT_STARTED });
