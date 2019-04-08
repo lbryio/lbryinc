@@ -16,9 +16,6 @@ import * as ACTIONS from 'constants/action_types';
 import * as NOTIFICATION_TYPES from 'constants/subscriptions';
 import Lbryio from 'lbryio';
 import rewards from 'rewards';
-import Promise from 'bluebird';
-// import * as SETTINGS from 'constants/settings';
-// import { makeSelectClientSetting } from 'redux/selectors/settings';
 
 const CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
 const SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
