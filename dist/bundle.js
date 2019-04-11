@@ -9632,7 +9632,9 @@ function doSetSync(oldHash, newHash, data) {
       type: ACTIONS.SET_SYNC_STARTED
     });
 
+    console.log('/sync/set with old_hash: ' + oldHash + ', new_hash: ' + newHash + ', data: ' + data);
     _lbryio2.default.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data: data }, 'post').then(function (response) {
+      console.log(response);
       if (!response.success) {
         return dispatch({
           type: ACTIONS.SET_SYNC_FAILED,
@@ -9645,7 +9647,8 @@ function doSetSync(oldHash, newHash, data) {
         data: { syncHash: response.hash }
       });
     }).catch(function (error) {
-      return dispatch({
+      console.log(error);
+      dispatch({
         type: ACTIONS.SET_SYNC_FAILED,
         data: { error: error }
       });
@@ -9660,7 +9663,9 @@ function doGetSync(password) {
     });
 
     _lbryRedux.Lbry.sync_hash().then(function (hash) {
+      console.log('/sync/get with hash: ' + hash + ', password: ' + password);
       _lbryio2.default.call('sync', 'get', { hash: hash }, 'post').then(function (response) {
+        console.log(response);
         var data = { hasWallet: true };
         if (response.changed) {
           var syncHash = response.hash;
@@ -9677,7 +9682,8 @@ function doGetSync(password) {
         }
 
         dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data: data });
-      }).catch(function () {
+      }).catch(function (err) {
+        console.log(err);
         // user doesn't have a synced wallet
         dispatch({
           type: ACTIONS.GET_SYNC_COMPLETED,
