@@ -87,10 +87,7 @@ export {
   selectFetchingRewards,
   selectUnclaimedRewardValue,
   selectClaimsPendingByType,
-  selectIsClaimRewardPending,
   selectClaimErrorsByType,
-  selectClaimRewardError,
-  selectRewardByType,
   selectRewardContentClaimIds,
   selectReferralReward,
 } from 'redux/selectors/rewards';
@@ -147,7 +144,6 @@ export {
   makeSelectFetchingCostInfoForUri,
   makeSelectCostInfoForUri,
   selectAllCostInfoByUri,
-  selectCostForCurrentPageUri,
   selectFetchingCostInfo,
 } from 'redux/selectors/cost_info';
 export { selectBlackListedOutpoints } from 'redux/selectors/blacklist';
