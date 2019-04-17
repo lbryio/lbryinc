@@ -8,10 +8,8 @@ export function doSetSync(oldHash, newHash, data) {
       type: ACTIONS.SET_SYNC_STARTED,
     });
 
-    console.log(`/sync/set with old_hash: ${oldHash}, new_hash: ${newHash}, data: ${data}`);
     Lbryio.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data }, 'post')
       .then(response => {
-        console.log(response);
         if (!response.success) {
           return dispatch({
             type: ACTIONS.SET_SYNC_FAILED,
@@ -25,7 +23,6 @@ export function doSetSync(oldHash, newHash, data) {
         });
       })
       .catch(error => {
-        console.log(error);
         dispatch({
           type: ACTIONS.SET_SYNC_FAILED,
           data: { error },
@@ -41,10 +38,8 @@ export function doGetSync(password) {
     });
 
     Lbry.sync_hash().then(hash => {
-      console.log(`/sync/get with hash: ${hash}, password: ${password}`);
       Lbryio.call('sync', 'get', { hash }, 'post')
         .then(response => {
-          console.log(response);
           const data = { hasWallet: true };
           if (response.changed) {
             const syncHash = response.hash;
@@ -61,8 +56,7 @@ export function doGetSync(password) {
 
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
           // user doesn't have a synced wallet
           dispatch({
             type: ACTIONS.GET_SYNC_COMPLETED,
