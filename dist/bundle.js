@@ -3406,14 +3406,11 @@ function doSetSync(oldHash, newHash, data) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]
     });
-    console.log("/sync/set with old_hash: ".concat(oldHash, ", new_hash: ").concat(newHash, ", data: ").concat(data));
     lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'set', {
       old_hash: oldHash,
       new_hash: newHash,
       data: data
     }, 'post').then(function (response) {
-      console.log(response);
-
       if (!response.success) {
         return dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"],
@@ -3430,7 +3427,6 @@ function doSetSync(oldHash, newHash, data) {
         }
       });
     })["catch"](function (error) {
-      console.log(error);
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"],
         data: {
@@ -3446,11 +3442,9 @@ function doGetSync(password) {
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
     });
     lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
-      console.log("/sync/get with hash: ".concat(hash, ", password: ").concat(password));
       lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
         hash: hash
       }, 'post').then(function (response) {
-        console.log(response);
         var data = {
           hasWallet: true
         };
@@ -3476,9 +3470,8 @@ function doGetSync(password) {
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
           data: data
         });
-      })["catch"](function (err) {
-        console.log(err); // user doesn't have a synced wallet
-
+      })["catch"](function () {
+        // user doesn't have a synced wallet
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
           data: {

@@ -1979,14 +1979,11 @@ function doSetSync(oldHash, newHash, data) {
     dispatch({
       type: SET_SYNC_STARTED
     });
-    console.log(`/sync/set with old_hash: ${oldHash}, new_hash: ${newHash}, data: ${data}`);
     Lbryio.call('sync', 'set', {
       old_hash: oldHash,
       new_hash: newHash,
       data
     }, 'post').then(response => {
-      console.log(response);
-
       if (!response.success) {
         return dispatch({
           type: SET_SYNC_FAILED,
@@ -2003,7 +2000,6 @@ function doSetSync(oldHash, newHash, data) {
         }
       });
     }).catch(error => {
-      console.log(error);
       dispatch({
         type: SET_SYNC_FAILED,
         data: {
@@ -2019,11 +2015,9 @@ function doGetSync(password) {
       type: GET_SYNC_STARTED
     });
     lbryRedux.Lbry.sync_hash().then(hash => {
-      console.log(`/sync/get with hash: ${hash}, password: ${password}`);
       Lbryio.call('sync', 'get', {
         hash
       }, 'post').then(response => {
-        console.log(response);
         const data = {
           hasWallet: true
         };
@@ -2049,9 +2043,8 @@ function doGetSync(password) {
           type: GET_SYNC_COMPLETED,
           data
         });
-      }).catch(err => {
-        console.log(err); // user doesn't have a synced wallet
-
+      }).catch(() => {
+        // user doesn't have a synced wallet
         dispatch({
           type: GET_SYNC_COMPLETED,
           data: {
