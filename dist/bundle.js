@@ -3411,11 +3411,11 @@ function doSetSync(oldHash, newHash, data) {
       new_hash: newHash,
       data: data
     }, 'post').then(function (response) {
-      if (!response.success) {
+      if (!response.hash) {
         return dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"],
           data: {
-            error: response.error
+            error: 'No hash returned for sync/set.'
           }
         });
       }

@@ -10,10 +10,10 @@ export function doSetSync(oldHash, newHash, data) {
 
     Lbryio.call('sync', 'set', { old_hash: oldHash, new_hash: newHash, data }, 'post')
       .then(response => {
-        if (!response.success) {
+        if (!response.hash) {
           return dispatch({
             type: ACTIONS.SET_SYNC_FAILED,
-            data: { error: response.error },
+            data: { error: 'No hash returned for sync/set.' },
           });
         }
 
