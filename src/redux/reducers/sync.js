@@ -2,7 +2,7 @@ import * as ACTIONS from 'constants/action_types';
 
 const reducers = {};
 const defaultState = {
-  hasWallet: false,
+  hasSyncedWallet: false,
   syncHash: null,
   setSyncErrorMessage: null,
   retrievingSync: false,
@@ -17,7 +17,7 @@ reducers[ACTIONS.GET_SYNC_STARTED] = state =>
 reducers[ACTIONS.GET_SYNC_COMPLETED] = (state, action) =>
   Object.assign({}, state, {
     syncHash: action.data.syncHash,
-    hasWallet: action.data.hasWallet,
+    hasSyncedWallet: action.data.hasSyncedWallet,
     retrievingSync: false,
   });
 
@@ -37,7 +37,7 @@ reducers[ACTIONS.SET_SYNC_COMPLETED] = (state, action) =>
   Object.assign({}, state, {
     settingSync: false,
     setSyncErrorMessage: null,
-    hasWallet: true, // sync was successful, so the user has a synced wallet at this point
+    hasSyncedWallet: true, // sync was successful, so the user has a synced wallet at this point
     syncHash: action.data.syncHash,
   });
 

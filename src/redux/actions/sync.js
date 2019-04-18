@@ -40,7 +40,7 @@ export function doGetSync(password) {
     Lbry.sync_hash().then(hash => {
       Lbryio.call('sync', 'get', { hash }, 'post')
         .then(response => {
-          const data = { hasWallet: true };
+          const data = { hasSyncedWallet: true };
           if (response.changed) {
             const syncHash = response.hash;
             data.syncHash = syncHash;
@@ -60,7 +60,7 @@ export function doGetSync(password) {
           // user doesn't have a synced wallet
           dispatch({
             type: ACTIONS.GET_SYNC_COMPLETED,
-            data: { hasWallet: false, syncHash: null },
+            data: { hasSyncedWallet: false, syncHash: null },
           });
 
           // call sync_apply to get data to sync

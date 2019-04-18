@@ -155,7 +155,7 @@ export {
 } from 'redux/selectors/homepage';
 export { makeSelectViewCountForUri } from 'redux/selectors/stats';
 export {
-  selectHasWallet,
+  selectHasSyncedWallet,
   selectSyncHash,
   selectSetSyncErrorMessage,
   selectIsRetrievingSync,

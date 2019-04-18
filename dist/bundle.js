@@ -389,7 +389,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_28__["makeSelectViewCountForUri"]; });
 
 /* harmony import */ var redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(39);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectHasWallet"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectHasSyncedWallet"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSyncHash"]; });
 
@@ -3446,7 +3446,7 @@ function doGetSync(password) {
         hash: hash
       }, 'post').then(function (response) {
         var data = {
-          hasWallet: true
+          hasSyncedWallet: true
         };
 
         if (response.changed) {
@@ -3475,7 +3475,7 @@ function doGetSync(password) {
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
           data: {
-            hasWallet: false,
+            hasSyncedWallet: false,
             syncHash: null
           }
         }); // call sync_apply to get data to sync
@@ -4125,7 +4125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var reducers = {};
 var defaultState = {
-  hasWallet: false,
+  hasSyncedWallet: false,
   syncHash: null,
   setSyncErrorMessage: null,
   retrievingSync: false,
@@ -4141,7 +4141,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"]] = function (state, action) {
   return Object.assign({}, state, {
     syncHash: action.data.syncHash,
-    hasWallet: action.data.hasWallet,
+    hasSyncedWallet: action.data.hasSyncedWallet,
     retrievingSync: false
   });
 };
@@ -4164,7 +4164,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED
   return Object.assign({}, state, {
     settingSync: false,
     setSyncErrorMessage: null,
-    hasWallet: true,
+    hasSyncedWallet: true,
     // sync was successful, so the user has a synced wallet at this point
     syncHash: action.data.syncHash
   });
@@ -4318,7 +4318,7 @@ var makeSelectViewCountForUri = function makeSelectViewCountForUri(uri) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasWallet", function() { return selectHasWallet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return selectHasSyncedWallet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return selectSyncHash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return selectSetSyncErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsRetrievingSync", function() { return selectIsRetrievingSync; });
@@ -4331,8 +4331,8 @@ var selectState = function selectState(state) {
   return state.sync || {};
 };
 
-var selectHasWallet = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.hasWallet;
+var selectHasSyncedWallet = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.hasSyncedWallet;
 });
 var selectSyncHash = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.syncHash;

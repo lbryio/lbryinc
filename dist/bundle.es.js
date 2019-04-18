@@ -2019,7 +2019,7 @@ function doGetSync(password) {
         hash
       }, 'post').then(response => {
         const data = {
-          hasWallet: true
+          hasSyncedWallet: true
         };
 
         if (response.changed) {
@@ -2048,7 +2048,7 @@ function doGetSync(password) {
         dispatch({
           type: GET_SYNC_COMPLETED,
           data: {
-            hasWallet: false,
+            hasSyncedWallet: false,
             syncHash: null
           }
         }); // call sync_apply to get data to sync
@@ -2538,7 +2538,7 @@ const statsReducer = handleActions({
 
 const reducers$3 = {};
 const defaultState$8 = {
-  hasWallet: false,
+  hasSyncedWallet: false,
   syncHash: null,
   setSyncErrorMessage: null,
   retrievingSync: false,
@@ -2551,7 +2551,7 @@ reducers$3[GET_SYNC_STARTED] = state => Object.assign({}, state, {
 
 reducers$3[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   syncHash: action.data.syncHash,
-  hasWallet: action.data.hasWallet,
+  hasSyncedWallet: action.data.hasSyncedWallet,
   retrievingSync: false
 });
 
@@ -2568,7 +2568,7 @@ reducers$3[SET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
 reducers$3[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   settingSync: false,
   setSyncErrorMessage: null,
-  hasWallet: true,
+  hasSyncedWallet: true,
   // sync was successful, so the user has a synced wallet at this point
   syncHash: action.data.syncHash
 });
@@ -2607,7 +2607,7 @@ const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeS
 
 const selectState$8 = state => state.sync || {};
 
-const selectHasWallet = reselect.createSelector(selectState$8, state => state.hasWallet);
+const selectHasSyncedWallet = reselect.createSelector(selectState$8, state => state.hasSyncedWallet);
 const selectSyncHash = reselect.createSelector(selectState$8, state => state.syncHash);
 const selectSetSyncErrorMessage = reselect.createSelector(selectState$8, state => state.setSyncErrorMessage);
 const selectIsRetrievingSync = reselect.createSelector(selectState$8, state => state.retrievingSync);
@@ -2698,7 +2698,7 @@ exports.selectFetchingFeaturedUris = selectFetchingFeaturedUris;
 exports.selectFetchingRewards = selectFetchingRewards;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
 exports.selectFirstRunCompleted = selectFirstRunCompleted;
-exports.selectHasWallet = selectHasWallet;
+exports.selectHasSyncedWallet = selectHasSyncedWallet;
 exports.selectIdentityVerifyErrorMessage = selectIdentityVerifyErrorMessage;
 exports.selectIdentityVerifyIsPending = selectIdentityVerifyIsPending;
 exports.selectIsAuthenticating = selectIsAuthenticating;

@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 const selectState = state => state.sync || {};
 
-export const selectHasWallet = createSelector(selectState, state => state.hasWallet);
+export const selectHasSyncedWallet = createSelector(selectState, state => state.hasSyncedWallet);
 
 export const selectSyncHash = createSelector(selectState, state => state.syncHash);
 
