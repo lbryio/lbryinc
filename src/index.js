@@ -59,6 +59,7 @@ export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
 export { doFetchFeaturedUris, doFetchTrendingUris } from 'redux/actions/homepage';
 export { doFetchViewCount } from 'redux/actions/stats';
+export { doGetSync, doSetSync } from 'redux/actions/sync';
 
 // reducers
 export { authReducer } from 'redux/reducers/auth';
@@ -69,6 +70,7 @@ export { costInfoReducer } from 'redux/reducers/cost_info';
 export { blacklistReducer } from 'redux/reducers/blacklist';
 export { homepageReducer } from 'redux/reducers/homepage';
 export { statsReducer } from 'redux/reducers/stats';
+export { syncReducer } from 'redux/reducers/sync';
 
 // selectors
 export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
@@ -152,3 +154,10 @@ export {
   selectFetchingTrendingUris,
 } from 'redux/selectors/homepage';
 export { makeSelectViewCountForUri } from 'redux/selectors/stats';
+export {
+  selectHasSyncedWallet,
+  selectSyncHash,
+  selectSetSyncErrorMessage,
+  selectIsRetrievingSync,
+  selectIsSettingSync,
+} from 'redux/selectors/sync';

@@ -160,7 +160,7 @@ Lbryio.authenticate = () => {
                   Lbryio.authToken = response.auth_token;
                   res(response);
                 })
-                .catch(() => rej());
+                .catch(error => rej(error));
             });
           });
         })
