@@ -20,10 +20,7 @@ export function doFetchCostInfoForUri(uri) {
       });
     }
 
-    const fee =
-      claim.value && claim.value.stream && claim.value.stream.metadata
-        ? claim.value.stream.metadata.fee
-        : undefined;
+    const fee = claim.value ? claim.value.fee : undefined;
 
     if (fee === undefined) {
       resolve({ cost: 0, includesData: true });

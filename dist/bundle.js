@@ -3157,7 +3157,7 @@ function doFetchCostInfoForUri(uri) {
       });
     }
 
-    var fee = claim.value && claim.value.stream && claim.value.stream.metadata ? claim.value.stream.metadata.fee : undefined;
+    var fee = claim.value ? claim.value.fee : undefined;
 
     if (fee === undefined) {
       resolve({
