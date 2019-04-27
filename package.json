@@ -32,7 +32,7 @@
     "reselect": "^3.0.0"
   },
   "peerDependencies": {
-    "lbry-redux": "lbryio/lbry-redux#sync"
+    "lbry-redux": "lbryio/lbry-redux"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
