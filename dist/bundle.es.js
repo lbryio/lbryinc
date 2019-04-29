@@ -1544,18 +1544,20 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
 
   if (!savedSubscription) {
     throw Error(`Trying to find new content for ${subscriptionUri} but it doesn't exist in your subscriptions`);
-  } // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
+  }
 
+  const {
+    claimId
+  } = lbryRedux.parseURI(subscriptionUri); // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
 
-  lbryRedux.Lbry.claim_list_by_channel({
-    uri: subscriptionUri,
+  lbryRedux.Lbry.claim_search({
+    channel_id: claimId,
     page: 1,
     page_size: PAGE_SIZE
-  }).then(claimListByChannel => {
-    const claimResult = claimListByChannel[subscriptionUri] || {};
+  }).then(result => {
     const {
-      claims_in_channel: claimsInChannel
-    } = claimResult; // may happen if subscribed to an abandoned channel or an empty channel
+      items: claimsInChannel
+    } = result; // may happen if subscribed to an abandoned channel or an empty channel
 
     if (!claimsInChannel || !claimsInChannel.length) {
       return;
