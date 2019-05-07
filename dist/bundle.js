@@ -1081,7 +1081,7 @@ rewards.claimReward = function (type, rewardParams) {
 
       switch (type) {
         case rewards.TYPE_FIRST_CHANNEL:
-          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].claim_list_mine().then(function (claims) {
+          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].claim_list().then(function (claims) {
             var claim = claims.find(function (foundClaim) {
               return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });
@@ -1096,7 +1096,7 @@ rewards.claimReward = function (type, rewardParams) {
           break;
 
         case rewards.TYPE_FIRST_PUBLISH:
-          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].claim_list_mine().then(function (claims) {
+          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].claim_list().then(function (claims) {
             var claim = claims.find(function (foundClaim) {
               return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
             });

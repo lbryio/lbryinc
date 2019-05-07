@@ -53,7 +53,7 @@ rewards.claimReward = (type, rewardParams) => {
 
       switch (type) {
         case rewards.TYPE_FIRST_CHANNEL:
-          Lbry.claim_list_mine()
+          Lbry.claim_list()
             .then(claims => {
               const claim = claims.find(
                 foundClaim =>
@@ -73,7 +73,7 @@ rewards.claimReward = (type, rewardParams) => {
           break;
 
         case rewards.TYPE_FIRST_PUBLISH:
-          Lbry.claim_list_mine()
+          Lbry.claim_list()
             .then(claims => {
               const claim = claims.find(
                 foundClaim =>
