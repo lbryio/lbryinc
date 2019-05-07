@@ -400,7 +400,7 @@ rewards.claimReward = (type, rewardParams) => {
 
       switch (type) {
         case rewards.TYPE_FIRST_CHANNEL:
-          lbryRedux.Lbry.claim_list_mine().then(claims => {
+          lbryRedux.Lbry.claim_list().then(claims => {
             const claim = claims.find(foundClaim => foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim');
 
             if (claim) {
@@ -413,7 +413,7 @@ rewards.claimReward = (type, rewardParams) => {
           break;
 
         case rewards.TYPE_FIRST_PUBLISH:
-          lbryRedux.Lbry.claim_list_mine().then(claims => {
+          lbryRedux.Lbry.claim_list().then(claims => {
             const claim = claims.find(foundClaim => foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim');
 
             if (claim) {
