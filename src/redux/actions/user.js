@@ -184,7 +184,7 @@ export function doUserPhoneVerify(verificationCode) {
         if (user.is_identity_verified) {
           dispatch({
             type: ACTIONS.USER_PHONE_VERIFY_SUCCESS,
-            data: { user },
+            data: { user: { ...user, phone_number: phoneNumber } },
           });
           dispatch(doClaimRewardType(rewards.TYPE_NEW_USER));
         }

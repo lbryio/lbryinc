@@ -872,7 +872,9 @@ function doUserPhoneVerify(verificationCode) {
         dispatch({
           type: lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS,
           data: {
-            user
+            user: { ...user,
+              phone_number: phoneNumber
+            }
           }
         });
         dispatch(doClaimRewardType(rewards.TYPE_NEW_USER));
