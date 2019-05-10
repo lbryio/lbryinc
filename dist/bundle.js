@@ -212,6 +212,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSetSync"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSetDefaultAccount"]; });
+
 /* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(26);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__["authReducer"]; });
 
@@ -507,6 +509,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_STARTED", function() { return SET_SYNC_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_FAILED", function() { return SET_SYNC_FAILED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_COMPLETED", function() { return SET_SYNC_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DEFAULT_ACCOUNT", function() { return SET_DEFAULT_ACCOUNT; });
 // Auth Token
 var GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
 var GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
@@ -577,6 +580,7 @@ var GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
 var SET_SYNC_STARTED = 'SET_SYNC_STARTED';
 var SET_SYNC_FAILED = 'SET_SYNC_FAILED';
 var SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
+var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 
 /***/ }),
 /* 2 */
@@ -3395,6 +3399,7 @@ var doFetchViewCount = function doFetchViewCount(claimId) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return doSetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return doSetDefaultAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return doGetSync; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
@@ -3438,6 +3443,38 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
+function doSetDefaultAccount() {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_DEFAULT_ACCOUNT"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_list().then(function (accountList) {
+      var accounts = accountList.lbc_mainnet;
+      var defaultId;
+
+      for (var i = 0; i < accounts.length; i++) {
+        if (accounts[i].satoshis > 0) {
+          defaultId = accounts[i].id;
+          break;
+        }
+      } // In a case where there's no balance on either account
+      // assume the second (which is created after sync) as default
+
+
+      if (!defaultId && accounts.length > 1) {
+        defaultId = accounts[1].id;
+      } // Set the default account
+
+
+      if (defaultId) {
+        lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_set({
+          account_id: defaultId,
+          "default": true
+        });
+      }
+    });
+  };
+}
 function doGetSync(password) {
   return function (dispatch) {
     dispatch({
@@ -3464,7 +3501,10 @@ function doGetSync(password) {
             if (walletHash !== syncHash) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
-            }
+            } // set the default account
+
+
+            dispatch(doSetDefaultAccount());
           });
         }
 
