@@ -78,6 +78,7 @@ const GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
 const SET_SYNC_STARTED = 'SET_SYNC_STARTED';
 const SET_SYNC_FAILED = 'SET_SYNC_FAILED';
 const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
+const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -142,7 +143,8 @@ var action_types = /*#__PURE__*/Object.freeze({
   GET_SYNC_COMPLETED: GET_SYNC_COMPLETED,
   SET_SYNC_STARTED: SET_SYNC_STARTED,
   SET_SYNC_FAILED: SET_SYNC_FAILED,
-  SET_SYNC_COMPLETED: SET_SYNC_COMPLETED
+  SET_SYNC_COMPLETED: SET_SYNC_COMPLETED,
+  SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT
 });
 
 const Lbryio = {
@@ -2011,6 +2013,40 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
+function doSetDefaultAccount() {
+  return dispatch => {
+    dispatch({
+      type: SET_DEFAULT_ACCOUNT
+    });
+    lbryRedux.Lbry.account_list().then(accountList => {
+      const {
+        lbc_mainnet: accounts
+      } = accountList;
+      let defaultId;
+
+      for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].satoshis > 0) {
+          defaultId = accounts[i].id;
+          break;
+        }
+      } // In a case where there's no balance on either account
+      // assume the second (which is created after sync) as default
+
+
+      if (!defaultId && accounts.length > 1) {
+        defaultId = accounts[1].id;
+      } // Set the default account
+
+
+      if (defaultId) {
+        lbryRedux.Lbry.account_set({
+          account_id: defaultId,
+          default: true
+        });
+      }
+    });
+  };
+}
 function doGetSync(password) {
   return dispatch => {
     dispatch({
@@ -2037,7 +2073,10 @@ function doGetSync(password) {
             if (walletHash !== syncHash) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
-            }
+            } // set the default account
+
+
+            dispatch(doSetDefaultAccount());
           });
         }
 
@@ -2648,6 +2687,7 @@ exports.doInstallNew = doInstallNew;
 exports.doRemoveUnreadSubscription = doRemoveUnreadSubscription;
 exports.doRemoveUnreadSubscriptions = doRemoveUnreadSubscriptions;
 exports.doRewardList = doRewardList;
+exports.doSetDefaultAccount = doSetDefaultAccount;
 exports.doSetSync = doSetSync;
 exports.doSetViewMode = doSetViewMode;
 exports.doShowSuggestedSubs = doShowSuggestedSubs;

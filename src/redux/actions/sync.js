@@ -31,6 +31,36 @@ export function doSetSync(oldHash, newHash, data) {
   };
 }
 
+export function doSetDefaultAccount() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.SET_DEFAULT_ACCOUNT,
+    });
+
+    Lbry.account_list().then(accountList => {
+      const { lbc_mainnet: accounts } = accountList;
+      let defaultId;
+      for (let i = 0; i < accounts.length; ++i) {
+        if (accounts[i].satoshis > 0) {
+          defaultId = accounts[i].id;
+          break;
+        }
+      }
+
+      // In a case where there's no balance on either account
+      // assume the second (which is created after sync) as default
+      if (!defaultId && accounts.length > 1) {
+        defaultId = accounts[1].id;
+      }
+
+      // Set the default account
+      if (defaultId) {
+        Lbry.account_set({ account_id: defaultId, default: true });
+      }
+    });
+  };
+}
+
 export function doGetSync(password) {
   return dispatch => {
     dispatch({
@@ -50,6 +80,9 @@ export function doGetSync(password) {
                   // different local hash, need to synchronise
                   dispatch(doSetSync(syncHash, walletHash, walletData));
                 }
+
+                // set the default account
+                dispatch(doSetDefaultAccount());
               }
             );
           }
