@@ -59,7 +59,7 @@ export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
 export { doFetchFeaturedUris, doFetchTrendingUris } from 'redux/actions/homepage';
 export { doFetchViewCount } from 'redux/actions/stats';
-export { doGetSync, doSetSync, doSetDefaultAccount } from 'redux/actions/sync';
+export { doCheckSync, doGetSync, doSetSync, doSetDefaultAccount } from 'redux/actions/sync';
 
 // reducers
 export { authReducer } from 'redux/reducers/auth';

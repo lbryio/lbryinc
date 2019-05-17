@@ -208,6 +208,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchViewCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_11__["doFetchViewCount"]; });
 
 /* harmony import */ var redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(25);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doCheckSync"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doGetSync"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSetSync"]; });
@@ -3401,6 +3403,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return doSetSync; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return doSetDefaultAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return doGetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return doCheckSync; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
@@ -3452,7 +3455,7 @@ function doSetDefaultAccount() {
       var accounts = accountList.lbc_mainnet;
       var defaultId;
 
-      for (var i = 0; i < accounts.length; i++) {
+      for (var i = 0; i < accounts.length; ++i) {
         if (accounts[i].satoshis > 0) {
           defaultId = accounts[i].id;
           break;
@@ -3529,6 +3532,35 @@ function doGetSync(password) {
           var walletHash = _ref2.hash,
               data = _ref2.data;
           return dispatch(doSetSync(null, walletHash, data));
+        });
+      });
+    });
+  };
+}
+function doCheckSync() {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
+      lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post').then(function (response) {
+        var data = {
+          hasSyncedWallet: true
+        };
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: data
+        });
+      })["catch"](function () {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: {
+            hasSyncedWallet: false,
+            syncHash: null
+          }
         });
       });
     });

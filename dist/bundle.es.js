@@ -2024,7 +2024,7 @@ function doSetDefaultAccount() {
       } = accountList;
       let defaultId;
 
-      for (let i = 0; i < accounts.length; i++) {
+      for (let i = 0; i < accounts.length; ++i) {
         if (accounts[i].satoshis > 0) {
           defaultId = accounts[i].id;
           break;
@@ -2101,6 +2101,35 @@ function doGetSync(password) {
           hash: walletHash,
           data
         }) => dispatch(doSetSync(null, walletHash, data)));
+      });
+    });
+  };
+}
+function doCheckSync() {
+  return dispatch => {
+    dispatch({
+      type: GET_SYNC_STARTED
+    });
+    lbryRedux.Lbry.sync_hash().then(hash => {
+      Lbryio.call('sync', 'get', {
+        hash
+      }, 'post').then(response => {
+        const data = {
+          hasSyncedWallet: true
+        };
+        dispatch({
+          type: GET_SYNC_COMPLETED,
+          data
+        });
+      }).catch(() => {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: GET_SYNC_COMPLETED,
+          data: {
+            hasSyncedWallet: false,
+            syncHash: null
+          }
+        });
       });
     });
   };
@@ -2668,6 +2697,7 @@ exports.doChannelUnsubscribe = doChannelUnsubscribe;
 exports.doCheckSubscription = doCheckSubscription;
 exports.doCheckSubscriptions = doCheckSubscriptions;
 exports.doCheckSubscriptionsInit = doCheckSubscriptionsInit;
+exports.doCheckSync = doCheckSync;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;

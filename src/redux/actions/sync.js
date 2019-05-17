@@ -105,3 +105,26 @@ export function doGetSync(password) {
     });
   };
 }
+
+export function doCheckSync() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.GET_SYNC_STARTED,
+    });
+
+    Lbry.sync_hash().then(hash => {
+      Lbryio.call('sync', 'get', { hash }, 'post')
+        .then(() => {
+          const data = { hasSyncedWallet: true };
+          dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
+        })
+        .catch(() => {
+          // user doesn't have a synced wallet
+          dispatch({
+            type: ACTIONS.GET_SYNC_COMPLETED,
+            data: { hasSyncedWallet: false, syncHash: null },
+          });
+        });
+    });
+  };
+}
