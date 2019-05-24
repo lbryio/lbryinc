@@ -3575,11 +3575,11 @@ function doSyncApply(syncHash, syncData, password) {
 
 
       dispatch(doSetDefaultAccount());
-    })["catch"](function (error) {
+    })["catch"](function () {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"],
         data: {
-          error: 'Invalid password. Please provide the password for your previously synchronised wallet.'
+          error: 'Invalid password specified. Please enter the password for your previously synchronised wallet.'
         }
       });
     });
