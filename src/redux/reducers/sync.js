@@ -4,41 +4,63 @@ const reducers = {};
 const defaultState = {
   hasSyncedWallet: false,
   syncHash: null,
+  syncData: null,
   setSyncErrorMessage: null,
-  retrievingSync: false,
-  settingSync: false,
+  syncApplyErrorMessage: '',
+  syncApplyIsPending: false,
+  getSyncIsPending: false,
+  setSyncIsPending: false,
 };
 
 reducers[ACTIONS.GET_SYNC_STARTED] = state =>
   Object.assign({}, state, {
-    retrievingSync: true,
+    getSyncIsPending: true,
   });
 
 reducers[ACTIONS.GET_SYNC_COMPLETED] = (state, action) =>
   Object.assign({}, state, {
     syncHash: action.data.syncHash,
+    syncData: action.data.syncData,
     hasSyncedWallet: action.data.hasSyncedWallet,
-    retrievingSync: false,
+    getSyncIsPending: false,
   });
 
 reducers[ACTIONS.SET_SYNC_STARTED] = state =>
   Object.assign({}, state, {
-    settingSync: true,
+    setSyncIsPending: true,
     setSyncErrorMessage: null,
   });
 
 reducers[ACTIONS.SET_SYNC_FAILED] = (state, action) =>
   Object.assign({}, state, {
-    settingSync: true,
+    setSyncIsPending: false,
     setSyncErrorMessage: action.data.error,
   });
 
 reducers[ACTIONS.SET_SYNC_COMPLETED] = (state, action) =>
   Object.assign({}, state, {
-    settingSync: false,
+    setSyncIsPending: false,
     setSyncErrorMessage: null,
     hasSyncedWallet: true, // sync was successful, so the user has a synced wallet at this point
     syncHash: action.data.syncHash,
+  });
+
+reducers[ACTIONS.SYNC_APPLY_STARTED] = state =>
+  Object.assign({}, state, {
+    syncApplyIsPending: true,
+    syncApplyErrorMessage: '',
+  });
+
+reducers[ACTIONS.SYNC_APPLY_COMPLETED] = state =>
+  Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: '',
+  });
+
+reducers[ACTIONS.SYNC_APPLY_FAILED] = (state, action) =>
+  Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: action.data.error,
   });
 
 export function syncReducer(state = defaultState, action) {

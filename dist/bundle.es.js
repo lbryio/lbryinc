@@ -79,6 +79,9 @@ const SET_SYNC_STARTED = 'SET_SYNC_STARTED';
 const SET_SYNC_FAILED = 'SET_SYNC_FAILED';
 const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
 const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
+const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
+const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
+const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -144,7 +147,10 @@ var action_types = /*#__PURE__*/Object.freeze({
   SET_SYNC_STARTED: SET_SYNC_STARTED,
   SET_SYNC_FAILED: SET_SYNC_FAILED,
   SET_SYNC_COMPLETED: SET_SYNC_COMPLETED,
-  SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT
+  SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
+  SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
+  SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
+  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED
 });
 
 const Lbryio = {
@@ -2063,6 +2069,7 @@ function doGetSync(password) {
         if (response.changed) {
           const syncHash = response.hash;
           data.syncHash = syncHash;
+          data.syncData = response.data;
           lbryRedux.Lbry.sync_apply({
             password,
             data: response.data
@@ -2105,6 +2112,39 @@ function doGetSync(password) {
     });
   };
 }
+function doSyncApply(syncHash, syncData, password) {
+  return dispatch => {
+    dispatch({
+      type: SYNC_APPLY_STARTED
+    });
+    lbryRedux.Lbry.sync_apply({
+      password,
+      data: syncData
+    }).then(({
+      hash: walletHash,
+      data: walletData
+    }) => {
+      dispatch({
+        type: SYNC_APPLY_COMPLETED
+      });
+
+      if (walletHash !== syncHash) {
+        // different local hash, need to synchronise
+        dispatch(doSetSync(syncHash, walletHash, walletData));
+      } // set the default account
+
+
+      dispatch(doSetDefaultAccount());
+    }).catch(error => {
+      dispatch({
+        type: SYNC_APPLY_FAILED,
+        data: {
+          error: 'Invalid password. Please provide the password for your previously synchronised wallet.'
+        }
+      });
+    });
+  };
+}
 function doCheckSync() {
   return dispatch => {
     dispatch({
@@ -2115,7 +2155,9 @@ function doCheckSync() {
         hash
       }, 'post').then(response => {
         const data = {
-          hasSyncedWallet: true
+          hasSyncedWallet: true,
+          syncHash: response.hash,
+          syncData: response.data
         };
         dispatch({
           type: GET_SYNC_COMPLETED,
@@ -2610,37 +2652,56 @@ const reducers$3 = {};
 const defaultState$8 = {
   hasSyncedWallet: false,
   syncHash: null,
+  syncData: null,
   setSyncErrorMessage: null,
-  retrievingSync: false,
-  settingSync: false
+  syncApplyErrorMessage: '',
+  syncApplyIsPending: false,
+  getSyncIsPending: false,
+  setSyncIsPending: false
 };
 
 reducers$3[GET_SYNC_STARTED] = state => Object.assign({}, state, {
-  retrievingSync: true
+  getSyncIsPending: true
 });
 
 reducers$3[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   syncHash: action.data.syncHash,
+  syncData: action.data.syncData,
   hasSyncedWallet: action.data.hasSyncedWallet,
-  retrievingSync: false
+  getSyncIsPending: false
 });
 
 reducers$3[SET_SYNC_STARTED] = state => Object.assign({}, state, {
-  settingSync: true,
+  setSyncIsPending: true,
   setSyncErrorMessage: null
 });
 
 reducers$3[SET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
-  settingSync: true,
+  setSyncIsPending: false,
   setSyncErrorMessage: action.data.error
 });
 
 reducers$3[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
-  settingSync: false,
+  setSyncIsPending: false,
   setSyncErrorMessage: null,
   hasSyncedWallet: true,
   // sync was successful, so the user has a synced wallet at this point
   syncHash: action.data.syncHash
+});
+
+reducers$3[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
+  syncApplyIsPending: true,
+  syncApplyErrorMessage: ''
+});
+
+reducers$3[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
+  syncApplyIsPending: false,
+  syncApplyErrorMessage: ''
+});
+
+reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
+  syncApplyIsPending: false,
+  syncApplyErrorMessage: action.data.error
 });
 
 function syncReducer(state = defaultState$8, action) {
@@ -2679,9 +2740,12 @@ const selectState$8 = state => state.sync || {};
 
 const selectHasSyncedWallet = reselect.createSelector(selectState$8, state => state.hasSyncedWallet);
 const selectSyncHash = reselect.createSelector(selectState$8, state => state.syncHash);
+const selectSyncData = reselect.createSelector(selectState$8, state => state.syncData);
 const selectSetSyncErrorMessage = reselect.createSelector(selectState$8, state => state.setSyncErrorMessage);
-const selectIsRetrievingSync = reselect.createSelector(selectState$8, state => state.retrievingSync);
-const selectIsSettingSync = reselect.createSelector(selectState$8, state => state.settingSync);
+const selectGetSyncIsPending = reselect.createSelector(selectState$8, state => state.getSyncIsPending);
+const selectSetSyncIsPending = reselect.createSelector(selectState$8, state => state.setSyncIsPending);
+const selectSyncApplyIsPending = reselect.createSelector(selectState$8, state => state.syncApplyIsPending);
+const selectSyncApplyErrorMessage = reselect.createSelector(selectState$8, state => state.syncApplyErrorMessage);
 
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
@@ -2721,6 +2785,7 @@ exports.doSetDefaultAccount = doSetDefaultAccount;
 exports.doSetSync = doSetSync;
 exports.doSetViewMode = doSetViewMode;
 exports.doShowSuggestedSubs = doShowSuggestedSubs;
+exports.doSyncApply = doSyncApply;
 exports.doUpdateUnreadSubscriptions = doUpdateUnreadSubscriptions;
 exports.doUserCheckEmailVerified = doUserCheckEmailVerified;
 exports.doUserEmailNew = doUserEmailNew;
@@ -2770,14 +2835,13 @@ exports.selectFetchingFeaturedUris = selectFetchingFeaturedUris;
 exports.selectFetchingRewards = selectFetchingRewards;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
 exports.selectFirstRunCompleted = selectFirstRunCompleted;
+exports.selectGetSyncIsPending = selectGetSyncIsPending;
 exports.selectHasSyncedWallet = selectHasSyncedWallet;
 exports.selectIdentityVerifyErrorMessage = selectIdentityVerifyErrorMessage;
 exports.selectIdentityVerifyIsPending = selectIdentityVerifyIsPending;
 exports.selectIsAuthenticating = selectIsAuthenticating;
 exports.selectIsFetchingSubscriptions = selectIsFetchingSubscriptions;
 exports.selectIsFetchingSuggested = selectIsFetchingSuggested;
-exports.selectIsRetrievingSync = selectIsRetrievingSync;
-exports.selectIsSettingSync = selectIsSettingSync;
 exports.selectPhoneNewErrorMessage = selectPhoneNewErrorMessage;
 exports.selectPhoneNewIsPending = selectPhoneNewIsPending;
 exports.selectPhoneToVerify = selectPhoneToVerify;
@@ -2786,12 +2850,16 @@ exports.selectPhoneVerifyIsPending = selectPhoneVerifyIsPending;
 exports.selectReferralReward = selectReferralReward;
 exports.selectRewardContentClaimIds = selectRewardContentClaimIds;
 exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
+exports.selectSetSyncIsPending = selectSetSyncIsPending;
 exports.selectShowSuggestedSubs = selectShowSuggestedSubs;
 exports.selectSubscriptionClaims = selectSubscriptionClaims;
 exports.selectSubscriptions = selectSubscriptions;
 exports.selectSubscriptionsBeingFetched = selectSubscriptionsBeingFetched;
 exports.selectSuggested = selectSuggested;
 exports.selectSuggestedChannels = selectSuggestedChannels;
+exports.selectSyncApplyErrorMessage = selectSyncApplyErrorMessage;
+exports.selectSyncApplyIsPending = selectSyncApplyIsPending;
+exports.selectSyncData = selectSyncData;
 exports.selectSyncHash = selectSyncHash;
 exports.selectTrendingUris = selectTrendingUris;
 exports.selectUnclaimedRewardValue = selectUnclaimedRewardValue;

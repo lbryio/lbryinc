@@ -6,11 +6,23 @@ export const selectHasSyncedWallet = createSelector(selectState, state => state.
 
 export const selectSyncHash = createSelector(selectState, state => state.syncHash);
 
+export const selectSyncData = createSelector(selectState, state => state.syncData);
+
 export const selectSetSyncErrorMessage = createSelector(
   selectState,
   state => state.setSyncErrorMessage
 );
 
-export const selectIsRetrievingSync = createSelector(selectState, state => state.retrievingSync);
+export const selectGetSyncIsPending = createSelector(selectState, state => state.getSyncIsPending);
 
-export const selectIsSettingSync = createSelector(selectState, state => state.settingSync);
+export const selectSetSyncIsPending = createSelector(selectState, state => state.setSyncIsPending);
+
+export const selectSyncApplyIsPending = createSelector(
+  selectState,
+  state => state.syncApplyIsPending
+);
+
+export const selectSyncApplyErrorMessage = createSelector(
+  selectState,
+  state => state.syncApplyErrorMessage
+);
