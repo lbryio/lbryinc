@@ -2547,16 +2547,14 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
 
     if (!savedSubscription) {
       throw Error("Trying to find new content for ".concat(subscriptionUri, " but it doesn't exist in your subscriptions"));
-    }
-
-    var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscriptionUri),
-        claimId = _parseURI.claimId; // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
+    } // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
 
 
     lbry_redux__WEBPACK_IMPORTED_MODULE_3__["Lbry"].claim_search({
-      channel_id: claimId,
+      channel_name: subscriptionUri,
       page: 1,
-      page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"]
+      page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"],
+      winning: true
     }).then(function (result) {
       var claimsInChannel = result.items; // may happen if subscribed to an abandoned channel or an empty channel
 
@@ -2639,8 +2637,8 @@ var doChannelSubscribe = function doChannelSubscribe(subscription) {
     }); // if the user isn't sharing data, keep the subscriptions entirely in the app
 
     if (isSharingData) {
-      var _parseURI2 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          claimId = _parseURI2.claimId; // They are sharing data, we can store their subscriptions in our internal database
+      var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
+          claimId = _parseURI.claimId; // They are sharing data, we can store their subscriptions in our internal database
 
 
       lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'new', {
@@ -2667,8 +2665,8 @@ var doChannelUnsubscribe = function doChannelUnsubscribe(subscription) {
     });
 
     if (isSharingData) {
-      var _parseURI3 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          claimId = _parseURI3.claimId;
+      var _parseURI2 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
+          claimId = _parseURI2.claimId;
 
       lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'delete', {
         claim_id: claimId
@@ -2721,8 +2719,8 @@ var doFetchMySubscriptions = function doFetchMySubscriptions() {
           dbSubMap[sub.claim_id] = 1;
         });
         reduxSubscriptions.forEach(function (sub) {
-          var _parseURI4 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(sub.uri),
-              claimId = _parseURI4.claimId;
+          var _parseURI3 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(sub.uri),
+              claimId = _parseURI3.claimId;
 
           reduxSubMap[claimId] = 1;
 
