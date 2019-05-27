@@ -74,6 +74,8 @@ export function doGetSync(password) {
           if (response.changed) {
             const syncHash = response.hash;
             data.syncHash = syncHash;
+            data.syncData = response.data;
+
             Lbry.sync_apply({ password, data: response.data }).then(
               ({ hash: walletHash, data: walletData }) => {
                 if (walletHash !== syncHash) {
@@ -101,6 +103,61 @@ export function doGetSync(password) {
           Lbry.sync_apply({ password }).then(({ hash: walletHash, data }) =>
             dispatch(doSetSync(null, walletHash, data))
           );
+        });
+    });
+  };
+}
+
+export function doSyncApply(syncHash, syncData, password) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.SYNC_APPLY_STARTED,
+    });
+
+    Lbry.sync_apply({ password, data: syncData })
+      .then(({ hash: walletHash, data: walletData }) => {
+        dispatch({
+          type: ACTIONS.SYNC_APPLY_COMPLETED,
+        });
+
+        if (walletHash !== syncHash) {
+          // different local hash, need to synchronise
+          dispatch(doSetSync(syncHash, walletHash, walletData));
+        }
+
+        // set the default account
+        dispatch(doSetDefaultAccount());
+      })
+      .catch(() => {
+        dispatch({
+          type: ACTIONS.SYNC_APPLY_FAILED,
+          data: {
+            error:
+              'Invalid password specified. Please enter the password for your previously synchronised wallet.',
+          },
+        });
+      });
+  };
+}
+
+export function doCheckSync() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.GET_SYNC_STARTED,
+    });
+
+    Lbry.sync_hash().then(hash => {
+      Lbryio.call('sync', 'get', { hash }, 'post')
+        .then(response => {
+          const data = { hasSyncedWallet: true, syncHash: response.hash, syncData: response.data };
+          dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
+        })
+        .catch(() => {
+          // user doesn't have a synced wallet
+          dispatch({
+            type: ACTIONS.GET_SYNC_COMPLETED,
+            data: { hasSyncedWallet: false, syncHash: null },
+          });
         });
     });
   };

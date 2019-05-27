@@ -208,11 +208,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchViewCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_11__["doFetchViewCount"]; });
 
 /* harmony import */ var redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(25);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doCheckSync"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doGetSync"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSetSync"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSetDefaultAccount"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_12__["doSyncApply"]; });
 
 /* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(26);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__["authReducer"]; });
@@ -393,13 +397,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(39);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectHasSyncedWallet"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSyncData"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSyncHash"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSetSyncErrorMessage"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsRetrievingSync", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectIsRetrievingSync"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectGetSyncIsPending"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsSettingSync", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectIsSettingSync"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSetSyncIsPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSyncApplyIsPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_29__["selectSyncApplyErrorMessage"]; });
 
 
 
@@ -510,6 +520,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_FAILED", function() { return SET_SYNC_FAILED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_COMPLETED", function() { return SET_SYNC_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DEFAULT_ACCOUNT", function() { return SET_DEFAULT_ACCOUNT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_STARTED", function() { return SYNC_APPLY_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_COMPLETED", function() { return SYNC_APPLY_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_FAILED", function() { return SYNC_APPLY_FAILED; });
 // Auth Token
 var GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
 var GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
@@ -581,6 +594,9 @@ var SET_SYNC_STARTED = 'SET_SYNC_STARTED';
 var SET_SYNC_FAILED = 'SET_SYNC_FAILED';
 var SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
 var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
+var SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
+var SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
+var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
 
 /***/ }),
 /* 2 */
@@ -3401,6 +3417,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return doSetSync; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return doSetDefaultAccount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return doGetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return doSyncApply; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return doCheckSync; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
@@ -3452,7 +3470,7 @@ function doSetDefaultAccount() {
       var accounts = accountList.lbc_mainnet;
       var defaultId;
 
-      for (var i = 0; i < accounts.length; i++) {
+      for (var i = 0; i < accounts.length; ++i) {
         if (accounts[i].satoshis > 0) {
           defaultId = accounts[i].id;
           break;
@@ -3491,6 +3509,7 @@ function doGetSync(password) {
         if (response.changed) {
           var syncHash = response.hash;
           data.syncHash = syncHash;
+          data.syncData = response.data;
           lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
             password: password,
             data: response.data
@@ -3529,6 +3548,69 @@ function doGetSync(password) {
           var walletHash = _ref2.hash,
               data = _ref2.data;
           return dispatch(doSetSync(null, walletHash, data));
+        });
+      });
+    });
+  };
+}
+function doSyncApply(syncHash, syncData, password) {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+      password: password,
+      data: syncData
+    }).then(function (_ref3) {
+      var walletHash = _ref3.hash,
+          walletData = _ref3.data;
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_COMPLETED"]
+      });
+
+      if (walletHash !== syncHash) {
+        // different local hash, need to synchronise
+        dispatch(doSetSync(syncHash, walletHash, walletData));
+      } // set the default account
+
+
+      dispatch(doSetDefaultAccount());
+    })["catch"](function () {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"],
+        data: {
+          error: 'Invalid password specified. Please enter the password for your previously synchronised wallet.'
+        }
+      });
+    });
+  };
+}
+function doCheckSync() {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
+      lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post').then(function (response) {
+        var data = {
+          hasSyncedWallet: true,
+          syncHash: response.hash,
+          syncData: response.data
+        };
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: data
+        });
+      })["catch"](function () {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: {
+            hasSyncedWallet: false,
+            syncHash: null
+          }
         });
       });
     });
@@ -4169,46 +4251,71 @@ var reducers = {};
 var defaultState = {
   hasSyncedWallet: false,
   syncHash: null,
+  syncData: null,
   setSyncErrorMessage: null,
-  retrievingSync: false,
-  settingSync: false
+  syncApplyErrorMessage: '',
+  syncApplyIsPending: false,
+  getSyncIsPending: false,
+  setSyncIsPending: false
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]] = function (state) {
   return Object.assign({}, state, {
-    retrievingSync: true
+    getSyncIsPending: true
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"]] = function (state, action) {
   return Object.assign({}, state, {
     syncHash: action.data.syncHash,
+    syncData: action.data.syncData,
     hasSyncedWallet: action.data.hasSyncedWallet,
-    retrievingSync: false
+    getSyncIsPending: false
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]] = function (state) {
   return Object.assign({}, state, {
-    settingSync: true,
+    setSyncIsPending: true,
     setSyncErrorMessage: null
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"]] = function (state, action) {
   return Object.assign({}, state, {
-    settingSync: true,
+    setSyncIsPending: false,
     setSyncErrorMessage: action.data.error
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED"]] = function (state, action) {
   return Object.assign({}, state, {
-    settingSync: false,
+    setSyncIsPending: false,
     setSyncErrorMessage: null,
     hasSyncedWallet: true,
     // sync was successful, so the user has a synced wallet at this point
     syncHash: action.data.syncHash
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyIsPending: true,
+    syncApplyErrorMessage: ''
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_COMPLETED"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: ''
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: action.data.error
   });
 };
 
@@ -4362,9 +4469,12 @@ var makeSelectViewCountForUri = function makeSelectViewCountForUri(uri) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return selectHasSyncedWallet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return selectSyncHash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return selectSyncData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return selectSetSyncErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsRetrievingSync", function() { return selectIsRetrievingSync; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsSettingSync", function() { return selectIsSettingSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return selectGetSyncIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return selectSetSyncIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -4379,14 +4489,23 @@ var selectHasSyncedWallet = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["create
 var selectSyncHash = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.syncHash;
 });
+var selectSyncData = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncData;
+});
 var selectSetSyncErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.setSyncErrorMessage;
 });
-var selectIsRetrievingSync = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.retrievingSync;
+var selectGetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.getSyncIsPending;
 });
-var selectIsSettingSync = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.settingSync;
+var selectSetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.setSyncIsPending;
+});
+var selectSyncApplyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyIsPending;
+});
+var selectSyncApplyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyErrorMessage;
 });
 
 /***/ })
