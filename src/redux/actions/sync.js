@@ -82,9 +82,6 @@ export function doGetSync(password) {
                   // different local hash, need to synchronise
                   dispatch(doSetSync(syncHash, walletHash, walletData));
                 }
-
-                // set the default account
-                dispatch(doSetDefaultAccount());
               }
             );
           }
@@ -124,9 +121,6 @@ export function doSyncApply(syncHash, syncData, password) {
           // different local hash, need to synchronise
           dispatch(doSetSync(syncHash, walletHash, walletData));
         }
-
-        // set the default account
-        dispatch(doSetDefaultAccount());
       })
       .catch(() => {
         dispatch({

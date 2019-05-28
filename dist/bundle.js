@@ -3518,10 +3518,7 @@ function doGetSync(password) {
             if (walletHash !== syncHash) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
-            } // set the default account
-
-
-            dispatch(doSetDefaultAccount());
+            }
           });
         }
 
@@ -3569,10 +3566,7 @@ function doSyncApply(syncHash, syncData, password) {
       if (walletHash !== syncHash) {
         // different local hash, need to synchronise
         dispatch(doSetSync(syncHash, walletHash, walletData));
-      } // set the default account
-
-
-      dispatch(doSetDefaultAccount());
+      }
     })["catch"](function () {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"],
