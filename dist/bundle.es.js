@@ -1559,7 +1559,8 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
     channel_name: subscriptionUri,
     page: 1,
     page_size: PAGE_SIZE,
-    winning: true
+    is_controlling: true,
+    order_by: ['release_time']
   }).then(result => {
     const {
       items: claimsInChannel
