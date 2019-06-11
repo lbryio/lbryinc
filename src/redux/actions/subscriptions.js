@@ -161,7 +161,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
     channel_name: subscriptionUri,
     page: 1,
     page_size: PAGE_SIZE,
-    is_controlling: true,
+    valid_channel_signatures: true,
     order_by: ['release_time'],
   }).then(result => {
     const { items: claimsInChannel } = result;
