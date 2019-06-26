@@ -2554,7 +2554,7 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
       channel_name: subscriptionUri,
       page: 1,
       page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"],
-      valid_channel_signatures: true,
+      valid_channel_signature: true,
       order_by: ['release_time']
     }).then(function (result) {
       var claimsInChannel = result.items; // may happen if subscribed to an abandoned channel or an empty channel
