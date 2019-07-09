@@ -57,6 +57,7 @@ export {
 } from 'redux/actions/user';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
+export { doFilteredOutpointsSubscribe } from 'redux/actions/filtered';
 export { doFetchFeaturedUris, doFetchTrendingUris } from 'redux/actions/homepage';
 export { doFetchViewCount } from 'redux/actions/stats';
 export {
@@ -74,6 +75,7 @@ export { subscriptionsReducer };
 export { userReducer } from 'redux/reducers/user';
 export { costInfoReducer } from 'redux/reducers/cost_info';
 export { blacklistReducer } from 'redux/reducers/blacklist';
+export { filteredReducer } from 'redux/reducers/filtered';
 export { homepageReducer } from 'redux/reducers/homepage';
 export { statsReducer } from 'redux/reducers/stats';
 export { syncReducer } from 'redux/reducers/sync';
@@ -153,6 +155,7 @@ export {
   selectFetchingCostInfo,
 } from 'redux/selectors/cost_info';
 export { selectBlackListedOutpoints } from 'redux/selectors/blacklist';
+export { selectFilteredOutpoints } from 'redux/selectors/filtered';
 export {
   selectFeaturedUris,
   selectFetchingFeaturedUris,

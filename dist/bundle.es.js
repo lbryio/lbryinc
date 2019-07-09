@@ -64,7 +64,12 @@ const VIEW_SUGGESTED_SUBSCRIPTIONS = 'VIEW_SUGGESTED_SUBSCRIPTIONS'; // Blacklis
 const FETCH_BLACK_LISTED_CONTENT_STARTED = 'FETCH_BLACK_LISTED_CONTENT_STARTED';
 const FETCH_BLACK_LISTED_CONTENT_COMPLETED = 'FETCH_BLACK_LISTED_CONTENT_COMPLETED';
 const FETCH_BLACK_LISTED_CONTENT_FAILED = 'FETCH_BLACK_LISTED_CONTENT_FAILED';
-const BLACK_LISTED_CONTENT_SUBSCRIBE = 'BLACK_LISTED_CONTENT_SUBSCRIBE'; // Cost Info
+const BLACK_LISTED_CONTENT_SUBSCRIBE = 'BLACK_LISTED_CONTENT_SUBSCRIBE'; // Filtered list
+
+const FETCH_FILTERED_CONTENT_STARTED = 'FETCH_FILTERED_CONTENT_STARTED';
+const FETCH_FILTERED_CONTENT_COMPLETED = 'FETCH_FILTERED_CONTENT_COMPLETED';
+const FETCH_FILTERED_CONTENT_FAILED = 'FETCH_FILTERED_CONTENT_FAILED';
+const FILTERED_CONTENT_SUBSCRIBE = 'FILTERED_CONTENT_SUBSCRIBE'; // Cost Info
 
 const FETCH_COST_INFO_STARTED = 'FETCH_COST_INFO_STARTED';
 const FETCH_COST_INFO_COMPLETED = 'FETCH_COST_INFO_COMPLETED'; // File Stats
@@ -137,6 +142,10 @@ var action_types = /*#__PURE__*/Object.freeze({
   FETCH_BLACK_LISTED_CONTENT_COMPLETED: FETCH_BLACK_LISTED_CONTENT_COMPLETED,
   FETCH_BLACK_LISTED_CONTENT_FAILED: FETCH_BLACK_LISTED_CONTENT_FAILED,
   BLACK_LISTED_CONTENT_SUBSCRIBE: BLACK_LISTED_CONTENT_SUBSCRIBE,
+  FETCH_FILTERED_CONTENT_STARTED: FETCH_FILTERED_CONTENT_STARTED,
+  FETCH_FILTERED_CONTENT_COMPLETED: FETCH_FILTERED_CONTENT_COMPLETED,
+  FETCH_FILTERED_CONTENT_FAILED: FETCH_FILTERED_CONTENT_FAILED,
+  FILTERED_CONTENT_SUBSCRIBE: FILTERED_CONTENT_SUBSCRIBE,
   FETCH_COST_INFO_STARTED: FETCH_COST_INFO_STARTED,
   FETCH_COST_INFO_COMPLETED: FETCH_COST_INFO_COMPLETED,
   FETCH_VIEW_COUNT_STARTED: FETCH_VIEW_COUNT_STARTED,
@@ -1888,6 +1897,55 @@ function doBlackListedOutpointsSubscribe() {
   };
 }
 
+const CHECK_FILTERED_CONTENT_INTERVAL = 60 * 60 * 1000;
+function doFetchFilteredOutpoints() {
+  return dispatch => {
+    dispatch({
+      type: FETCH_FILTERED_CONTENT_STARTED
+    });
+
+    const success = ({
+      outpoints
+    }) => {
+      const splitedOutpoints = [];
+      outpoints.forEach((outpoint, index) => {
+        const [txid, nout] = outpoint.split(':');
+        splitedOutpoints[index] = {
+          txid,
+          nout: Number.parseInt(nout, 10)
+        };
+      });
+      dispatch({
+        type: FETCH_FILTERED_CONTENT_COMPLETED,
+        data: {
+          outpoints: splitedOutpoints,
+          success: true
+        }
+      });
+    };
+
+    const failure = ({
+      error
+    }) => {
+      dispatch({
+        type: FETCH_FILTERED_CONTENT_FAILED,
+        data: {
+          error,
+          success: false
+        }
+      });
+    };
+
+    Lbryio.call('file', 'list_filtered').then(success, failure);
+  };
+}
+function doFilteredOutpointsSubscribe() {
+  return dispatch => {
+    dispatch(doFetchFilteredOutpoints());
+    setInterval(() => dispatch(doFetchFilteredOutpoints()), CHECK_FILTERED_CONTENT_INTERVAL);
+  };
+}
+
 function doFetchFeaturedUris(offloadResolve = false) {
   return dispatch => {
     dispatch({
@@ -2576,6 +2634,39 @@ const blacklistReducer = handleActions({
 }, defaultState$5);
 
 const defaultState$6 = {
+  fetchingFilteredOutpoints: false,
+  fetchingFilteredOutpointsSucceed: undefined,
+  filteredOutpoints: undefined
+};
+const filteredReducer = handleActions({
+  [FETCH_FILTERED_CONTENT_STARTED]: state => ({ ...state,
+    fetchingFilteredOutpoints: true
+  }),
+  [FETCH_FILTERED_CONTENT_COMPLETED]: (state, action) => {
+    const {
+      outpoints,
+      success
+    } = action.data;
+    return { ...state,
+      fetchingFilteredOutpoints: false,
+      fetchingFilteredOutpointsSucceed: success,
+      filteredOutpoints: outpoints
+    };
+  },
+  [FETCH_FILTERED_CONTENT_FAILED]: (state, action) => {
+    const {
+      error,
+      success
+    } = action.data;
+    return { ...state,
+      fetchingFilteredOutpoints: false,
+      fetchingFilteredOutpointsSucceed: success,
+      fetchingFilteredOutpointsError: error
+    };
+  }
+}, defaultState$6);
+
+const defaultState$7 = {
   fetchingFeaturedContent: false,
   fetchingFeaturedContentFailed: false,
   featuredUris: undefined,
@@ -2612,9 +2703,9 @@ const homepageReducer = handleActions({
       trendingUris: uris
     };
   }
-}, defaultState$6);
+}, defaultState$7);
 
-const defaultState$7 = {
+const defaultState$8 = {
   fetchingViewCount: false,
   viewCountError: undefined,
   viewCountById: {}
@@ -2639,10 +2730,10 @@ const statsReducer = handleActions({
       viewCountById
     };
   }
-}, defaultState$7);
+}, defaultState$8);
 
 const reducers$3 = {};
-const defaultState$8 = {
+const defaultState$9 = {
   hasSyncedWallet: false,
   syncHash: null,
   syncData: null,
@@ -2697,7 +2788,7 @@ reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyErrorMessage: action.data.error
 });
 
-function syncReducer(state = defaultState$8, action) {
+function syncReducer(state = defaultState$9, action) {
   const handler = reducers$3[action.type];
   if (handler) return handler(state, action);
   return state;
@@ -2717,28 +2808,31 @@ const makeSelectFetchingCostInfoForUri = uri => reselect.createSelector(selectFe
 const selectState$5 = state => state.blacklist || {};
 const selectBlackListedOutpoints = reselect.createSelector(selectState$5, state => state.blackListedOutpoints);
 
-const selectState$6 = state => state.homepage || {};
+const selectState$6 = state => state.filtered || {};
+const selectFilteredOutpoints = reselect.createSelector(selectState$6, state => state.filteredOutpoints);
 
-const selectFeaturedUris = reselect.createSelector(selectState$6, state => state.featuredUris);
-const selectFetchingFeaturedUris = reselect.createSelector(selectState$6, state => state.fetchingFeaturedContent);
-const selectTrendingUris = reselect.createSelector(selectState$6, state => state.trendingUris);
-const selectFetchingTrendingUris = reselect.createSelector(selectState$6, state => state.fetchingTrendingContent);
+const selectState$7 = state => state.homepage || {};
 
-const selectState$7 = state => state.stats || {};
+const selectFeaturedUris = reselect.createSelector(selectState$7, state => state.featuredUris);
+const selectFetchingFeaturedUris = reselect.createSelector(selectState$7, state => state.fetchingFeaturedContent);
+const selectTrendingUris = reselect.createSelector(selectState$7, state => state.trendingUris);
+const selectFetchingTrendingUris = reselect.createSelector(selectState$7, state => state.fetchingTrendingContent);
 
-const selectViewCount = reselect.createSelector(selectState$7, state => state.viewCountById);
+const selectState$8 = state => state.stats || {};
+
+const selectViewCount = reselect.createSelector(selectState$8, state => state.viewCountById);
 const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => viewCountById[claim.claim_id] || 0);
 
-const selectState$8 = state => state.sync || {};
+const selectState$9 = state => state.sync || {};
 
-const selectHasSyncedWallet = reselect.createSelector(selectState$8, state => state.hasSyncedWallet);
-const selectSyncHash = reselect.createSelector(selectState$8, state => state.syncHash);
-const selectSyncData = reselect.createSelector(selectState$8, state => state.syncData);
-const selectSetSyncErrorMessage = reselect.createSelector(selectState$8, state => state.setSyncErrorMessage);
-const selectGetSyncIsPending = reselect.createSelector(selectState$8, state => state.getSyncIsPending);
-const selectSetSyncIsPending = reselect.createSelector(selectState$8, state => state.setSyncIsPending);
-const selectSyncApplyIsPending = reselect.createSelector(selectState$8, state => state.syncApplyIsPending);
-const selectSyncApplyErrorMessage = reselect.createSelector(selectState$8, state => state.syncApplyErrorMessage);
+const selectHasSyncedWallet = reselect.createSelector(selectState$9, state => state.hasSyncedWallet);
+const selectSyncHash = reselect.createSelector(selectState$9, state => state.syncHash);
+const selectSyncData = reselect.createSelector(selectState$9, state => state.syncData);
+const selectSetSyncErrorMessage = reselect.createSelector(selectState$9, state => state.setSyncErrorMessage);
+const selectGetSyncIsPending = reselect.createSelector(selectState$9, state => state.getSyncIsPending);
+const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => state.setSyncIsPending);
+const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state => state.syncApplyIsPending);
+const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
 
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
@@ -2768,6 +2862,7 @@ exports.doFetchRecommendedSubscriptions = doFetchRecommendedSubscriptions;
 exports.doFetchRewardedContent = doFetchRewardedContent;
 exports.doFetchTrendingUris = doFetchTrendingUris;
 exports.doFetchViewCount = doFetchViewCount;
+exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
 exports.doGenerateAuthToken = doGenerateAuthToken;
 exports.doGetSync = doGetSync;
 exports.doInstallNew = doInstallNew;
@@ -2793,6 +2888,7 @@ exports.doUserPhoneReset = doUserPhoneReset;
 exports.doUserPhoneVerify = doUserPhoneVerify;
 exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
+exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
 exports.makeSelectClaimRewardError = makeSelectClaimRewardError;
 exports.makeSelectCostInfoForUri = makeSelectCostInfoForUri;
@@ -2827,6 +2923,7 @@ exports.selectFetchingCostInfo = selectFetchingCostInfo;
 exports.selectFetchingFeaturedUris = selectFetchingFeaturedUris;
 exports.selectFetchingRewards = selectFetchingRewards;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
+exports.selectFilteredOutpoints = selectFilteredOutpoints;
 exports.selectFirstRunCompleted = selectFirstRunCompleted;
 exports.selectGetSyncIsPending = selectGetSyncIsPending;
 exports.selectHasSyncedWallet = selectHasSyncedWallet;
