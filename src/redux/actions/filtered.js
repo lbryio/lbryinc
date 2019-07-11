@@ -10,18 +10,15 @@ export function doFetchFilteredOutpoints() {
     });
 
     const success = ({ outpoints }) => {
-      const splitedOutpoints = [];
-
-      outpoints.forEach((outpoint, index) => {
+      const formattedOutpoints = outpoints.map(outpoint => {
         const [txid, nout] = outpoint.split(':');
-
-        splitedOutpoints[index] = { txid, nout: Number.parseInt(nout, 10) };
+        return { txid, nout: Number.parseInt(nout, 10) };
       });
+
       dispatch({
         type: ACTIONS.FETCH_FILTERED_CONTENT_COMPLETED,
         data: {
-          outpoints: splitedOutpoints,
-          success: true,
+          outpoints: formattedOutpoints,
         },
       });
     };
@@ -31,7 +28,6 @@ export function doFetchFilteredOutpoints() {
         type: ACTIONS.FETCH_FILTERED_CONTENT_FAILED,
         data: {
           error,
-          success: false,
         },
       });
     };

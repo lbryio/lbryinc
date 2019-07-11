@@ -3325,14 +3325,13 @@ function doFetchFilteredOutpoints() {
 
     var success = function success(_ref) {
       var outpoints = _ref.outpoints;
-      var splitedOutpoints = [];
-      outpoints.forEach(function (outpoint, index) {
+      var formattedOutpoints = outpoints.map(function (outpoint) {
         var _outpoint$split = outpoint.split(':'),
             _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
             txid = _outpoint$split2[0],
             nout = _outpoint$split2[1];
 
-        splitedOutpoints[index] = {
+        return {
           txid: txid,
           nout: Number.parseInt(nout, 10)
         };
@@ -3340,8 +3339,7 @@ function doFetchFilteredOutpoints() {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_FILTERED_CONTENT_COMPLETED"],
         data: {
-          outpoints: splitedOutpoints,
-          success: true
+          outpoints: formattedOutpoints
         }
       });
     };
@@ -3351,8 +3349,7 @@ function doFetchFilteredOutpoints() {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_FILTERED_CONTENT_FAILED"],
         data: {
-          error: error,
-          success: false
+          error: error
         }
       });
     };
@@ -4247,30 +4244,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var defaultState = {
-  fetchingFilteredOutpoints: false,
-  fetchingFilteredOutpointsSucceed: undefined,
+  loading: false,
   filteredOutpoints: undefined
 };
 var filteredReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_1__["handleActions"])((_handleActions = {}, _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_FILTERED_CONTENT_STARTED"], function (state) {
   return _objectSpread({}, state, {
-    fetchingFilteredOutpoints: true
+    loading: true
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_FILTERED_CONTENT_COMPLETED"], function (state, action) {
-  var _action$data = action.data,
-      outpoints = _action$data.outpoints,
-      success = _action$data.success;
+  var outpoints = action.data.outpoints;
   return _objectSpread({}, state, {
-    fetchingFilteredOutpoints: false,
-    fetchingFilteredOutpointsSucceed: success,
+    loading: false,
     filteredOutpoints: outpoints
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_FILTERED_CONTENT_FAILED"], function (state, action) {
-  var _action$data2 = action.data,
-      error = _action$data2.error,
-      success = _action$data2.success;
+  var error = action.data.error;
   return _objectSpread({}, state, {
-    fetchingFilteredOutpoints: false,
-    fetchingFilteredOutpointsSucceed: success,
+    loading: false,
     fetchingFilteredOutpointsError: error
   });
 }), _handleActions), defaultState);

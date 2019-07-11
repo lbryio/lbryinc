@@ -2,8 +2,7 @@ import * as ACTIONS from 'constants/action_types';
 import { handleActions } from 'util/redux-utils';
 
 const defaultState = {
-  fetchingFilteredOutpoints: false,
-  fetchingFilteredOutpointsSucceed: undefined,
+  loading: false,
   filteredOutpoints: undefined,
 };
 
@@ -11,24 +10,22 @@ export const filteredReducer = handleActions(
   {
     [ACTIONS.FETCH_FILTERED_CONTENT_STARTED]: state => ({
       ...state,
-      fetchingFilteredOutpoints: true,
+      loading: true,
     }),
     [ACTIONS.FETCH_FILTERED_CONTENT_COMPLETED]: (state, action) => {
-      const { outpoints, success } = action.data;
+      const { outpoints } = action.data;
       return {
         ...state,
-        fetchingFilteredOutpoints: false,
-        fetchingFilteredOutpointsSucceed: success,
+        loading: false,
         filteredOutpoints: outpoints,
       };
     },
     [ACTIONS.FETCH_FILTERED_CONTENT_FAILED]: (state, action) => {
-      const { error, success } = action.data;
+      const { error } = action.data;
 
       return {
         ...state,
-        fetchingFilteredOutpoints: false,
-        fetchingFilteredOutpointsSucceed: success,
+        loading: false,
         fetchingFilteredOutpointsError: error,
       };
     },

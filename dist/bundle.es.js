@@ -1907,10 +1907,9 @@ function doFetchFilteredOutpoints() {
     const success = ({
       outpoints
     }) => {
-      const splitedOutpoints = [];
-      outpoints.forEach((outpoint, index) => {
+      const formattedOutpoints = outpoints.map(outpoint => {
         const [txid, nout] = outpoint.split(':');
-        splitedOutpoints[index] = {
+        return {
           txid,
           nout: Number.parseInt(nout, 10)
         };
@@ -1918,8 +1917,7 @@ function doFetchFilteredOutpoints() {
       dispatch({
         type: FETCH_FILTERED_CONTENT_COMPLETED,
         data: {
-          outpoints: splitedOutpoints,
-          success: true
+          outpoints: formattedOutpoints
         }
       });
     };
@@ -1930,8 +1928,7 @@ function doFetchFilteredOutpoints() {
       dispatch({
         type: FETCH_FILTERED_CONTENT_FAILED,
         data: {
-          error,
-          success: false
+          error
         }
       });
     };
@@ -2634,33 +2631,28 @@ const blacklistReducer = handleActions({
 }, defaultState$5);
 
 const defaultState$6 = {
-  fetchingFilteredOutpoints: false,
-  fetchingFilteredOutpointsSucceed: undefined,
+  loading: false,
   filteredOutpoints: undefined
 };
 const filteredReducer = handleActions({
   [FETCH_FILTERED_CONTENT_STARTED]: state => ({ ...state,
-    fetchingFilteredOutpoints: true
+    loading: true
   }),
   [FETCH_FILTERED_CONTENT_COMPLETED]: (state, action) => {
     const {
-      outpoints,
-      success
+      outpoints
     } = action.data;
     return { ...state,
-      fetchingFilteredOutpoints: false,
-      fetchingFilteredOutpointsSucceed: success,
+      loading: false,
       filteredOutpoints: outpoints
     };
   },
   [FETCH_FILTERED_CONTENT_FAILED]: (state, action) => {
     const {
-      error,
-      success
+      error
     } = action.data;
     return { ...state,
-      fetchingFilteredOutpoints: false,
-      fetchingFilteredOutpointsSucceed: success,
+      loading: false,
       fetchingFilteredOutpointsError: error
     };
   }
