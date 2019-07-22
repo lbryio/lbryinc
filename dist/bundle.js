@@ -2572,7 +2572,7 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
 
 
     lbry_redux__WEBPACK_IMPORTED_MODULE_3__["Lbry"].claim_search({
-      channel_name: subscriptionUri,
+      channel: subscriptionUri,
       page: 1,
       page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"],
       valid_channel_signature: true,
