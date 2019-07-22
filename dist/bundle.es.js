@@ -1565,7 +1565,7 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
 
 
   lbryRedux.Lbry.claim_search({
-    channel_name: subscriptionUri,
+    channel: subscriptionUri,
     page: 1,
     page_size: PAGE_SIZE,
     valid_channel_signature: true,
