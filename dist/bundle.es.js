@@ -2400,8 +2400,7 @@ reducers$2[lbryRedux.ACTIONS.AUTHENTICATION_FAILURE] = state => Object.assign({}
 });
 
 reducers$2[lbryRedux.ACTIONS.USER_FETCH_STARTED] = state => Object.assign({}, state, {
-  userIsPending: true,
-  user: defaultState$3.user
+  userIsPending: true
 });
 
 reducers$2[lbryRedux.ACTIONS.USER_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
