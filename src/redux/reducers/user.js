@@ -40,7 +40,6 @@ reducers[ACTIONS.AUTHENTICATION_FAILURE] = state =>
 reducers[ACTIONS.USER_FETCH_STARTED] = state =>
   Object.assign({}, state, {
     userIsPending: true,
-    user: defaultState.user,
   });
 
 reducers[ACTIONS.USER_FETCH_SUCCESS] = (state, action) =>
