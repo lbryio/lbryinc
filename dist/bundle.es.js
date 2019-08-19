@@ -2205,7 +2205,8 @@ function doCheckSync() {
         const data = {
           hasSyncedWallet: true,
           syncHash: response.hash,
-          syncData: response.data
+          syncData: response.data,
+          hashChanged: response.changed
         };
         dispatch({
           type: GET_SYNC_COMPLETED,
@@ -2732,7 +2733,8 @@ const defaultState$9 = {
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
   getSyncIsPending: false,
-  setSyncIsPending: false
+  setSyncIsPending: false,
+  hashChanged: false
 };
 
 reducers$3[GET_SYNC_STARTED] = state => Object.assign({}, state, {
@@ -2743,7 +2745,8 @@ reducers$3[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   syncHash: action.data.syncHash,
   syncData: action.data.syncData,
   hasSyncedWallet: action.data.hasSyncedWallet,
-  getSyncIsPending: false
+  getSyncIsPending: false,
+  hashChanged: action.data.hashChanged
 });
 
 reducers$3[SET_SYNC_STARTED] = state => Object.assign({}, state, {
@@ -2822,6 +2825,7 @@ const selectSyncData = reselect.createSelector(selectState$9, state => state.syn
 const selectSetSyncErrorMessage = reselect.createSelector(selectState$9, state => state.setSyncErrorMessage);
 const selectGetSyncIsPending = reselect.createSelector(selectState$9, state => state.getSyncIsPending);
 const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => state.setSyncIsPending);
+const selectHashChanged = reselect.createSelector(selectState$9, state => state.hashChanged);
 const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state => state.syncApplyIsPending);
 const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
 
@@ -2918,6 +2922,7 @@ exports.selectFilteredOutpoints = selectFilteredOutpoints;
 exports.selectFirstRunCompleted = selectFirstRunCompleted;
 exports.selectGetSyncIsPending = selectGetSyncIsPending;
 exports.selectHasSyncedWallet = selectHasSyncedWallet;
+exports.selectHashChanged = selectHashChanged;
 exports.selectIdentityVerifyErrorMessage = selectIdentityVerifyErrorMessage;
 exports.selectIdentityVerifyIsPending = selectIdentityVerifyIsPending;
 exports.selectIsAuthenticating = selectIsAuthenticating;

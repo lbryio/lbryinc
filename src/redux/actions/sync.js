@@ -143,7 +143,12 @@ export function doCheckSync() {
     Lbry.sync_hash().then(hash => {
       Lbryio.call('sync', 'get', { hash }, 'post')
         .then(response => {
-          const data = { hasSyncedWallet: true, syncHash: response.hash, syncData: response.data };
+          const data = {
+            hasSyncedWallet: true,
+            syncHash: response.hash,
+            syncData: response.data,
+            hashChanged: response.changed,
+          };
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
         })
         .catch(() => {

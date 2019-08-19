@@ -17,6 +17,8 @@ export const selectGetSyncIsPending = createSelector(selectState, state => state
 
 export const selectSetSyncIsPending = createSelector(selectState, state => state.setSyncIsPending);
 
+export const selectHashChanged = createSelector(selectState, state => state.hashChanged);
+
 export const selectSyncApplyIsPending = createSelector(
   selectState,
   state => state.syncApplyIsPending

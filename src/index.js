@@ -171,5 +171,6 @@ export {
   selectGetSyncIsPending,
   selectSetSyncIsPending,
   selectSyncApplyIsPending,
+  selectHashChanged,
   selectSyncApplyErrorMessage,
 } from 'redux/selectors/sync';

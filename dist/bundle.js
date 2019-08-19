@@ -418,6 +418,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_32__["selectSyncApplyIsPending"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_32__["selectHashChanged"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_32__["selectSyncApplyErrorMessage"]; });
 
 
@@ -3681,7 +3683,8 @@ function doCheckSync() {
         var data = {
           hasSyncedWallet: true,
           syncHash: response.hash,
-          syncData: response.data
+          syncData: response.data,
+          hashChanged: response.changed
         };
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
@@ -4379,7 +4382,8 @@ var defaultState = {
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
   getSyncIsPending: false,
-  setSyncIsPending: false
+  setSyncIsPending: false,
+  hashChanged: false
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]] = function (state) {
@@ -4393,7 +4397,8 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED
     syncHash: action.data.syncHash,
     syncData: action.data.syncData,
     hasSyncedWallet: action.data.hasSyncedWallet,
-    getSyncIsPending: false
+    getSyncIsPending: false,
+    hashChanged: action.data.hashChanged
   });
 };
 
@@ -4614,6 +4619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return selectSetSyncErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return selectGetSyncIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return selectSetSyncIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return selectHashChanged; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
@@ -4641,6 +4647,9 @@ var selectGetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["creat
 });
 var selectSetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.setSyncIsPending;
+});
+var selectHashChanged = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.hashChanged;
 });
 var selectSyncApplyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.syncApplyIsPending;
