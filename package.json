@@ -21,7 +21,7 @@
   "main": "dist/bundle.js",
   "module": "dist/bundle.es.js",
   "scripts": {
-    "build": "rollup --config",
+    "build": "rollup --config && webpack",
     "dev": "rollup --config --watch",
     "precommit": "lint-staged",
     "preinstall": "yarn cache clean lbry-redux",
@@ -59,7 +59,9 @@
     "rollup": "^1.8.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-flow": "^1.1.1",
-    "rollup-plugin-includepaths": "^0.2.3"
+    "rollup-plugin-includepaths": "^0.2.3",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^3.3.7"
   },
   "engines": {
     "yarn": "^1.3"
