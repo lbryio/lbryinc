@@ -186,7 +186,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
       const newUnread = [];
       claimsInChannel.slice(0, latestIndexToNotify).forEach(claim => {
-        const uri = buildURI({ contentName: claim.name, claimId: claim.claim_id }, true);
+        const uri = buildURI({ claimName: claim.name, claimId: claim.claim_id }, true);
         const shouldDownload =
           shouldAutoDownload &&
           Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.stream.metadata.fee);

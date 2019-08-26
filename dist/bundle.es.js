@@ -1590,7 +1590,7 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
       const newUnread = [];
       claimsInChannel.slice(0, latestIndexToNotify).forEach(claim => {
         const uri = lbryRedux.buildURI({
-          contentName: claim.name,
+          claimName: claim.name,
           claimId: claim.claim_id
         }, true);
 
