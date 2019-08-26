@@ -1610,7 +1610,7 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
         claimId: claimsInChannel[0].claim_id
       }, false)
     }, lbryRedux.buildURI({
-      contentName: claimsInChannel[0].name,
+      claimName: claimsInChannel[0].name,
       claimId: claimsInChannel[0].claim_id
     }, false))); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
     // means it will delete a non-existant fetchingChannelClaims[uri]

@@ -226,7 +226,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
           ),
         },
         buildURI(
-          { contentName: claimsInChannel[0].name, claimId: claimsInChannel[0].claim_id },
+          { claimName: claimsInChannel[0].name, claimId: claimsInChannel[0].claim_id },
           false
         )
       )
