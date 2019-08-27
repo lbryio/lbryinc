@@ -213,22 +213,21 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
     // Set the latest piece of content for a channel
     // This allows the app to know if there has been new content since it was last set
+    const latestClaim = claimsInChannel[0];
+    const latestClaimChannel = latestClaim.signing_channel.name;
     dispatch(
       setSubscriptionLatest(
         {
-          channelName: claimsInChannel[0].channel_name,
+          channelName: latestClaimChannel,
           uri: buildURI(
             {
-              channelName: claimsInChannel[0].channel_name,
-              claimId: claimsInChannel[0].claim_id,
+              channelName: latestClaimChannel,
+              claimId: latestClaim.claim_id,
             },
             false
           ),
         },
-        buildURI(
-          { claimName: claimsInChannel[0].name, claimId: claimsInChannel[0].claim_id },
-          false
-        )
+        buildURI({ claimName: latestClaim.name, claimId: latestClaim.claim_id }, false)
       )
     );
 
