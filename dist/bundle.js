@@ -2575,12 +2575,12 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
 
     lbry_redux__WEBPACK_IMPORTED_MODULE_3__["Lbry"].claim_search({
       channel: subscriptionUri,
-      page: 1,
-      page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"],
       valid_channel_signature: true,
-      order_by: ['release_time']
-    }).then(function (result) {
-      var claimsInChannel = result.items; // may happen if subscribed to an abandoned channel or an empty channel
+      order_by: ['release_time'],
+      page: 1,
+      page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"]
+    }).then(function (claimListByChannel) {
+      var claimsInChannel = claimListByChannel.items; // may happen if subscribed to an abandoned channel or an empty channel
 
       if (!claimsInChannel || !claimsInChannel.length) {
         return;
@@ -2588,7 +2588,7 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
 
 
       var latestIndex = claimsInChannel.findIndex(function (claim) {
-        return "".concat(claim.name, "#").concat(claim.claim_id) === savedSubscription.latest;
+        return claim.permanent_url === savedSubscription.latest;
       }); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
 
       var latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex; // If latest is 0, nothing has changed
@@ -2598,11 +2598,8 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
         var downloadCount = 0;
         var newUnread = [];
         claimsInChannel.slice(0, latestIndexToNotify).forEach(function (claim) {
-          var uri = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["buildURI"])({
-            claimName: claim.name,
-            claimId: claim.claim_id
-          }, true);
-          var shouldDownload = shouldAutoDownload && Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.stream.metadata.fee); // Add the new content to the list of "un-read" subscriptions
+          var uri = claim.permanent_url;
+          var shouldDownload = shouldAutoDownload && Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.fee); // Add the new content to the list of "un-read" subscriptions
 
           if (shouldNotify) {
             newUnread.push(uri);
@@ -2620,18 +2617,11 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
       // This allows the app to know if there has been new content since it was last set
 
 
-      var latestClaim = claimsInChannel[0];
-      var latestClaimChannel = latestClaim.signing_channel.name;
+      var latest = claimsInChannel[0];
       dispatch(setSubscriptionLatest({
-        channelName: latestClaimChannel,
-        uri: Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["buildURI"])({
-          channelName: latestClaimChannel,
-          claimId: latestClaim.claim_id
-        }, false)
-      }, Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["buildURI"])({
-        claimName: latestClaim.name,
-        claimId: latestClaim.claim_id
-      }, false))); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
+        channelName: latest.signing_channel.name,
+        uri: latest.signing_channel.permanent_url
+      }, latest.permanent_url)); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
       // means it will delete a non-existant fetchingChannelClaims[uri]
 
       dispatch({
@@ -2664,12 +2654,12 @@ var doChannelSubscribe = function doChannelSubscribe(subscription) {
 
     if (isSharingData) {
       var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          claimId = _parseURI.claimId; // They are sharing data, we can store their subscriptions in our internal database
+          channelClaimId = _parseURI.channelClaimId; // They are sharing data, we can store their subscriptions in our internal database
 
 
       lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'new', {
         channel_name: subscription.channelName,
-        claim_id: claimId
+        claim_id: channelClaimId
       });
       dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_1__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_7__["default"].TYPE_SUBSCRIPTION, {
         failSilently: true
@@ -2692,10 +2682,10 @@ var doChannelUnsubscribe = function doChannelUnsubscribe(subscription) {
 
     if (isSharingData) {
       var _parseURI2 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          claimId = _parseURI2.claimId;
+          channelClaimId = _parseURI2.channelClaimId;
 
       lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'delete', {
-        claim_id: claimId
+        claim_id: channelClaimId
       });
     }
   };
@@ -2746,16 +2736,9 @@ var doFetchMySubscriptions = function doFetchMySubscriptions() {
         });
         reduxSubscriptions.forEach(function (sub) {
           var _parseURI3 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(sub.uri),
-              claimId = _parseURI3.claimId;
+              channelClaimId = _parseURI3.channelClaimId;
 
-          reduxSubMap[claimId] = 1;
-
-          if (!dbSubMap[claimId]) {
-            subsNotInDB.push({
-              claim_id: claimId,
-              channel_name: sub.channelName
-            });
-          }
+          reduxSubMap[channelClaimId] = 1;
         });
         storedSubscriptions.forEach(function (sub) {
           if (!reduxSubMap[sub.claim_id]) {

@@ -1566,21 +1566,21 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
 
   lbryRedux.Lbry.claim_search({
     channel: subscriptionUri,
-    page: 1,
-    page_size: PAGE_SIZE,
     valid_channel_signature: true,
-    order_by: ['release_time']
-  }).then(result => {
+    order_by: ['release_time'],
+    page: 1,
+    page_size: PAGE_SIZE
+  }).then(claimListByChannel => {
     const {
       items: claimsInChannel
-    } = result; // may happen if subscribed to an abandoned channel or an empty channel
+    } = claimListByChannel; // may happen if subscribed to an abandoned channel or an empty channel
 
     if (!claimsInChannel || !claimsInChannel.length) {
       return;
     } // Determine if the latest subscription currently saved is actually the latest subscription
 
 
-    const latestIndex = claimsInChannel.findIndex(claim => `${claim.name}#${claim.claim_id}` === savedSubscription.latest); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
+    const latestIndex = claimsInChannel.findIndex(claim => claim.permanent_url === savedSubscription.latest); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
 
     const latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex; // If latest is 0, nothing has changed
     // Do not download/notify about new content, it would download/notify 10 claims per channel
@@ -1589,10 +1589,7 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
       let downloadCount = 0;
       const newUnread = [];
       claimsInChannel.slice(0, latestIndexToNotify).forEach(claim => {
-        const uri = lbryRedux.buildURI({
-          claimName: claim.name,
-          claimId: claim.claim_id
-        }, true);
+        const uri = claim.permanent_url;
 
         if (shouldNotify) {
           newUnread.push(uri);
@@ -1603,18 +1600,11 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
     // This allows the app to know if there has been new content since it was last set
 
 
-    const latestClaim = claimsInChannel[0];
-    const latestClaimChannel = latestClaim.signing_channel.name;
+    const latest = claimsInChannel[0];
     dispatch(setSubscriptionLatest({
-      channelName: latestClaimChannel,
-      uri: lbryRedux.buildURI({
-        channelName: latestClaimChannel,
-        claimId: latestClaim.claim_id
-      }, false)
-    }, lbryRedux.buildURI({
-      claimName: latestClaim.name,
-      claimId: latestClaim.claim_id
-    }, false))); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
+      channelName: latest.signing_channel.name,
+      uri: latest.signing_channel.permanent_url
+    }, latest.permanent_url)); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
     // means it will delete a non-existant fetchingChannelClaims[uri]
 
     dispatch({
@@ -1647,12 +1637,12 @@ const doChannelSubscribe = subscription => (dispatch, getState) => {
 
   if (isSharingData) {
     const {
-      claimId
+      channelClaimId
     } = lbryRedux.parseURI(subscription.uri); // They are sharing data, we can store their subscriptions in our internal database
 
     Lbryio.call('subscription', 'new', {
       channel_name: subscription.channelName,
-      claim_id: claimId
+      claim_id: channelClaimId
     });
     dispatch(doClaimRewardType(rewards.TYPE_SUBSCRIPTION, {
       failSilently: true
@@ -1675,10 +1665,10 @@ const doChannelUnsubscribe = subscription => (dispatch, getState) => {
 
   if (isSharingData) {
     const {
-      claimId
+      channelClaimId
     } = lbryRedux.parseURI(subscription.uri);
     Lbryio.call('subscription', 'delete', {
-      claim_id: claimId
+      claim_id: channelClaimId
     });
   }
 };
@@ -1727,16 +1717,9 @@ const doFetchMySubscriptions = () => (dispatch, getState) => {
       });
       reduxSubscriptions.forEach(sub => {
         const {
-          claimId
+          channelClaimId
         } = lbryRedux.parseURI(sub.uri);
-        reduxSubMap[claimId] = 1;
-
-        if (!dbSubMap[claimId]) {
-          subsNotInDB.push({
-            claim_id: claimId,
-            channel_name: sub.channelName
-          });
-        }
+        reduxSubMap[channelClaimId] = 1;
       });
       storedSubscriptions.forEach(sub => {
         if (!reduxSubMap[sub.claim_id]) {
