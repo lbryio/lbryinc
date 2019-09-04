@@ -1563,7 +1563,7 @@ function doClaimEligiblePurchaseRewards() {
     })) {
       dispatch(doClaimRewardType(rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FIRST_STREAM));
     } else {
-      [rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_MANY_DOWNLOADS, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FEATURED_DOWNLOAD].forEach(function (type) {
+      [rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_MANY_DOWNLOADS, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FEATURED_DOWNLOAD, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW].forEach(function (type) {
         dispatch(doClaimRewardType(type, {
           failSilently: true
         }));
