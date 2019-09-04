@@ -1198,7 +1198,7 @@ function doClaimEligiblePurchaseRewards() {
     if (unclaimedRewards.find(ur => ur.reward_type === rewards.TYPE_FIRST_STREAM)) {
       dispatch(doClaimRewardType(rewards.TYPE_FIRST_STREAM));
     } else {
-      [rewards.TYPE_MANY_DOWNLOADS, rewards.TYPE_FEATURED_DOWNLOAD].forEach(type => {
+      [rewards.TYPE_MANY_DOWNLOADS, rewards.TYPE_FEATURED_DOWNLOAD, rewards.TYPE_DAILY_VIEW].forEach(type => {
         dispatch(doClaimRewardType(type, {
           failSilently: true
         }));
