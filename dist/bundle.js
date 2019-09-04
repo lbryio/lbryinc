@@ -1089,6 +1089,7 @@ rewards.TYPE_REFERRAL = 'referral';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
+rewards.TYPE_DAILY_VIEW = 'daily_view';
 
 rewards.claimReward = function (type, rewardParams) {
   function requestReward(resolve, reject, params) {
