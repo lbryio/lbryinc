@@ -31,33 +31,54 @@ export function doSetSync(oldHash, newHash, data) {
   };
 }
 
-export function doSetDefaultAccount() {
+export function doSetDefaultAccount(success, failure) {
   return dispatch => {
     dispatch({
       type: ACTIONS.SET_DEFAULT_ACCOUNT,
     });
 
-    Lbry.account_list().then(accountList => {
-      const { lbc_mainnet: accounts } = accountList;
-      let defaultId;
-      for (let i = 0; i < accounts.length; ++i) {
-        if (accounts[i].satoshis > 0) {
-          defaultId = accounts[i].id;
-          break;
+    Lbry.account_list()
+      .then(accountList => {
+        const { lbc_mainnet: accounts } = accountList;
+        let defaultId;
+        for (let i = 0; i < accounts.length; ++i) {
+          if (accounts[i].satoshis > 0) {
+            defaultId = accounts[i].id;
+            break;
+          }
         }
-      }
 
-      // In a case where there's no balance on either account
-      // assume the second (which is created after sync) as default
-      if (!defaultId && accounts.length > 1) {
-        defaultId = accounts[1].id;
-      }
+        // In a case where there's no balance on either account
+        // assume the second (which is created after sync) as default
+        if (!defaultId && accounts.length > 1) {
+          defaultId = accounts[1].id;
+        }
 
-      // Set the default account
-      if (defaultId) {
-        Lbry.account_set({ account_id: defaultId, default: true });
-      }
-    });
+        // Set the default account
+        if (defaultId) {
+          Lbry.account_set({ account_id: defaultId, default: true })
+            .then(() => {
+              if (success) {
+                success();
+              }
+            })
+            .catch(err => {
+              if (failure) {
+                failure(err);
+              }
+            });
+        } else {
+          // no default account to set
+          if (failure) {
+            failure('Could not set a default account'); // fail
+          }
+        }
+      })
+      .catch(err => {
+        if (failure) {
+          failure(err);
+        }
+      });
   };
 }
 

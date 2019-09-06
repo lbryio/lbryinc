@@ -3556,7 +3556,7 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doSetDefaultAccount() {
+function doSetDefaultAccount(success, failure) {
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_DEFAULT_ACCOUNT"]
@@ -3583,7 +3583,24 @@ function doSetDefaultAccount() {
         lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_set({
           account_id: defaultId,
           "default": true
+        }).then(function () {
+          if (success) {
+            success();
+          }
+        })["catch"](function (err) {
+          if (failure) {
+            failure(err);
+          }
         });
+      } else {
+        // no default account to set
+        if (failure) {
+          failure('Could not set a default account'); // fail
+        }
+      }
+    })["catch"](function (err) {
+      if (failure) {
+        failure(err);
       }
     });
   };
