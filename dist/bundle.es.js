@@ -2076,7 +2076,7 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doSetDefaultAccount() {
+function doSetDefaultAccount(success, failure) {
   return dispatch => {
     dispatch({
       type: SET_DEFAULT_ACCOUNT
@@ -2105,7 +2105,24 @@ function doSetDefaultAccount() {
         lbryRedux.Lbry.account_set({
           account_id: defaultId,
           default: true
+        }).then(() => {
+          if (success) {
+            success();
+          }
+        }).catch(err => {
+          if (failure) {
+            failure(err);
+          }
         });
+      } else {
+        // no default account to set
+        if (failure) {
+          failure('Could not set a default account'); // fail
+        }
+      }
+    }).catch(err => {
+      if (failure) {
+        failure(err);
       }
     });
   };
