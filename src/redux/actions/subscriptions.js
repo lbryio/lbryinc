@@ -11,7 +11,7 @@ import type {
 import { PAGE_SIZE } from 'constants/claim';
 import { doClaimRewardType } from 'redux/actions/rewards';
 import { selectSubscriptions, selectUnreadByChannel } from 'redux/selectors/subscriptions';
-import { Lbry, buildURI, parseURI, doResolveUris, doPurchaseUri } from 'lbry-redux';
+import { Lbry, parseURI, doResolveUris, doPurchaseUri } from 'lbry-redux';
 import * as ACTIONS from 'constants/action_types';
 import * as NOTIFICATION_TYPES from 'constants/subscriptions';
 import Lbryio from 'lbryio';
@@ -159,12 +159,12 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
   // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
   Lbry.claim_search({
     channel: subscriptionUri,
-    page: 1,
-    page_size: PAGE_SIZE,
     valid_channel_signature: true,
     order_by: ['release_time'],
-  }).then(result => {
-    const { items: claimsInChannel } = result;
+    page: 1,
+    page_size: PAGE_SIZE,
+  }).then(claimListByChannel => {
+    const { items: claimsInChannel } = claimListByChannel;
 
     // may happen if subscribed to an abandoned channel or an empty channel
     if (!claimsInChannel || !claimsInChannel.length) {
@@ -173,7 +173,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
     // Determine if the latest subscription currently saved is actually the latest subscription
     const latestIndex = claimsInChannel.findIndex(
-      claim => `${claim.name}#${claim.claim_id}` === savedSubscription.latest
+      claim => claim.permanent_url === savedSubscription.latest
     );
 
     // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
@@ -186,10 +186,10 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
       const newUnread = [];
       claimsInChannel.slice(0, latestIndexToNotify).forEach(claim => {
-        const uri = buildURI({ claimName: claim.name, claimId: claim.claim_id }, true);
+        const uri = claim.permanent_url;
         const shouldDownload =
           shouldAutoDownload &&
-          Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.stream.metadata.fee);
+          Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.fee);
 
         // Add the new content to the list of "un-read" subscriptions
         if (shouldNotify) {
@@ -213,21 +213,14 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
     // Set the latest piece of content for a channel
     // This allows the app to know if there has been new content since it was last set
-    const latestClaim = claimsInChannel[0];
-    const latestClaimChannel = latestClaim.signing_channel.name;
+    const latest = claimsInChannel[0];
     dispatch(
       setSubscriptionLatest(
         {
-          channelName: latestClaimChannel,
-          uri: buildURI(
-            {
-              channelName: latestClaimChannel,
-              claimId: latestClaim.claim_id,
-            },
-            false
-          ),
+          channelName: latest.signing_channel.name,
+          uri: latest.signing_channel.permanent_url,
         },
-        buildURI({ claimName: latestClaim.name, claimId: latestClaim.claim_id }, false)
+        latest.permanent_url
       )
     );
 
@@ -268,11 +261,11 @@ export const doChannelSubscribe = (subscription: Subscription) => (
 
   // if the user isn't sharing data, keep the subscriptions entirely in the app
   if (isSharingData) {
-    const { claimId } = parseURI(subscription.uri);
+    const { channelClaimId } = parseURI(subscription.uri);
     // They are sharing data, we can store their subscriptions in our internal database
     Lbryio.call('subscription', 'new', {
       channel_name: subscription.channelName,
-      claim_id: claimId,
+      claim_id: channelClaimId,
     });
 
     dispatch(doClaimRewardType(rewards.TYPE_SUBSCRIPTION, { failSilently: true }));
@@ -296,9 +289,9 @@ export const doChannelUnsubscribe = (subscription: Subscription) => (
   });
 
   if (isSharingData) {
-    const { claimId } = parseURI(subscription.uri);
+    const { channelClaimId } = parseURI(subscription.uri);
     Lbryio.call('subscription', 'delete', {
-      claim_id: claimId,
+      claim_id: channelClaimId,
     });
   }
 };
@@ -354,15 +347,8 @@ export const doFetchMySubscriptions = () => (dispatch: ReduxDispatch, getState: 
         });
 
         reduxSubscriptions.forEach(sub => {
-          const { claimId } = parseURI(sub.uri);
-          reduxSubMap[claimId] = 1;
-
-          if (!dbSubMap[claimId]) {
-            subsNotInDB.push({
-              claim_id: claimId,
-              channel_name: sub.channelName,
-            });
-          }
+          const { channelClaimId } = parseURI(sub.uri);
+          reduxSubMap[channelClaimId] = 1;
         });
 
         storedSubscriptions.forEach(sub => {
