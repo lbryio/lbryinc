@@ -86,7 +86,9 @@ const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
 const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
-const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED'; // User
+
+const USER_SETTINGS_POPULATE = 'USER_SETTINGS_POPULATE';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -159,7 +161,8 @@ var action_types = /*#__PURE__*/Object.freeze({
   SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
-  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED
+  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
+  USER_SETTINGS_POPULATE: USER_SETTINGS_POPULATE
 });
 
 const Lbryio = {
@@ -213,6 +216,13 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
       auth_token: token,
       ...params
     };
+    Object.keys(fullParams).forEach(key => {
+      const value = fullParams[key];
+
+      if (typeof value === 'object') {
+        fullParams[key] = JSON.stringify(value);
+      }
+    });
     const qs = querystring.stringify(fullParams);
     let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
     let options = {
@@ -371,7 +381,7 @@ Lbryio.setOverride = (methodName, newMethod) => {
 const rewards = {};
 rewards.TYPE_NEW_DEVELOPER = 'new_developer';
 rewards.TYPE_NEW_USER = 'new_user';
-rewards.TYPE_CONFIRM_EMAIL = 'verified_email';
+rewards.TYPE_CONFIRM_EMAIL = 'email_provided';
 rewards.TYPE_FIRST_CHANNEL = 'new_channel';
 rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
@@ -709,6 +719,7 @@ const selectPhoneVerifyIsPending = reselect.createSelector(selectState$1, state 
 const selectPhoneVerifyErrorMessage = reselect.createSelector(selectState$1, state => state.phoneVerifyErrorMessage);
 const selectIdentityVerifyIsPending = reselect.createSelector(selectState$1, state => state.identityVerifyIsPending);
 const selectIdentityVerifyErrorMessage = reselect.createSelector(selectState$1, state => state.identityVerifyErrorMessage);
+const selectUserVerifiedEmail = reselect.createSelector(selectUser, user => user && user.has_verified_email);
 const selectUserIsVerificationCandidate = reselect.createSelector(selectUser, user => user && (!user.has_verified_email || !user.is_identity_verified));
 const selectAccessToken = reselect.createSelector(selectState$1, state => state.accessToken);
 const selectUserInviteStatusIsPending = reselect.createSelector(selectState$1, state => state.inviteStatusIsPending);
@@ -1121,16 +1132,16 @@ function doClaimRewardType(rewardType, options = {}) {
     const unclaimedRewards = selectUnclaimedRewards(state);
     const reward = rewardType === rewards.TYPE_REWARD_CODE ? {
       reward_type: rewards.TYPE_REWARD_CODE
-    } : unclaimedRewards.find(ur => ur.reward_type === rewardType);
+    } : unclaimedRewards.find(ur => ur.reward_type === rewardType); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards.TYPE_REWARD_CODE) {
+    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
       }
     }
 
-    if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
+    if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL && rewardType !== rewards.TYPE_REWARD_CODE) {
       if (!options || !options.failSilently && rewards.callbacks.rewardApprovalRequested) {
         rewards.callbacks.rewardApprovalRequested();
       }
@@ -1163,6 +1174,10 @@ function doClaimRewardType(rewardType, options = {}) {
       }
 
       dispatch(doRewardList());
+
+      if (options.callback) {
+        options.callback();
+      }
     };
 
     const failure = error => {
@@ -1179,6 +1194,10 @@ function doClaimRewardType(rewardType, options = {}) {
           message: error.message,
           isError: true
         }));
+      }
+
+      if (options.callback) {
+        options.callback(error);
       }
     };
 
@@ -2409,7 +2428,8 @@ reducers$2[lbryRedux.ACTIONS.USER_FETCH_STARTED] = state => Object.assign({}, st
 
 reducers$2[lbryRedux.ACTIONS.USER_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
   userIsPending: false,
-  user: action.data.user
+  user: action.data.user,
+  emailToVerify: action.data.user.has_verified_email ? null : state.emailToVerify
 });
 
 reducers$2[lbryRedux.ACTIONS.USER_FETCH_FAILURE] = state => Object.assign({}, state, {
@@ -2971,6 +2991,7 @@ exports.selectUserIsPending = selectUserIsPending;
 exports.selectUserIsRewardApproved = selectUserIsRewardApproved;
 exports.selectUserIsVerificationCandidate = selectUserIsVerificationCandidate;
 exports.selectUserPhone = selectUserPhone;
+exports.selectUserVerifiedEmail = selectUserVerifiedEmail;
 exports.selectViewMode = selectViewMode;
 exports.setSubscriptionLatest = setSubscriptionLatest;
 exports.statsReducer = statsReducer;

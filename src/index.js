@@ -147,6 +147,7 @@ export {
   selectUserInviteNewIsPending,
   selectUserInviteNewErrorMessage,
   selectUserInviteReferralLink,
+  selectUserVerifiedEmail,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,

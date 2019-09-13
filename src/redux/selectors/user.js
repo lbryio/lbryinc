@@ -93,6 +93,11 @@ export const selectIdentityVerifyErrorMessage = createSelector(
   state => state.identityVerifyErrorMessage
 );
 
+export const selectUserVerifiedEmail = createSelector(
+  selectUser,
+  user => user && user.has_verified_email
+);
+
 export const selectUserIsVerificationCandidate = createSelector(
   selectUser,
   user => user && (!user.has_verified_email || !user.is_identity_verified)

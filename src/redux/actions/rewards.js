@@ -37,14 +37,19 @@ export function doClaimRewardType(rewardType, options = {}) {
         ? { reward_type: rewards.TYPE_REWARD_CODE }
         : unclaimedRewards.find(ur => ur.reward_type === rewardType);
 
-    if (rewardType !== rewards.TYPE_REWARD_CODE) {
+    // Try to claim the email reward right away, even if we haven't called reward_list yet
+    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
       }
     }
 
-    if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL) {
+    if (
+      !userIsRewardApproved &&
+      rewardType !== rewards.TYPE_CONFIRM_EMAIL &&
+      rewardType !== rewards.TYPE_REWARD_CODE
+    ) {
       if (!options || (!options.failSilently && rewards.callbacks.rewardApprovalRequested)) {
         rewards.callbacks.rewardApprovalRequested();
       }
@@ -78,6 +83,10 @@ export function doClaimRewardType(rewardType, options = {}) {
       }
 
       dispatch(doRewardList());
+
+      if (options.callback) {
+        options.callback();
+      }
     };
 
     const failure = error => {
@@ -91,6 +100,10 @@ export function doClaimRewardType(rewardType, options = {}) {
 
       if (options.notifyError) {
         dispatch(doToast({ message: error.message, isError: true }));
+      }
+
+      if (options.callback) {
+        options.callback(error);
       }
     };
 

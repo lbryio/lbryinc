@@ -48,6 +48,13 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 
   return Lbryio.getAuthToken().then(token => {
     const fullParams = { auth_token: token, ...params };
+    Object.keys(fullParams).forEach(key => {
+      const value = fullParams[key];
+      if (typeof value === 'object') {
+        fullParams[key] = JSON.stringify(value);
+      }
+    });
+
     const qs = querystring.stringify(fullParams);
     let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
 
