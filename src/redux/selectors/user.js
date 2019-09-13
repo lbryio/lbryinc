@@ -38,6 +38,11 @@ export const selectPhoneToVerify = createSelector(
   (state, userPhone) => state.phoneToVerify || userPhone
 );
 
+export const selectYoutubeChannels = createSelector(
+  selectUser,
+  user => (user ? user.youtube_channels : null)
+);
+
 export const selectUserIsRewardApproved = createSelector(
   selectUser,
   user => user && user.is_reward_approved

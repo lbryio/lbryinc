@@ -381,6 +381,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserVerifiedEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectUserVerifiedEmail"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectYoutubeChannels"]; });
+
 /* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(38);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_28__["makeSelectFetchingCostInfoForUri"]; });
 
@@ -2261,6 +2263,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return selectUserCountryCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailToVerify", function() { return selectEmailToVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneToVerify", function() { return selectPhoneToVerify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return selectYoutubeChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsRewardApproved", function() { return selectUserIsRewardApproved; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewIsPending", function() { return selectEmailNewIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewErrorMessage", function() { return selectEmailNewErrorMessage; });
@@ -2311,6 +2314,9 @@ var selectEmailToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSe
 });
 var selectPhoneToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, selectUserPhone, function (state, userPhone) {
   return state.phoneToVerify || userPhone;
+});
+var selectYoutubeChannels = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
+  return user ? user.youtube_channels : null;
 });
 var selectUserIsRewardApproved = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
   return user && user.is_reward_approved;
