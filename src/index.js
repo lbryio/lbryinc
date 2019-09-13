@@ -147,6 +147,7 @@ export {
   selectUserInviteNewIsPending,
   selectUserInviteNewErrorMessage,
   selectUserInviteReferralLink,
+  selectYoutubeChannels,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,

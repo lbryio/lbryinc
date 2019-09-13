@@ -698,6 +698,7 @@ const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
 const selectEmailToVerify = reselect.createSelector(selectState$1, selectUserEmail, (state, userEmail) => state.emailToVerify || userEmail);
 const selectPhoneToVerify = reselect.createSelector(selectState$1, selectUserPhone, (state, userPhone) => state.phoneToVerify || userPhone);
+const selectYoutubeChannels = reselect.createSelector(selectUser, user => user ? user.youtube_channels : null);
 const selectUserIsRewardApproved = reselect.createSelector(selectUser, user => user && user.is_reward_approved);
 const selectEmailNewIsPending = reselect.createSelector(selectState$1, state => state.emailNewIsPending);
 const selectEmailNewErrorMessage = reselect.createSelector(selectState$1, state => state.emailNewErrorMessage);
@@ -2972,6 +2973,7 @@ exports.selectUserIsRewardApproved = selectUserIsRewardApproved;
 exports.selectUserIsVerificationCandidate = selectUserIsVerificationCandidate;
 exports.selectUserPhone = selectUserPhone;
 exports.selectViewMode = selectViewMode;
+exports.selectYoutubeChannels = selectYoutubeChannels;
 exports.setSubscriptionLatest = setSubscriptionLatest;
 exports.statsReducer = statsReducer;
 exports.subscriptionsReducer = subscriptions;
