@@ -86,9 +86,7 @@ const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
 const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
-const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED'; // User
-
-const USER_SETTINGS_POPULATE = 'USER_SETTINGS_POPULATE';
+const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -161,8 +159,7 @@ var action_types = /*#__PURE__*/Object.freeze({
   SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
-  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
-  USER_SETTINGS_POPULATE: USER_SETTINGS_POPULATE
+  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED
 });
 
 const Lbryio = {
@@ -638,6 +635,273 @@ var subscriptions = handleActions({
   })
 }, defaultState);
 
+function swapKeyAndValue(dict) {
+  const ret = {}; // eslint-disable-next-line no-restricted-syntax
+
+  for (const key in dict) {
+    if (dict.hasOwnProperty(key)) {
+      ret[dict[key]] = key;
+    }
+  }
+
+  return ret;
+}
+
+const selectState = state => state.subscriptions || {}; // Returns the list of channel uris a user is subscribed to
+
+
+const selectSubscriptions = reselect.createSelector(selectState, state => state.subscriptions); // Fetching list of users subscriptions
+
+const selectIsFetchingSubscriptions = reselect.createSelector(selectState, state => state.loading); // The current view mode on the subscriptions page
+
+const selectViewMode = reselect.createSelector(selectState, state => state.viewMode); // Suggested subscriptions from internal apis
+
+const selectSuggested = reselect.createSelector(selectState, state => state.suggested);
+const selectIsFetchingSuggested = reselect.createSelector(selectState, state => state.loadingSuggested);
+const selectSuggestedChannels = reselect.createSelector(selectSubscriptions, selectSuggested, (userSubscriptions, suggested) => {
+  if (!suggested) {
+    return null;
+  } // Swap the key/value because we will use the uri for everything, this just makes it easier
+  // suggested is returned from the api with the form:
+  // {
+  //   featured: { "Channel label": uri, ... },
+  //   top_subscribed: { "@channel": uri, ... }
+  //   top_bid: { "@channel": uri, ... }
+  // }
+  // To properly compare the suggested subscriptions from our current subscribed channels
+  // We only care about the uri, not the label
+  // We also only care about top_subscribed and featured
+  // top_bid could just be porn or a channel with no content
+
+
+  const topSubscribedSuggestions = swapKeyAndValue(suggested[SUGGESTED_TOP_SUBSCRIBED]);
+  const featuredSuggestions = swapKeyAndValue(suggested[SUGGESTED_FEATURED]); // Make sure there are no duplicates
+  // If a uri isn't already in the suggested object, add it
+
+  const suggestedChannels = { ...topSubscribedSuggestions
+  };
+  Object.keys(featuredSuggestions).forEach(uri => {
+    if (!suggestedChannels[uri]) {
+      const channelLabel = featuredSuggestions[uri];
+      suggestedChannels[uri] = channelLabel;
+    }
+  });
+  userSubscriptions.forEach(({
+    uri
+  }) => {
+    // Note to passer bys:
+    // Maybe we should just remove the `lbry://` prefix from subscription uris
+    // Most places don't store them like that
+    const subscribedUri = uri.slice('lbry://'.length);
+
+    if (suggestedChannels[subscribedUri]) {
+      delete suggestedChannels[subscribedUri];
+    }
+  });
+  return Object.keys(suggestedChannels).map(uri => ({
+    uri,
+    label: suggestedChannels[uri]
+  })).slice(0, 5);
+});
+const selectFirstRunCompleted = reselect.createSelector(selectState, state => state.firstRunCompleted);
+const selectShowSuggestedSubs = reselect.createSelector(selectState, state => state.showSuggestedSubs); // Fetching any claims that are a part of a users subscriptions
+
+const selectSubscriptionsBeingFetched = reselect.createSelector(selectSubscriptions, lbryRedux.selectAllFetchingChannelClaims, (subscriptions, fetchingChannelClaims) => {
+  const fetchingSubscriptionMap = {};
+  subscriptions.forEach(sub => {
+    const isFetching = fetchingChannelClaims && fetchingChannelClaims[sub.uri];
+
+    if (isFetching) {
+      fetchingSubscriptionMap[sub.uri] = true;
+    }
+  });
+  return fetchingSubscriptionMap;
+});
+const selectUnreadByChannel = reselect.createSelector(selectState, state => state.unread); // Returns the current total of unread subscriptions
+
+const selectUnreadAmount = reselect.createSelector(selectUnreadByChannel, unreadByChannel => {
+  const unreadChannels = Object.keys(unreadByChannel);
+  let badges = 0;
+
+  if (!unreadChannels.length) {
+    return badges;
+  }
+
+  unreadChannels.forEach(channel => {
+    badges += unreadByChannel[channel].uris.length;
+  });
+  return badges;
+}); // Returns the uris with channels as an array with the channel with the newest content first
+// If you just want the `unread` state, use selectUnread
+
+const selectUnreadSubscriptions = reselect.createSelector(selectUnreadAmount, selectUnreadByChannel, lbryRedux.selectClaimsByUri, (unreadAmount, unreadByChannel, claimsByUri) => {
+  // determine which channel has the newest content
+  const unreadList = [];
+
+  if (!unreadAmount) {
+    return unreadList;
+  }
+
+  const channelUriList = Object.keys(unreadByChannel); // There is only one channel with unread notifications
+
+  if (unreadAmount === 1) {
+    channelUriList.forEach(channel => {
+      const unreadChannel = {
+        channel,
+        uris: unreadByChannel[channel].uris
+      };
+      unreadList.push(unreadChannel);
+    });
+    return unreadList;
+  }
+
+  channelUriList.sort((channel1, channel2) => {
+    const latestUriFromChannel1 = unreadByChannel[channel1].uris[0];
+    const latestClaimFromChannel1 = claimsByUri[latestUriFromChannel1] || {};
+    const latestUriFromChannel2 = unreadByChannel[channel2].uris[0];
+    const latestClaimFromChannel2 = claimsByUri[latestUriFromChannel2] || {};
+    const latestHeightFromChannel1 = latestClaimFromChannel1.height || 0;
+    const latestHeightFromChannel2 = latestClaimFromChannel2.height || 0;
+
+    if (latestHeightFromChannel1 !== latestHeightFromChannel2) {
+      return latestHeightFromChannel2 - latestHeightFromChannel1;
+    }
+
+    return 0;
+  }).forEach(channel => {
+    const unreadSubscription = unreadByChannel[channel];
+    const unreadChannel = {
+      channel,
+      uris: unreadSubscription.uris
+    };
+    unreadList.push(unreadChannel);
+  });
+  return unreadList;
+}); // Returns all unread subscriptions for a uri passed in
+
+const makeSelectUnreadByChannel = uri => reselect.createSelector(selectUnreadByChannel, unread => unread[uri]); // Returns the first page of claims for every channel a user is subscribed to
+
+const selectSubscriptionClaims = reselect.createSelector(lbryRedux.selectAllClaimsByChannel, lbryRedux.selectClaimsById, selectSubscriptions, selectUnreadByChannel, (channelIds, allClaims, savedSubscriptions, unreadByChannel) => {
+  // no claims loaded yet
+  if (!Object.keys(channelIds).length) {
+    return [];
+  }
+
+  let fetchedSubscriptions = [];
+  savedSubscriptions.forEach(subscription => {
+    let channelClaims = []; // if subscribed channel has content
+
+    if (channelIds[subscription.uri] && channelIds[subscription.uri]['1']) {
+      // This will need to be more robust, we will want to be able to load more than the first page
+      // Strip out any ids that will be shown as notifications
+      const pageOneChannelIds = channelIds[subscription.uri]['1']; // we have the channel ids and the corresponding claims
+      // loop over the list of ids and grab the claim
+
+      pageOneChannelIds.forEach(id => {
+        const grabbedClaim = allClaims[id];
+
+        if (unreadByChannel[subscription.uri] && unreadByChannel[subscription.uri].uris.some(uri => uri.includes(id))) {
+          grabbedClaim.isNew = true;
+        }
+
+        channelClaims = channelClaims.concat([grabbedClaim]);
+      });
+    }
+
+    fetchedSubscriptions = fetchedSubscriptions.concat(channelClaims);
+  });
+  return fetchedSubscriptions;
+}); // Returns true if a user is subscribed to the channel associated with the uri passed in
+// Accepts content or channel uris
+
+const makeSelectIsSubscribed = uri => reselect.createSelector(selectSubscriptions, lbryRedux.makeSelectChannelForClaimUri(uri, true), (subscriptions, channelUri) => {
+  if (channelUri) {
+    return subscriptions.some(sub => sub.uri === channelUri);
+  } // If we couldn't get a channel uri from the claim uri, the uri passed in might be a channel already
+
+
+  const {
+    isChannel
+  } = lbryRedux.parseURI(uri);
+
+  if (isChannel) {
+    const uriWithPrefix = uri.startsWith('lbry://') ? uri : `lbry://${uri}`;
+    return subscriptions.some(sub => sub.uri === uriWithPrefix);
+  }
+
+  return false;
+});
+const makeSelectIsNew = uri => reselect.createSelector(makeSelectIsSubscribed(uri), lbryRedux.makeSelectChannelForClaimUri(uri), selectUnreadByChannel, (isSubscribed, channel, unreadByChannel) => {
+  if (!isSubscribed) {
+    return false;
+  }
+
+  const unreadForChannel = unreadByChannel[`lbry://${channel}`];
+
+  if (unreadForChannel) {
+    return unreadForChannel.uris.includes(uri);
+  }
+
+  return false; // If they are subscribed, check to see if this uri is in the list of unreads
+});
+const selectEnabledChannelNotifications = reselect.createSelector(selectState, state => state.enabledChannelNotifications);
+
+const persistShape = {
+  version: '0',
+  shared: {}
+};
+function userStateSyncMiddleware() {
+  return ({
+    getState
+  }) => next => action => {
+    if (action.type === CHANNEL_SUBSCRIBE || action.type === CHANNEL_UNSUBSCRIBE || action.type === lbryRedux.ACTIONS.TOGGLE_TAG_FOLLOW) {
+      const newShape = { ...persistShape
+      };
+      const state = getState();
+      const subscriptions = selectSubscriptions(state).map(({
+        uri
+      }) => uri);
+      const tags = lbryRedux.selectFollowedTags(state);
+      newShape.shared.subscriptions = subscriptions;
+      newShape.shared.tags = tags;
+      const {
+        uri
+      } = action.data;
+
+      if (action.type === CHANNEL_SUBSCRIBE) {
+        const newSubscriptions = subscriptions.slice();
+        newSubscriptions.push(uri);
+        newShape.shared.subscriptions = newSubscriptions;
+      } else if (action.type === CHANNEL_UNSUBSCRIBE) {
+        let newSubscriptions = subscriptions.slice();
+        newSubscriptions = newSubscriptions.filter(subscribedUri => subscribedUri !== uri);
+        newShape.shared.subscriptions = newSubscriptions;
+      } else {
+        const toggledTag = action.data.name;
+        const followedTags = lbryRedux.selectFollowedTags(state).map(({
+          name
+        }) => name);
+        const isFollowing = lbryRedux.makeSelectIsFollowingTag(toggledTag)(state);
+        let newTags = followedTags.slice();
+
+        if (isFollowing) {
+          newTags = newTags.filter(followedTag => followedTag.name !== toggledTag);
+        } else {
+          newTags.push(toggledTag);
+        }
+
+        newShape.shared.tags = newTags;
+      }
+
+      Lbryio.call('user_settings', 'set', {
+        settings: newShape
+      });
+    }
+
+    return next(action);
+  };
+}
+
 function doGenerateAuthToken(installationId) {
   return dispatch => {
     dispatch({
@@ -668,25 +932,25 @@ function doGenerateAuthToken(installationId) {
   };
 }
 
-const selectState = state => state.rewards || {};
+const selectState$1 = state => state.rewards || {};
 
-const selectUnclaimedRewardsByType = reselect.createSelector(selectState, state => state.unclaimedRewardsByType);
-const selectClaimedRewardsById = reselect.createSelector(selectState, state => state.claimedRewardsById);
+const selectUnclaimedRewardsByType = reselect.createSelector(selectState$1, state => state.unclaimedRewardsByType);
+const selectClaimedRewardsById = reselect.createSelector(selectState$1, state => state.claimedRewardsById);
 const selectClaimedRewards = reselect.createSelector(selectClaimedRewardsById, byId => Object.values(byId) || []);
 const selectClaimedRewardsByTransactionId = reselect.createSelector(selectClaimedRewards, rewards => rewards.reduce((mapParam, reward) => {
   const map = mapParam;
   map[reward.transaction_id] = reward;
   return map;
 }, {}));
-const selectUnclaimedRewards = reselect.createSelector(selectState, state => state.unclaimedRewards);
-const selectFetchingRewards = reselect.createSelector(selectState, state => !!state.fetching);
+const selectUnclaimedRewards = reselect.createSelector(selectState$1, state => state.unclaimedRewards);
+const selectFetchingRewards = reselect.createSelector(selectState$1, state => !!state.fetching);
 const selectUnclaimedRewardValue = reselect.createSelector(selectUnclaimedRewards, rewards => rewards.reduce((sum, reward) => sum + reward.reward_amount, 0));
-const selectClaimsPendingByType = reselect.createSelector(selectState, state => state.claimPendingByType);
+const selectClaimsPendingByType = reselect.createSelector(selectState$1, state => state.claimPendingByType);
 
 const selectIsClaimRewardPending = (state, props) => selectClaimsPendingByType(state, props)[props.reward_type];
 
 const makeSelectIsRewardClaimPending = () => reselect.createSelector(selectIsClaimRewardPending, isClaiming => isClaiming);
-const selectClaimErrorsByType = reselect.createSelector(selectState, state => state.claimErrorsByType);
+const selectClaimErrorsByType = reselect.createSelector(selectState$1, state => state.claimErrorsByType);
 
 const selectClaimRewardError = (state, props) => selectClaimErrorsByType(state, props)[props.reward_type];
 
@@ -696,39 +960,39 @@ const selectRewardByType = (state, rewardType) => selectUnclaimedRewards(state).
 
 const makeSelectRewardByType = () => reselect.createSelector(selectRewardByType, reward => reward);
 const makeSelectRewardAmountByType = () => reselect.createSelector(selectRewardByType, reward => reward ? reward.reward_amount : 0);
-const selectRewardContentClaimIds = reselect.createSelector(selectState, state => state.rewardedContentClaimIds);
+const selectRewardContentClaimIds = reselect.createSelector(selectState$1, state => state.rewardedContentClaimIds);
 const selectReferralReward = reselect.createSelector(selectUnclaimedRewards, unclaimedRewards => unclaimedRewards.filter(reward => reward.reward_type === rewards.TYPE_REFERRAL)[0]);
 
-const selectState$1 = state => state.user || {};
-const selectAuthenticationIsPending = reselect.createSelector(selectState$1, state => state.authenticationIsPending);
-const selectUserIsPending = reselect.createSelector(selectState$1, state => state.userIsPending);
-const selectUser = reselect.createSelector(selectState$1, state => state.user);
+const selectState$2 = state => state.user || {};
+const selectAuthenticationIsPending = reselect.createSelector(selectState$2, state => state.authenticationIsPending);
+const selectUserIsPending = reselect.createSelector(selectState$2, state => state.userIsPending);
+const selectUser = reselect.createSelector(selectState$2, state => state.user);
 const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email : null);
 const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.phone_number : null);
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
-const selectEmailToVerify = reselect.createSelector(selectState$1, selectUserEmail, (state, userEmail) => state.emailToVerify || userEmail);
-const selectPhoneToVerify = reselect.createSelector(selectState$1, selectUserPhone, (state, userPhone) => state.phoneToVerify || userPhone);
+const selectEmailToVerify = reselect.createSelector(selectState$2, selectUserEmail, (state, userEmail) => state.emailToVerify || userEmail);
+const selectPhoneToVerify = reselect.createSelector(selectState$2, selectUserPhone, (state, userPhone) => state.phoneToVerify || userPhone);
 const selectUserIsRewardApproved = reselect.createSelector(selectUser, user => user && user.is_reward_approved);
-const selectEmailNewIsPending = reselect.createSelector(selectState$1, state => state.emailNewIsPending);
-const selectEmailNewErrorMessage = reselect.createSelector(selectState$1, state => state.emailNewErrorMessage);
-const selectPhoneNewErrorMessage = reselect.createSelector(selectState$1, state => state.phoneNewErrorMessage);
-const selectEmailVerifyIsPending = reselect.createSelector(selectState$1, state => state.emailVerifyIsPending);
-const selectEmailVerifyErrorMessage = reselect.createSelector(selectState$1, state => state.emailVerifyErrorMessage);
-const selectPhoneNewIsPending = reselect.createSelector(selectState$1, state => state.phoneNewIsPending);
-const selectPhoneVerifyIsPending = reselect.createSelector(selectState$1, state => state.phoneVerifyIsPending);
-const selectPhoneVerifyErrorMessage = reselect.createSelector(selectState$1, state => state.phoneVerifyErrorMessage);
-const selectIdentityVerifyIsPending = reselect.createSelector(selectState$1, state => state.identityVerifyIsPending);
-const selectIdentityVerifyErrorMessage = reselect.createSelector(selectState$1, state => state.identityVerifyErrorMessage);
+const selectEmailNewIsPending = reselect.createSelector(selectState$2, state => state.emailNewIsPending);
+const selectEmailNewErrorMessage = reselect.createSelector(selectState$2, state => state.emailNewErrorMessage);
+const selectPhoneNewErrorMessage = reselect.createSelector(selectState$2, state => state.phoneNewErrorMessage);
+const selectEmailVerifyIsPending = reselect.createSelector(selectState$2, state => state.emailVerifyIsPending);
+const selectEmailVerifyErrorMessage = reselect.createSelector(selectState$2, state => state.emailVerifyErrorMessage);
+const selectPhoneNewIsPending = reselect.createSelector(selectState$2, state => state.phoneNewIsPending);
+const selectPhoneVerifyIsPending = reselect.createSelector(selectState$2, state => state.phoneVerifyIsPending);
+const selectPhoneVerifyErrorMessage = reselect.createSelector(selectState$2, state => state.phoneVerifyErrorMessage);
+const selectIdentityVerifyIsPending = reselect.createSelector(selectState$2, state => state.identityVerifyIsPending);
+const selectIdentityVerifyErrorMessage = reselect.createSelector(selectState$2, state => state.identityVerifyErrorMessage);
 const selectUserVerifiedEmail = reselect.createSelector(selectUser, user => user && user.has_verified_email);
 const selectUserIsVerificationCandidate = reselect.createSelector(selectUser, user => user && (!user.has_verified_email || !user.is_identity_verified));
-const selectAccessToken = reselect.createSelector(selectState$1, state => state.accessToken);
-const selectUserInviteStatusIsPending = reselect.createSelector(selectState$1, state => state.inviteStatusIsPending);
-const selectUserInvitesRemaining = reselect.createSelector(selectState$1, state => state.invitesRemaining);
-const selectUserInvitees = reselect.createSelector(selectState$1, state => state.invitees);
+const selectAccessToken = reselect.createSelector(selectState$2, state => state.accessToken);
+const selectUserInviteStatusIsPending = reselect.createSelector(selectState$2, state => state.inviteStatusIsPending);
+const selectUserInvitesRemaining = reselect.createSelector(selectState$2, state => state.invitesRemaining);
+const selectUserInvitees = reselect.createSelector(selectState$2, state => state.invitees);
 const selectUserInviteStatusFailed = reselect.createSelector(selectUserInvitesRemaining, () => selectUserInvitesRemaining === null);
-const selectUserInviteNewIsPending = reselect.createSelector(selectState$1, state => state.inviteNewIsPending);
-const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$1, state => state.inviteNewErrorMessage);
-const selectUserInviteReferralLink = reselect.createSelector(selectState$1, state => state.referralLink);
+const selectUserInviteNewIsPending = reselect.createSelector(selectState$2, state => state.inviteNewIsPending);
+const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$2, state => state.inviteNewErrorMessage);
+const selectUserInviteReferralLink = reselect.createSelector(selectState$2, state => state.referralLink);
 
 function doFetchInviteStatus() {
   return dispatch => {
@@ -1262,217 +1526,6 @@ function doFetchRewardedContent() {
 }
 
 const PAGE_SIZE = 20;
-
-function swapKeyAndValue(dict) {
-  const ret = {}; // eslint-disable-next-line no-restricted-syntax
-
-  for (const key in dict) {
-    if (dict.hasOwnProperty(key)) {
-      ret[dict[key]] = key;
-    }
-  }
-
-  return ret;
-}
-
-const selectState$2 = state => state.subscriptions || {}; // Returns the list of channel uris a user is subscribed to
-
-
-const selectSubscriptions = reselect.createSelector(selectState$2, state => state.subscriptions); // Fetching list of users subscriptions
-
-const selectIsFetchingSubscriptions = reselect.createSelector(selectState$2, state => state.loading); // The current view mode on the subscriptions page
-
-const selectViewMode = reselect.createSelector(selectState$2, state => state.viewMode); // Suggested subscriptions from internal apis
-
-const selectSuggested = reselect.createSelector(selectState$2, state => state.suggested);
-const selectIsFetchingSuggested = reselect.createSelector(selectState$2, state => state.loadingSuggested);
-const selectSuggestedChannels = reselect.createSelector(selectSubscriptions, selectSuggested, (userSubscriptions, suggested) => {
-  if (!suggested) {
-    return null;
-  } // Swap the key/value because we will use the uri for everything, this just makes it easier
-  // suggested is returned from the api with the form:
-  // {
-  //   featured: { "Channel label": uri, ... },
-  //   top_subscribed: { "@channel": uri, ... }
-  //   top_bid: { "@channel": uri, ... }
-  // }
-  // To properly compare the suggested subscriptions from our current subscribed channels
-  // We only care about the uri, not the label
-  // We also only care about top_subscribed and featured
-  // top_bid could just be porn or a channel with no content
-
-
-  const topSubscribedSuggestions = swapKeyAndValue(suggested[SUGGESTED_TOP_SUBSCRIBED]);
-  const featuredSuggestions = swapKeyAndValue(suggested[SUGGESTED_FEATURED]); // Make sure there are no duplicates
-  // If a uri isn't already in the suggested object, add it
-
-  const suggestedChannels = { ...topSubscribedSuggestions
-  };
-  Object.keys(featuredSuggestions).forEach(uri => {
-    if (!suggestedChannels[uri]) {
-      const channelLabel = featuredSuggestions[uri];
-      suggestedChannels[uri] = channelLabel;
-    }
-  });
-  userSubscriptions.forEach(({
-    uri
-  }) => {
-    // Note to passer bys:
-    // Maybe we should just remove the `lbry://` prefix from subscription uris
-    // Most places don't store them like that
-    const subscribedUri = uri.slice('lbry://'.length);
-
-    if (suggestedChannels[subscribedUri]) {
-      delete suggestedChannels[subscribedUri];
-    }
-  });
-  return Object.keys(suggestedChannels).map(uri => ({
-    uri,
-    label: suggestedChannels[uri]
-  })).slice(0, 5);
-});
-const selectFirstRunCompleted = reselect.createSelector(selectState$2, state => state.firstRunCompleted);
-const selectShowSuggestedSubs = reselect.createSelector(selectState$2, state => state.showSuggestedSubs); // Fetching any claims that are a part of a users subscriptions
-
-const selectSubscriptionsBeingFetched = reselect.createSelector(selectSubscriptions, lbryRedux.selectAllFetchingChannelClaims, (subscriptions, fetchingChannelClaims) => {
-  const fetchingSubscriptionMap = {};
-  subscriptions.forEach(sub => {
-    const isFetching = fetchingChannelClaims && fetchingChannelClaims[sub.uri];
-
-    if (isFetching) {
-      fetchingSubscriptionMap[sub.uri] = true;
-    }
-  });
-  return fetchingSubscriptionMap;
-});
-const selectUnreadByChannel = reselect.createSelector(selectState$2, state => state.unread); // Returns the current total of unread subscriptions
-
-const selectUnreadAmount = reselect.createSelector(selectUnreadByChannel, unreadByChannel => {
-  const unreadChannels = Object.keys(unreadByChannel);
-  let badges = 0;
-
-  if (!unreadChannels.length) {
-    return badges;
-  }
-
-  unreadChannels.forEach(channel => {
-    badges += unreadByChannel[channel].uris.length;
-  });
-  return badges;
-}); // Returns the uris with channels as an array with the channel with the newest content first
-// If you just want the `unread` state, use selectUnread
-
-const selectUnreadSubscriptions = reselect.createSelector(selectUnreadAmount, selectUnreadByChannel, lbryRedux.selectClaimsByUri, (unreadAmount, unreadByChannel, claimsByUri) => {
-  // determine which channel has the newest content
-  const unreadList = [];
-
-  if (!unreadAmount) {
-    return unreadList;
-  }
-
-  const channelUriList = Object.keys(unreadByChannel); // There is only one channel with unread notifications
-
-  if (unreadAmount === 1) {
-    channelUriList.forEach(channel => {
-      const unreadChannel = {
-        channel,
-        uris: unreadByChannel[channel].uris
-      };
-      unreadList.push(unreadChannel);
-    });
-    return unreadList;
-  }
-
-  channelUriList.sort((channel1, channel2) => {
-    const latestUriFromChannel1 = unreadByChannel[channel1].uris[0];
-    const latestClaimFromChannel1 = claimsByUri[latestUriFromChannel1] || {};
-    const latestUriFromChannel2 = unreadByChannel[channel2].uris[0];
-    const latestClaimFromChannel2 = claimsByUri[latestUriFromChannel2] || {};
-    const latestHeightFromChannel1 = latestClaimFromChannel1.height || 0;
-    const latestHeightFromChannel2 = latestClaimFromChannel2.height || 0;
-
-    if (latestHeightFromChannel1 !== latestHeightFromChannel2) {
-      return latestHeightFromChannel2 - latestHeightFromChannel1;
-    }
-
-    return 0;
-  }).forEach(channel => {
-    const unreadSubscription = unreadByChannel[channel];
-    const unreadChannel = {
-      channel,
-      uris: unreadSubscription.uris
-    };
-    unreadList.push(unreadChannel);
-  });
-  return unreadList;
-}); // Returns all unread subscriptions for a uri passed in
-
-const makeSelectUnreadByChannel = uri => reselect.createSelector(selectUnreadByChannel, unread => unread[uri]); // Returns the first page of claims for every channel a user is subscribed to
-
-const selectSubscriptionClaims = reselect.createSelector(lbryRedux.selectAllClaimsByChannel, lbryRedux.selectClaimsById, selectSubscriptions, selectUnreadByChannel, (channelIds, allClaims, savedSubscriptions, unreadByChannel) => {
-  // no claims loaded yet
-  if (!Object.keys(channelIds).length) {
-    return [];
-  }
-
-  let fetchedSubscriptions = [];
-  savedSubscriptions.forEach(subscription => {
-    let channelClaims = []; // if subscribed channel has content
-
-    if (channelIds[subscription.uri] && channelIds[subscription.uri]['1']) {
-      // This will need to be more robust, we will want to be able to load more than the first page
-      // Strip out any ids that will be shown as notifications
-      const pageOneChannelIds = channelIds[subscription.uri]['1']; // we have the channel ids and the corresponding claims
-      // loop over the list of ids and grab the claim
-
-      pageOneChannelIds.forEach(id => {
-        const grabbedClaim = allClaims[id];
-
-        if (unreadByChannel[subscription.uri] && unreadByChannel[subscription.uri].uris.some(uri => uri.includes(id))) {
-          grabbedClaim.isNew = true;
-        }
-
-        channelClaims = channelClaims.concat([grabbedClaim]);
-      });
-    }
-
-    fetchedSubscriptions = fetchedSubscriptions.concat(channelClaims);
-  });
-  return fetchedSubscriptions;
-}); // Returns true if a user is subscribed to the channel associated with the uri passed in
-// Accepts content or channel uris
-
-const makeSelectIsSubscribed = uri => reselect.createSelector(selectSubscriptions, lbryRedux.makeSelectChannelForClaimUri(uri, true), (subscriptions, channelUri) => {
-  if (channelUri) {
-    return subscriptions.some(sub => sub.uri === channelUri);
-  } // If we couldn't get a channel uri from the claim uri, the uri passed in might be a channel already
-
-
-  const {
-    isChannel
-  } = lbryRedux.parseURI(uri);
-
-  if (isChannel) {
-    const uriWithPrefix = uri.startsWith('lbry://') ? uri : `lbry://${uri}`;
-    return subscriptions.some(sub => sub.uri === uriWithPrefix);
-  }
-
-  return false;
-});
-const makeSelectIsNew = uri => reselect.createSelector(makeSelectIsSubscribed(uri), lbryRedux.makeSelectChannelForClaimUri(uri), selectUnreadByChannel, (isSubscribed, channel, unreadByChannel) => {
-  if (!isSubscribed) {
-    return false;
-  }
-
-  const unreadForChannel = unreadByChannel[`lbry://${channel}`];
-
-  if (unreadForChannel) {
-    return unreadForChannel.uris.includes(uri);
-  }
-
-  return false; // If they are subscribed, check to see if this uri is in the list of unreads
-});
-const selectEnabledChannelNotifications = reselect.createSelector(selectState$2, state => state.enabledChannelNotifications);
 
 //      
 const CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
@@ -2998,3 +3051,4 @@ exports.statsReducer = statsReducer;
 exports.subscriptionsReducer = subscriptions;
 exports.syncReducer = syncReducer;
 exports.userReducer = userReducer;
+exports.userStateSyncMiddleware = userStateSyncMiddleware;
