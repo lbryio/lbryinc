@@ -1090,6 +1090,26 @@ function doUserInviteNew(email) {
     });
   };
 }
+function doClaimYoutubeChannels() {
+  return dispatch => {
+    lbryRedux.Lbry.address_unused().then(address => // add dispatch started here
+    Lbryio.call('yt', 'transfer', {
+      address
+    }).then(response => {
+      if (response && response.length) {
+        Promise.all(response.map(channelMeta => {
+          if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+            return lbryRedux.Lbry.channel_import({
+              channel_data: channelMeta.channel.channel_certificate
+            });
+          }
+
+          return null;
+        })).then(() => dispatch(doUserFetch())); // update the channel data the form uses
+      }
+    })).catch(e => console.error('Transfering channels failed', e));
+  };
+}
 
 function doRewardList() {
   return dispatch => {
@@ -2851,6 +2871,7 @@ exports.doCheckSync = doCheckSync;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;
+exports.doClaimYoutubeChannels = doClaimYoutubeChannels;
 exports.doCompleteFirstRun = doCompleteFirstRun;
 exports.doFetchAccessToken = doFetchAccessToken;
 exports.doFetchCostInfoForUri = doFetchCostInfoForUri;

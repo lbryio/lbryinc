@@ -54,6 +54,7 @@ export {
   doUserResendVerificationEmail,
   doUserIdentityVerify,
   doUserInviteNew,
+  doClaimYoutubeChannels,
 } from 'redux/actions/user';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
