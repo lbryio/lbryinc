@@ -382,3 +382,27 @@ export function doUserInviteNew(email) {
       });
   };
 }
+
+export function doClaimYoutubeChannels() {
+  return dispatch => {
+    Lbry.address_unused()
+      .then(address =>
+        // add dispatch started here
+        Lbryio.call('yt', 'transfer', { address }).then(response => {
+          if (response && response.length) {
+            Promise.all(
+              response.map(channelMeta => {
+                if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+                  return Lbry.channel_import({
+                    channel_data: channelMeta.channel.channel_certificate,
+                  });
+                }
+                return null;
+              })
+            ).then(() => dispatch(doUserFetch())); // update the channel data the form uses
+          }
+        })
+      )
+      .catch(e => console.error('Transfering channels failed', e));
+  };
+}

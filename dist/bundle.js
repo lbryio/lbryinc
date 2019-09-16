@@ -196,6 +196,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_8__["doUserInviteNew"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_8__["doClaimYoutubeChannels"]; });
+
 /* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(22);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_9__["doFetchCostInfoForUri"]; });
 
@@ -2405,6 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return doUserIdentityVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return doUserInviteNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return doClaimYoutubeChannels; });
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_actions_rewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(16);
@@ -2803,6 +2806,33 @@ function doUserInviteNew(email) {
           error: error
         }
       });
+    });
+  };
+}
+function doClaimYoutubeChannels() {
+  return function (dispatch) {
+    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_unused().then(function (address) {
+      return (// add dispatch started here
+        lbryio__WEBPACK_IMPORTED_MODULE_4__["default"].call('yt', 'transfer', {
+          address: address
+        }).then(function (response) {
+          if (response && response.length) {
+            Promise.all(response.map(function (channelMeta) {
+              if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+                return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
+                  channel_data: channelMeta.channel.channel_certificate
+                });
+              }
+
+              return null;
+            })).then(function () {
+              return dispatch(doUserFetch());
+            }); // update the channel data the form uses
+          }
+        })
+      );
+    })["catch"](function (e) {
+      return console.error('Transfering channels failed', e);
     });
   };
 }
