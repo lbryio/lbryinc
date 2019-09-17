@@ -141,3 +141,13 @@ export const selectUserInviteReferralLink = createSelector(
   selectState,
   state => state.referralLink
 );
+
+export const selectYTImportPending = createSelector(
+  selectState,
+  state => state.ytChannelImportPending
+);
+
+export const selectYTImportError = createSelector(
+  selectState,
+  state => state.ytChannelImportErrorMessage
+);

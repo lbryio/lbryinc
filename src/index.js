@@ -153,6 +153,8 @@ export {
   selectUserInviteReferralLink,
   selectUserVerifiedEmail,
   selectYoutubeChannels,
+  selectYTImportPending,
+  selectYTImportError,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,
