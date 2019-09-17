@@ -20,6 +20,9 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    alias: {
+      'flow-typed': path.resolve(__dirname, './flow-typed'),
+    },
   },
   externals: 'lbry-redux',
 };

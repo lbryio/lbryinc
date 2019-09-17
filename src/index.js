@@ -3,6 +3,9 @@ import Lbryio from 'lbryio';
 import rewards from 'rewards';
 import subscriptionsReducer from 'redux/reducers/subscriptions';
 
+// middleware
+export { userStateSyncMiddleware } from 'redux/middleware/sync';
+
 // constants
 export { LBRYINC_ACTIONS };
 
@@ -147,6 +150,7 @@ export {
   selectUserInviteNewIsPending,
   selectUserInviteNewErrorMessage,
   selectUserInviteReferralLink,
+  selectUserVerifiedEmail,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,

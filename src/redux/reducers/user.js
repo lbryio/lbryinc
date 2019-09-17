@@ -46,6 +46,7 @@ reducers[ACTIONS.USER_FETCH_SUCCESS] = (state, action) =>
   Object.assign({}, state, {
     userIsPending: false,
     user: action.data.user,
+    emailToVerify: action.data.user.has_verified_email ? null : state.emailToVerify,
   });
 
 reducers[ACTIONS.USER_FETCH_FAILURE] = state =>

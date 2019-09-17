@@ -25,6 +25,8 @@
     "import/no-commonjs": "warn",
     "import/no-amd": "warn",
     "import/prefer-default-export": "ignore",
-    "func-names": ["warn", "as-needed"]
+    "flowtype/generic-spacing": 0,
+    "func-names": ["warn", "as-needed"],
+    "no-plusplus": 0
   }
 }
