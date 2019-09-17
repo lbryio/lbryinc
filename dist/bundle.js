@@ -380,6 +380,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_26__["selectYoutubeChannels"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYTImportPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_26__["selectYTImportPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYTImportError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_26__["selectYTImportError"]; });
+
 /* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(37);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_27__["makeSelectFetchingCostInfoForUri"]; });
 
@@ -1888,6 +1892,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewIsPending", function() { return selectUserInviteNewIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewErrorMessage", function() { return selectUserInviteNewErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return selectUserInviteReferralLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYTImportPending", function() { return selectYTImportPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYTImportError", function() { return selectYTImportError; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -1980,6 +1986,12 @@ var selectUserInviteNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0
 });
 var selectUserInviteReferralLink = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.referralLink;
+});
+var selectYTImportPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.ytChannelImportPending;
+});
+var selectYTImportError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.ytChannelImportErrorMessage;
 });
 
 /***/ }),
@@ -2409,28 +2421,43 @@ function doUserInviteNew(email) {
 }
 function doClaimYoutubeChannels() {
   return function (dispatch) {
-    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_unused().then(function (address) {
-      return (// add dispatch started here
-        lbryio__WEBPACK_IMPORTED_MODULE_4__["default"].call('yt', 'transfer', {
-          address: address
-        }).then(function (response) {
-          if (response && response.length) {
-            Promise.all(response.map(function (channelMeta) {
-              if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
-                return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
-                  channel_data: channelMeta.channel.channel_certificate
-                });
-              }
+    dispatch({
+      type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_STARTED
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list().then(function (addressList) {
+      return addressList.find(function (el) {
+        return el.used_times === 0;
+      });
+    }).then(function (address) {
+      return lbryio__WEBPACK_IMPORTED_MODULE_4__["default"].call('yt', 'transfer', {
+        address: address.address,
+        public_key: address.public_key
+      }).then(function (response) {
+        if (response && response.success) {
+          Promise.all(response.map(function (channelMeta) {
+            if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+              return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
+                channel_data: channelMeta.channel.channel_certificate
+              });
+            }
 
-              return null;
-            })).then(function () {
-              return dispatch(doUserFetch());
-            }); // update the channel data the form uses
-          }
-        })
-      );
-    })["catch"](function (e) {
-      return console.error('Transfering channels failed', e);
+            return null;
+          })).then(function () {
+            var actions = [{
+              type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_COMPLETED
+            }];
+            actions.push(doUserFetch());
+            actions.push(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doFetchChannelListMine"])());
+            dispatch(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["batchActions"].apply(void 0, actions));
+          });
+        }
+      });
+    })["catch"](function (error) {
+      console.error('Youtube import error:', error);
+      dispatch({
+        type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_FAILURE,
+        data: String(error)
+      });
     });
   };
 }
@@ -3938,7 +3965,9 @@ var defaultState = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
-  user: undefined
+  user: undefined,
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: ''
 };
 
 reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].AUTHENTICATION_STARTED] = function (state) {
@@ -4168,6 +4197,27 @@ reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_INVITE_STATUS_F
     inviteStatusIsPending: false,
     invitesRemaining: null,
     invitees: null
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: true,
+    ytChannelImportErrorMessage: ''
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_COMPLETED] = function (state) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: ''
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: action.data
   });
 };
 

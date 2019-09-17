@@ -1,4 +1,4 @@
-import { ACTIONS, Lbry, doToast } from 'lbry-redux';
+import { ACTIONS, Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
   selectEmailToVerify,
@@ -385,11 +385,17 @@ export function doUserInviteNew(email) {
 
 export function doClaimYoutubeChannels() {
   return dispatch => {
-    Lbry.address_unused()
+    dispatch({
+      type: ACTIONS.USER_YOUTUBE_IMPORT_STARTED,
+    });
+    Lbry.address_list()
+      .then(addressList => addressList.find(el => el.used_times === 0))
       .then(address =>
-        // add dispatch started here
-        Lbryio.call('yt', 'transfer', { address }).then(response => {
-          if (response && response.length) {
+        Lbryio.call('yt', 'transfer', {
+          address: address.address,
+          public_key: address.public_key,
+        }).then(response => {
+          if (response && response.success) {
             Promise.all(
               response.map(channelMeta => {
                 if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
@@ -399,10 +405,24 @@ export function doClaimYoutubeChannels() {
                 }
                 return null;
               })
-            ).then(() => dispatch(doUserFetch())); // update the channel data the form uses
+            ).then(() => {
+              const actions = [
+                {
+                  type: ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED,
+                },
+              ];
+              actions.push(doUserFetch());
+              actions.push(doFetchChannelListMine());
+              dispatch(batchActions(...actions));
+            });
           }
         })
       )
-      .catch(e => console.error('Transfering channels failed', e));
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
+          data: String(error),
+        });
+      });
   };
 }
