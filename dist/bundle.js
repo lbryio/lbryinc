@@ -2007,7 +2007,7 @@ function doClaimRewardType(rewardType) {
       return ur.reward_type === rewardType;
     }); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL) {
+    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
