@@ -1207,13 +1207,16 @@ rewards.setCallback = function (name, method) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var constants_subscriptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var constants_subscriptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(10);
 var _handleActions;
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -1224,12 +1227,12 @@ var defaultState = {
   unread: {},
   suggested: {},
   loading: false,
-  viewMode: constants_subscriptions__WEBPACK_IMPORTED_MODULE_1__["VIEW_ALL"],
+  viewMode: constants_subscriptions__WEBPACK_IMPORTED_MODULE_2__["VIEW_ALL"],
   loadingSuggested: false,
   firstRunCompleted: false,
   showSuggestedSubs: false
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_2__["handleActions"])((_handleActions = {}, _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_SUBSCRIBE"], function (state, action) {
+/* harmony default export */ __webpack_exports__["default"] = (Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_3__["handleActions"])((_handleActions = {}, _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_SUBSCRIBE"], function (state, action) {
   var newSubscription = action.data;
   var newSubscriptions = state.subscriptions.slice();
   newSubscriptions.unshift(newSubscription);
@@ -1353,6 +1356,36 @@ var defaultState = {
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["VIEW_SUGGESTED_SUBSCRIPTIONS"], function (state) {
   return _objectSpread({}, state, {
     showSuggestedSubs: true
+  });
+}), _defineProperty(_handleActions, lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].USER_STATE_POPULATE, function (state, action) {
+  var subscriptions = action.data.subscriptions;
+  var newSubscriptions;
+
+  if (!subscriptions) {
+    newSubscriptions = state.subscriptions;
+  } else {
+    var parsedSubscriptions = subscriptions.map(function (uri) {
+      var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["parseURI"])(uri),
+          channelName = _parseURI.channelName;
+
+      return {
+        uri: uri,
+        channelName: "@".concat(channelName)
+      };
+    });
+
+    if (!state.subscriptions || !state.subscriptions.length) {
+      newSubscriptions = parsedSubscriptions;
+    } else {
+      var map = {};
+      newSubscriptions = parsedSubscriptions.concat(state.subscriptions).filter(function (sub) {
+        return map[sub.uri] ? false : map[sub.uri] = true;
+      }, {});
+    }
+  }
+
+  return _objectSpread({}, state, {
+    subscriptions: newSubscriptions
   });
 }), _handleActions), defaultState));
 
