@@ -1,4 +1,4 @@
-import { ACTIONS, Lbry, doToast } from 'lbry-redux';
+import { ACTIONS, Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
   selectEmailToVerify,
@@ -378,6 +378,50 @@ export function doUserInviteNew(email) {
         dispatch({
           type: ACTIONS.USER_INVITE_NEW_FAILURE,
           data: { error },
+        });
+      });
+  };
+}
+
+export function doClaimYoutubeChannels() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_YOUTUBE_IMPORT_STARTED,
+    });
+    Lbry.address_list()
+      .then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0])
+      .then(address =>
+        Lbryio.call('yt', 'transfer', {
+          address: address.address,
+          public_key: address.pubkey,
+        }).then(response => {
+          if (response && response.success) {
+            Promise.all(
+              response.map(channelMeta => {
+                if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
+                  return Lbry.channel_import({
+                    channel_data: channelMeta.channel.channel_certificate,
+                  });
+                }
+                return null;
+              })
+            ).then(() => {
+              const actions = [
+                {
+                  type: ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED,
+                },
+              ];
+              actions.push(doUserFetch());
+              actions.push(doFetchChannelListMine());
+              dispatch(batchActions(...actions));
+            });
+          }
+        })
+      )
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
+          data: String(error),
         });
       });
   };

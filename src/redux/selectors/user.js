@@ -38,6 +38,11 @@ export const selectPhoneToVerify = createSelector(
   (state, userPhone) => state.phoneToVerify || userPhone
 );
 
+export const selectYoutubeChannels = createSelector(
+  selectUser,
+  user => (user ? user.youtube_channels : null)
+);
+
 export const selectUserIsRewardApproved = createSelector(
   selectUser,
   user => user && user.is_reward_approved
@@ -135,4 +140,14 @@ export const selectUserInviteNewErrorMessage = createSelector(
 export const selectUserInviteReferralLink = createSelector(
   selectState,
   state => state.referralLink
+);
+
+export const selectYTImportPending = createSelector(
+  selectState,
+  state => state.ytChannelImportPending
+);
+
+export const selectYTImportError = createSelector(
+  selectState,
+  state => state.ytChannelImportErrorMessage
 );

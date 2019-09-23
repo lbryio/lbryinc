@@ -14,6 +14,8 @@ const defaultState = {
   invitesRemaining: undefined,
   invitees: undefined,
   user: undefined,
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: '',
 };
 
 reducers[ACTIONS.AUTHENTICATION_STARTED] = state =>
@@ -219,6 +221,24 @@ reducers[ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE] = state =>
     inviteStatusIsPending: false,
     invitesRemaining: null,
     invitees: null,
+  });
+
+reducers[ACTIONS.USER_YOUTUBE_IMPORT_STARTED] = state =>
+  Object.assign({}, state, {
+    ytChannelImportPending: true,
+    ytChannelImportErrorMessage: '',
+  });
+
+reducers[ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED] = state =>
+  Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: '',
+  });
+
+reducers[ACTIONS.USER_YOUTUBE_IMPORT_FAILURE] = (state, action) =>
+  Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: action.data,
   });
 
 export function userReducer(state = defaultState, action) {

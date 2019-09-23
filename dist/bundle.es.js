@@ -972,6 +972,7 @@ const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
 const selectEmailToVerify = reselect.createSelector(selectState$2, selectUserEmail, (state, userEmail) => state.emailToVerify || userEmail);
 const selectPhoneToVerify = reselect.createSelector(selectState$2, selectUserPhone, (state, userPhone) => state.phoneToVerify || userPhone);
+const selectYoutubeChannels = reselect.createSelector(selectUser, user => user ? user.youtube_channels : null);
 const selectUserIsRewardApproved = reselect.createSelector(selectUser, user => user && user.is_reward_approved);
 const selectEmailNewIsPending = reselect.createSelector(selectState$2, state => state.emailNewIsPending);
 const selectEmailNewErrorMessage = reselect.createSelector(selectState$2, state => state.emailNewErrorMessage);
@@ -993,6 +994,8 @@ const selectUserInviteStatusFailed = reselect.createSelector(selectUserInvitesRe
 const selectUserInviteNewIsPending = reselect.createSelector(selectState$2, state => state.inviteNewIsPending);
 const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$2, state => state.inviteNewErrorMessage);
 const selectUserInviteReferralLink = reselect.createSelector(selectState$2, state => state.referralLink);
+const selectYTImportPending = reselect.createSelector(selectState$2, state => state.ytChannelImportPending);
+const selectYTImportError = reselect.createSelector(selectState$2, state => state.ytChannelImportErrorMessage);
 
 function doFetchInviteStatus() {
   return dispatch => {
@@ -1360,6 +1363,41 @@ function doUserInviteNew(email) {
         data: {
           error
         }
+      });
+    });
+  };
+}
+function doClaimYoutubeChannels() {
+  return dispatch => {
+    dispatch({
+      type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_STARTED
+    });
+    lbryRedux.Lbry.address_list().then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0]).then(address => Lbryio.call('yt', 'transfer', {
+      address: address.address,
+      public_key: address.pubkey
+    }).then(response => {
+      if (response && response.success) {
+        Promise.all(response.map(channelMeta => {
+          if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
+            return lbryRedux.Lbry.channel_import({
+              channel_data: channelMeta.channel.channel_certificate
+            });
+          }
+
+          return null;
+        })).then(() => {
+          const actions = [{
+            type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED
+          }];
+          actions.push(doUserFetch());
+          actions.push(lbryRedux.doFetchChannelListMine());
+          dispatch(lbryRedux.batchActions(...actions));
+        });
+      }
+    })).catch(error => {
+      dispatch({
+        type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
+        data: String(error)
       });
     });
   };
@@ -2454,7 +2492,9 @@ const defaultState$3 = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
-  user: undefined
+  user: undefined,
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: ''
 };
 
 reducers$2[lbryRedux.ACTIONS.AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
@@ -2634,6 +2674,21 @@ reducers$2[lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE] = state => Object
   inviteStatusIsPending: false,
   invitesRemaining: null,
   invitees: null
+});
+
+reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_STARTED] = state => Object.assign({}, state, {
+  ytChannelImportPending: true,
+  ytChannelImportErrorMessage: ''
+});
+
+reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED] = state => Object.assign({}, state, {
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: ''
+});
+
+reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_FAILURE] = (state, action) => Object.assign({}, state, {
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: action.data
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -2923,6 +2978,7 @@ exports.doCheckSync = doCheckSync;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;
+exports.doClaimYoutubeChannels = doClaimYoutubeChannels;
 exports.doCompleteFirstRun = doCompleteFirstRun;
 exports.doFetchAccessToken = doFetchAccessToken;
 exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
@@ -3046,6 +3102,9 @@ exports.selectUserIsVerificationCandidate = selectUserIsVerificationCandidate;
 exports.selectUserPhone = selectUserPhone;
 exports.selectUserVerifiedEmail = selectUserVerifiedEmail;
 exports.selectViewMode = selectViewMode;
+exports.selectYTImportError = selectYTImportError;
+exports.selectYTImportPending = selectYTImportPending;
+exports.selectYoutubeChannels = selectYoutubeChannels;
 exports.setSubscriptionLatest = setSubscriptionLatest;
 exports.statsReducer = statsReducer;
 exports.subscriptionsReducer = subscriptions;

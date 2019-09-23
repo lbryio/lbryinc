@@ -196,6 +196,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_8__["doUserInviteNew"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_8__["doClaimYoutubeChannels"]; });
+
 /* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(22);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_9__["doFetchCostInfoForUri"]; });
 
@@ -380,6 +382,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectUserInviteReferralLink"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserVerifiedEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectUserVerifiedEmail"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectYoutubeChannels"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYTImportPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectYTImportPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYTImportError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_27__["selectYTImportError"]; });
 
 /* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(38);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_28__["makeSelectFetchingCostInfoForUri"]; });
@@ -2261,6 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return selectUserCountryCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailToVerify", function() { return selectEmailToVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneToVerify", function() { return selectPhoneToVerify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return selectYoutubeChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsRewardApproved", function() { return selectUserIsRewardApproved; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewIsPending", function() { return selectEmailNewIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewErrorMessage", function() { return selectEmailNewErrorMessage; });
@@ -2282,6 +2291,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewIsPending", function() { return selectUserInviteNewIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewErrorMessage", function() { return selectUserInviteNewErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return selectUserInviteReferralLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYTImportPending", function() { return selectYTImportPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYTImportError", function() { return selectYTImportError; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(13);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -2311,6 +2322,9 @@ var selectEmailToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSe
 });
 var selectPhoneToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, selectUserPhone, function (state, userPhone) {
   return state.phoneToVerify || userPhone;
+});
+var selectYoutubeChannels = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
+  return user ? user.youtube_channels : null;
 });
 var selectUserIsRewardApproved = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
   return user && user.is_reward_approved;
@@ -2375,6 +2389,12 @@ var selectUserInviteNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0
 var selectUserInviteReferralLink = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.referralLink;
 });
+var selectYTImportPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.ytChannelImportPending;
+});
+var selectYTImportError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.ytChannelImportErrorMessage;
+});
 
 /***/ }),
 /* 19 */
@@ -2399,6 +2419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return doUserIdentityVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return doUserInviteNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return doClaimYoutubeChannels; });
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var redux_actions_rewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(16);
@@ -2796,6 +2817,47 @@ function doUserInviteNew(email) {
         data: {
           error: error
         }
+      });
+    });
+  };
+}
+function doClaimYoutubeChannels() {
+  return function (dispatch) {
+    dispatch({
+      type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_STARTED
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list().then(function (addressList) {
+      return addressList.sort(function (a, b) {
+        return a.used_times - b.used_times;
+      })[0];
+    }).then(function (address) {
+      return lbryio__WEBPACK_IMPORTED_MODULE_4__["default"].call('yt', 'transfer', {
+        address: address.address,
+        public_key: address.pubkey
+      }).then(function (response) {
+        if (response && response.success) {
+          Promise.all(response.map(function (channelMeta) {
+            if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
+              return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
+                channel_data: channelMeta.channel.channel_certificate
+              });
+            }
+
+            return null;
+          })).then(function () {
+            var actions = [{
+              type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_COMPLETED
+            }];
+            actions.push(doUserFetch());
+            actions.push(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doFetchChannelListMine"])());
+            dispatch(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["batchActions"].apply(void 0, actions));
+          });
+        }
+      });
+    })["catch"](function (error) {
+      dispatch({
+        type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_FAILURE,
+        data: String(error)
       });
     });
   };
@@ -4014,7 +4076,9 @@ var defaultState = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
-  user: undefined
+  user: undefined,
+  ytChannelImportPending: false,
+  ytChannelImportErrorMessage: ''
 };
 
 reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].AUTHENTICATION_STARTED] = function (state) {
@@ -4245,6 +4309,27 @@ reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_INVITE_STATUS_F
     inviteStatusIsPending: false,
     invitesRemaining: null,
     invitees: null
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_STARTED] = function (state) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: true,
+    ytChannelImportErrorMessage: ''
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_COMPLETED] = function (state) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: ''
+  });
+};
+
+reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_FAILURE] = function (state, action) {
+  return Object.assign({}, state, {
+    ytChannelImportPending: false,
+    ytChannelImportErrorMessage: action.data
   });
 };
 
