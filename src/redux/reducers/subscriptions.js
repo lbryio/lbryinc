@@ -1,5 +1,6 @@
 // @flow
 import * as ACTIONS from 'constants/action_types';
+import { parseURI, ACTIONS as LBRY_REDUX_ACTIONS } from 'lbry-redux';
 import { VIEW_ALL } from 'constants/subscriptions';
 import { handleActions } from 'util/redux-utils';
 
@@ -194,6 +195,39 @@ export default handleActions(
       ...state,
       showSuggestedSubs: true,
     }),
+    [LBRY_REDUX_ACTIONS.USER_STATE_POPULATE]: (
+      state: SubscriptionState,
+      action: { data: { subscriptions: ?Array<string> } }
+    ) => {
+      const { subscriptions } = action.data;
+      let newSubscriptions;
+
+      if (!subscriptions) {
+        newSubscriptions = state.subscriptions;
+      } else {
+        const parsedSubscriptions = subscriptions.map(uri => {
+          const { channelName } = parseURI(uri);
+
+          return {
+            uri,
+            channelName: `@${channelName}`,
+          };
+        });
+        if (!state.subscriptions || !state.subscriptions.length) {
+          newSubscriptions = parsedSubscriptions;
+        } else {
+          const map = {};
+          newSubscriptions = parsedSubscriptions.concat(state.subscriptions).filter(sub => {
+            return map[sub.uri] ? false : (map[sub.uri] = true);
+          }, {});
+        }
+      }
+
+      return {
+        ...state,
+        subscriptions: newSubscriptions,
+      };
+    },
   },
   defaultState
 );

@@ -632,7 +632,40 @@ var subscriptions = handleActions({
   }),
   [VIEW_SUGGESTED_SUBSCRIPTIONS]: state => ({ ...state,
     showSuggestedSubs: true
-  })
+  }),
+  [lbryRedux.ACTIONS.USER_STATE_POPULATE]: (state, action) => {
+    const {
+      subscriptions
+    } = action.data;
+    let newSubscriptions;
+
+    if (!subscriptions) {
+      newSubscriptions = state.subscriptions;
+    } else {
+      const parsedSubscriptions = subscriptions.map(uri => {
+        const {
+          channelName
+        } = lbryRedux.parseURI(uri);
+        return {
+          uri,
+          channelName: `@${channelName}`
+        };
+      });
+
+      if (!state.subscriptions || !state.subscriptions.length) {
+        newSubscriptions = parsedSubscriptions;
+      } else {
+        const map = {};
+        newSubscriptions = parsedSubscriptions.concat(state.subscriptions).filter(sub => {
+          return map[sub.uri] ? false : map[sub.uri] = true;
+        }, {});
+      }
+    }
+
+    return { ...state,
+      subscriptions: newSubscriptions
+    };
+  }
 }, defaultState);
 
 function swapKeyAndValue(dict) {
