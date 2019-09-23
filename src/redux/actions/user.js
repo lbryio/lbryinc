@@ -389,16 +389,16 @@ export function doClaimYoutubeChannels() {
       type: ACTIONS.USER_YOUTUBE_IMPORT_STARTED,
     });
     Lbry.address_list()
-      .then(addressList => addressList.find(el => el.used_times === 0))
+      .then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0])
       .then(address =>
         Lbryio.call('yt', 'transfer', {
           address: address.address,
-          public_key: address.public_key,
+          public_key: address.pubkey,
         }).then(response => {
           if (response && response.success) {
             Promise.all(
               response.map(channelMeta => {
-                if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+                if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
                   return Lbry.channel_import({
                     channel_data: channelMeta.channel.channel_certificate,
                   });

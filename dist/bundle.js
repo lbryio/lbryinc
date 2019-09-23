@@ -2827,17 +2827,17 @@ function doClaimYoutubeChannels() {
       type: lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].USER_YOUTUBE_IMPORT_STARTED
     });
     lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list().then(function (addressList) {
-      return addressList.find(function (el) {
-        return el.used_times === 0;
-      });
+      return addressList.sort(function (a, b) {
+        return a.used_times - b.used_times;
+      })[0];
     }).then(function (address) {
       return lbryio__WEBPACK_IMPORTED_MODULE_4__["default"].call('yt', 'transfer', {
         address: address.address,
-        public_key: address.public_key
+        public_key: address.pubkey
       }).then(function (response) {
         if (response && response.success) {
           Promise.all(response.map(function (channelMeta) {
-            if (channelMeta && channelMeta.channel && channelMeta.channel.transferable) {
+            if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
               return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
                 channel_data: channelMeta.channel.channel_certificate
               });
