@@ -3846,7 +3846,7 @@ function doGetSync(password) {
         }).then(function (_ref2) {
           var walletHash = _ref2.hash,
               data = _ref2.data;
-          return dispatch(doSetSync(null, walletHash, data));
+          return dispatch(doSetSync('', walletHash, data));
         });
       });
     });

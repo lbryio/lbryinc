@@ -2304,7 +2304,7 @@ function doGetSync(password) {
         }).then(({
           hash: walletHash,
           data
-        }) => dispatch(doSetSync(null, walletHash, data)));
+        }) => dispatch(doSetSync('', walletHash, data)));
       });
     });
   };

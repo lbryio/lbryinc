@@ -119,7 +119,7 @@ export function doGetSync(password) {
           // call sync_apply to get data to sync
           // first time sync. use any string for old hash
           Lbry.sync_apply({ password }).then(({ hash: walletHash, data }) =>
-            dispatch(doSetSync(null, walletHash, data))
+            dispatch(doSetSync('', walletHash, data))
           );
         });
     });
