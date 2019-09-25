@@ -63,7 +63,7 @@ export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
 export { doFilteredOutpointsSubscribe } from 'redux/actions/filtered';
 export { doFetchFeaturedUris, doFetchTrendingUris } from 'redux/actions/homepage';
-export { doFetchViewCount } from 'redux/actions/stats';
+export { doFetchViewCount, doFetchSubCount } from 'redux/actions/stats';
 export {
   doCheckSync,
   doGetSync,
@@ -170,7 +170,7 @@ export {
   selectTrendingUris,
   selectFetchingTrendingUris,
 } from 'redux/selectors/homepage';
-export { makeSelectViewCountForUri } from 'redux/selectors/stats';
+export { makeSelectViewCountForUri, makeSelectSubCountForUri } from 'redux/selectors/stats';
 export {
   selectHasSyncedWallet,
   selectSyncData,

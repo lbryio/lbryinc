@@ -72,11 +72,14 @@ const FETCH_FILTERED_CONTENT_FAILED = 'FETCH_FILTERED_CONTENT_FAILED';
 const FILTERED_CONTENT_SUBSCRIBE = 'FILTERED_CONTENT_SUBSCRIBE'; // Cost Info
 
 const FETCH_COST_INFO_STARTED = 'FETCH_COST_INFO_STARTED';
-const FETCH_COST_INFO_COMPLETED = 'FETCH_COST_INFO_COMPLETED'; // File Stats
+const FETCH_COST_INFO_COMPLETED = 'FETCH_COST_INFO_COMPLETED'; // Stats
 
 const FETCH_VIEW_COUNT_STARTED = 'FETCH_VIEW_COUNT_STARTED';
 const FETCH_VIEW_COUNT_FAILED = 'FETCH_VIEW_COUNT_FAILED';
-const FETCH_VIEW_COUNT_COMPLETED = 'FETCH_VIEW_COUNT_COMPLETED'; // Cross-device Sync
+const FETCH_VIEW_COUNT_COMPLETED = 'FETCH_VIEW_COUNT_COMPLETED';
+const FETCH_SUB_COUNT_STARTED = 'FETCH_SUB_COUNT_STARTED';
+const FETCH_SUB_COUNT_FAILED = 'FETCH_SUB_COUNT_FAILED';
+const FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Cross-device Sync
 
 const GET_SYNC_STARTED = 'GET_SYNC_STARTED';
 const GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
@@ -151,6 +154,9 @@ var action_types = /*#__PURE__*/Object.freeze({
   FETCH_VIEW_COUNT_STARTED: FETCH_VIEW_COUNT_STARTED,
   FETCH_VIEW_COUNT_FAILED: FETCH_VIEW_COUNT_FAILED,
   FETCH_VIEW_COUNT_COMPLETED: FETCH_VIEW_COUNT_COMPLETED,
+  FETCH_SUB_COUNT_STARTED: FETCH_SUB_COUNT_STARTED,
+  FETCH_SUB_COUNT_FAILED: FETCH_SUB_COUNT_FAILED,
+  FETCH_SUB_COUNT_COMPLETED: FETCH_SUB_COUNT_COMPLETED,
   GET_SYNC_STARTED: GET_SYNC_STARTED,
   GET_SYNC_COMPLETED: GET_SYNC_COMPLETED,
   SET_SYNC_STARTED: SET_SYNC_STARTED,
@@ -2166,6 +2172,28 @@ const doFetchViewCount = claimId => dispatch => {
     });
   });
 };
+const doFetchSubCount = claimId => dispatch => {
+  dispatch({
+    type: FETCH_SUB_COUNT_STARTED
+  });
+  return Lbryio.call('subscription', 'sub_count', {
+    claim_id: claimId
+  }).then(result => {
+    const subCount = result[0];
+    dispatch({
+      type: FETCH_SUB_COUNT_COMPLETED,
+      data: {
+        claimId,
+        subCount
+      }
+    });
+  }).catch(error => {
+    dispatch({
+      type: FETCH_SUB_COUNT_FAILED,
+      data: error
+    });
+  });
+};
 
 function doSetSync(oldHash, newHash, data) {
   return dispatch => {
@@ -2864,7 +2892,10 @@ const homepageReducer = handleActions({
 const defaultState$8 = {
   fetchingViewCount: false,
   viewCountError: undefined,
-  viewCountById: {}
+  viewCountById: {},
+  fetchingSubCount: false,
+  subCountError: undefined,
+  subCountById: {}
 };
 const statsReducer = handleActions({
   [FETCH_VIEW_COUNT_STARTED]: state => ({ ...state,
@@ -2884,6 +2915,25 @@ const statsReducer = handleActions({
     return { ...state,
       fetchingViewCount: false,
       viewCountById
+    };
+  },
+  [FETCH_SUB_COUNT_STARTED]: state => ({ ...state,
+    fetchingSubCount: true
+  }),
+  [FETCH_SUB_COUNT_FAILED]: (state, action) => ({ ...state,
+    subCountError: action.data
+  }),
+  [FETCH_SUB_COUNT_COMPLETED]: (state, action) => {
+    const {
+      claimId,
+      subCount
+    } = action.data;
+    const subCountById = { ...state.subCountById,
+      [claimId]: subCount
+    };
+    return { ...state,
+      fetchingSubCount: false,
+      subCountById
     };
   }
 }, defaultState$8);
@@ -2979,7 +3029,9 @@ const selectFetchingTrendingUris = reselect.createSelector(selectState$7, state 
 const selectState$8 = state => state.stats || {};
 
 const selectViewCount = reselect.createSelector(selectState$8, state => state.viewCountById);
+const selectSubCount = reselect.createSelector(selectState$8, state => state.subCountById);
 const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => viewCountById[claim.claim_id] || 0);
+const makeSelectSubCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectSubCount, (claim, subCountById) => subCountById[claim.claim_id] || 0);
 
 const selectState$9 = state => state.sync || {};
 
@@ -3020,6 +3072,7 @@ exports.doFetchInviteStatus = doFetchInviteStatus;
 exports.doFetchMySubscriptions = doFetchMySubscriptions;
 exports.doFetchRecommendedSubscriptions = doFetchRecommendedSubscriptions;
 exports.doFetchRewardedContent = doFetchRewardedContent;
+exports.doFetchSubCount = doFetchSubCount;
 exports.doFetchTrendingUris = doFetchTrendingUris;
 exports.doFetchViewCount = doFetchViewCount;
 exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
@@ -3058,6 +3111,7 @@ exports.makeSelectIsRewardClaimPending = makeSelectIsRewardClaimPending;
 exports.makeSelectIsSubscribed = makeSelectIsSubscribed;
 exports.makeSelectRewardAmountByType = makeSelectRewardAmountByType;
 exports.makeSelectRewardByType = makeSelectRewardByType;
+exports.makeSelectSubCountForUri = makeSelectSubCountForUri;
 exports.makeSelectUnreadByChannel = makeSelectUnreadByChannel;
 exports.makeSelectViewCountForUri = makeSelectViewCountForUri;
 exports.rewards = rewards;
