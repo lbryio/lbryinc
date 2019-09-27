@@ -5,6 +5,9 @@ const defaultState = {
   fetchingViewCount: false,
   viewCountError: undefined,
   viewCountById: {},
+  fetchingSubCount: false,
+  subCountError: undefined,
+  subCountById: {},
 };
 
 export const statsReducer = handleActions(
@@ -22,6 +25,21 @@ export const statsReducer = handleActions(
         ...state,
         fetchingViewCount: false,
         viewCountById,
+      };
+    },
+    [ACTIONS.FETCH_SUB_COUNT_STARTED]: state => ({ ...state, fetchingSubCount: true }),
+    [ACTIONS.FETCH_SUB_COUNT_FAILED]: (state, action) => ({
+      ...state,
+      subCountError: action.data,
+    }),
+    [ACTIONS.FETCH_SUB_COUNT_COMPLETED]: (state, action) => {
+      const { claimId, subCount } = action.data;
+
+      const subCountById = { ...state.subCountById, [claimId]: subCount };
+      return {
+        ...state,
+        fetchingSubCount: false,
+        subCountById,
       };
     },
   },
