@@ -1234,6 +1234,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var defaultState = {
   enabledChannelNotifications: [],
   subscriptions: [],
+  latest: {},
   unread: {},
   suggested: {},
   loading: false,
@@ -1266,18 +1267,19 @@ var defaultState = {
     subscriptions: newSubscriptions
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSCRIPTION_LATEST"], function (state, action) {
+  var _action$data = action.data,
+      subscription = _action$data.subscription,
+      uri = _action$data.uri;
+  var newLatest = Object.assign({}, state.latest);
+  newLatest[subscription.uri] = uri;
   return _objectSpread({}, state, {
-    subscriptions: state.subscriptions.map(function (subscription) {
-      return subscription.channelName === action.data.subscription.channelName ? _objectSpread({}, subscription, {
-        latest: action.data.uri
-      }) : subscription;
-    })
+    latest: newLatest
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SUBSCRIPTION_UNREADS"], function (state, action) {
-  var _action$data = action.data,
-      channel = _action$data.channel,
-      uris = _action$data.uris,
-      type = _action$data.type;
+  var _action$data2 = action.data,
+      channel = _action$data2.channel,
+      uris = _action$data2.uris,
+      type = _action$data2.type;
   return _objectSpread({}, state, {
     unread: _objectSpread({}, state.unread, _defineProperty({}, channel, {
       uris: uris,
@@ -1285,9 +1287,9 @@ var defaultState = {
     }))
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["REMOVE_SUBSCRIPTION_UNREADS"], function (state, action) {
-  var _action$data2 = action.data,
-      channel = _action$data2.channel,
-      uris = _action$data2.uris; // If no channel is passed in, remove all unreads
+  var _action$data3 = action.data,
+      channel = _action$data3.channel,
+      uris = _action$data3.uris; // If no channel is passed in, remove all unreads
 
   var newUnread;
 
@@ -3075,6 +3077,7 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
     var savedSubscription = state.subscriptions.subscriptions.find(function (sub) {
       return sub.uri === subscriptionUri;
     });
+    var subscriptionLatest = state.subscriptions.latest[subscriptionUri];
 
     if (!savedSubscription) {
       throw Error("Trying to find new content for ".concat(subscriptionUri, " but it doesn't exist in your subscriptions"));
@@ -3096,13 +3099,13 @@ var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNo
 
 
       var latestIndex = claimsInChannel.findIndex(function (claim) {
-        return claim.permanent_url === savedSubscription.latest;
+        return claim.permanent_url === subscriptionLatest;
       }); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
 
       var latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex; // If latest is 0, nothing has changed
       // Do not download/notify about new content, it would download/notify 10 claims per channel
 
-      if (latestIndex !== 0 && savedSubscription.latest) {
+      if (latestIndex !== 0 && subscriptionLatest) {
         var downloadCount = 0;
         var newUnread = [];
         claimsInChannel.slice(0, latestIndexToNotify).forEach(function (claim) {
