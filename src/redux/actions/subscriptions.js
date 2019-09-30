@@ -141,6 +141,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
   const savedSubscription = state.subscriptions.subscriptions.find(
     sub => sub.uri === subscriptionUri
   );
+  const subscriptionLatest = state.subscriptions.latest[subscriptionUri];
 
   if (!savedSubscription) {
     throw Error(
@@ -165,7 +166,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
     // Determine if the latest subscription currently saved is actually the latest subscription
     const latestIndex = claimsInChannel.findIndex(
-      claim => claim.permanent_url === savedSubscription.latest
+      claim => claim.permanent_url === subscriptionLatest
     );
 
     // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
@@ -173,7 +174,7 @@ export const doCheckSubscription = (subscriptionUri: string, shouldNotify?: bool
 
     // If latest is 0, nothing has changed
     // Do not download/notify about new content, it would download/notify 10 claims per channel
-    if (latestIndex !== 0 && savedSubscription.latest) {
+    if (latestIndex !== 0 && subscriptionLatest) {
       let downloadCount = 0;
 
       const newUnread = [];

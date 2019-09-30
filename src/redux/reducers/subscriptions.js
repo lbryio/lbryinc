@@ -7,6 +7,7 @@ import { handleActions } from 'util/redux-utils';
 const defaultState: SubscriptionState = {
   enabledChannelNotifications: [],
   subscriptions: [],
+  latest: {},
   unread: {},
   suggested: {},
   loading: false,
@@ -54,15 +55,16 @@ export default handleActions(
     [ACTIONS.SET_SUBSCRIPTION_LATEST]: (
       state: SubscriptionState,
       action: SetSubscriptionLatest
-    ): SubscriptionState => ({
-      ...state,
-      subscriptions: state.subscriptions.map(
-        subscription =>
-          subscription.channelName === action.data.subscription.channelName
-            ? { ...subscription, latest: action.data.uri }
-            : subscription
-      ),
-    }),
+    ): SubscriptionState => {
+      const { subscription, uri } = action.data;
+      const newLatest = Object.assign({}, state.latest);
+      newLatest[subscription.uri] = uri;
+
+      return {
+        ...state,
+        latest: newLatest,
+      };
+    },
     [ACTIONS.UPDATE_SUBSCRIPTION_UNREADS]: (
       state: SubscriptionState,
       action: DoUpdateSubscriptionUnreads

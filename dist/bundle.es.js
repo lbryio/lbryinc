@@ -498,6 +498,7 @@ const handleActions = (actionMap, defaultState) => (state = defaultState, action
 const defaultState = {
   enabledChannelNotifications: [],
   subscriptions: [],
+  latest: {},
   unread: {},
   suggested: {},
   loading: false,
@@ -533,11 +534,17 @@ var subscriptions = handleActions({
       subscriptions: newSubscriptions
     };
   },
-  [SET_SUBSCRIPTION_LATEST]: (state, action) => ({ ...state,
-    subscriptions: state.subscriptions.map(subscription => subscription.channelName === action.data.subscription.channelName ? { ...subscription,
-      latest: action.data.uri
-    } : subscription)
-  }),
+  [SET_SUBSCRIPTION_LATEST]: (state, action) => {
+    const {
+      subscription,
+      uri
+    } = action.data;
+    const newLatest = Object.assign({}, state.latest);
+    newLatest[subscription.uri] = uri;
+    return { ...state,
+      latest: newLatest
+    };
+  },
   [UPDATE_SUBSCRIPTION_UNREADS]: (state, action) => {
     const {
       channel,
@@ -1702,6 +1709,7 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
   const state = getState();
 
   const savedSubscription = state.subscriptions.subscriptions.find(sub => sub.uri === subscriptionUri);
+  const subscriptionLatest = state.subscriptions.latest[subscriptionUri];
 
   if (!savedSubscription) {
     throw Error(`Trying to find new content for ${subscriptionUri} but it doesn't exist in your subscriptions`);
@@ -1724,12 +1732,12 @@ const doCheckSubscription = (subscriptionUri, shouldNotify) => (dispatch, getSta
     } // Determine if the latest subscription currently saved is actually the latest subscription
 
 
-    const latestIndex = claimsInChannel.findIndex(claim => claim.permanent_url === savedSubscription.latest); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
+    const latestIndex = claimsInChannel.findIndex(claim => claim.permanent_url === subscriptionLatest); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
 
     const latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex; // If latest is 0, nothing has changed
     // Do not download/notify about new content, it would download/notify 10 claims per channel
 
-    if (latestIndex !== 0 && savedSubscription.latest) {
+    if (latestIndex !== 0 && subscriptionLatest) {
       let downloadCount = 0;
       const newUnread = [];
       claimsInChannel.slice(0, latestIndexToNotify).forEach(claim => {
