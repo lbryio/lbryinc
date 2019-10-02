@@ -202,3 +202,11 @@ export function doCheckSync() {
     });
   };
 }
+
+export function doResetSync() {
+  return dispatch =>
+    new Promise(resolve => {
+      dispatch({ type: ACTIONS.SYNC_RESET });
+      resolve();
+    });
+}

@@ -232,6 +232,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_15__["doSyncApply"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_15__["doResetSync"]; });
+
 /* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(29);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_16__["authReducer"]; });
 
@@ -609,6 +611,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_STARTED", function() { return SYNC_APPLY_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_COMPLETED", function() { return SYNC_APPLY_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_FAILED", function() { return SYNC_APPLY_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_RESET", function() { return SYNC_RESET; });
 // User
 var GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
 var GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
@@ -728,6 +731,7 @@ var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 var SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 var SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+var SYNC_RESET = 'SYNC_RESET';
 
 /***/ }),
 /* 2 */
@@ -2182,24 +2186,26 @@ function doClaimRewardType(rewardType) {
     });
 
     var success = function success(successReward) {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_SUCCESS,
-        data: {
-          reward: successReward
+      dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["doUpdateBalance"])()).then(function () {
+        dispatch({
+          type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_SUCCESS,
+          data: {
+            reward: successReward
+          }
+        });
+
+        if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_USER && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess) {
+          rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess();
+        } else if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REFERRAL) {
+          dispatch(Object(redux_actions_user__WEBPACK_IMPORTED_MODULE_4__["doFetchInviteStatus"])());
+        }
+
+        dispatch(doRewardList());
+
+        if (options.callback) {
+          options.callback();
         }
       });
-
-      if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_USER && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess) {
-        rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess();
-      } else if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REFERRAL) {
-        dispatch(Object(redux_actions_user__WEBPACK_IMPORTED_MODULE_4__["doFetchInviteStatus"])());
-      }
-
-      dispatch(doRewardList());
-
-      if (options.callback) {
-        options.callback();
-      }
     };
 
     var failure = function failure(error) {
@@ -2223,7 +2229,7 @@ function doClaimRewardType(rewardType) {
       }
     };
 
-    rewards__WEBPACK_IMPORTED_MODULE_5__["default"].claimReward(rewardType, params).then(success, failure);
+    return rewards__WEBPACK_IMPORTED_MODULE_5__["default"].claimReward(rewardType, params).then(success, failure);
   };
 }
 function doClaimEligiblePurchaseRewards() {
@@ -3874,6 +3880,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return doGetSync; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return doSyncApply; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return doCheckSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return doResetSync; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
@@ -4102,6 +4109,16 @@ function doCheckSync() {
           }
         });
       });
+    });
+  };
+}
+function doResetSync() {
+  return function (dispatch) {
+    return new Promise(function (resolve) {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_RESET"]
+      });
+      resolve();
     });
   };
 }
@@ -4908,6 +4925,10 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"
     syncApplyIsPending: false,
     syncApplyErrorMessage: action.data.error
   });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_RESET"]] = function () {
+  return defaultState;
 };
 
 function syncReducer() {

@@ -127,6 +127,7 @@ const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+const SYNC_RESET = 'SYNC_RESET';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -239,7 +240,8 @@ var action_types = /*#__PURE__*/Object.freeze({
   SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
-  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED
+  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
+  SYNC_RESET: SYNC_RESET
 });
 
 const NOT_TRANSFERRED = 'not_transferred';
@@ -1624,24 +1626,26 @@ function doClaimRewardType(rewardType, options = {}) {
     });
 
     const success = successReward => {
-      dispatch({
-        type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
-        data: {
-          reward: successReward
+      dispatch(lbryRedux.doUpdateBalance()).then(() => {
+        dispatch({
+          type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
+          data: {
+            reward: successReward
+          }
+        });
+
+        if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
+          rewards.callbacks.claimFirstRewardSuccess();
+        } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+          dispatch(doFetchInviteStatus());
+        }
+
+        dispatch(doRewardList());
+
+        if (options.callback) {
+          options.callback();
         }
       });
-
-      if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
-        rewards.callbacks.claimFirstRewardSuccess();
-      } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
-        dispatch(doFetchInviteStatus());
-      }
-
-      dispatch(doRewardList());
-
-      if (options.callback) {
-        options.callback();
-      }
     };
 
     const failure = error => {
@@ -1665,7 +1669,7 @@ function doClaimRewardType(rewardType, options = {}) {
       }
     };
 
-    rewards.claimReward(rewardType, params).then(success, failure);
+    return rewards.claimReward(rewardType, params).then(success, failure);
   };
 }
 function doClaimEligiblePurchaseRewards() {
@@ -2545,6 +2549,14 @@ function doCheckSync() {
     });
   };
 }
+function doResetSync() {
+  return dispatch => new Promise(resolve => {
+    dispatch({
+      type: SYNC_RESET
+    });
+    resolve();
+  });
+}
 
 const reducers = {};
 const defaultState$1 = {
@@ -3155,6 +3167,8 @@ reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyErrorMessage: action.data.error
 });
 
+reducers$3[SYNC_RESET] = () => defaultState$9;
+
 function syncReducer(state = defaultState$9, action) {
   const handler = reducers$3[action.type];
   if (handler) return handler(state, action);
@@ -3243,6 +3257,7 @@ exports.doGetSync = doGetSync;
 exports.doInstallNew = doInstallNew;
 exports.doRemoveUnreadSubscription = doRemoveUnreadSubscription;
 exports.doRemoveUnreadSubscriptions = doRemoveUnreadSubscriptions;
+exports.doResetSync = doResetSync;
 exports.doRewardList = doRewardList;
 exports.doSetDefaultAccount = doSetDefaultAccount;
 exports.doSetSync = doSetSync;

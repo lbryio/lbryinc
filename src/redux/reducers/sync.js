@@ -73,6 +73,8 @@ reducers[ACTIONS.SYNC_APPLY_FAILED] = (state, action) =>
     syncApplyErrorMessage: action.data.error,
   });
 
+reducers[ACTIONS.SYNC_RESET] = () => defaultState;
+
 export function syncReducer(state = defaultState, action) {
   const handler = reducers[action.type];
   if (handler) return handler(state, action);

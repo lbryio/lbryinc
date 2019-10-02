@@ -72,6 +72,7 @@ export {
   doSetSync,
   doSetDefaultAccount,
   doSyncApply,
+  doResetSync,
 } from 'redux/actions/sync';
 
 // reducers
