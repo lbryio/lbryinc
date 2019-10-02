@@ -1,4 +1,5 @@
 import * as LBRYINC_ACTIONS from 'constants/action_types';
+import * as YOUTUBE_STATUSES from 'constants/youtube';
 import Lbryio from 'lbryio';
 import rewards from 'rewards';
 import subscriptionsReducer from 'redux/reducers/subscriptions';
@@ -7,7 +8,7 @@ import subscriptionsReducer from 'redux/reducers/subscriptions';
 export { userStateSyncMiddleware } from 'redux/middleware/sync';
 
 // constants
-export { LBRYINC_ACTIONS };
+export { LBRYINC_ACTIONS, YOUTUBE_STATUSES };
 
 // Lbryio and rewards
 export { Lbryio, rewards };
@@ -58,6 +59,7 @@ export {
   doUserIdentityVerify,
   doUserInviteNew,
   doClaimYoutubeChannels,
+  doCheckYoutubeTransfer,
 } from 'redux/actions/user';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
@@ -153,8 +155,9 @@ export {
   selectUserInviteReferralLink,
   selectUserVerifiedEmail,
   selectYoutubeChannels,
-  selectYTImportPending,
-  selectYTImportError,
+  selectYouTubeImportPending,
+  selectYouTubeImportError,
+  selectYouTubeImportVideosComplete,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,
@@ -176,6 +179,7 @@ export {
   selectSyncData,
   selectSyncHash,
   selectSetSyncErrorMessage,
+  selectGetSyncErrorMessage,
   selectGetSyncIsPending,
   selectSetSyncIsPending,
   selectSyncApplyIsPending,

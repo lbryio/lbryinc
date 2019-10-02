@@ -13,6 +13,11 @@ export const selectSetSyncErrorMessage = createSelector(
   state => state.setSyncErrorMessage
 );
 
+export const selectGetSyncErrorMessage = createSelector(
+  selectState,
+  state => state.getSyncErrorMessage
+);
+
 export const selectGetSyncIsPending = createSelector(selectState, state => state.getSyncIsPending);
 
 export const selectSetSyncIsPending = createSelector(selectState, state => state.setSyncIsPending);

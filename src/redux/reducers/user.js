@@ -1,4 +1,4 @@
-import { ACTIONS } from 'lbry-redux';
+import * as ACTIONS from 'constants/action_types';
 
 const reducers = {};
 
@@ -14,8 +14,8 @@ const defaultState = {
   invitesRemaining: undefined,
   invitees: undefined,
   user: undefined,
-  ytChannelImportPending: false,
-  ytChannelImportErrorMessage: '',
+  youtubeChannelImportPending: false,
+  youtubeChannelImportErrorMessage: '',
 };
 
 reducers[ACTIONS.AUTHENTICATION_STARTED] = state =>
@@ -225,20 +225,27 @@ reducers[ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE] = state =>
 
 reducers[ACTIONS.USER_YOUTUBE_IMPORT_STARTED] = state =>
   Object.assign({}, state, {
-    ytChannelImportPending: true,
-    ytChannelImportErrorMessage: '',
+    youtubeChannelImportPending: true,
+    youtubeChannelImportErrorMessage: '',
   });
 
-reducers[ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED] = state =>
-  Object.assign({}, state, {
-    ytChannelImportPending: false,
-    ytChannelImportErrorMessage: '',
+reducers[ACTIONS.USER_YOUTUBE_IMPORT_SUCCESS] = (state, action) => {
+  const total = action.data.reduce((acc, value) => acc + value.total_published_videos, 0);
+
+  const complete = action.data.reduce((acc, value) => acc + value.total_transferred, 0);
+
+  return Object.assign({}, state, {
+    youtubeChannelImportPending: false,
+    youtubeChannelImportErrorMessage: '',
+    youtubeChannelImportTotal: total,
+    youtubeChannelImportComplete: complete,
   });
+};
 
 reducers[ACTIONS.USER_YOUTUBE_IMPORT_FAILURE] = (state, action) =>
   Object.assign({}, state, {
-    ytChannelImportPending: false,
-    ytChannelImportErrorMessage: action.data,
+    youtubeChannelImportPending: false,
+    youtubeChannelImportErrorMessage: action.data,
   });
 
 export function userReducer(state = defaultState, action) {

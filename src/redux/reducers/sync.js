@@ -6,6 +6,7 @@ const defaultState = {
   syncHash: null,
   syncData: null,
   setSyncErrorMessage: null,
+  getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
   getSyncIsPending: false,
@@ -16,6 +17,7 @@ const defaultState = {
 reducers[ACTIONS.GET_SYNC_STARTED] = state =>
   Object.assign({}, state, {
     getSyncIsPending: true,
+    getSyncErrorMessage: null,
   });
 
 reducers[ACTIONS.GET_SYNC_COMPLETED] = (state, action) =>
@@ -25,6 +27,12 @@ reducers[ACTIONS.GET_SYNC_COMPLETED] = (state, action) =>
     hasSyncedWallet: action.data.hasSyncedWallet,
     getSyncIsPending: false,
     hashChanged: action.data.hashChanged,
+  });
+
+reducers[ACTIONS.GET_SYNC_FAILED] = (state, action) =>
+  Object.assign({}, state, {
+    getSyncIsPending: false,
+    getSyncErrorMessage: action.data.error,
   });
 
 reducers[ACTIONS.SET_SYNC_STARTED] = state =>

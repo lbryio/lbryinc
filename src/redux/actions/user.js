@@ -1,4 +1,5 @@
-import { ACTIONS, Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
+import { Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
+import * as ACTIONS from 'constants/action_types';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
   selectEmailToVerify,
@@ -84,9 +85,7 @@ export function doUserFetch() {
     });
     Lbryio.getCurrentUser()
       .then(user => {
-        // analytics.setUser(user);
         dispatch(doRewardList());
-
         dispatch({
           type: ACTIONS.USER_FETCH_SUCCESS,
           data: { user },
@@ -388,15 +387,18 @@ export function doClaimYoutubeChannels() {
     dispatch({
       type: ACTIONS.USER_YOUTUBE_IMPORT_STARTED,
     });
-    Lbry.address_list()
+
+    let transferResponse;
+    return Lbry.address_list()
       .then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0])
       .then(address =>
         Lbryio.call('yt', 'transfer', {
           address: address.address,
           public_key: address.pubkey,
         }).then(response => {
-          if (response && response.success) {
-            Promise.all(
+          if (response && response.length) {
+            transferResponse = response;
+            return Promise.all(
               response.map(channelMeta => {
                 if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
                   return Lbry.channel_import({
@@ -408,7 +410,8 @@ export function doClaimYoutubeChannels() {
             ).then(() => {
               const actions = [
                 {
-                  type: ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED,
+                  type: ACTIONS.USER_YOUTUBE_IMPORT_SUCCESS,
+                  data: transferResponse,
                 },
               ];
               actions.push(doUserFetch());
@@ -418,6 +421,32 @@ export function doClaimYoutubeChannels() {
           }
         })
       )
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
+          data: String(error),
+        });
+      });
+  };
+}
+
+export function doCheckYoutubeTransfer() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_YOUTUBE_IMPORT_STARTED,
+    });
+
+    return Lbryio.call('yt', 'transfer')
+      .then(response => {
+        if (response && response.length) {
+          dispatch({
+            type: ACTIONS.USER_YOUTUBE_IMPORT_SUCCESS,
+            data: response,
+          });
+        } else {
+          throw new Error();
+        }
+      })
       .catch(error => {
         dispatch({
           type: ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
