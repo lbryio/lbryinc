@@ -1218,7 +1218,6 @@ rewards.TYPE_FIRST_CHANNEL = 'new_channel';
 rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
-rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
 rewards.TYPE_REFERRAL = 'referral';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
@@ -2250,7 +2249,7 @@ function doClaimEligiblePurchaseRewards() {
     })) {
       dispatch(doClaimRewardType(rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FIRST_STREAM));
     } else {
-      [rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_MANY_DOWNLOADS, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FEATURED_DOWNLOAD, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW].forEach(function (type) {
+      [rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_MANY_DOWNLOADS, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW].forEach(function (type) {
         dispatch(doClaimRewardType(type, {
           failSilently: true
         }));

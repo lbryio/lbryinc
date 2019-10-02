@@ -10,7 +10,6 @@ rewards.TYPE_FIRST_CHANNEL = 'new_channel';
 rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
-rewards.TYPE_FEATURED_DOWNLOAD = 'featured_download';
 rewards.TYPE_REFERRAL = 'referral';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
