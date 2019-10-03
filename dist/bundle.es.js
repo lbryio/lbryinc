@@ -1626,26 +1626,29 @@ function doClaimRewardType(rewardType, options = {}) {
     });
 
     const success = successReward => {
-      dispatch(lbryRedux.doUpdateBalance()).then(() => {
-        dispatch({
-          type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
-          data: {
-            reward: successReward
+      // Temporary timeout to ensure the sdk has the correct balance after claiming a reward
+      setTimeout(() => {
+        dispatch(lbryRedux.doUpdateBalance()).then(() => {
+          dispatch({
+            type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
+            data: {
+              reward: successReward
+            }
+          });
+
+          if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
+            rewards.callbacks.claimFirstRewardSuccess();
+          } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+            dispatch(doFetchInviteStatus());
+          }
+
+          dispatch(doRewardList());
+
+          if (options.callback) {
+            options.callback();
           }
         });
-
-        if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
-          rewards.callbacks.claimFirstRewardSuccess();
-        } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
-          dispatch(doFetchInviteStatus());
-        }
-
-        dispatch(doRewardList());
-
-        if (options.callback) {
-          options.callback();
-        }
-      });
+      }, 1000);
     };
 
     const failure = error => {

@@ -2186,26 +2186,29 @@ function doClaimRewardType(rewardType) {
     });
 
     var success = function success(successReward) {
-      dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["doUpdateBalance"])()).then(function () {
-        dispatch({
-          type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_SUCCESS,
-          data: {
-            reward: successReward
+      // Temporary timeout to ensure the sdk has the correct balance after claiming a reward
+      setTimeout(function () {
+        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["doUpdateBalance"])()).then(function () {
+          dispatch({
+            type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_SUCCESS,
+            data: {
+              reward: successReward
+            }
+          });
+
+          if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_USER && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess) {
+            rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess();
+          } else if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REFERRAL) {
+            dispatch(Object(redux_actions_user__WEBPACK_IMPORTED_MODULE_4__["doFetchInviteStatus"])());
+          }
+
+          dispatch(doRewardList());
+
+          if (options.callback) {
+            options.callback();
           }
         });
-
-        if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_USER && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess) {
-          rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess();
-        } else if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REFERRAL) {
-          dispatch(Object(redux_actions_user__WEBPACK_IMPORTED_MODULE_4__["doFetchInviteStatus"])());
-        }
-
-        dispatch(doRewardList());
-
-        if (options.callback) {
-          options.callback();
-        }
-      });
+      }, 1000);
     };
 
     var failure = function failure(error) {
