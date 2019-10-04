@@ -2375,34 +2375,18 @@ function doSetDefaultAccount(success, failure) {
     });
   };
 }
-function doSetSync(oldHash, newHash, data, password) {
+function doSetSync(oldHash, newHash, data) {
   return dispatch => {
     dispatch({
       type: SET_SYNC_STARTED
     });
-    Lbryio.call('sync', 'set', {
+    return Lbryio.call('sync', 'set', {
       old_hash: oldHash,
       new_hash: newHash,
       data
     }, 'post').then(response => {
       if (!response.hash) {
-        return dispatch({
-          type: SET_SYNC_FAILED,
-          data: {
-            error: 'No hash returned for sync/set.'
-          }
-        });
-      }
-
-      if (oldHash && newHash !== oldHash) {
-        dispatch(doSetDefaultAccount(() => {
-          if (password !== undefined) {
-            lbryRedux.Lbry.account_unlock({
-              password
-            });
-            dispatch(lbryRedux.doFetchChannelListMine());
-          }
-        }));
+        throw Error('No hash returned for sync/set.');
       }
 
       return dispatch({
@@ -2421,7 +2405,7 @@ function doSetSync(oldHash, newHash, data, password) {
     });
   };
 }
-function doGetSync(password = '') {
+function doGetSync(password = '', shouldSetDefaultAccount) {
   return dispatch => {
     dispatch({
       type: GET_SYNC_STARTED
@@ -2436,7 +2420,7 @@ function doGetSync(password = '') {
         data.syncData = response.data;
         data.hasSyncedWallet = true;
 
-        if (response.changed) {
+        if (response.changed || shouldSetDefaultAccount) {
           return lbryRedux.Lbry.sync_apply({
             password,
             data: response.data
@@ -2449,9 +2433,23 @@ function doGetSync(password = '') {
               data
             });
 
-            if (walletHash !== syncHash) {
+            if (walletHash !== syncHash || shouldSetDefaultAccount) {
               // different local hash, need to synchronise
-              dispatch(doSetSync(syncHash, walletHash, walletData, password));
+              dispatch(doSetSync(syncHash, walletHash, walletData));
+
+              if (shouldSetDefaultAccount) {
+                dispatch(doSetDefaultAccount(() => {
+                  lbryRedux.Lbry.status().then(status => {
+                    if (status.wallet.is_locked) {
+                      lbryRedux.Lbry.account_unlock({
+                        password
+                      });
+                    }
+
+                    dispatch(lbryRedux.doFetchChannelListMine());
+                  });
+                }));
+              }
             }
           });
         }

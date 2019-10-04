@@ -3938,34 +3938,18 @@ function doSetDefaultAccount(success, failure) {
     });
   };
 }
-function doSetSync(oldHash, newHash, data, password) {
+function doSetSync(oldHash, newHash, data) {
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]
     });
-    lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'set', {
+    return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'set', {
       old_hash: oldHash,
       new_hash: newHash,
       data: data
     }, 'post').then(function (response) {
       if (!response.hash) {
-        return dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"],
-          data: {
-            error: 'No hash returned for sync/set.'
-          }
-        });
-      }
-
-      if (oldHash && newHash !== oldHash) {
-        dispatch(doSetDefaultAccount(function () {
-          if (password !== undefined) {
-            lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_unlock({
-              password: password
-            });
-            dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doFetchChannelListMine"])());
-          }
-        }));
+        throw Error('No hash returned for sync/set.');
       }
 
       return dispatch({
@@ -3986,6 +3970,7 @@ function doSetSync(oldHash, newHash, data, password) {
 }
 function doGetSync() {
   var password = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var shouldSetDefaultAccount = arguments.length > 1 ? arguments[1] : undefined;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
@@ -4000,7 +3985,7 @@ function doGetSync() {
         data.syncData = response.data;
         data.hasSyncedWallet = true;
 
-        if (response.changed) {
+        if (response.changed || shouldSetDefaultAccount) {
           return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
             password: password,
             data: response.data
@@ -4012,9 +3997,23 @@ function doGetSync() {
               data: data
             });
 
-            if (walletHash !== syncHash) {
+            if (walletHash !== syncHash || shouldSetDefaultAccount) {
               // different local hash, need to synchronise
-              dispatch(doSetSync(syncHash, walletHash, walletData, password));
+              dispatch(doSetSync(syncHash, walletHash, walletData));
+
+              if (shouldSetDefaultAccount) {
+                dispatch(doSetDefaultAccount(function () {
+                  lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].status().then(function (status) {
+                    if (status.wallet.is_locked) {
+                      lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_unlock({
+                        password: password
+                      });
+                    }
+
+                    dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doFetchChannelListMine"])());
+                  });
+                }));
+              }
             }
           });
         }
