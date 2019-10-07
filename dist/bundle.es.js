@@ -8,10 +8,46 @@ var lbryRedux = require('lbry-redux');
 var querystring = _interopDefault(require('querystring'));
 var reselect = require('reselect');
 
-// Auth Token
+// User
 const GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
 const GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
-const GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS'; // Claims
+const GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
+const AUTHENTICATION_STARTED = 'AUTHENTICATION_STARTED';
+const AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
+const AUTHENTICATION_FAILURE = 'AUTHENTICATION_FAILURE';
+const USER_EMAIL_DECLINE = 'USER_EMAIL_DECLINE';
+const USER_EMAIL_NEW_STARTED = 'USER_EMAIL_NEW_STARTED';
+const USER_EMAIL_NEW_SUCCESS = 'USER_EMAIL_NEW_SUCCESS';
+const USER_EMAIL_NEW_EXISTS = 'USER_EMAIL_NEW_EXISTS';
+const USER_EMAIL_NEW_FAILURE = 'USER_EMAIL_NEW_FAILURE';
+const USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
+const USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
+const USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
+const USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
+const USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
+const USER_PHONE_RESET = 'USER_PHONE_RESET';
+const USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
+const USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
+const USER_PHONE_NEW_FAILURE = 'USER_PHONE_NEW_FAILURE';
+const USER_PHONE_VERIFY_STARTED = 'USER_PHONE_VERIFY_STARTED';
+const USER_PHONE_VERIFY_SUCCESS = 'USER_PHONE_VERIFY_SUCCESS';
+const USER_PHONE_VERIFY_FAILURE = 'USER_PHONE_VERIFY_FAILURE';
+const USER_IDENTITY_VERIFY_STARTED = 'USER_IDENTITY_VERIFY_STARTED';
+const USER_IDENTITY_VERIFY_SUCCESS = 'USER_IDENTITY_VERIFY_SUCCESS';
+const USER_IDENTITY_VERIFY_FAILURE = 'USER_IDENTITY_VERIFY_FAILURE';
+const USER_FETCH_STARTED = 'USER_FETCH_STARTED';
+const USER_FETCH_SUCCESS = 'USER_FETCH_SUCCESS';
+const USER_FETCH_FAILURE = 'USER_FETCH_FAILURE';
+const USER_INVITE_STATUS_FETCH_STARTED = 'USER_INVITE_STATUS_FETCH_STARTED';
+const USER_INVITE_STATUS_FETCH_SUCCESS = 'USER_INVITE_STATUS_FETCH_SUCCESS';
+const USER_INVITE_STATUS_FETCH_FAILURE = 'USER_INVITE_STATUS_FETCH_FAILURE';
+const USER_INVITE_NEW_STARTED = 'USER_INVITE_NEW_STARTED';
+const USER_INVITE_NEW_SUCCESS = 'USER_INVITE_NEW_SUCCESS';
+const USER_INVITE_NEW_FAILURE = 'USER_INVITE_NEW_FAILURE';
+const FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
+const USER_YOUTUBE_IMPORT_STARTED = 'USER_YOUTUBE_IMPORT_STARTED';
+const USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
+const USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS'; // Claims
 
 const FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 const FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
@@ -83,6 +119,7 @@ const FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Cross-device S
 
 const GET_SYNC_STARTED = 'GET_SYNC_STARTED';
 const GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
+const GET_SYNC_FAILED = 'GET_SYNC_FAILED';
 const SET_SYNC_STARTED = 'SET_SYNC_STARTED';
 const SET_SYNC_FAILED = 'SET_SYNC_FAILED';
 const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
@@ -90,11 +127,48 @@ const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+const SYNC_RESET = 'SYNC_RESET';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
   GENERATE_AUTH_TOKEN_STARTED: GENERATE_AUTH_TOKEN_STARTED,
   GENERATE_AUTH_TOKEN_SUCCESS: GENERATE_AUTH_TOKEN_SUCCESS,
+  AUTHENTICATION_STARTED: AUTHENTICATION_STARTED,
+  AUTHENTICATION_SUCCESS: AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE: AUTHENTICATION_FAILURE,
+  USER_EMAIL_DECLINE: USER_EMAIL_DECLINE,
+  USER_EMAIL_NEW_STARTED: USER_EMAIL_NEW_STARTED,
+  USER_EMAIL_NEW_SUCCESS: USER_EMAIL_NEW_SUCCESS,
+  USER_EMAIL_NEW_EXISTS: USER_EMAIL_NEW_EXISTS,
+  USER_EMAIL_NEW_FAILURE: USER_EMAIL_NEW_FAILURE,
+  USER_EMAIL_VERIFY_SET: USER_EMAIL_VERIFY_SET,
+  USER_EMAIL_VERIFY_STARTED: USER_EMAIL_VERIFY_STARTED,
+  USER_EMAIL_VERIFY_SUCCESS: USER_EMAIL_VERIFY_SUCCESS,
+  USER_EMAIL_VERIFY_FAILURE: USER_EMAIL_VERIFY_FAILURE,
+  USER_EMAIL_VERIFY_RETRY: USER_EMAIL_VERIFY_RETRY,
+  USER_PHONE_RESET: USER_PHONE_RESET,
+  USER_PHONE_NEW_STARTED: USER_PHONE_NEW_STARTED,
+  USER_PHONE_NEW_SUCCESS: USER_PHONE_NEW_SUCCESS,
+  USER_PHONE_NEW_FAILURE: USER_PHONE_NEW_FAILURE,
+  USER_PHONE_VERIFY_STARTED: USER_PHONE_VERIFY_STARTED,
+  USER_PHONE_VERIFY_SUCCESS: USER_PHONE_VERIFY_SUCCESS,
+  USER_PHONE_VERIFY_FAILURE: USER_PHONE_VERIFY_FAILURE,
+  USER_IDENTITY_VERIFY_STARTED: USER_IDENTITY_VERIFY_STARTED,
+  USER_IDENTITY_VERIFY_SUCCESS: USER_IDENTITY_VERIFY_SUCCESS,
+  USER_IDENTITY_VERIFY_FAILURE: USER_IDENTITY_VERIFY_FAILURE,
+  USER_FETCH_STARTED: USER_FETCH_STARTED,
+  USER_FETCH_SUCCESS: USER_FETCH_SUCCESS,
+  USER_FETCH_FAILURE: USER_FETCH_FAILURE,
+  USER_INVITE_STATUS_FETCH_STARTED: USER_INVITE_STATUS_FETCH_STARTED,
+  USER_INVITE_STATUS_FETCH_SUCCESS: USER_INVITE_STATUS_FETCH_SUCCESS,
+  USER_INVITE_STATUS_FETCH_FAILURE: USER_INVITE_STATUS_FETCH_FAILURE,
+  USER_INVITE_NEW_STARTED: USER_INVITE_NEW_STARTED,
+  USER_INVITE_NEW_SUCCESS: USER_INVITE_NEW_SUCCESS,
+  USER_INVITE_NEW_FAILURE: USER_INVITE_NEW_FAILURE,
+  FETCH_ACCESS_TOKEN_SUCCESS: FETCH_ACCESS_TOKEN_SUCCESS,
+  USER_YOUTUBE_IMPORT_STARTED: USER_YOUTUBE_IMPORT_STARTED,
+  USER_YOUTUBE_IMPORT_FAILURE: USER_YOUTUBE_IMPORT_FAILURE,
+  USER_YOUTUBE_IMPORT_SUCCESS: USER_YOUTUBE_IMPORT_SUCCESS,
   FETCH_FEATURED_CONTENT_STARTED: FETCH_FEATURED_CONTENT_STARTED,
   FETCH_FEATURED_CONTENT_COMPLETED: FETCH_FEATURED_CONTENT_COMPLETED,
   FETCH_TRENDING_CONTENT_STARTED: FETCH_TRENDING_CONTENT_STARTED,
@@ -159,13 +233,25 @@ var action_types = /*#__PURE__*/Object.freeze({
   FETCH_SUB_COUNT_COMPLETED: FETCH_SUB_COUNT_COMPLETED,
   GET_SYNC_STARTED: GET_SYNC_STARTED,
   GET_SYNC_COMPLETED: GET_SYNC_COMPLETED,
+  GET_SYNC_FAILED: GET_SYNC_FAILED,
   SET_SYNC_STARTED: SET_SYNC_STARTED,
   SET_SYNC_FAILED: SET_SYNC_FAILED,
   SET_SYNC_COMPLETED: SET_SYNC_COMPLETED,
   SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
-  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED
+  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
+  SYNC_RESET: SYNC_RESET
+});
+
+const NOT_TRANSFERRED = 'not_transferred';
+const PENDING_TRANSFER = 'pending_transfer';
+const COMPLETED_TRANSFER = 'completed_transfer';
+
+var youtube = /*#__PURE__*/Object.freeze({
+  NOT_TRANSFERRED: NOT_TRANSFERRED,
+  PENDING_TRANSFER: PENDING_TRANSFER,
+  COMPLETED_TRANSFER: COMPLETED_TRANSFER
 });
 
 const Lbryio = {
@@ -1040,18 +1126,26 @@ const selectUserInviteStatusFailed = reselect.createSelector(selectUserInvitesRe
 const selectUserInviteNewIsPending = reselect.createSelector(selectState$2, state => state.inviteNewIsPending);
 const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$2, state => state.inviteNewErrorMessage);
 const selectUserInviteReferralLink = reselect.createSelector(selectState$2, state => state.referralLink);
-const selectYTImportPending = reselect.createSelector(selectState$2, state => state.ytChannelImportPending);
-const selectYTImportError = reselect.createSelector(selectState$2, state => state.ytChannelImportErrorMessage);
+const selectYouTubeImportPending = reselect.createSelector(selectState$2, state => state.youtubeChannelImportPending);
+const selectYouTubeImportError = reselect.createSelector(selectState$2, state => state.youtubeChannelImportErrorMessage);
+const selectYouTubeImportVideosComplete = reselect.createSelector(selectState$2, state => {
+  const total = state.youtubeChannelImportTotal;
+  const complete = state.youtubeChannelImportComplete || 0;
+
+  if (total) {
+    return [complete, total];
+  }
+});
 
 function doFetchInviteStatus() {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_STARTED
+      type: USER_INVITE_STATUS_FETCH_STARTED
     });
     Promise.all([Lbryio.call('user', 'invite_status'), Lbryio.call('user_referral_code', 'list')]).then(([status, code]) => {
       dispatch(doRewardList());
       dispatch({
-        type: lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
+        type: USER_INVITE_STATUS_FETCH_SUCCESS,
         data: {
           invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
           invitees: status.invitees,
@@ -1060,7 +1154,7 @@ function doFetchInviteStatus() {
       });
     }).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE,
+        type: USER_INVITE_STATUS_FETCH_FAILURE,
         data: {
           error
         }
@@ -1087,12 +1181,12 @@ function doInstallNew(appVersion, os = null) {
 function doAuthenticate(appVersion, os = null) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.AUTHENTICATION_STARTED
+      type: AUTHENTICATION_STARTED
     });
     Lbryio.authenticate().then(user => {
       // analytics.setUser(user);
       dispatch({
-        type: lbryRedux.ACTIONS.AUTHENTICATION_SUCCESS,
+        type: AUTHENTICATION_SUCCESS,
         data: {
           user
         }
@@ -1102,7 +1196,7 @@ function doAuthenticate(appVersion, os = null) {
       doInstallNew(appVersion, os);
     }).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.AUTHENTICATION_FAILURE,
+        type: AUTHENTICATION_FAILURE,
         data: {
           error
         }
@@ -1113,20 +1207,19 @@ function doAuthenticate(appVersion, os = null) {
 function doUserFetch() {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_FETCH_STARTED
+      type: USER_FETCH_STARTED
     });
     Lbryio.getCurrentUser().then(user => {
-      // analytics.setUser(user);
       dispatch(doRewardList());
       dispatch({
-        type: lbryRedux.ACTIONS.USER_FETCH_SUCCESS,
+        type: USER_FETCH_SUCCESS,
         data: {
           user
         }
       });
     }).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_FETCH_FAILURE,
+        type: USER_FETCH_FAILURE,
         data: {
           error
         }
@@ -1141,7 +1234,7 @@ function doUserCheckEmailVerified() {
       if (user.has_verified_email) {
         dispatch(doRewardList());
         dispatch({
-          type: lbryRedux.ACTIONS.USER_FETCH_SUCCESS,
+          type: USER_FETCH_SUCCESS,
           data: {
             user
           }
@@ -1152,13 +1245,13 @@ function doUserCheckEmailVerified() {
 }
 function doUserPhoneReset() {
   return {
-    type: lbryRedux.ACTIONS.USER_PHONE_RESET
+    type: USER_PHONE_RESET
   };
 }
 function doUserPhoneNew(phone, countryCode) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_PHONE_NEW_STARTED,
+      type: USER_PHONE_NEW_STARTED,
       data: {
         phone,
         country_code: countryCode
@@ -1167,7 +1260,7 @@ function doUserPhoneNew(phone, countryCode) {
 
     const success = () => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_PHONE_NEW_SUCCESS,
+        type: USER_PHONE_NEW_SUCCESS,
         data: {
           phone
         }
@@ -1176,7 +1269,7 @@ function doUserPhoneNew(phone, countryCode) {
 
     const failure = error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_PHONE_NEW_FAILURE,
+        type: USER_PHONE_NEW_FAILURE,
         data: {
           error
         }
@@ -1191,7 +1284,7 @@ function doUserPhoneNew(phone, countryCode) {
 }
 function doUserPhoneVerifyFailure(error) {
   return {
-    type: lbryRedux.ACTIONS.USER_PHONE_VERIFY_FAILURE,
+    type: USER_PHONE_VERIFY_FAILURE,
     data: {
       error
     }
@@ -1202,7 +1295,7 @@ function doUserPhoneVerify(verificationCode) {
     const phoneNumber = selectPhoneToVerify(getState());
     const countryCode = selectUserCountryCode(getState());
     dispatch({
-      type: lbryRedux.ACTIONS.USER_PHONE_VERIFY_STARTED,
+      type: USER_PHONE_VERIFY_STARTED,
       code: verificationCode
     });
     Lbryio.call('user', 'phone_number_confirm', {
@@ -1212,7 +1305,7 @@ function doUserPhoneVerify(verificationCode) {
     }, 'post').then(user => {
       if (user.is_identity_verified) {
         dispatch({
-          type: lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS,
+          type: USER_PHONE_VERIFY_SUCCESS,
           data: {
             user
           }
@@ -1225,7 +1318,7 @@ function doUserPhoneVerify(verificationCode) {
 function doUserEmailToVerify(email) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SET,
+      type: USER_EMAIL_VERIFY_SET,
       data: {
         email
       }
@@ -1235,13 +1328,13 @@ function doUserEmailToVerify(email) {
 function doUserEmailNew(email) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_EMAIL_NEW_STARTED,
+      type: USER_EMAIL_NEW_STARTED,
       email
     });
 
     const success = () => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        type: USER_EMAIL_NEW_SUCCESS,
         data: {
           email
         }
@@ -1251,7 +1344,7 @@ function doUserEmailNew(email) {
 
     const failure = error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_EMAIL_NEW_FAILURE,
+        type: USER_EMAIL_NEW_FAILURE,
         data: {
           error
         }
@@ -1276,13 +1369,13 @@ function doUserEmailNew(email) {
 function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_EMAIL_VERIFY_RETRY,
+      type: USER_EMAIL_VERIFY_RETRY,
       email
     });
 
     const success = () => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        type: USER_EMAIL_NEW_SUCCESS,
         data: {
           email
         }
@@ -1292,7 +1385,7 @@ function doUserResendVerificationEmail(email) {
 
     const failure = error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_EMAIL_NEW_FAILURE,
+        type: USER_EMAIL_NEW_FAILURE,
         data: {
           error
         }
@@ -1310,7 +1403,7 @@ function doUserResendVerificationEmail(email) {
 }
 function doUserEmailVerifyFailure(error) {
   return {
-    type: lbryRedux.ACTIONS.USER_EMAIL_VERIFY_FAILURE,
+    type: USER_EMAIL_VERIFY_FAILURE,
     data: {
       error
     }
@@ -1320,7 +1413,7 @@ function doUserEmailVerify(verificationToken, recaptcha) {
   return (dispatch, getState) => {
     const email = selectEmailToVerify(getState());
     dispatch({
-      type: lbryRedux.ACTIONS.USER_EMAIL_VERIFY_STARTED,
+      type: USER_EMAIL_VERIFY_STARTED,
       code: verificationToken,
       recaptcha
     });
@@ -1331,7 +1424,7 @@ function doUserEmailVerify(verificationToken, recaptcha) {
     }, 'post').then(userEmail => {
       if (userEmail.is_verified) {
         dispatch({
-          type: lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SUCCESS,
+          type: USER_EMAIL_VERIFY_SUCCESS,
           data: {
             email
           }
@@ -1346,7 +1439,7 @@ function doUserEmailVerify(verificationToken, recaptcha) {
 function doFetchAccessToken() {
   return dispatch => {
     const success = token => dispatch({
-      type: lbryRedux.ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS,
+      type: FETCH_ACCESS_TOKEN_SUCCESS,
       data: {
         token
       }
@@ -1358,7 +1451,7 @@ function doFetchAccessToken() {
 function doUserIdentityVerify(stripeToken) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_STARTED,
+      type: USER_IDENTITY_VERIFY_STARTED,
       token: stripeToken
     });
     Lbryio.call('user', 'verify_identity', {
@@ -1366,7 +1459,7 @@ function doUserIdentityVerify(stripeToken) {
     }, 'post').then(user => {
       if (user.is_identity_verified) {
         dispatch({
-          type: lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_SUCCESS,
+          type: USER_IDENTITY_VERIFY_SUCCESS,
           data: {
             user
           }
@@ -1377,7 +1470,7 @@ function doUserIdentityVerify(stripeToken) {
       }
     }).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_FAILURE,
+        type: USER_IDENTITY_VERIFY_FAILURE,
         data: {
           error: error.toString()
         }
@@ -1388,13 +1481,13 @@ function doUserIdentityVerify(stripeToken) {
 function doUserInviteNew(email) {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_INVITE_NEW_STARTED
+      type: USER_INVITE_NEW_STARTED
     });
     Lbryio.call('user', 'invite', {
       email
     }, 'post').then(() => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_INVITE_NEW_SUCCESS,
+        type: USER_INVITE_NEW_SUCCESS,
         data: {
           email
         }
@@ -1405,7 +1498,7 @@ function doUserInviteNew(email) {
       dispatch(doFetchInviteStatus());
     }).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_INVITE_NEW_FAILURE,
+        type: USER_INVITE_NEW_FAILURE,
         data: {
           error
         }
@@ -1416,14 +1509,16 @@ function doUserInviteNew(email) {
 function doClaimYoutubeChannels() {
   return dispatch => {
     dispatch({
-      type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_STARTED
+      type: USER_YOUTUBE_IMPORT_STARTED
     });
-    lbryRedux.Lbry.address_list().then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0]).then(address => Lbryio.call('yt', 'transfer', {
+    let transferResponse;
+    return lbryRedux.Lbry.address_list().then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0]).then(address => Lbryio.call('yt', 'transfer', {
       address: address.address,
       public_key: address.pubkey
     }).then(response => {
-      if (response && response.success) {
-        Promise.all(response.map(channelMeta => {
+      if (response && response.length) {
+        transferResponse = response;
+        return Promise.all(response.map(channelMeta => {
           if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
             return lbryRedux.Lbry.channel_import({
               channel_data: channelMeta.channel.channel_certificate
@@ -1433,7 +1528,8 @@ function doClaimYoutubeChannels() {
           return null;
         })).then(() => {
           const actions = [{
-            type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED
+            type: USER_YOUTUBE_IMPORT_SUCCESS,
+            data: transferResponse
           }];
           actions.push(doUserFetch());
           actions.push(lbryRedux.doFetchChannelListMine());
@@ -1442,7 +1538,29 @@ function doClaimYoutubeChannels() {
       }
     })).catch(error => {
       dispatch({
-        type: lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_FAILURE,
+        type: USER_YOUTUBE_IMPORT_FAILURE,
+        data: String(error)
+      });
+    });
+  };
+}
+function doCheckYoutubeTransfer() {
+  return dispatch => {
+    dispatch({
+      type: USER_YOUTUBE_IMPORT_STARTED
+    });
+    return Lbryio.call('yt', 'transfer').then(response => {
+      if (response && response.length) {
+        dispatch({
+          type: USER_YOUTUBE_IMPORT_SUCCESS,
+          data: response
+        });
+      } else {
+        throw new Error();
+      }
+    }).catch(error => {
+      dispatch({
+        type: USER_YOUTUBE_IMPORT_FAILURE,
         data: String(error)
       });
     });
@@ -1508,24 +1626,29 @@ function doClaimRewardType(rewardType, options = {}) {
     });
 
     const success = successReward => {
-      dispatch({
-        type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
-        data: {
-          reward: successReward
-        }
-      });
+      // Temporary timeout to ensure the sdk has the correct balance after claiming a reward
+      setTimeout(() => {
+        dispatch(lbryRedux.doUpdateBalance()).then(() => {
+          dispatch({
+            type: lbryRedux.ACTIONS.CLAIM_REWARD_SUCCESS,
+            data: {
+              reward: successReward
+            }
+          });
 
-      if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
-        rewards.callbacks.claimFirstRewardSuccess();
-      } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
-        dispatch(doFetchInviteStatus());
-      }
+          if (successReward.reward_type === rewards.TYPE_NEW_USER && rewards.callbacks.claimFirstRewardSuccess) {
+            rewards.callbacks.claimFirstRewardSuccess();
+          } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+            dispatch(doFetchInviteStatus());
+          }
 
-      dispatch(doRewardList());
+          dispatch(doRewardList());
 
-      if (options.callback) {
-        options.callback();
-      }
+          if (options.callback) {
+            options.callback();
+          }
+        });
+      }, 1000);
     };
 
     const failure = error => {
@@ -1549,7 +1672,7 @@ function doClaimRewardType(rewardType, options = {}) {
       }
     };
 
-    rewards.claimReward(rewardType, params).then(success, failure);
+    return rewards.claimReward(rewardType, params).then(success, failure);
   };
 }
 function doClaimEligiblePurchaseRewards() {
@@ -2203,41 +2326,6 @@ const doFetchSubCount = claimId => dispatch => {
   });
 };
 
-function doSetSync(oldHash, newHash, data) {
-  return dispatch => {
-    dispatch({
-      type: SET_SYNC_STARTED
-    });
-    Lbryio.call('sync', 'set', {
-      old_hash: oldHash,
-      new_hash: newHash,
-      data
-    }, 'post').then(response => {
-      if (!response.hash) {
-        return dispatch({
-          type: SET_SYNC_FAILED,
-          data: {
-            error: 'No hash returned for sync/set.'
-          }
-        });
-      }
-
-      return dispatch({
-        type: SET_SYNC_COMPLETED,
-        data: {
-          syncHash: response.hash
-        }
-      });
-    }).catch(error => {
-      dispatch({
-        type: SET_SYNC_FAILED,
-        data: {
-          error
-        }
-      });
-    });
-  };
-}
 function doSetDefaultAccount(success, failure) {
   return dispatch => {
     dispatch({
@@ -2276,11 +2364,9 @@ function doSetDefaultAccount(success, failure) {
             failure(err);
           }
         });
-      } else {
+      } else if (failure) {
         // no default account to set
-        if (failure) {
-          failure('Could not set a default account'); // fail
-        }
+        failure('Could not set a default account'); // fail
       }
     }).catch(err => {
       if (failure) {
@@ -2289,33 +2375,81 @@ function doSetDefaultAccount(success, failure) {
     });
   };
 }
-function doGetSync(password) {
+function doSetSync(oldHash, newHash, data) {
+  return dispatch => {
+    dispatch({
+      type: SET_SYNC_STARTED
+    });
+    return Lbryio.call('sync', 'set', {
+      old_hash: oldHash,
+      new_hash: newHash,
+      data
+    }, 'post').then(response => {
+      if (!response.hash) {
+        throw Error('No hash returned for sync/set.');
+      }
+
+      return dispatch({
+        type: SET_SYNC_COMPLETED,
+        data: {
+          syncHash: response.hash
+        }
+      });
+    }).catch(error => {
+      dispatch({
+        type: SET_SYNC_FAILED,
+        data: {
+          error
+        }
+      });
+    });
+  };
+}
+function doGetSync(password = '', shouldSetDefaultAccount) {
   return dispatch => {
     dispatch({
       type: GET_SYNC_STARTED
     });
+    const data = {};
     lbryRedux.Lbry.sync_hash().then(hash => {
       Lbryio.call('sync', 'get', {
         hash
       }, 'post').then(response => {
-        const data = {
-          hasSyncedWallet: true
-        };
+        const syncHash = response.hash;
+        data.syncHash = syncHash;
+        data.syncData = response.data;
+        data.hasSyncedWallet = true;
 
-        if (response.changed) {
-          const syncHash = response.hash;
-          data.syncHash = syncHash;
-          data.syncData = response.data;
-          lbryRedux.Lbry.sync_apply({
+        if (response.changed || shouldSetDefaultAccount) {
+          return lbryRedux.Lbry.sync_apply({
             password,
             data: response.data
           }).then(({
             hash: walletHash,
             data: walletData
           }) => {
-            if (walletHash !== syncHash) {
+            dispatch({
+              type: GET_SYNC_COMPLETED,
+              data
+            });
+
+            if (walletHash !== syncHash || shouldSetDefaultAccount) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
+
+              if (shouldSetDefaultAccount) {
+                dispatch(doSetDefaultAccount(() => {
+                  lbryRedux.Lbry.status().then(status => {
+                    if (status.wallet.is_locked) {
+                      lbryRedux.Lbry.account_unlock({
+                        password
+                      });
+                    }
+
+                    dispatch(lbryRedux.doFetchChannelListMine());
+                  });
+                }));
+              }
             }
           });
         }
@@ -2325,22 +2459,31 @@ function doGetSync(password) {
           data
         });
       }).catch(() => {
-        // user doesn't have a synced wallet
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data: {
-            hasSyncedWallet: false,
-            syncHash: null
-          }
-        }); // call sync_apply to get data to sync
-        // first time sync. use any string for old hash
+        if (data.hasSyncedWallet) {
+          dispatch({
+            type: GET_SYNC_FAILED,
+            data: {
+              error: 'Error getting synced wallet'
+            }
+          });
+        } else {
+          // user doesn't have a synced wallet
+          dispatch({
+            type: GET_SYNC_COMPLETED,
+            data: {
+              hasSyncedWallet: false,
+              syncHash: null
+            }
+          }); // call sync_apply to get data to sync
+          // first time sync. use any string for old hash
 
-        lbryRedux.Lbry.sync_apply({
-          password
-        }).then(({
-          hash: walletHash,
-          data
-        }) => dispatch(doSetSync('', walletHash, data)));
+          lbryRedux.Lbry.sync_apply({
+            password
+          }).then(({
+            hash: walletHash,
+            data: syncApplyData
+          }) => dispatch(doSetSync('', walletHash, syncApplyData, password)));
+        }
       });
     });
   };
@@ -2406,6 +2549,14 @@ function doCheckSync() {
       });
     });
   };
+}
+function doResetSync() {
+  return dispatch => new Promise(resolve => {
+    dispatch({
+      type: SYNC_RESET
+    });
+    resolve();
+  });
 }
 
 const reducers = {};
@@ -2562,44 +2713,44 @@ const defaultState$3 = {
   invitesRemaining: undefined,
   invitees: undefined,
   user: undefined,
-  ytChannelImportPending: false,
-  ytChannelImportErrorMessage: ''
+  youtubeChannelImportPending: false,
+  youtubeChannelImportErrorMessage: ''
 };
 
-reducers$2[lbryRedux.ACTIONS.AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
+reducers$2[AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
   authenticationIsPending: true,
   userIsPending: true,
   user: defaultState$3.user
 });
 
-reducers$2[lbryRedux.ACTIONS.AUTHENTICATION_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[AUTHENTICATION_SUCCESS] = (state, action) => Object.assign({}, state, {
   authenticationIsPending: false,
   userIsPending: false,
   user: action.data.user
 });
 
-reducers$2[lbryRedux.ACTIONS.AUTHENTICATION_FAILURE] = state => Object.assign({}, state, {
+reducers$2[AUTHENTICATION_FAILURE] = state => Object.assign({}, state, {
   authenticationIsPending: false,
   userIsPending: false,
   user: null
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_FETCH_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_FETCH_STARTED] = state => Object.assign({}, state, {
   userIsPending: true
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
   userIsPending: false,
   user: action.data.user,
   emailToVerify: action.data.user.has_verified_email ? null : state.emailToVerify
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_FETCH_FAILURE] = state => Object.assign({}, state, {
+reducers$2[USER_FETCH_FAILURE] = state => Object.assign({}, state, {
   userIsPending: true,
   user: null
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_NEW_STARTED] = (state, action) => {
+reducers$2[USER_PHONE_NEW_STARTED] = (state, action) => {
   const user = Object.assign({}, state.user);
   user.country_code = action.data.country_code;
   return Object.assign({}, state, {
@@ -2609,42 +2760,42 @@ reducers$2[lbryRedux.ACTIONS.USER_PHONE_NEW_STARTED] = (state, action) => {
   });
 };
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_NEW_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_PHONE_NEW_SUCCESS] = (state, action) => Object.assign({}, state, {
   phoneToVerify: action.data.phone,
   phoneNewIsPending: false
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_RESET] = state => Object.assign({}, state, {
+reducers$2[USER_PHONE_RESET] = state => Object.assign({}, state, {
   phoneToVerify: null
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_PHONE_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
   phoneNewIsPending: false,
   phoneNewErrorMessage: action.data.error
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_VERIFY_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_PHONE_VERIFY_STARTED] = state => Object.assign({}, state, {
   phoneVerifyIsPending: true,
   phoneVerifyErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_VERIFY_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_PHONE_VERIFY_SUCCESS] = (state, action) => Object.assign({}, state, {
   phoneToVerify: '',
   phoneVerifyIsPending: false,
   user: action.data.user
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_PHONE_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_PHONE_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
   phoneVerifyIsPending: false,
   phoneVerifyErrorMessage: action.data.error
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_NEW_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_EMAIL_NEW_STARTED] = state => Object.assign({}, state, {
   emailNewIsPending: true,
   emailNewErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS] = (state, action) => {
+reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
   const user = Object.assign({}, state.user);
   user.primary_email = action.data.email;
   return Object.assign({}, state, {
@@ -2654,22 +2805,22 @@ reducers$2[lbryRedux.ACTIONS.USER_EMAIL_NEW_SUCCESS] = (state, action) => {
   });
 };
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_NEW_EXISTS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_EMAIL_NEW_EXISTS] = (state, action) => Object.assign({}, state, {
   emailToVerify: action.data.email,
   emailNewIsPending: false
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
   emailNewIsPending: false,
   emailNewErrorMessage: action.data.error
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_VERIFY_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_EMAIL_VERIFY_STARTED] = state => Object.assign({}, state, {
   emailVerifyIsPending: true,
   emailVerifyErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SUCCESS] = (state, action) => {
+reducers$2[USER_EMAIL_VERIFY_SUCCESS] = (state, action) => {
   const user = Object.assign({}, state.user);
   user.primary_email = action.data.email;
   return Object.assign({}, state, {
@@ -2679,32 +2830,32 @@ reducers$2[lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SUCCESS] = (state, action) => {
   });
 };
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_EMAIL_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
   emailVerifyIsPending: false,
   emailVerifyErrorMessage: action.data.error
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_EMAIL_VERIFY_SET] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_EMAIL_VERIFY_SET] = (state, action) => Object.assign({}, state, {
   emailToVerify: action.data.email
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_IDENTITY_VERIFY_STARTED] = state => Object.assign({}, state, {
   identityVerifyIsPending: true,
   identityVerifyErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_IDENTITY_VERIFY_SUCCESS] = (state, action) => Object.assign({}, state, {
   identityVerifyIsPending: false,
   identityVerifyErrorMessage: '',
   user: action.data.user
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_IDENTITY_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_IDENTITY_VERIFY_FAILURE] = (state, action) => Object.assign({}, state, {
   identityVerifyIsPending: false,
   identityVerifyErrorMessage: action.data.error
 });
 
-reducers$2[lbryRedux.ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS] = (state, action) => {
+reducers$2[FETCH_ACCESS_TOKEN_SUCCESS] = (state, action) => {
   const {
     token
   } = action.data;
@@ -2713,51 +2864,57 @@ reducers$2[lbryRedux.ACTIONS.FETCH_ACCESS_TOKEN_SUCCESS] = (state, action) => {
   });
 };
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_INVITE_STATUS_FETCH_STARTED] = state => Object.assign({}, state, {
   inviteStatusIsPending: true
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_INVITE_STATUS_FETCH_SUCCESS] = (state, action) => Object.assign({}, state, {
   inviteStatusIsPending: false,
   invitesRemaining: action.data.invitesRemaining,
   invitees: action.data.invitees,
   referralLink: action.data.referralLink
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_NEW_STARTED] = state => Object.assign({}, state, {
+reducers$2[USER_INVITE_NEW_STARTED] = state => Object.assign({}, state, {
   inviteNewIsPending: true,
   inviteNewErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_NEW_SUCCESS] = state => Object.assign({}, state, {
+reducers$2[USER_INVITE_NEW_SUCCESS] = state => Object.assign({}, state, {
   inviteNewIsPending: false,
   inviteNewErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
+reducers$2[USER_INVITE_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
   inviteNewIsPending: false,
   inviteNewErrorMessage: action.data.error.message
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_INVITE_STATUS_FETCH_FAILURE] = state => Object.assign({}, state, {
+reducers$2[USER_INVITE_STATUS_FETCH_FAILURE] = state => Object.assign({}, state, {
   inviteStatusIsPending: false,
   invitesRemaining: null,
   invitees: null
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_STARTED] = state => Object.assign({}, state, {
-  ytChannelImportPending: true,
-  ytChannelImportErrorMessage: ''
+reducers$2[USER_YOUTUBE_IMPORT_STARTED] = state => Object.assign({}, state, {
+  youtubeChannelImportPending: true,
+  youtubeChannelImportErrorMessage: ''
 });
 
-reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_COMPLETED] = state => Object.assign({}, state, {
-  ytChannelImportPending: false,
-  ytChannelImportErrorMessage: ''
-});
+reducers$2[USER_YOUTUBE_IMPORT_SUCCESS] = (state, action) => {
+  const total = action.data.reduce((acc, value) => acc + value.total_published_videos, 0);
+  const complete = action.data.reduce((acc, value) => acc + value.total_transferred, 0);
+  return Object.assign({}, state, {
+    youtubeChannelImportPending: false,
+    youtubeChannelImportErrorMessage: '',
+    youtubeChannelImportTotal: total,
+    youtubeChannelImportComplete: complete
+  });
+};
 
-reducers$2[lbryRedux.ACTIONS.USER_YOUTUBE_IMPORT_FAILURE] = (state, action) => Object.assign({}, state, {
-  ytChannelImportPending: false,
-  ytChannelImportErrorMessage: action.data
+reducers$2[USER_YOUTUBE_IMPORT_FAILURE] = (state, action) => Object.assign({}, state, {
+  youtubeChannelImportPending: false,
+  youtubeChannelImportErrorMessage: action.data
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -2952,6 +3109,7 @@ const defaultState$9 = {
   syncHash: null,
   syncData: null,
   setSyncErrorMessage: null,
+  getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
   getSyncIsPending: false,
@@ -2960,7 +3118,8 @@ const defaultState$9 = {
 };
 
 reducers$3[GET_SYNC_STARTED] = state => Object.assign({}, state, {
-  getSyncIsPending: true
+  getSyncIsPending: true,
+  getSyncErrorMessage: null
 });
 
 reducers$3[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
@@ -2969,6 +3128,11 @@ reducers$3[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   hasSyncedWallet: action.data.hasSyncedWallet,
   getSyncIsPending: false,
   hashChanged: action.data.hashChanged
+});
+
+reducers$3[GET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
+  getSyncIsPending: false,
+  getSyncErrorMessage: action.data.error
 });
 
 reducers$3[SET_SYNC_STARTED] = state => Object.assign({}, state, {
@@ -3003,6 +3167,8 @@ reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyIsPending: false,
   syncApplyErrorMessage: action.data.error
 });
+
+reducers$3[SYNC_RESET] = () => defaultState$9;
 
 function syncReducer(state = defaultState$9, action) {
   const handler = reducers$3[action.type];
@@ -3047,6 +3213,7 @@ const selectHasSyncedWallet = reselect.createSelector(selectState$9, state => st
 const selectSyncHash = reselect.createSelector(selectState$9, state => state.syncHash);
 const selectSyncData = reselect.createSelector(selectState$9, state => state.syncData);
 const selectSetSyncErrorMessage = reselect.createSelector(selectState$9, state => state.setSyncErrorMessage);
+const selectGetSyncErrorMessage = reselect.createSelector(selectState$9, state => state.getSyncErrorMessage);
 const selectGetSyncIsPending = reselect.createSelector(selectState$9, state => state.getSyncIsPending);
 const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => state.setSyncIsPending);
 const selectHashChanged = reselect.createSelector(selectState$9, state => state.hashChanged);
@@ -3055,6 +3222,7 @@ const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state
 
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
+exports.YOUTUBE_STATUSES = youtube;
 exports.authReducer = authReducer;
 exports.blacklistReducer = blacklistReducer;
 exports.costInfoReducer = costInfoReducer;
@@ -3068,6 +3236,7 @@ exports.doCheckSubscription = doCheckSubscription;
 exports.doCheckSubscriptions = doCheckSubscriptions;
 exports.doCheckSubscriptionsInit = doCheckSubscriptionsInit;
 exports.doCheckSync = doCheckSync;
+exports.doCheckYoutubeTransfer = doCheckYoutubeTransfer;
 exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;
@@ -3089,6 +3258,7 @@ exports.doGetSync = doGetSync;
 exports.doInstallNew = doInstallNew;
 exports.doRemoveUnreadSubscription = doRemoveUnreadSubscription;
 exports.doRemoveUnreadSubscriptions = doRemoveUnreadSubscriptions;
+exports.doResetSync = doResetSync;
 exports.doRewardList = doRewardList;
 exports.doSetDefaultAccount = doSetDefaultAccount;
 exports.doSetSync = doSetSync;
@@ -3147,6 +3317,7 @@ exports.selectFetchingRewards = selectFetchingRewards;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
 exports.selectFilteredOutpoints = selectFilteredOutpoints;
 exports.selectFirstRunCompleted = selectFirstRunCompleted;
+exports.selectGetSyncErrorMessage = selectGetSyncErrorMessage;
 exports.selectGetSyncIsPending = selectGetSyncIsPending;
 exports.selectHasSyncedWallet = selectHasSyncedWallet;
 exports.selectHashChanged = selectHashChanged;
@@ -3197,8 +3368,9 @@ exports.selectUserIsVerificationCandidate = selectUserIsVerificationCandidate;
 exports.selectUserPhone = selectUserPhone;
 exports.selectUserVerifiedEmail = selectUserVerifiedEmail;
 exports.selectViewMode = selectViewMode;
-exports.selectYTImportError = selectYTImportError;
-exports.selectYTImportPending = selectYTImportPending;
+exports.selectYouTubeImportError = selectYouTubeImportError;
+exports.selectYouTubeImportPending = selectYouTubeImportPending;
+exports.selectYouTubeImportVideosComplete = selectYouTubeImportVideosComplete;
 exports.selectYoutubeChannels = selectYoutubeChannels;
 exports.setSubscriptionLatest = setSubscriptionLatest;
 exports.statsReducer = statsReducer;

@@ -142,12 +142,21 @@ export const selectUserInviteReferralLink = createSelector(
   state => state.referralLink
 );
 
-export const selectYTImportPending = createSelector(
+export const selectYouTubeImportPending = createSelector(
   selectState,
-  state => state.ytChannelImportPending
+  state => state.youtubeChannelImportPending
 );
 
-export const selectYTImportError = createSelector(
+export const selectYouTubeImportError = createSelector(
   selectState,
-  state => state.ytChannelImportErrorMessage
+  state => state.youtubeChannelImportErrorMessage
 );
+
+export const selectYouTubeImportVideosComplete = createSelector(selectState, state => {
+  const total = state.youtubeChannelImportTotal;
+  const complete = state.youtubeChannelImportComplete || 0;
+
+  if (total) {
+    return [complete, total];
+  }
+});

@@ -1,5 +1,5 @@
 import Lbryio from 'lbryio';
-import { ACTIONS, doToast } from 'lbry-redux';
+import { ACTIONS, doToast, doUpdateBalance } from 'lbry-redux';
 import { selectUnclaimedRewards } from 'redux/selectors/rewards';
 import { selectUserIsRewardApproved } from 'redux/selectors/user';
 import { doFetchInviteStatus } from 'redux/actions/user';
@@ -71,26 +71,31 @@ export function doClaimRewardType(rewardType, options = {}) {
     });
 
     const success = successReward => {
-      dispatch({
-        type: ACTIONS.CLAIM_REWARD_SUCCESS,
-        data: {
-          reward: successReward,
-        },
-      });
-      if (
-        successReward.reward_type === rewards.TYPE_NEW_USER &&
-        rewards.callbacks.claimFirstRewardSuccess
-      ) {
-        rewards.callbacks.claimFirstRewardSuccess();
-      } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
-        dispatch(doFetchInviteStatus());
-      }
+      // Temporary timeout to ensure the sdk has the correct balance after claiming a reward
+      setTimeout(() => {
+        dispatch(doUpdateBalance()).then(() => {
+          dispatch({
+            type: ACTIONS.CLAIM_REWARD_SUCCESS,
+            data: {
+              reward: successReward,
+            },
+          });
+          if (
+            successReward.reward_type === rewards.TYPE_NEW_USER &&
+            rewards.callbacks.claimFirstRewardSuccess
+          ) {
+            rewards.callbacks.claimFirstRewardSuccess();
+          } else if (successReward.reward_type === rewards.TYPE_REFERRAL) {
+            dispatch(doFetchInviteStatus());
+          }
 
-      dispatch(doRewardList());
+          dispatch(doRewardList());
 
-      if (options.callback) {
-        options.callback();
-      }
+          if (options.callback) {
+            options.callback();
+          }
+        });
+      }, 1000);
     };
 
     const failure = error => {
@@ -111,7 +116,7 @@ export function doClaimRewardType(rewardType, options = {}) {
       }
     };
 
-    rewards.claimReward(rewardType, params).then(success, failure);
+    return rewards.claimReward(rewardType, params).then(success, failure);
   };
 }
 
