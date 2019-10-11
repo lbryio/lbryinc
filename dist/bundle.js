@@ -2207,7 +2207,7 @@ function doClaimRewardType(rewardType) {
             options.callback();
           }
         });
-      }, 1000);
+      }, 2000);
     };
 
     var failure = function failure(error) {

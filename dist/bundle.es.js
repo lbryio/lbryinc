@@ -1647,7 +1647,7 @@ function doClaimRewardType(rewardType, options = {}) {
             options.callback();
           }
         });
-      }, 1000);
+      }, 2000);
     };
 
     const failure = error => {
