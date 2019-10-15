@@ -116,7 +116,6 @@ export function doGetSync(passedPassword, callback) {
               }
             );
           }
-
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
           handleCallback();
         })

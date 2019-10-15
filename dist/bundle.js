@@ -4012,13 +4012,13 @@ function doGetSync(passedPassword, callback) {
               handleCallback();
             }
           });
+        } else {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+            data: data
+          });
+          handleCallback();
         }
-
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
-          data: data
-        });
-        handleCallback();
       })["catch"](function () {
         if (data.hasSyncedWallet) {
           var error = 'Error getting synced wallet';

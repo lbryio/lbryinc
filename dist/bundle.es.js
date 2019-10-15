@@ -2450,13 +2450,13 @@ function doGetSync(passedPassword, callback) {
               handleCallback();
             }
           });
+        } else {
+          dispatch({
+            type: GET_SYNC_COMPLETED,
+            data
+          });
+          handleCallback();
         }
-
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data
-        });
-        handleCallback();
       }).catch(() => {
         if (data.hasSyncedWallet) {
           const error = 'Error getting synced wallet';
