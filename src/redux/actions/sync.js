@@ -1,6 +1,6 @@
 import * as ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
-import { Lbry, doFetchChannelListMine } from 'lbry-redux';
+import { Lbry } from 'lbry-redux';
 
 export function doSetDefaultAccount(success, failure) {
   return dispatch => {
@@ -77,7 +77,17 @@ export function doSetSync(oldHash, newHash, data) {
   };
 }
 
-export function doGetSync(password = '', shouldSetDefaultAccount) {
+export function doGetSync(password = '', callback) {
+  function handleCallback() {
+    if (callback) {
+      if (typeof callback !== 'function') {
+        throw new Error('Second argument passed to "doGetSync" must be a function');
+      }
+
+      callback();
+    }
+  }
+
   return dispatch => {
     dispatch({
       type: ACTIONS.GET_SYNC_STARTED,
@@ -91,42 +101,34 @@ export function doGetSync(password = '', shouldSetDefaultAccount) {
           data.syncHash = syncHash;
           data.syncData = response.data;
           data.hasSyncedWallet = true;
-          if (response.changed || shouldSetDefaultAccount) {
+          if (response.changed) {
             return Lbry.sync_apply({ password, data: response.data }).then(
               ({ hash: walletHash, data: walletData }) => {
                 dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
 
-                if (walletHash !== syncHash || shouldSetDefaultAccount) {
+                if (walletHash !== syncHash) {
                   // different local hash, need to synchronise
                   dispatch(doSetSync(syncHash, walletHash, walletData));
-
-                  if (shouldSetDefaultAccount) {
-                    dispatch(
-                      doSetDefaultAccount(() => {
-                        Lbry.status().then(status => {
-                          if (status.wallet.is_locked) {
-                            Lbry.account_unlock({ password });
-                          }
-                          dispatch(doFetchChannelListMine());
-                        });
-                      })
-                    );
-                  }
+                  handleCallback();
                 }
               }
             );
           }
 
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
+          handleCallback();
         })
         .catch(() => {
           if (data.hasSyncedWallet) {
+            const error = 'Error getting synced wallet';
             dispatch({
               type: ACTIONS.GET_SYNC_FAILED,
               data: {
-                error: 'Error getting synced wallet',
+                error,
               },
             });
+
+            handleCallback(error);
           } else {
             // user doesn't have a synced wallet
             dispatch({
@@ -136,9 +138,10 @@ export function doGetSync(password = '', shouldSetDefaultAccount) {
 
             // call sync_apply to get data to sync
             // first time sync. use any string for old hash
-            Lbry.sync_apply({ password }).then(({ hash: walletHash, data: syncApplyData }) =>
-              dispatch(doSetSync('', walletHash, syncApplyData, password))
-            );
+            Lbry.sync_apply({ password }).then(({ hash: walletHash, data: syncApplyData }) => {
+              dispatch(doSetSync('', walletHash, syncApplyData, password));
+              handleCallback();
+            });
           }
         });
     });

@@ -2404,7 +2404,17 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doGetSync(password = '', shouldSetDefaultAccount) {
+function doGetSync(password = '', callback) {
+  function handleCallback() {
+    if (callback) {
+      if (typeof callback !== 'function') {
+        throw new Error('Second argument passed to "doGetSync" must be a function');
+      }
+
+      callback();
+    }
+  }
+
   return dispatch => {
     dispatch({
       type: GET_SYNC_STARTED
@@ -2419,7 +2429,7 @@ function doGetSync(password = '', shouldSetDefaultAccount) {
         data.syncData = response.data;
         data.hasSyncedWallet = true;
 
-        if (response.changed || shouldSetDefaultAccount) {
+        if (response.changed) {
           return lbryRedux.Lbry.sync_apply({
             password,
             data: response.data
@@ -2432,23 +2442,10 @@ function doGetSync(password = '', shouldSetDefaultAccount) {
               data
             });
 
-            if (walletHash !== syncHash || shouldSetDefaultAccount) {
+            if (walletHash !== syncHash) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
-
-              if (shouldSetDefaultAccount) {
-                dispatch(doSetDefaultAccount(() => {
-                  lbryRedux.Lbry.status().then(status => {
-                    if (status.wallet.is_locked) {
-                      lbryRedux.Lbry.account_unlock({
-                        password
-                      });
-                    }
-
-                    dispatch(lbryRedux.doFetchChannelListMine());
-                  });
-                }));
-              }
+              handleCallback();
             }
           });
         }
@@ -2457,14 +2454,17 @@ function doGetSync(password = '', shouldSetDefaultAccount) {
           type: GET_SYNC_COMPLETED,
           data
         });
+        handleCallback();
       }).catch(() => {
         if (data.hasSyncedWallet) {
+          const error = 'Error getting synced wallet';
           dispatch({
             type: GET_SYNC_FAILED,
             data: {
-              error: 'Error getting synced wallet'
+              error
             }
           });
+          handleCallback(error);
         } else {
           // user doesn't have a synced wallet
           dispatch({
@@ -2481,7 +2481,10 @@ function doGetSync(password = '', shouldSetDefaultAccount) {
           }).then(({
             hash: walletHash,
             data: syncApplyData
-          }) => dispatch(doSetSync('', walletHash, syncApplyData, password)));
+          }) => {
+            dispatch(doSetSync('', walletHash, syncApplyData, password));
+            handleCallback();
+          });
         }
       });
     });
