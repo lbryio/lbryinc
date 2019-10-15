@@ -3974,9 +3974,19 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doGetSync() {
-  var password = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var shouldSetDefaultAccount = arguments.length > 1 ? arguments[1] : undefined;
+function doGetSync(passedPassword, callback) {
+  var password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
+
+  function handleCallback() {
+    if (callback) {
+      if (typeof callback !== 'function') {
+        throw new Error('Second argument passed to "doGetSync" must be a function');
+      }
+
+      callback();
+    }
+  }
+
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
@@ -3991,7 +4001,7 @@ function doGetSync() {
         data.syncData = response.data;
         data.hasSyncedWallet = true;
 
-        if (response.changed || shouldSetDefaultAccount) {
+        if (response.changed) {
           return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
             password: password,
             data: response.data
@@ -4003,39 +4013,29 @@ function doGetSync() {
               data: data
             });
 
-            if (walletHash !== syncHash || shouldSetDefaultAccount) {
+            if (walletHash !== syncHash) {
               // different local hash, need to synchronise
               dispatch(doSetSync(syncHash, walletHash, walletData));
-
-              if (shouldSetDefaultAccount) {
-                dispatch(doSetDefaultAccount(function () {
-                  lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].status().then(function (status) {
-                    if (status.wallet.is_locked) {
-                      lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_unlock({
-                        password: password
-                      });
-                    }
-
-                    dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doFetchChannelListMine"])());
-                  });
-                }));
-              }
+              handleCallback();
             }
           });
+        } else {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+            data: data
+          });
+          handleCallback();
         }
-
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
-          data: data
-        });
       })["catch"](function () {
         if (data.hasSyncedWallet) {
+          var error = 'Error getting synced wallet';
           dispatch({
             type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
             data: {
-              error: 'Error getting synced wallet'
+              error: error
             }
           });
+          handleCallback(error);
         } else {
           // user doesn't have a synced wallet
           dispatch({
@@ -4052,7 +4052,8 @@ function doGetSync() {
           }).then(function (_ref2) {
             var walletHash = _ref2.hash,
                 syncApplyData = _ref2.data;
-            return dispatch(doSetSync('', walletHash, syncApplyData, password));
+            dispatch(doSetSync('', walletHash, syncApplyData, password));
+            handleCallback();
           });
         }
       });
