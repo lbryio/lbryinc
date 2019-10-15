@@ -2631,9 +2631,15 @@ function doFetchInviteStatus() {
 }
 function doInstallNew(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var payload = {
     app_version: appVersion
   };
+
+  if (firebaseToken) {
+    payload.firebase_token = firebaseToken;
+  }
+
   lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status().then(function (status) {
     payload.app_id = status.installation_id;
     payload.node_id = status.lbry_id;
@@ -2648,6 +2654,7 @@ function doInstallNew(appVersion) {
 
 function doAuthenticate(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
@@ -2662,7 +2669,7 @@ function doAuthenticate(appVersion) {
       });
       dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
       dispatch(doFetchInviteStatus());
-      doInstallNew(appVersion, os);
+      doInstallNew(appVersion, os, firebaseToken);
     })["catch"](function (error) {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_FAILURE"],

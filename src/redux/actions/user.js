@@ -37,8 +37,12 @@ export function doFetchInviteStatus() {
   };
 }
 
-export function doInstallNew(appVersion, os = null) {
+export function doInstallNew(appVersion, os = null, firebaseToken = null) {
   const payload = { app_version: appVersion };
+  if (firebaseToken) {
+    payload.firebase_token = firebaseToken;
+  }
+
   Lbry.status().then(status => {
     payload.app_id = status.installation_id;
     payload.node_id = status.lbry_id;
@@ -52,7 +56,7 @@ export function doInstallNew(appVersion, os = null) {
 }
 
 // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
-export function doAuthenticate(appVersion, os = null) {
+export function doAuthenticate(appVersion, os = null, firebaseToken = null) {
   return dispatch => {
     dispatch({
       type: ACTIONS.AUTHENTICATION_STARTED,
@@ -67,7 +71,7 @@ export function doAuthenticate(appVersion, os = null) {
         });
         dispatch(doRewardList());
         dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, os);
+        doInstallNew(appVersion, os, firebaseToken);
       })
       .catch(error => {
         dispatch({
