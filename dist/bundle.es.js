@@ -2404,7 +2404,9 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doGetSync(password = '', callback) {
+function doGetSync(passedPassword, callback) {
+  const password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
+
   function handleCallback() {
     if (callback) {
       if (typeof callback !== 'function') {

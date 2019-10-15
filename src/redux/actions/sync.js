@@ -77,7 +77,9 @@ export function doSetSync(oldHash, newHash, data) {
   };
 }
 
-export function doGetSync(password = '', callback) {
+export function doGetSync(passedPassword, callback) {
+  const password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
+
   function handleCallback() {
     if (callback) {
       if (typeof callback !== 'function') {

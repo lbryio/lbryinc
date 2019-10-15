@@ -3967,9 +3967,8 @@ function doSetSync(oldHash, newHash, data) {
     });
   };
 }
-function doGetSync() {
-  var password = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var callback = arguments.length > 1 ? arguments[1] : undefined;
+function doGetSync(passedPassword, callback) {
+  var password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
 
   function handleCallback() {
     if (callback) {
