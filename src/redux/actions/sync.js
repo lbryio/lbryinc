@@ -123,6 +123,7 @@ export function doGetSync(passedPassword, callback) {
         }
 
         const { hash: walletHash, data: walletData } = response;
+
         if (walletHash !== data.syncHash) {
           // different local hash, need to synchronise
           dispatch(doSetSync(data.syncHash, walletHash, walletData));
@@ -131,7 +132,8 @@ export function doGetSync(passedPassword, callback) {
         dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
         handleCallback();
       })
-      .catch(() => {
+      .catch(err => {
+        console.log('error', err);
         if (data.hasSyncedWallet) {
           const error = 'Error getting synced wallet';
           dispatch({
@@ -227,4 +229,27 @@ export function doResetSync() {
       dispatch({ type: ACTIONS.SYNC_RESET });
       resolve();
     });
+}
+
+export function changeSyncPassword(oldPassword, newPassword) {
+  return dispatch => {
+    let data = {};
+
+    return Lbry.sync_hash()
+      .then(hash => {
+        return Lbryio.call('sync', 'get', { hash }, 'post');
+      })
+      .then(syncGetResponse => {
+        data.oldHash = syncGetResponse.hash;
+
+        return Lbry.sync_apply({ password: oldPassword, data: syncGetResponse.data });
+      })
+      .then(() => Lbry.sync_apply({ password: newPassword }))
+      .then(syncApplyResponse => {
+        if (syncApplyResponse.hash !== data.oldHash) {
+          return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+        }
+      })
+      .catch(console.error);
+  };
 }

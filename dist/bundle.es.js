@@ -2472,7 +2472,9 @@ function doGetSync(passedPassword, callback) {
         data
       });
       handleCallback();
-    }).catch(() => {
+    }).catch(err => {
+      console.log('error', err);
+
       if (data.hasSyncedWallet) {
         const error = 'Error getting synced wallet';
         dispatch({
@@ -2577,6 +2579,28 @@ function doResetSync() {
     });
     resolve();
   });
+}
+function changeSyncPassword(oldPassword, newPassword) {
+  return dispatch => {
+    let data = {};
+    return lbryRedux.Lbry.sync_hash().then(hash => {
+      return Lbryio.call('sync', 'get', {
+        hash
+      }, 'post');
+    }).then(syncGetResponse => {
+      data.oldHash = syncGetResponse.hash;
+      return lbryRedux.Lbry.sync_apply({
+        password: oldPassword,
+        data: syncGetResponse.data
+      });
+    }).then(() => lbryRedux.Lbry.sync_apply({
+      password: newPassword
+    })).then(syncApplyResponse => {
+      if (syncApplyResponse.hash !== data.oldHash) {
+        return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+      }
+    }).catch(console.error);
+  };
 }
 
 const reducers = {};
@@ -3245,6 +3269,7 @@ exports.Lbryio = Lbryio;
 exports.YOUTUBE_STATUSES = youtube;
 exports.authReducer = authReducer;
 exports.blacklistReducer = blacklistReducer;
+exports.changeSyncPassword = changeSyncPassword;
 exports.costInfoReducer = costInfoReducer;
 exports.doAuthenticate = doAuthenticate;
 exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
