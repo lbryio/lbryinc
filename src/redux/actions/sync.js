@@ -96,56 +96,67 @@ export function doGetSync(passedPassword, callback) {
     });
 
     const data = {};
-    Lbry.sync_hash().then(hash => {
-      Lbryio.call('sync', 'get', { hash }, 'post')
-        .then(response => {
-          const syncHash = response.hash;
-          data.syncHash = syncHash;
-          data.syncData = response.data;
-          data.hasSyncedWallet = true;
-          if (response.changed) {
-            return Lbry.sync_apply({ password, data: response.data }).then(
-              ({ hash: walletHash, data: walletData }) => {
-                dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
 
-                if (walletHash !== syncHash) {
-                  // different local hash, need to synchronise
-                  dispatch(doSetSync(syncHash, walletHash, walletData));
-                  handleCallback();
-                }
-              }
-            );
-          }
+    Lbry.wallet_status()
+      .then(status => {
+        if (status.is_locked) {
+          return Lbry.wallet_unlock({ password });
+        }
+      })
+      .then(() => Lbry.sync_hash())
+      .then(hash => Lbryio.call('sync', 'get', { hash }, 'post'))
+      .then(response => {
+        const syncHash = response.hash;
+        data.syncHash = syncHash;
+        data.syncData = response.data;
+        data.hasSyncedWallet = true;
+
+        if (response.changed) {
+          return Lbry.sync_apply({ password, data: response.data });
+        }
+      })
+      .then(response => {
+        if (!response) {
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
           handleCallback();
-        })
-        .catch(() => {
-          if (data.hasSyncedWallet) {
-            const error = 'Error getting synced wallet';
-            dispatch({
-              type: ACTIONS.GET_SYNC_FAILED,
-              data: {
-                error,
-              },
-            });
+          return;
+        }
 
-            handleCallback(error);
-          } else {
-            // user doesn't have a synced wallet
-            dispatch({
-              type: ACTIONS.GET_SYNC_COMPLETED,
-              data: { hasSyncedWallet: false, syncHash: null },
-            });
+        const { hash: walletHash, data: walletData } = response;
+        if (walletHash !== data.syncHash) {
+          // different local hash, need to synchronise
+          dispatch(doSetSync(data.syncHash, walletHash, walletData));
+        }
 
-            // call sync_apply to get data to sync
-            // first time sync. use any string for old hash
-            Lbry.sync_apply({ password }).then(({ hash: walletHash, data: syncApplyData }) => {
-              dispatch(doSetSync('', walletHash, syncApplyData, password));
-              handleCallback();
-            });
-          }
-        });
-    });
+        dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
+        handleCallback();
+      })
+      .catch(() => {
+        if (data.hasSyncedWallet) {
+          const error = 'Error getting synced wallet';
+          dispatch({
+            type: ACTIONS.GET_SYNC_FAILED,
+            data: {
+              error,
+            },
+          });
+
+          handleCallback(error);
+        } else {
+          // user doesn't have a synced wallet
+          dispatch({
+            type: ACTIONS.GET_SYNC_COMPLETED,
+            data: { hasSyncedWallet: false, syncHash: null },
+          });
+
+          // call sync_apply to get data to sync
+          // first time sync. use any string for old hash
+          Lbry.sync_apply({ password }).then(({ hash: walletHash, data: syncApplyData }) => {
+            dispatch(doSetSync('', walletHash, syncApplyData, password));
+            handleCallback();
+          });
+        }
+      });
   };
 }
 
