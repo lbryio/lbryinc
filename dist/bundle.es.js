@@ -2580,7 +2580,7 @@ function doResetSync() {
     resolve();
   });
 }
-function changeSyncPassword(oldPassword, newPassword) {
+function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
   return dispatch => {
     let data = {};
     return lbryRedux.Lbry.sync_hash().then(hash => {
@@ -2593,6 +2593,12 @@ function changeSyncPassword(oldPassword, newPassword) {
         password: oldPassword,
         data: syncGetResponse.data
       });
+    }).then(() => {
+      if (encrypt) {
+        dispatch(lbryRedux.doWalletEncrypt(newPassword));
+      } else {
+        dispatch(lbryRedux.doWalletDecrypt());
+      }
     }).then(() => lbryRedux.Lbry.sync_apply({
       password: newPassword
     })).then(syncApplyResponse => {
@@ -3269,7 +3275,6 @@ exports.Lbryio = Lbryio;
 exports.YOUTUBE_STATUSES = youtube;
 exports.authReducer = authReducer;
 exports.blacklistReducer = blacklistReducer;
-exports.changeSyncPassword = changeSyncPassword;
 exports.costInfoReducer = costInfoReducer;
 exports.doAuthenticate = doAuthenticate;
 exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
@@ -3310,6 +3315,7 @@ exports.doSetSync = doSetSync;
 exports.doSetViewMode = doSetViewMode;
 exports.doShowSuggestedSubs = doShowSuggestedSubs;
 exports.doSyncApply = doSyncApply;
+exports.doSyncEncryptAndDecrypt = doSyncEncryptAndDecrypt;
 exports.doUpdateUnreadSubscriptions = doUpdateUnreadSubscriptions;
 exports.doUserCheckEmailVerified = doUserCheckEmailVerified;
 exports.doUserEmailNew = doUserEmailNew;

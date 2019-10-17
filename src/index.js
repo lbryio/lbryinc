@@ -73,7 +73,7 @@ export {
   doSetDefaultAccount,
   doSyncApply,
   doResetSync,
-  changeSyncPassword,
+  doSyncEncryptAndDecrypt,
 } from 'redux/actions/sync';
 
 // reducers
