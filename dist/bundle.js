@@ -1225,6 +1225,61 @@ rewards.YOUTUBE_CREATOR = 'youtube_creator';
 rewards.TYPE_DAILY_VIEW = 'daily_view';
 
 rewards.claimReward = function (type, rewardParams) {
+  var reason;
+
+  switch (type) {
+    case rewards.TYPE_NEW_DEVELOPER:
+      reason = __('for being a new developer!');
+      break;
+
+    case rewards.TYPE_NEW_USER:
+      reason = __('for being a new user!');
+      break;
+
+    case rewards.TYPE_CONFIRM_EMAIL:
+      reason = __('for confirming your email!');
+      break;
+
+    case rewards.TYPE_FIRST_CHANNEL:
+      reason = __('for your first channel!');
+      break;
+
+    case rewards.TYPE_FIRST_STREAM:
+      reason = __('for your first publish!');
+      break;
+
+    case rewards.TYPE_MANY_DOWNLOADS:
+      reason = __('for having many downloads!');
+      break;
+
+    case rewards.TYPE_FIRST_PUBLISH:
+      reason = __('for your first publish!');
+      break;
+
+    case rewards.TYPE_REFERRAL:
+      reason = __('for a referral!');
+      break;
+
+    case rewards.TYPE_REWARD_CODE:
+      reason = __('for entering a reward code!');
+      break;
+
+    case rewards.TYPE_SUBSCRIPTION:
+      reason = __('for adding a subscription!');
+      break;
+
+    case rewards.YOUTUBE_CREATOR:
+      reason = __('for being a youtube creator!');
+      break;
+
+    case rewards.TYPE_DAILY_VIEW:
+      reason = __('for viewing content today!');
+      break;
+
+    default:
+      reason = '.';
+  }
+
   function requestReward(resolve, reject, params) {
     if (!lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].enabled) {
       reject(new Error(__('Rewards are not enabled.')));
@@ -1232,7 +1287,8 @@ rewards.claimReward = function (type, rewardParams) {
     }
 
     lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('reward', 'new', params, 'post').then(function (reward) {
-      var message = reward.reward_notification || "You have claimed a ".concat(reward.reward_amount, " LBC reward."); // Display global notice
+      // different message per type
+      var message = reward.reward_notification || "You have claimed a ".concat(reward.reward_amount, " LBC reward ").concat(reason); // Display global notice
 
       var action = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
         message: message,
@@ -4019,13 +4075,13 @@ function doGetSync(passedPassword, callback) {
               handleCallback();
             }
           });
-        } else {
-          dispatch({
-            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
-            data: data
-          });
-          handleCallback();
         }
+
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: data
+        });
+        handleCallback();
       })["catch"](function () {
         if (data.hasSyncedWallet) {
           var error = 'Error getting synced wallet';

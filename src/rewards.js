@@ -17,6 +17,47 @@ rewards.YOUTUBE_CREATOR = 'youtube_creator';
 rewards.TYPE_DAILY_VIEW = 'daily_view';
 
 rewards.claimReward = (type, rewardParams) => {
+  let reason;
+  switch (type) {
+    case rewards.TYPE_NEW_DEVELOPER:
+      reason = __('for being a new developer!');
+      break;
+    case rewards.TYPE_NEW_USER:
+      reason = __('for being a new user!');
+      break;
+    case rewards.TYPE_CONFIRM_EMAIL:
+      reason = __('for confirming your email!');
+      break;
+    case rewards.TYPE_FIRST_CHANNEL:
+      reason = __('for your first channel!');
+      break;
+    case rewards.TYPE_FIRST_STREAM:
+      reason = __('for your first publish!');
+      break;
+    case rewards.TYPE_MANY_DOWNLOADS:
+      reason = __('for having many downloads!');
+      break;
+    case rewards.TYPE_FIRST_PUBLISH:
+      reason = __('for your first publish!');
+      break;
+    case rewards.TYPE_REFERRAL:
+      reason = __('for a referral!');
+      break;
+    case rewards.TYPE_REWARD_CODE:
+      reason = __('for entering a reward code!');
+      break;
+    case rewards.TYPE_SUBSCRIPTION:
+      reason = __('for adding a subscription!');
+      break;
+    case rewards.YOUTUBE_CREATOR:
+      reason = __('for being a youtube creator!');
+      break;
+    case rewards.TYPE_DAILY_VIEW:
+      reason = __('for viewing content today!');
+      break;
+    default:
+      reason = '.';
+  }
   function requestReward(resolve, reject, params) {
     if (!Lbryio.enabled) {
       reject(new Error(__('Rewards are not enabled.')));
@@ -24,8 +65,10 @@ rewards.claimReward = (type, rewardParams) => {
     }
 
     Lbryio.call('reward', 'new', params, 'post').then(reward => {
+      // different message per type
       const message =
-        reward.reward_notification || `You have claimed a ${reward.reward_amount} LBC reward.`;
+        reward.reward_notification ||
+        `You have claimed a ${reward.reward_amount} LBC reward ${reason}`;
 
       // Display global notice
       const action = doToast({
