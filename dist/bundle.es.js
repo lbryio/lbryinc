@@ -2501,6 +2501,8 @@ function doGetSync(passedPassword, callback) {
         }) => {
           dispatch(doSetSync('', walletHash, syncApplyData, password));
           handleCallback();
+        }).catch(error => {
+          handleCallback(error);
         });
       }
     });

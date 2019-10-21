@@ -151,10 +151,14 @@ export function doGetSync(passedPassword, callback) {
 
           // call sync_apply to get data to sync
           // first time sync. use any string for old hash
-          Lbry.sync_apply({ password }).then(({ hash: walletHash, data: syncApplyData }) => {
-            dispatch(doSetSync('', walletHash, syncApplyData, password));
-            handleCallback();
-          });
+          Lbry.sync_apply({ password })
+            .then(({ hash: walletHash, data: syncApplyData }) => {
+              dispatch(doSetSync('', walletHash, syncApplyData, password));
+              handleCallback();
+            })
+            .catch(error => {
+              handleCallback(error);
+            });
         }
       });
   };

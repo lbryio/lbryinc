@@ -4067,6 +4067,8 @@ function doGetSync(passedPassword, callback) {
               syncApplyData = _ref.data;
           dispatch(doSetSync('', walletHash, syncApplyData, password));
           handleCallback();
+        })["catch"](function (error) {
+          handleCallback(error);
         });
       }
     });
