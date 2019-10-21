@@ -234,6 +234,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_15__["doResetSync"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_15__["doSyncEncryptAndDecrypt"]; });
+
 /* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(29);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_16__["authReducer"]; });
 
@@ -3890,6 +3892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return doSyncApply; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return doCheckSync; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return doResetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return doSyncEncryptAndDecrypt; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4);
@@ -4143,6 +4146,36 @@ function doResetSync() {
       });
       resolve();
     });
+  };
+}
+function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
+  return function (dispatch) {
+    var data = {};
+    return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
+      return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post');
+    }).then(function (syncGetResponse) {
+      data.oldHash = syncGetResponse.hash;
+      return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+        password: oldPassword,
+        data: syncGetResponse.data
+      });
+    }).then(function () {
+      if (encrypt) {
+        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doWalletEncrypt"])(newPassword));
+      } else {
+        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doWalletDecrypt"])());
+      }
+    }).then(function () {
+      return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+        password: newPassword
+      });
+    }).then(function (syncApplyResponse) {
+      if (syncApplyResponse.hash !== data.oldHash) {
+        return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+      }
+    })["catch"](console.error);
   };
 }
 

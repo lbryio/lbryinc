@@ -2578,6 +2578,32 @@ function doResetSync() {
     resolve();
   });
 }
+function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
+  return dispatch => {
+    const data = {};
+    return lbryRedux.Lbry.sync_hash().then(hash => Lbryio.call('sync', 'get', {
+      hash
+    }, 'post')).then(syncGetResponse => {
+      data.oldHash = syncGetResponse.hash;
+      return lbryRedux.Lbry.sync_apply({
+        password: oldPassword,
+        data: syncGetResponse.data
+      });
+    }).then(() => {
+      if (encrypt) {
+        dispatch(lbryRedux.doWalletEncrypt(newPassword));
+      } else {
+        dispatch(lbryRedux.doWalletDecrypt());
+      }
+    }).then(() => lbryRedux.Lbry.sync_apply({
+      password: newPassword
+    })).then(syncApplyResponse => {
+      if (syncApplyResponse.hash !== data.oldHash) {
+        return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+      }
+    }).catch(console.error);
+  };
+}
 
 const reducers = {};
 const defaultState$1 = {
@@ -3285,6 +3311,7 @@ exports.doSetSync = doSetSync;
 exports.doSetViewMode = doSetViewMode;
 exports.doShowSuggestedSubs = doShowSuggestedSubs;
 exports.doSyncApply = doSyncApply;
+exports.doSyncEncryptAndDecrypt = doSyncEncryptAndDecrypt;
 exports.doUpdateUnreadSubscriptions = doUpdateUnreadSubscriptions;
 exports.doUserCheckEmailVerified = doUserCheckEmailVerified;
 exports.doUserEmailNew = doUserEmailNew;

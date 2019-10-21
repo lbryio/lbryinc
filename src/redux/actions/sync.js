@@ -1,6 +1,6 @@
 import * as ACTIONS from 'constants/action_types';
 import Lbryio from 'lbryio';
-import { Lbry } from 'lbry-redux';
+import { Lbry, doWalletEncrypt, doWalletDecrypt } from 'lbry-redux';
 
 export function doSetDefaultAccount(success, failure) {
   return dispatch => {
@@ -123,6 +123,7 @@ export function doGetSync(passedPassword, callback) {
         }
 
         const { hash: walletHash, data: walletData } = response;
+
         if (walletHash !== data.syncHash) {
           // different local hash, need to synchronise
           dispatch(doSetSync(data.syncHash, walletHash, walletData));
@@ -227,4 +228,31 @@ export function doResetSync() {
       dispatch({ type: ACTIONS.SYNC_RESET });
       resolve();
     });
+}
+
+export function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
+  return dispatch => {
+    const data = {};
+    return Lbry.sync_hash()
+      .then(hash => Lbryio.call('sync', 'get', { hash }, 'post'))
+      .then(syncGetResponse => {
+        data.oldHash = syncGetResponse.hash;
+
+        return Lbry.sync_apply({ password: oldPassword, data: syncGetResponse.data });
+      })
+      .then(() => {
+        if (encrypt) {
+          dispatch(doWalletEncrypt(newPassword));
+        } else {
+          dispatch(doWalletDecrypt());
+        }
+      })
+      .then(() => Lbry.sync_apply({ password: newPassword }))
+      .then(syncApplyResponse => {
+        if (syncApplyResponse.hash !== data.oldHash) {
+          return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+        }
+      })
+      .catch(console.error);
+  };
 }
