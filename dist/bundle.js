@@ -4042,9 +4042,7 @@ function doGetSync(passedPassword, callback) {
         data: data
       });
       handleCallback();
-    })["catch"](function (err) {
-      console.log('error', err);
-
+    })["catch"](function () {
       if (data.hasSyncedWallet) {
         var error = 'Error getting synced wallet';
         dispatch({

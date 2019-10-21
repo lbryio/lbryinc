@@ -132,8 +132,7 @@ export function doGetSync(passedPassword, callback) {
         dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
         handleCallback();
       })
-      .catch(err => {
-        console.log('error', err);
+      .catch(() => {
         if (data.hasSyncedWallet) {
           const error = 'Error getting synced wallet';
           dispatch({

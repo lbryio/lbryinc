@@ -2472,9 +2472,7 @@ function doGetSync(passedPassword, callback) {
         data
       });
       handleCallback();
-    }).catch(err => {
-      console.log('error', err);
-
+    }).catch(() => {
       if (data.hasSyncedWallet) {
         const error = 'Error getting synced wallet';
         dispatch({
@@ -2582,12 +2580,10 @@ function doResetSync() {
 }
 function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
   return dispatch => {
-    let data = {};
-    return lbryRedux.Lbry.sync_hash().then(hash => {
-      return Lbryio.call('sync', 'get', {
-        hash
-      }, 'post');
-    }).then(syncGetResponse => {
+    const data = {};
+    return lbryRedux.Lbry.sync_hash().then(hash => Lbryio.call('sync', 'get', {
+      hash
+    }, 'post')).then(syncGetResponse => {
       data.oldHash = syncGetResponse.hash;
       return lbryRedux.Lbry.sync_apply({
         password: oldPassword,
