@@ -75,6 +75,7 @@ export {
   doResetSync,
   doSyncEncryptAndDecrypt,
 } from 'redux/actions/sync';
+export { doUpdateUploadProgress } from 'redux/actions/lbrytv';
 
 // reducers
 export { authReducer } from 'redux/reducers/auth';
@@ -87,6 +88,7 @@ export { filteredReducer } from 'redux/reducers/filtered';
 export { homepageReducer } from 'redux/reducers/homepage';
 export { statsReducer } from 'redux/reducers/stats';
 export { syncReducer } from 'redux/reducers/sync';
+export { lbrytvReducer } from 'redux/reducers/lbrytv';
 
 // selectors
 export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
@@ -188,3 +190,4 @@ export {
   selectHashChanged,
   selectSyncApplyErrorMessage,
 } from 'redux/selectors/sync';
+export { selectCurrentUploads, selectUploadCount } from 'redux/selectors/lbrytv';
