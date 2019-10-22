@@ -127,7 +127,9 @@ const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
-const SYNC_RESET = 'SYNC_RESET';
+const SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
+
+const UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
 
 var action_types = /*#__PURE__*/Object.freeze({
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
@@ -241,7 +243,8 @@ var action_types = /*#__PURE__*/Object.freeze({
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
   SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
-  SYNC_RESET: SYNC_RESET
+  SYNC_RESET: SYNC_RESET,
+  UPDATE_UPLOAD_PROGRESS: UPDATE_UPLOAD_PROGRESS
 });
 
 const NOT_TRANSFERRED = 'not_transferred';
@@ -2605,6 +2608,16 @@ function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
   };
 }
 
+//      
+const doUpdateUploadProgress = (progress, params, xhr) => dispatch => dispatch({
+  type: UPDATE_UPLOAD_PROGRESS,
+  data: {
+    progress,
+    params,
+    xhr
+  }
+});
+
 const reducers = {};
 const defaultState$1 = {
   authenticating: false
@@ -3222,6 +3235,61 @@ function syncReducer(state = defaultState$9, action) {
   return state;
 }
 
+//      
+/*
+test mock:
+  currentUploads: {
+    'test#upload': {
+      progress: 50,
+      params: {
+        name: 'steve',
+        thumbnail_url: 'https://dev2.spee.ch/4/KMNtoSZ009fawGz59VG8PrID.jpeg',
+      },
+    },
+  },
+ */
+
+const reducers$4 = {};
+const defaultState$a = {
+  currentUploads: {}
+};
+
+reducers$4[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
+  const {
+    progress,
+    params,
+    xhr
+  } = action.data;
+  const key = params.channel ? `${params.name}#${params.channel}` : `${params.name}#anonymous`;
+  let currentUploads;
+
+  if (!progress) {
+    currentUploads = Object.assign({}, state.currentUploads);
+    Object.keys(currentUploads).forEach(k => {
+      if (k === key) {
+        delete currentUploads[key];
+      }
+    });
+  } else {
+    currentUploads = Object.assign({}, state.currentUploads);
+    currentUploads[key] = {
+      progress,
+      params,
+      xhr
+    };
+  }
+
+  return { ...state,
+    currentUploads
+  };
+};
+
+function lbrytvReducer(state = defaultState$a, action) {
+  const handler = reducers$4[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
 const selectState$3 = state => state.auth || {};
 
 const selectAuthToken = reselect.createSelector(selectState$3, state => state.authToken);
@@ -3265,6 +3333,11 @@ const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => s
 const selectHashChanged = reselect.createSelector(selectState$9, state => state.hashChanged);
 const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state => state.syncApplyIsPending);
 const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
+
+const selectState$a = state => state.lbrytv || {};
+
+const selectCurrentUploads = reselect.createSelector(selectState$a, state => state.currentUploads);
+const selectUploadCount = reselect.createSelector(selectCurrentUploads, currentUploads => currentUploads && Object.keys(currentUploads).length);
 
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
@@ -3313,6 +3386,7 @@ exports.doShowSuggestedSubs = doShowSuggestedSubs;
 exports.doSyncApply = doSyncApply;
 exports.doSyncEncryptAndDecrypt = doSyncEncryptAndDecrypt;
 exports.doUpdateUnreadSubscriptions = doUpdateUnreadSubscriptions;
+exports.doUpdateUploadProgress = doUpdateUploadProgress;
 exports.doUserCheckEmailVerified = doUserCheckEmailVerified;
 exports.doUserEmailNew = doUserEmailNew;
 exports.doUserEmailToVerify = doUserEmailToVerify;
@@ -3328,6 +3402,7 @@ exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
 exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
+exports.lbrytvReducer = lbrytvReducer;
 exports.makeSelectClaimRewardError = makeSelectClaimRewardError;
 exports.makeSelectCostInfoForUri = makeSelectCostInfoForUri;
 exports.makeSelectFetchingCostInfoForUri = makeSelectFetchingCostInfoForUri;
@@ -3351,6 +3426,7 @@ exports.selectClaimedRewards = selectClaimedRewards;
 exports.selectClaimedRewardsById = selectClaimedRewardsById;
 exports.selectClaimedRewardsByTransactionId = selectClaimedRewardsByTransactionId;
 exports.selectClaimsPendingByType = selectClaimsPendingByType;
+exports.selectCurrentUploads = selectCurrentUploads;
 exports.selectEmailNewErrorMessage = selectEmailNewErrorMessage;
 exports.selectEmailNewIsPending = selectEmailNewIsPending;
 exports.selectEmailToVerify = selectEmailToVerify;
@@ -3399,6 +3475,7 @@ exports.selectUnclaimedRewardsByType = selectUnclaimedRewardsByType;
 exports.selectUnreadAmount = selectUnreadAmount;
 exports.selectUnreadByChannel = selectUnreadByChannel;
 exports.selectUnreadSubscriptions = selectUnreadSubscriptions;
+exports.selectUploadCount = selectUploadCount;
 exports.selectUser = selectUser;
 exports.selectUserCountryCode = selectUserCountryCode;
 exports.selectUserEmail = selectUserEmail;
