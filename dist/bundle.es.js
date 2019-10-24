@@ -389,41 +389,40 @@ Lbryio.authenticate = () => {
       }).then(user => {
         if (user) {
           return user;
-        }
-
-        return lbryRedux.Lbry.status().then(status => {
-          if (Lbryio.overrides.setAuthToken) {
-            return Lbryio.overrides.setAuthToken(status);
-          } // simply call the logic to create a new user, and obtain the auth token
+        } // return Lbry.status().then(status => {
 
 
-          return new Promise((res, rej) => {
-            Lbryio.call('user', 'new', {
-              auth_token: '',
-              language: 'en',
-              app_id: status.installation_id
-            }, 'post').then(response => {
-              if (!response.auth_token) {
-                throw new Error('auth_token was not set in the response');
-              }
+        if (Lbryio.overrides.setAuthToken) {
+          return Lbryio.overrides.setAuthToken();
+        } // simply call the logic to create a new user, and obtain the auth token
 
-              const {
-                store
-              } = window;
 
-              if (store) {
-                store.dispatch({
-                  type: GENERATE_AUTH_TOKEN_SUCCESS,
-                  data: {
-                    authToken: response.auth_token
-                  }
-                });
-              }
+        return new Promise((res, rej) => {
+          Lbryio.call('user', 'new', {
+            auth_token: '',
+            language: 'en',
+            app_id: status.installation_id
+          }, 'post').then(response => {
+            if (!response.auth_token) {
+              throw new Error('auth_token was not set in the response');
+            }
 
-              Lbryio.authToken = response.auth_token;
-              res(response);
-            }).catch(error => rej(error));
-          });
+            const {
+              store
+            } = window;
+
+            if (store) {
+              store.dispatch({
+                type: GENERATE_AUTH_TOKEN_SUCCESS,
+                data: {
+                  authToken: response.auth_token
+                }
+              });
+            }
+
+            Lbryio.authToken = response.auth_token;
+            res(response);
+          }).catch(error => rej(error));
         });
       }).then(user => {
         if (!user) {
