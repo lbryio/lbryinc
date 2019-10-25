@@ -24,7 +24,9 @@ const USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 const USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 const USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 const USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-const USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
+const USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
+const USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
+const USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
 const USER_PHONE_RESET = 'USER_PHONE_RESET';
 const USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 const USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -147,7 +149,9 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_EMAIL_VERIFY_STARTED: USER_EMAIL_VERIFY_STARTED,
   USER_EMAIL_VERIFY_SUCCESS: USER_EMAIL_VERIFY_SUCCESS,
   USER_EMAIL_VERIFY_FAILURE: USER_EMAIL_VERIFY_FAILURE,
-  USER_EMAIL_VERIFY_RETRY: USER_EMAIL_VERIFY_RETRY,
+  USER_EMAIL_VERIFY_RETRY_STARTED: USER_EMAIL_VERIFY_RETRY_STARTED,
+  USER_EMAIL_VERIFY_RETRY_FAILURE: USER_EMAIL_VERIFY_RETRY_FAILURE,
+  USER_EMAIL_VERIFY_RETRY_SUCCESS: USER_EMAIL_VERIFY_RETRY_SUCCESS,
   USER_PHONE_RESET: USER_PHONE_RESET,
   USER_PHONE_NEW_STARTED: USER_PHONE_NEW_STARTED,
   USER_PHONE_NEW_SUCCESS: USER_PHONE_NEW_SUCCESS,
@@ -1101,6 +1105,8 @@ const selectState$2 = state => state.user || {};
 const selectAuthenticationIsPending = reselect.createSelector(selectState$2, state => state.authenticationIsPending);
 const selectUserIsPending = reselect.createSelector(selectState$2, state => state.userIsPending);
 const selectUser = reselect.createSelector(selectState$2, state => state.user);
+const selectEmailAlreadyExists = reselect.createSelector(selectState$2, state => state.emailAlreadyExists);
+const selectResendingVerificationEmail = reselect.createSelector(selectState$2, state => state.resendingVerificationEmail);
 const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email : null);
 const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.phone_number : null);
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
@@ -1363,6 +1369,9 @@ function doUserEmailNew(email) {
       send_verification_email: true
     }, 'post').catch(error => {
       if (error.response && error.response.status === 409) {
+        dispatch({
+          type: USER_EMAIL_NEW_EXISTS
+        });
         return Lbryio.call('user_email', 'resend_token', {
           email,
           only_if_expired: true
@@ -1376,23 +1385,18 @@ function doUserEmailNew(email) {
 function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
-      type: USER_EMAIL_VERIFY_RETRY,
-      email
+      type: USER_EMAIL_VERIFY_RETRY_STARTED
     });
 
     const success = () => {
       dispatch({
-        type: USER_EMAIL_NEW_SUCCESS,
-        data: {
-          email
-        }
+        type: USER_EMAIL_VERIFY_RETRY_SUCCESS
       });
-      dispatch(doUserFetch());
     };
 
     const failure = error => {
       dispatch({
-        type: USER_EMAIL_NEW_FAILURE,
+        type: USER_EMAIL_VERIFY_RETRY_FAILURE,
         data: {
           error
         }
@@ -2769,6 +2773,8 @@ const defaultState$3 = {
   emailNewIsPending: false,
   emailNewErrorMessage: '',
   emailToVerify: '',
+  emailAlreadyExists: false,
+  resendingVerificationEmail: false,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -2854,7 +2860,8 @@ reducers$2[USER_PHONE_VERIFY_FAILURE] = (state, action) => Object.assign({}, sta
 
 reducers$2[USER_EMAIL_NEW_STARTED] = state => Object.assign({}, state, {
   emailNewIsPending: true,
-  emailNewErrorMessage: ''
+  emailNewErrorMessage: '',
+  emailAlreadyExists: false
 });
 
 reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
@@ -2867,9 +2874,8 @@ reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
   });
 };
 
-reducers$2[USER_EMAIL_NEW_EXISTS] = (state, action) => Object.assign({}, state, {
-  emailToVerify: action.data.email,
-  emailNewIsPending: false
+reducers$2[USER_EMAIL_NEW_EXISTS] = state => Object.assign({}, state, {
+  emailAlreadyExists: true
 });
 
 reducers$2[USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
@@ -2977,6 +2983,18 @@ reducers$2[USER_YOUTUBE_IMPORT_SUCCESS] = (state, action) => {
 reducers$2[USER_YOUTUBE_IMPORT_FAILURE] = (state, action) => Object.assign({}, state, {
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: action.data
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_STARTED] = state => Object.assign({}, state, {
+  resendingVerificationEmail: true
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_SUCCESS] = state => Object.assign({}, state, {
+  resendingVerificationEmail: false
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_FAILURE] = state => Object.assign({}, state, {
+  resendingVerificationEmail: false
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -3430,6 +3448,7 @@ exports.selectClaimedRewardsById = selectClaimedRewardsById;
 exports.selectClaimedRewardsByTransactionId = selectClaimedRewardsByTransactionId;
 exports.selectClaimsPendingByType = selectClaimsPendingByType;
 exports.selectCurrentUploads = selectCurrentUploads;
+exports.selectEmailAlreadyExists = selectEmailAlreadyExists;
 exports.selectEmailNewErrorMessage = selectEmailNewErrorMessage;
 exports.selectEmailNewIsPending = selectEmailNewIsPending;
 exports.selectEmailToVerify = selectEmailToVerify;
@@ -3458,6 +3477,7 @@ exports.selectPhoneToVerify = selectPhoneToVerify;
 exports.selectPhoneVerifyErrorMessage = selectPhoneVerifyErrorMessage;
 exports.selectPhoneVerifyIsPending = selectPhoneVerifyIsPending;
 exports.selectReferralReward = selectReferralReward;
+exports.selectResendingVerificationEmail = selectResendingVerificationEmail;
 exports.selectRewardContentClaimIds = selectRewardContentClaimIds;
 exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
 exports.selectSetSyncIsPending = selectSetSyncIsPending;

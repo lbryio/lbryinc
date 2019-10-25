@@ -371,6 +371,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectEmailVerifyErrorMessage"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectEmailAlreadyExists"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectResendingVerificationEmail"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectPhoneVerifyErrorMessage"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectPhoneVerifyIsPending"]; });
@@ -531,7 +535,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_STARTED", function() { return USER_EMAIL_VERIFY_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_SUCCESS", function() { return USER_EMAIL_VERIFY_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_FAILURE", function() { return USER_EMAIL_VERIFY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY", function() { return USER_EMAIL_VERIFY_RETRY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_STARTED", function() { return USER_EMAIL_VERIFY_RETRY_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_FAILURE", function() { return USER_EMAIL_VERIFY_RETRY_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_SUCCESS", function() { return USER_EMAIL_VERIFY_RETRY_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_RESET", function() { return USER_PHONE_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_STARTED", function() { return USER_PHONE_NEW_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_SUCCESS", function() { return USER_PHONE_NEW_SUCCESS; });
@@ -645,7 +651,9 @@ var USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 var USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 var USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 var USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-var USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
+var USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
+var USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
+var USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
 var USER_PHONE_RESET = 'USER_PHONE_RESET';
 var USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 var USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -2432,6 +2440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAuthenticationIsPending", function() { return selectAuthenticationIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsPending", function() { return selectUserIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUser", function() { return selectUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return selectEmailAlreadyExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return selectResendingVerificationEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserEmail", function() { return selectUserEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserPhone", function() { return selectUserPhone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return selectUserCountryCode; });
@@ -2476,6 +2486,12 @@ var selectUserIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSe
 });
 var selectUser = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.user;
+});
+var selectEmailAlreadyExists = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.emailAlreadyExists;
+});
+var selectResendingVerificationEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.resendingVerificationEmail;
 });
 var selectUserEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
   return user ? user.primary_email : null;
@@ -2853,6 +2869,9 @@ function doUserEmailNew(email) {
       send_verification_email: true
     }, 'post')["catch"](function (error) {
       if (error.response && error.response.status === 409) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
+        });
         return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
           email: email,
           only_if_expired: true
@@ -2866,23 +2885,18 @@ function doUserEmailNew(email) {
 function doUserResendVerificationEmail(email) {
   return function (dispatch) {
     dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY"],
-      email: email
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_STARTED"]
     });
 
     var success = function success() {
       dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]
       });
-      dispatch(doUserFetch());
     };
 
     var failure = function failure(error) {
       dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_FAILURE"],
         data: {
           error: error
         }
@@ -4410,6 +4424,8 @@ var defaultState = {
   emailNewIsPending: false,
   emailNewErrorMessage: '',
   emailToVerify: '',
+  emailAlreadyExists: false,
+  resendingVerificationEmail: false,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -4520,7 +4536,8 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_VERIFY_
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_STARTED"]] = function (state) {
   return Object.assign({}, state, {
     emailNewIsPending: true,
-    emailNewErrorMessage: ''
+    emailNewErrorMessage: '',
+    emailAlreadyExists: false
   });
 };
 
@@ -4534,10 +4551,9 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_SUC
   });
 };
 
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_EXISTS"]] = function (state, action) {
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_EXISTS"]] = function (state) {
   return Object.assign({}, state, {
-    emailToVerify: action.data.email,
-    emailNewIsPending: false
+    emailAlreadyExists: true
   });
 };
 
@@ -4677,6 +4693,24 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_YOUTUBE_IMPOR
   return Object.assign({}, state, {
     youtubeChannelImportPending: false,
     youtubeChannelImportErrorMessage: action.data
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: true
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: false
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_FAILURE"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: false
   });
 };
 

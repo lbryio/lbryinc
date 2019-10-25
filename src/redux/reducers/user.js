@@ -8,6 +8,8 @@ const defaultState = {
   emailNewIsPending: false,
   emailNewErrorMessage: '',
   emailToVerify: '',
+  emailAlreadyExists: false,
+  resendingVerificationEmail: false,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -107,6 +109,7 @@ reducers[ACTIONS.USER_EMAIL_NEW_STARTED] = state =>
   Object.assign({}, state, {
     emailNewIsPending: true,
     emailNewErrorMessage: '',
+    emailAlreadyExists: false,
   });
 
 reducers[ACTIONS.USER_EMAIL_NEW_SUCCESS] = (state, action) => {
@@ -119,10 +122,9 @@ reducers[ACTIONS.USER_EMAIL_NEW_SUCCESS] = (state, action) => {
   });
 };
 
-reducers[ACTIONS.USER_EMAIL_NEW_EXISTS] = (state, action) =>
+reducers[ACTIONS.USER_EMAIL_NEW_EXISTS] = state =>
   Object.assign({}, state, {
-    emailToVerify: action.data.email,
-    emailNewIsPending: false,
+    emailAlreadyExists: true,
   });
 
 reducers[ACTIONS.USER_EMAIL_NEW_FAILURE] = (state, action) =>
@@ -246,6 +248,21 @@ reducers[ACTIONS.USER_YOUTUBE_IMPORT_FAILURE] = (state, action) =>
   Object.assign({}, state, {
     youtubeChannelImportPending: false,
     youtubeChannelImportErrorMessage: action.data,
+  });
+
+reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_STARTED] = state =>
+  Object.assign({}, state, {
+    resendingVerificationEmail: true,
+  });
+
+reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_SUCCESS] = state =>
+  Object.assign({}, state, {
+    resendingVerificationEmail: false,
+  });
+
+reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_FAILURE] = state =>
+  Object.assign({}, state, {
+    resendingVerificationEmail: false,
   });
 
 export function userReducer(state = defaultState, action) {

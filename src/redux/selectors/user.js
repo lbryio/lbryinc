@@ -11,6 +11,16 @@ export const selectUserIsPending = createSelector(selectState, state => state.us
 
 export const selectUser = createSelector(selectState, state => state.user);
 
+export const selectEmailAlreadyExists = createSelector(
+  selectState,
+  state => state.emailAlreadyExists
+);
+
+export const selectResendingVerificationEmail = createSelector(
+  selectState,
+  state => state.resendingVerificationEmail
+);
+
 export const selectUserEmail = createSelector(
   selectUser,
   user => (user ? user.primary_email : null)

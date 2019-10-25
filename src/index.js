@@ -144,6 +144,8 @@ export {
   selectPhoneNewIsPending,
   selectEmailVerifyIsPending,
   selectEmailVerifyErrorMessage,
+  selectEmailAlreadyExists,
+  selectResendingVerificationEmail,
   selectPhoneVerifyErrorMessage,
   selectPhoneVerifyIsPending,
   selectIdentityVerifyIsPending,
