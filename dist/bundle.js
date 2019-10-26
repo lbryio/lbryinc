@@ -2994,7 +2994,7 @@ function doUserInviteNew(email) {
         }
       });
       dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
-        message: __('Invite sent to %s', email)
+        message: __("Invite sent to ".concat(email))
       }));
       dispatch(doFetchInviteStatus());
     })["catch"](function (error) {

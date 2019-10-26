@@ -1500,7 +1500,7 @@ function doUserInviteNew(email) {
         }
       });
       dispatch(lbryRedux.doToast({
-        message: __('Invite sent to %s', email)
+        message: __(`Invite sent to ${email}`)
       }));
       dispatch(doFetchInviteStatus());
     }).catch(error => {

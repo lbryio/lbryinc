@@ -371,7 +371,7 @@ export function doUserInviteNew(email) {
 
         dispatch(
           doToast({
-            message: __('Invite sent to %s', email),
+            message: __(`Invite sent to ${email}`),
           })
         );
 
