@@ -4077,7 +4077,9 @@ function doGetSync(passedPassword, callback) {
         data: data
       });
       handleCallback();
-    })["catch"](function () {
+    })["catch"](function (err) {
+      console.error(err);
+
       if (data.hasSyncedWallet) {
         var error = 'Error getting synced wallet';
         dispatch({
