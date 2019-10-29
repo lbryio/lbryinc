@@ -129,6 +129,7 @@ const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+const SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
 const SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
 const UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
@@ -247,6 +248,7 @@ var action_types = /*#__PURE__*/Object.freeze({
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
   SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
+  SYNC_APPLY_BAD_PASSWORD: SYNC_APPLY_BAD_PASSWORD,
   SYNC_RESET: SYNC_RESET,
   UPDATE_UPLOAD_PROGRESS: UPDATE_UPLOAD_PROGRESS
 });
@@ -2490,7 +2492,16 @@ function doGetSync(passedPassword, callback) {
           data: {
             error
           }
-        });
+        }); // Temp solution until we have a bad password error code
+        // Don't fail on blank passwords so we don't show a "password error" message
+        // before users have ever entered a password
+
+        if (password !== '') {
+          dispatch({
+            type: SYNC_APPLY_BAD_PASSWORD
+          });
+        }
+
         handleCallback(error);
       } else {
         // user doesn't have a synced wallet
@@ -3192,6 +3203,7 @@ const defaultState$9 = {
   getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
+  syncApplyPasswordError: false,
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false
@@ -3234,6 +3246,7 @@ reducers$3[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
 });
 
 reducers$3[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
+  syncApplyPasswordError: false,
   syncApplyIsPending: true,
   syncApplyErrorMessage: ''
 });
@@ -3246,6 +3259,10 @@ reducers$3[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
 reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyIsPending: false,
   syncApplyErrorMessage: action.data.error
+});
+
+reducers$3[SYNC_APPLY_BAD_PASSWORD] = state => Object.assign({}, state, {
+  syncApplyPasswordError: true
 });
 
 reducers$3[SYNC_RESET] = () => defaultState$9;
@@ -3354,6 +3371,7 @@ const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => s
 const selectHashChanged = reselect.createSelector(selectState$9, state => state.hashChanged);
 const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state => state.syncApplyIsPending);
 const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
+const selectSyncApplyPasswordError = reselect.createSelector(selectState$9, state => state.syncApplyPasswordError);
 
 const selectState$a = state => state.lbrytv || {};
 
@@ -3489,6 +3507,7 @@ exports.selectSuggested = selectSuggested;
 exports.selectSuggestedChannels = selectSuggestedChannels;
 exports.selectSyncApplyErrorMessage = selectSyncApplyErrorMessage;
 exports.selectSyncApplyIsPending = selectSyncApplyIsPending;
+exports.selectSyncApplyPasswordError = selectSyncApplyPasswordError;
 exports.selectSyncData = selectSyncData;
 exports.selectSyncHash = selectSyncHash;
 exports.selectTrendingUris = selectTrendingUris;
