@@ -33,3 +33,8 @@ export const selectSyncApplyErrorMessage = createSelector(
   selectState,
   state => state.syncApplyErrorMessage
 );
+
+export const selectSyncApplyPasswordError = createSelector(
+  selectState,
+  state => state.syncApplyPasswordError
+);

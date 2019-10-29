@@ -191,5 +191,6 @@ export {
   selectSyncApplyIsPending,
   selectHashChanged,
   selectSyncApplyErrorMessage,
+  selectSyncApplyPasswordError,
 } from 'redux/selectors/sync';
 export { selectCurrentUploads, selectUploadCount } from 'redux/selectors/lbrytv';

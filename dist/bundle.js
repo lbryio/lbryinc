@@ -461,6 +461,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_36__["selectSyncApplyErrorMessage"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_36__["selectSyncApplyPasswordError"]; });
+
 /* harmony import */ var redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_37__["selectCurrentUploads"]; });
 
@@ -633,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_STARTED", function() { return SYNC_APPLY_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_COMPLETED", function() { return SYNC_APPLY_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_FAILED", function() { return SYNC_APPLY_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_BAD_PASSWORD", function() { return SYNC_APPLY_BAD_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_RESET", function() { return SYNC_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPLOAD_PROGRESS", function() { return UPDATE_UPLOAD_PROGRESS; });
 // User
@@ -756,6 +759,7 @@ var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 var SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 var SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+var SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
 var SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
 var UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
@@ -4081,7 +4085,16 @@ function doGetSync(passedPassword, callback) {
           data: {
             error: error
           }
-        });
+        }); // Temp solution until we have a bad password error code
+        // Don't fail on blank passwords so we don't show a "password error" message
+        // before users have ever entered a password
+
+        if (password !== '') {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]
+          });
+        }
+
         handleCallback(error);
       } else {
         // user doesn't have a synced wallet
@@ -4982,6 +4995,7 @@ var defaultState = {
   getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
+  syncApplyPasswordError: false,
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false
@@ -5037,6 +5051,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]] = function (state) {
   return Object.assign({}, state, {
+    syncApplyPasswordError: false,
     syncApplyIsPending: true,
     syncApplyErrorMessage: ''
   });
@@ -5053,6 +5068,12 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"
   return Object.assign({}, state, {
     syncApplyIsPending: false,
     syncApplyErrorMessage: action.data.error
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyPasswordError: true
   });
 };
 
@@ -5314,6 +5335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return selectHashChanged; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return selectSyncApplyPasswordError; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -5351,6 +5373,9 @@ var selectSyncApplyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["cre
 });
 var selectSyncApplyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.syncApplyErrorMessage;
+});
+var selectSyncApplyPasswordError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyPasswordError;
 });
 
 /***/ }),

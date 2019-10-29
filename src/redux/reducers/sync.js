@@ -9,6 +9,7 @@ const defaultState = {
   getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
+  syncApplyPasswordError: false,
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false,
@@ -57,6 +58,7 @@ reducers[ACTIONS.SET_SYNC_COMPLETED] = (state, action) =>
 
 reducers[ACTIONS.SYNC_APPLY_STARTED] = state =>
   Object.assign({}, state, {
+    syncApplyPasswordError: false,
     syncApplyIsPending: true,
     syncApplyErrorMessage: '',
   });
@@ -71,6 +73,11 @@ reducers[ACTIONS.SYNC_APPLY_FAILED] = (state, action) =>
   Object.assign({}, state, {
     syncApplyIsPending: false,
     syncApplyErrorMessage: action.data.error,
+  });
+
+reducers[ACTIONS.SYNC_APPLY_BAD_PASSWORD] = state =>
+  Object.assign({}, state, {
+    syncApplyPasswordError: true,
   });
 
 reducers[ACTIONS.SYNC_RESET] = () => defaultState;

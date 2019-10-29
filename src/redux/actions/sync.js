@@ -142,6 +142,13 @@ export function doGetSync(passedPassword, callback) {
             },
           });
 
+          // Temp solution until we have a bad password error code
+          // Don't fail on blank passwords so we don't show a "password error" message
+          // before users have ever entered a password
+          if (password !== '') {
+            dispatch({ type: ACTIONS.SYNC_APPLY_BAD_PASSWORD });
+          }
+
           handleCallback(error);
         } else {
           // user doesn't have a synced wallet
