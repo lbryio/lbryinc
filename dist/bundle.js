@@ -3013,8 +3013,11 @@ function doClaimYoutubeChannels() {
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_STARTED"]
     });
     var transferResponse;
-    return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list().then(function (addressList) {
-      return addressList.sort(function (a, b) {
+    return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list({
+      page: 1,
+      page_size: 99999
+    }).then(function (addressList) {
+      return addressList.items.sort(function (a, b) {
         return a.used_times - b.used_times;
       })[0];
     }).then(function (address) {

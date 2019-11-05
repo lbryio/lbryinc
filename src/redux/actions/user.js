@@ -393,8 +393,8 @@ export function doClaimYoutubeChannels() {
     });
 
     let transferResponse;
-    return Lbry.address_list()
-      .then(addressList => addressList.sort((a, b) => a.used_times - b.used_times)[0])
+    return Lbry.address_list({ page: 1, page_size: 99999 })
+      .then(addressList => addressList.items.sort((a, b) => a.used_times - b.used_times)[0])
       .then(address =>
         Lbryio.call('yt', 'transfer', {
           address: address.address,
