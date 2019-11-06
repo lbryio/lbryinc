@@ -371,6 +371,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectEmailVerifyErrorMessage"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectEmailAlreadyExists"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectResendingVerificationEmail"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectPhoneVerifyErrorMessage"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_30__["selectPhoneVerifyIsPending"]; });
@@ -457,6 +461,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_36__["selectSyncApplyErrorMessage"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_36__["selectSyncApplyPasswordError"]; });
+
 /* harmony import */ var redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_37__["selectCurrentUploads"]; });
 
@@ -531,7 +537,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_STARTED", function() { return USER_EMAIL_VERIFY_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_SUCCESS", function() { return USER_EMAIL_VERIFY_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_FAILURE", function() { return USER_EMAIL_VERIFY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY", function() { return USER_EMAIL_VERIFY_RETRY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_STARTED", function() { return USER_EMAIL_VERIFY_RETRY_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_FAILURE", function() { return USER_EMAIL_VERIFY_RETRY_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_SUCCESS", function() { return USER_EMAIL_VERIFY_RETRY_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_RESET", function() { return USER_PHONE_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_STARTED", function() { return USER_PHONE_NEW_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_SUCCESS", function() { return USER_PHONE_NEW_SUCCESS; });
@@ -627,6 +635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_STARTED", function() { return SYNC_APPLY_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_COMPLETED", function() { return SYNC_APPLY_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_FAILED", function() { return SYNC_APPLY_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_BAD_PASSWORD", function() { return SYNC_APPLY_BAD_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_RESET", function() { return SYNC_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPLOAD_PROGRESS", function() { return UPDATE_UPLOAD_PROGRESS; });
 // User
@@ -645,7 +654,9 @@ var USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 var USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 var USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 var USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-var USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
+var USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
+var USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
+var USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
 var USER_PHONE_RESET = 'USER_PHONE_RESET';
 var USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 var USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -748,6 +759,7 @@ var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 var SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 var SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+var SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
 var SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
 var UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
@@ -2432,6 +2444,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAuthenticationIsPending", function() { return selectAuthenticationIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsPending", function() { return selectUserIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUser", function() { return selectUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return selectEmailAlreadyExists; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return selectResendingVerificationEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserEmail", function() { return selectUserEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserPhone", function() { return selectUserPhone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return selectUserCountryCode; });
@@ -2476,6 +2490,12 @@ var selectUserIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSe
 });
 var selectUser = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.user;
+});
+var selectEmailAlreadyExists = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.emailAlreadyExists;
+});
+var selectResendingVerificationEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.resendingVerificationEmail;
 });
 var selectUserEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
   return user ? user.primary_email : null;
@@ -2853,6 +2873,9 @@ function doUserEmailNew(email) {
       send_verification_email: true
     }, 'post')["catch"](function (error) {
       if (error.response && error.response.status === 409) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
+        });
         return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
           email: email,
           only_if_expired: true
@@ -2866,23 +2889,18 @@ function doUserEmailNew(email) {
 function doUserResendVerificationEmail(email) {
   return function (dispatch) {
     dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY"],
-      email: email
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_STARTED"]
     });
 
     var success = function success() {
       dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]
       });
-      dispatch(doUserFetch());
     };
 
     var failure = function failure(error) {
       dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_FAILURE"],
         data: {
           error: error
         }
@@ -4070,7 +4088,16 @@ function doGetSync(passedPassword, callback) {
           data: {
             error: error
           }
-        });
+        }); // Temp solution until we have a bad password error code
+        // Don't fail on blank passwords so we don't show a "password error" message
+        // before users have ever entered a password
+
+        if (password !== '') {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]
+          });
+        }
+
         handleCallback(error);
       } else {
         // user doesn't have a synced wallet
@@ -4410,6 +4437,8 @@ var defaultState = {
   emailNewIsPending: false,
   emailNewErrorMessage: '',
   emailToVerify: '',
+  emailAlreadyExists: false,
+  resendingVerificationEmail: false,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -4520,7 +4549,8 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_VERIFY_
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_STARTED"]] = function (state) {
   return Object.assign({}, state, {
     emailNewIsPending: true,
-    emailNewErrorMessage: ''
+    emailNewErrorMessage: '',
+    emailAlreadyExists: false
   });
 };
 
@@ -4534,10 +4564,9 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_SUC
   });
 };
 
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_EXISTS"]] = function (state, action) {
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_EXISTS"]] = function (state) {
   return Object.assign({}, state, {
-    emailToVerify: action.data.email,
-    emailNewIsPending: false
+    emailAlreadyExists: true
   });
 };
 
@@ -4677,6 +4706,24 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_YOUTUBE_IMPOR
   return Object.assign({}, state, {
     youtubeChannelImportPending: false,
     youtubeChannelImportErrorMessage: action.data
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: true
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: false
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_FAILURE"]] = function (state) {
+  return Object.assign({}, state, {
+    resendingVerificationEmail: false
   });
 };
 
@@ -4951,6 +4998,7 @@ var defaultState = {
   getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
+  syncApplyPasswordError: false,
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false
@@ -5006,6 +5054,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]] = function (state) {
   return Object.assign({}, state, {
+    syncApplyPasswordError: false,
     syncApplyIsPending: true,
     syncApplyErrorMessage: ''
   });
@@ -5022,6 +5071,12 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"
   return Object.assign({}, state, {
     syncApplyIsPending: false,
     syncApplyErrorMessage: action.data.error
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyPasswordError: true
   });
 };
 
@@ -5283,6 +5338,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return selectHashChanged; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return selectSyncApplyPasswordError; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -5320,6 +5376,9 @@ var selectSyncApplyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["cre
 });
 var selectSyncApplyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.syncApplyErrorMessage;
+});
+var selectSyncApplyPasswordError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyPasswordError;
 });
 
 /***/ }),

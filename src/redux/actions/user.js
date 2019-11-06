@@ -230,6 +230,10 @@ export function doUserEmailNew(email) {
     Lbryio.call('user_email', 'new', { email, send_verification_email: true }, 'post')
       .catch(error => {
         if (error.response && error.response.status === 409) {
+          dispatch({
+            type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+          });
+
           return Lbryio.call(
             'user_email',
             'resend_token',
@@ -246,21 +250,18 @@ export function doUserEmailNew(email) {
 export function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
-      type: ACTIONS.USER_EMAIL_VERIFY_RETRY,
-      email,
+      type: ACTIONS.USER_EMAIL_VERIFY_RETRY_STARTED,
     });
 
     const success = () => {
       dispatch({
-        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
-        data: { email },
+        type: ACTIONS.USER_EMAIL_VERIFY_RETRY_SUCCESS,
       });
-      dispatch(doUserFetch());
     };
 
     const failure = error => {
       dispatch({
-        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        type: ACTIONS.USER_EMAIL_VERIFY_RETRY_FAILURE,
         data: { error },
       });
     };

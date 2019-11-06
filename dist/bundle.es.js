@@ -24,7 +24,9 @@ const USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 const USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 const USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
 const USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-const USER_EMAIL_VERIFY_RETRY = 'USER_EMAIL_VERIFY_RETRY';
+const USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
+const USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
+const USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
 const USER_PHONE_RESET = 'USER_PHONE_RESET';
 const USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 const USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -127,6 +129,7 @@ const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
 const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
 const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
 const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+const SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
 const SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
 const UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
@@ -147,7 +150,9 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_EMAIL_VERIFY_STARTED: USER_EMAIL_VERIFY_STARTED,
   USER_EMAIL_VERIFY_SUCCESS: USER_EMAIL_VERIFY_SUCCESS,
   USER_EMAIL_VERIFY_FAILURE: USER_EMAIL_VERIFY_FAILURE,
-  USER_EMAIL_VERIFY_RETRY: USER_EMAIL_VERIFY_RETRY,
+  USER_EMAIL_VERIFY_RETRY_STARTED: USER_EMAIL_VERIFY_RETRY_STARTED,
+  USER_EMAIL_VERIFY_RETRY_FAILURE: USER_EMAIL_VERIFY_RETRY_FAILURE,
+  USER_EMAIL_VERIFY_RETRY_SUCCESS: USER_EMAIL_VERIFY_RETRY_SUCCESS,
   USER_PHONE_RESET: USER_PHONE_RESET,
   USER_PHONE_NEW_STARTED: USER_PHONE_NEW_STARTED,
   USER_PHONE_NEW_SUCCESS: USER_PHONE_NEW_SUCCESS,
@@ -243,6 +248,7 @@ var action_types = /*#__PURE__*/Object.freeze({
   SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
   SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
   SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
+  SYNC_APPLY_BAD_PASSWORD: SYNC_APPLY_BAD_PASSWORD,
   SYNC_RESET: SYNC_RESET,
   UPDATE_UPLOAD_PROGRESS: UPDATE_UPLOAD_PROGRESS
 });
@@ -1101,6 +1107,8 @@ const selectState$2 = state => state.user || {};
 const selectAuthenticationIsPending = reselect.createSelector(selectState$2, state => state.authenticationIsPending);
 const selectUserIsPending = reselect.createSelector(selectState$2, state => state.userIsPending);
 const selectUser = reselect.createSelector(selectState$2, state => state.user);
+const selectEmailAlreadyExists = reselect.createSelector(selectState$2, state => state.emailAlreadyExists);
+const selectResendingVerificationEmail = reselect.createSelector(selectState$2, state => state.resendingVerificationEmail);
 const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email : null);
 const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.phone_number : null);
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
@@ -1363,6 +1371,9 @@ function doUserEmailNew(email) {
       send_verification_email: true
     }, 'post').catch(error => {
       if (error.response && error.response.status === 409) {
+        dispatch({
+          type: USER_EMAIL_NEW_EXISTS
+        });
         return Lbryio.call('user_email', 'resend_token', {
           email,
           only_if_expired: true
@@ -1376,23 +1387,18 @@ function doUserEmailNew(email) {
 function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
-      type: USER_EMAIL_VERIFY_RETRY,
-      email
+      type: USER_EMAIL_VERIFY_RETRY_STARTED
     });
 
     const success = () => {
       dispatch({
-        type: USER_EMAIL_NEW_SUCCESS,
-        data: {
-          email
-        }
+        type: USER_EMAIL_VERIFY_RETRY_SUCCESS
       });
-      dispatch(doUserFetch());
     };
 
     const failure = error => {
       dispatch({
-        type: USER_EMAIL_NEW_FAILURE,
+        type: USER_EMAIL_VERIFY_RETRY_FAILURE,
         data: {
           error
         }
@@ -2486,7 +2492,16 @@ function doGetSync(passedPassword, callback) {
           data: {
             error
           }
-        });
+        }); // Temp solution until we have a bad password error code
+        // Don't fail on blank passwords so we don't show a "password error" message
+        // before users have ever entered a password
+
+        if (password !== '') {
+          dispatch({
+            type: SYNC_APPLY_BAD_PASSWORD
+          });
+        }
+
         handleCallback(error);
       } else {
         // user doesn't have a synced wallet
@@ -2769,6 +2784,8 @@ const defaultState$3 = {
   emailNewIsPending: false,
   emailNewErrorMessage: '',
   emailToVerify: '',
+  emailAlreadyExists: false,
+  resendingVerificationEmail: false,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -2854,7 +2871,8 @@ reducers$2[USER_PHONE_VERIFY_FAILURE] = (state, action) => Object.assign({}, sta
 
 reducers$2[USER_EMAIL_NEW_STARTED] = state => Object.assign({}, state, {
   emailNewIsPending: true,
-  emailNewErrorMessage: ''
+  emailNewErrorMessage: '',
+  emailAlreadyExists: false
 });
 
 reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
@@ -2867,9 +2885,8 @@ reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
   });
 };
 
-reducers$2[USER_EMAIL_NEW_EXISTS] = (state, action) => Object.assign({}, state, {
-  emailToVerify: action.data.email,
-  emailNewIsPending: false
+reducers$2[USER_EMAIL_NEW_EXISTS] = state => Object.assign({}, state, {
+  emailAlreadyExists: true
 });
 
 reducers$2[USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
@@ -2977,6 +2994,18 @@ reducers$2[USER_YOUTUBE_IMPORT_SUCCESS] = (state, action) => {
 reducers$2[USER_YOUTUBE_IMPORT_FAILURE] = (state, action) => Object.assign({}, state, {
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: action.data
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_STARTED] = state => Object.assign({}, state, {
+  resendingVerificationEmail: true
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_SUCCESS] = state => Object.assign({}, state, {
+  resendingVerificationEmail: false
+});
+
+reducers$2[USER_EMAIL_VERIFY_RETRY_FAILURE] = state => Object.assign({}, state, {
+  resendingVerificationEmail: false
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -3174,6 +3203,7 @@ const defaultState$9 = {
   getSyncErrorMessage: null,
   syncApplyErrorMessage: '',
   syncApplyIsPending: false,
+  syncApplyPasswordError: false,
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false
@@ -3216,6 +3246,7 @@ reducers$3[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
 });
 
 reducers$3[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
+  syncApplyPasswordError: false,
   syncApplyIsPending: true,
   syncApplyErrorMessage: ''
 });
@@ -3228,6 +3259,10 @@ reducers$3[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
 reducers$3[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyIsPending: false,
   syncApplyErrorMessage: action.data.error
+});
+
+reducers$3[SYNC_APPLY_BAD_PASSWORD] = state => Object.assign({}, state, {
+  syncApplyPasswordError: true
 });
 
 reducers$3[SYNC_RESET] = () => defaultState$9;
@@ -3336,6 +3371,7 @@ const selectSetSyncIsPending = reselect.createSelector(selectState$9, state => s
 const selectHashChanged = reselect.createSelector(selectState$9, state => state.hashChanged);
 const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state => state.syncApplyIsPending);
 const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
+const selectSyncApplyPasswordError = reselect.createSelector(selectState$9, state => state.syncApplyPasswordError);
 
 const selectState$a = state => state.lbrytv || {};
 
@@ -3430,6 +3466,7 @@ exports.selectClaimedRewardsById = selectClaimedRewardsById;
 exports.selectClaimedRewardsByTransactionId = selectClaimedRewardsByTransactionId;
 exports.selectClaimsPendingByType = selectClaimsPendingByType;
 exports.selectCurrentUploads = selectCurrentUploads;
+exports.selectEmailAlreadyExists = selectEmailAlreadyExists;
 exports.selectEmailNewErrorMessage = selectEmailNewErrorMessage;
 exports.selectEmailNewIsPending = selectEmailNewIsPending;
 exports.selectEmailToVerify = selectEmailToVerify;
@@ -3458,6 +3495,7 @@ exports.selectPhoneToVerify = selectPhoneToVerify;
 exports.selectPhoneVerifyErrorMessage = selectPhoneVerifyErrorMessage;
 exports.selectPhoneVerifyIsPending = selectPhoneVerifyIsPending;
 exports.selectReferralReward = selectReferralReward;
+exports.selectResendingVerificationEmail = selectResendingVerificationEmail;
 exports.selectRewardContentClaimIds = selectRewardContentClaimIds;
 exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
 exports.selectSetSyncIsPending = selectSetSyncIsPending;
@@ -3469,6 +3507,7 @@ exports.selectSuggested = selectSuggested;
 exports.selectSuggestedChannels = selectSuggestedChannels;
 exports.selectSyncApplyErrorMessage = selectSyncApplyErrorMessage;
 exports.selectSyncApplyIsPending = selectSyncApplyIsPending;
+exports.selectSyncApplyPasswordError = selectSyncApplyPasswordError;
 exports.selectSyncData = selectSyncData;
 exports.selectSyncHash = selectSyncHash;
 exports.selectTrendingUris = selectTrendingUris;
