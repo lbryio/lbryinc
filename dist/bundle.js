@@ -2107,13 +2107,14 @@ function swapKeyAndValue(dict) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doTransifexUpload", function() { return doTransifexUpload; });
+var apiBaseUrl = 'https://www.transifex.com/api/2/project';
 var resource = 'app-strings';
 var token = '1/9492ad42eff9cc8c2d5a141f8df3647570d7a641';
 function doTransifexUpload(contents, project, success, fail) {
-  var url = "https://www.transifex.com/api/2/project/".concat(project, "/resources/");
-  var deleteUrl = "https://www.transifex.com/api/2/project/".concat(project, "/resource/").concat(resource, "/");
+  var url = "".concat(apiBaseUrl, "/").concat(project, "/resources/");
+  var updateUrl = "".concat(apiBaseUrl, "/").concat(project, "/resource/").concat(resource, "/content/");
   var headers = {
-    'Authorization': 'Basic ' + Buffer.from("api:".concat(token)).toString('base64'),
+    Authorization: "Basic ".concat(Buffer.from("api:".concat(token)).toString('base64')),
     'Content-Type': 'application/json'
   };
   var req = {
@@ -2122,12 +2123,51 @@ function doTransifexUpload(contents, project, success, fail) {
     name: resource,
     slug: resource,
     content: contents
-  }; // always call delete first in order to replace the previous set of strings
+  };
 
-  fetch(deleteUrl, {
-    method: 'DELETE',
+  function handleResponse(text) {
+    var json;
+
+    try {
+      // transifex api returns Python dicts for some reason.
+      // Any way to get the api to return valid JSON?
+      json = JSON.parse(text);
+    } catch (e) {// ignore
+    }
+
+    if (success) {
+      success(json || text);
+    }
+  }
+
+  function handleError(err) {
+    if (fail) {
+      fail(err.message ? err.message : 'Could not upload strings resource to Transifex');
+    }
+  } // check if the resource exists
+
+
+  fetch(updateUrl, {
     headers: headers
+  }).then(function (response) {
+    return response.json();
   }).then(function () {
+    // perform an update
+    fetch(updateUrl, {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({
+        content: contents
+      })
+    }).then(function (response) {
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error('failed to update transifex');
+      }
+
+      return response.text();
+    }).then(handleResponse)["catch"](handleError);
+  })["catch"](function (err) {
+    // resource doesn't exist, create a fresh resource
     fetch(url, {
       method: 'POST',
       headers: headers,
@@ -2138,23 +2178,7 @@ function doTransifexUpload(contents, project, success, fail) {
       }
 
       return response.text();
-    }).then(function (text) {
-      var json;
-
-      try {
-        // transifex api returns Python dicts for some reason.
-        // Any way to get the api to return valid JSON?
-        json = JSON.parse(text);
-      } catch (e) {}
-
-      if (success) {
-        success(json ? json : text);
-      }
-    })["catch"](function (err) {
-      if (fail) {
-        fail(err.message ? err.message : 'Could not upload strings resource to Transifex');
-      }
-    });
+    }).then(handleResponse)["catch"](handleError);
   });
 }
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(17).Buffer))
