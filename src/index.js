@@ -13,6 +13,9 @@ export { LBRYINC_ACTIONS, YOUTUBE_STATUSES };
 // Lbryio and rewards
 export { Lbryio, rewards };
 
+// utils
+export { doTransifexUpload } from 'util/transifex-upload';
+
 // actions
 export { doGenerateAuthToken } from 'redux/actions/auth';
 export {
