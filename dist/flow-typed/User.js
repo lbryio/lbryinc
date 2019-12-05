@@ -1,5 +1,7 @@
 // @flow
 
+type DeviceType = 'mobile' | 'web' | 'desktop';
+
 declare type User = {
   created_at: string,
   family_name: ?string,
@@ -20,4 +22,5 @@ declare type User = {
   reward_status_change_trigger: string,
   updated_at: string,
   youtube_channels: ?Array<string>,
+  device_types: Array<DeviceType>,
 };
