@@ -1,8 +1,7 @@
 const apiBaseUrl = 'https://www.transifex.com/api/2/project';
 const resource = 'app-strings';
-const token = '1/9492ad42eff9cc8c2d5a141f8df3647570d7a641';
 
-export function doTransifexUpload(contents, project, success, fail) {
+export function doTransifexUpload(contents, project, token, success, fail) {
   const url = `${apiBaseUrl}/${project}/resources/`;
   const updateUrl = `${apiBaseUrl}/${project}/resource/${resource}/content/`;
   const headers = {

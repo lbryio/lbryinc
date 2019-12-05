@@ -2109,8 +2109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doTransifexUpload", function() { return doTransifexUpload; });
 var apiBaseUrl = 'https://www.transifex.com/api/2/project';
 var resource = 'app-strings';
-var token = '1/9492ad42eff9cc8c2d5a141f8df3647570d7a641';
-function doTransifexUpload(contents, project, success, fail) {
+function doTransifexUpload(contents, project, token, success, fail) {
   var url = "".concat(apiBaseUrl, "/").concat(project, "/resources/");
   var updateUrl = "".concat(apiBaseUrl, "/").concat(project, "/resource/").concat(resource, "/content/");
   var headers = {
@@ -2166,7 +2165,7 @@ function doTransifexUpload(contents, project, success, fail) {
 
       return response.text();
     }).then(handleResponse)["catch"](handleError);
-  })["catch"](function (err) {
+  })["catch"](function () {
     // resource doesn't exist, create a fresh resource
     fetch(url, {
       method: 'POST',

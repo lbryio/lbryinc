@@ -1050,8 +1050,7 @@ function userStateSyncMiddleware() {
 
 const apiBaseUrl = 'https://www.transifex.com/api/2/project';
 const resource = 'app-strings';
-const token = '1/9492ad42eff9cc8c2d5a141f8df3647570d7a641';
-function doTransifexUpload(contents, project, success, fail) {
+function doTransifexUpload(contents, project, token, success, fail) {
   const url = `${apiBaseUrl}/${project}/resources/`;
   const updateUrl = `${apiBaseUrl}/${project}/resource/${resource}/content/`;
   const headers = {
@@ -1105,7 +1104,7 @@ function doTransifexUpload(contents, project, success, fail) {
 
       return response.text();
     }).then(handleResponse).catch(handleError);
-  }).catch(err => {
+  }).catch(() => {
     // resource doesn't exist, create a fresh resource
     fetch(url, {
       method: 'POST',
