@@ -7488,12 +7488,12 @@ var selectSubCount = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelecto
 });
 var makeSelectViewCountForUri = function makeSelectViewCountForUri(uri) {
   return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["makeSelectClaimForUri"])(uri), selectViewCount, function (claim, viewCountById) {
-    return viewCountById[claim.claim_id] || 0;
+    return claim ? viewCountById[claim.claim_id] || 0 : 0;
   });
 };
 var makeSelectSubCountForUri = function makeSelectSubCountForUri(uri) {
   return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["makeSelectClaimForUri"])(uri), selectSubCount, function (claim, subCountById) {
-    return subCountById[claim.claim_id] || 0;
+    return claim ? subCountById[claim.claim_id] || 0 : 0;
   });
 };
 

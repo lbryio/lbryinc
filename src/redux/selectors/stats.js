@@ -9,12 +9,12 @@ export const makeSelectViewCountForUri = uri =>
   createSelector(
     makeSelectClaimForUri(uri),
     selectViewCount,
-    (claim, viewCountById) => viewCountById[claim.claim_id] || 0
+    (claim, viewCountById) => (claim ? viewCountById[claim.claim_id] || 0 : 0)
   );
 
 export const makeSelectSubCountForUri = uri =>
   createSelector(
     makeSelectClaimForUri(uri),
     selectSubCount,
-    (claim, subCountById) => subCountById[claim.claim_id] || 0
+    (claim, subCountById) => (claim ? subCountById[claim.claim_id] || 0 : 0)
   );

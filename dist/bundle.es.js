@@ -3434,8 +3434,8 @@ const selectState$8 = state => state.stats || {};
 
 const selectViewCount = reselect.createSelector(selectState$8, state => state.viewCountById);
 const selectSubCount = reselect.createSelector(selectState$8, state => state.subCountById);
-const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => viewCountById[claim.claim_id] || 0);
-const makeSelectSubCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectSubCount, (claim, subCountById) => subCountById[claim.claim_id] || 0);
+const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => claim ? viewCountById[claim.claim_id] || 0 : 0);
+const makeSelectSubCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectSubCount, (claim, subCountById) => claim ? subCountById[claim.claim_id] || 0 : 0);
 
 const selectState$9 = state => state.sync || {};
 
