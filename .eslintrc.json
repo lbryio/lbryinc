@@ -23,6 +23,7 @@
   },
   "rules": {
     "consistent-return": 0,
+    "import/extensions": 0,
     "import/no-commonjs": "warn",
     "import/no-amd": "warn",
     "import/prefer-default-export": "ignore",

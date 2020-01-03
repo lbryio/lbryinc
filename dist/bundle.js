@@ -1267,7 +1267,7 @@ rewards.claimReward = function (type, rewardParams) {
       return;
     }
 
-    lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('reward', 'new', params, 'post').then(function (reward) {
+    lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('reward', 'claim', params, 'post').then(function (reward) {
       var message = reward.reward_notification || "You have claimed a ".concat(reward.reward_amount, " LBC reward."); // Display global notice
 
       var action = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({

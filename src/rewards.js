@@ -23,7 +23,7 @@ rewards.claimReward = (type, rewardParams) => {
       return;
     }
 
-    Lbryio.call('reward', 'new', params, 'post').then(reward => {
+    Lbryio.call('reward', 'claim', params, 'post').then(reward => {
       const message =
         reward.reward_notification || `You have claimed a ${reward.reward_amount} LBC reward.`;
 
