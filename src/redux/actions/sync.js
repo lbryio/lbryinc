@@ -80,13 +80,13 @@ export function doSetSync(oldHash, newHash, data) {
 export function doGetSync(passedPassword, callback) {
   const password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
 
-  function handleCallback() {
+  function handleCallback(error) {
     if (callback) {
       if (typeof callback !== 'function') {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
-      callback();
+      callback(error);
     }
   }
 
