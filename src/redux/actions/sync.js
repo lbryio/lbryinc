@@ -112,7 +112,7 @@ export function doGetSync(passedPassword, callback) {
         data.hasSyncedWallet = true;
 
         if (response.changed) {
-          return Lbry.sync_apply({ password, data: response.data });
+          return Lbry.sync_apply({ password, data: response.data, blocking: true });
         }
       })
       .then(response => {

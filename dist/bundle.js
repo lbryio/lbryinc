@@ -6193,13 +6193,13 @@ function doSetSync(oldHash, newHash, data) {
 function doGetSync(passedPassword, callback) {
   var password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
 
-  function handleCallback() {
+  function handleCallback(error) {
     if (callback) {
       if (typeof callback !== 'function') {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
-      callback();
+      callback(error);
     }
   }
 
@@ -6229,7 +6229,8 @@ function doGetSync(passedPassword, callback) {
       if (response.changed) {
         return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
           password: password,
-          data: response.data
+          data: response.data,
+          blocking: true
         });
       }
     }).then(function (response) {

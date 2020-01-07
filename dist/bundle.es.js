@@ -2534,7 +2534,8 @@ function doGetSync(passedPassword, callback) {
       if (response.changed) {
         return lbryRedux.Lbry.sync_apply({
           password,
-          data: response.data
+          data: response.data,
+          blocking: true
         });
       }
     }).then(response => {
