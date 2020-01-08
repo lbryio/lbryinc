@@ -5822,22 +5822,26 @@ function doFetchBlackListedOutpoints() {
 
     var success = function success(_ref) {
       var outpoints = _ref.outpoints;
-      var splitedOutpoints = [];
-      outpoints.forEach(function (outpoint, index) {
-        var _outpoint$split = outpoint.split(':'),
-            _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
-            txid = _outpoint$split2[0],
-            nout = _outpoint$split2[1];
+      var splitOutpoints = [];
 
-        splitedOutpoints[index] = {
-          txid: txid,
-          nout: Number.parseInt(nout, 10)
-        };
-      });
+      if (outpoints) {
+        outpoints.forEach(function (outpoint, index) {
+          var _outpoint$split = outpoint.split(':'),
+              _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
+              txid = _outpoint$split2[0],
+              nout = _outpoint$split2[1];
+
+          splitOutpoints[index] = {
+            txid: txid,
+            nout: Number.parseInt(nout, 10)
+          };
+        });
+      }
+
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_BLACK_LISTED_CONTENT_COMPLETED"],
         data: {
-          outpoints: splitedOutpoints,
+          outpoints: splitOutpoints,
           success: true
         }
       });
@@ -5895,17 +5899,22 @@ function doFetchFilteredOutpoints() {
 
     var success = function success(_ref) {
       var outpoints = _ref.outpoints;
-      var formattedOutpoints = outpoints.map(function (outpoint) {
-        var _outpoint$split = outpoint.split(':'),
-            _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
-            txid = _outpoint$split2[0],
-            nout = _outpoint$split2[1];
+      var formattedOutpoints = [];
 
-        return {
-          txid: txid,
-          nout: Number.parseInt(nout, 10)
-        };
-      });
+      if (outpoints) {
+        formattedOutpoints = outpoints.map(function (outpoint) {
+          var _outpoint$split = outpoint.split(':'),
+              _outpoint$split2 = _slicedToArray(_outpoint$split, 2),
+              txid = _outpoint$split2[0],
+              nout = _outpoint$split2[1];
+
+          return {
+            txid: txid,
+            nout: Number.parseInt(nout, 10)
+          };
+        });
+      }
+
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_FILTERED_CONTENT_COMPLETED"],
         data: {

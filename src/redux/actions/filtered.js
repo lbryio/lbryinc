@@ -10,10 +10,13 @@ export function doFetchFilteredOutpoints() {
     });
 
     const success = ({ outpoints }) => {
-      const formattedOutpoints = outpoints.map(outpoint => {
-        const [txid, nout] = outpoint.split(':');
-        return { txid, nout: Number.parseInt(nout, 10) };
-      });
+      let formattedOutpoints = [];
+      if (outpoints) {
+        formattedOutpoints = outpoints.map(outpoint => {
+          const [txid, nout] = outpoint.split(':');
+          return { txid, nout: Number.parseInt(nout, 10) };
+        });
+      }
 
       dispatch({
         type: ACTIONS.FETCH_FILTERED_CONTENT_COMPLETED,

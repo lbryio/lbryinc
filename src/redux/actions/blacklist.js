@@ -10,17 +10,19 @@ export function doFetchBlackListedOutpoints() {
     });
 
     const success = ({ outpoints }) => {
-      const splitedOutpoints = [];
+      const splitOutpoints = [];
+      if (outpoints) {
+        outpoints.forEach((outpoint, index) => {
+          const [txid, nout] = outpoint.split(':');
 
-      outpoints.forEach((outpoint, index) => {
-        const [txid, nout] = outpoint.split(':');
+          splitOutpoints[index] = { txid, nout: Number.parseInt(nout, 10) };
+        });
+      }
 
-        splitedOutpoints[index] = { txid, nout: Number.parseInt(nout, 10) };
-      });
       dispatch({
         type: ACTIONS.FETCH_BLACK_LISTED_CONTENT_COMPLETED,
         data: {
-          outpoints: splitedOutpoints,
+          outpoints: splitOutpoints,
           success: true,
         },
       });

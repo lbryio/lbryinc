@@ -2218,18 +2218,22 @@ function doFetchBlackListedOutpoints() {
     const success = ({
       outpoints
     }) => {
-      const splitedOutpoints = [];
-      outpoints.forEach((outpoint, index) => {
-        const [txid, nout] = outpoint.split(':');
-        splitedOutpoints[index] = {
-          txid,
-          nout: Number.parseInt(nout, 10)
-        };
-      });
+      const splitOutpoints = [];
+
+      if (outpoints) {
+        outpoints.forEach((outpoint, index) => {
+          const [txid, nout] = outpoint.split(':');
+          splitOutpoints[index] = {
+            txid,
+            nout: Number.parseInt(nout, 10)
+          };
+        });
+      }
+
       dispatch({
         type: FETCH_BLACK_LISTED_CONTENT_COMPLETED,
         data: {
-          outpoints: splitedOutpoints,
+          outpoints: splitOutpoints,
           success: true
         }
       });
@@ -2267,13 +2271,18 @@ function doFetchFilteredOutpoints() {
     const success = ({
       outpoints
     }) => {
-      const formattedOutpoints = outpoints.map(outpoint => {
-        const [txid, nout] = outpoint.split(':');
-        return {
-          txid,
-          nout: Number.parseInt(nout, 10)
-        };
-      });
+      let formattedOutpoints = [];
+
+      if (outpoints) {
+        formattedOutpoints = outpoints.map(outpoint => {
+          const [txid, nout] = outpoint.split(':');
+          return {
+            txid,
+            nout: Number.parseInt(nout, 10)
+          };
+        });
+      }
+
       dispatch({
         type: FETCH_FILTERED_CONTENT_COMPLETED,
         data: {
