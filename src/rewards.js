@@ -11,6 +11,7 @@ rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REFEREE = 'referee';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';

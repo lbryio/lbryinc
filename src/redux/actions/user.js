@@ -25,6 +25,7 @@ export function doFetchInviteStatus() {
             invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
             invitees: status.invitees,
             referralLink: `${Lbryio.CONNECTION_STRING}user/refer?r=${code}`,
+            referralCode: code,
           },
         });
       })
@@ -63,11 +64,11 @@ export function doAuthenticate(appVersion, os = null, firebaseToken = null) {
     });
 
     Lbryio.authenticate()
-      .then(user => {
+      .then(accessToken => {
         // analytics.setUser(user);
         dispatch({
           type: ACTIONS.AUTHENTICATION_SUCCESS,
-          data: { user },
+          data: { accessToken },
         });
         dispatch(doRewardList());
         dispatch(doFetchInviteStatus());
@@ -363,8 +364,8 @@ export function doUserInviteNew(email) {
       type: ACTIONS.USER_INVITE_NEW_STARTED,
     });
 
-    Lbryio.call('user', 'invite', { email }, 'post')
-      .then(() => {
+    return Lbryio.call('user', 'invite', { email }, 'post')
+      .then(success => {
         dispatch({
           type: ACTIONS.USER_INVITE_NEW_SUCCESS,
           data: { email },
@@ -377,10 +378,45 @@ export function doUserInviteNew(email) {
         );
 
         dispatch(doFetchInviteStatus());
+        return success;
       })
       .catch(error => {
         dispatch({
           type: ACTIONS.USER_INVITE_NEW_FAILURE,
+          data: { error },
+        });
+      });
+  };
+}
+
+export function doUserSetReferrer(referrer, shouldClaim) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_SET_REFERRER_STARTED,
+    });
+
+    return Lbryio.call('user', 'referral', { referrer }, 'post')
+      .then(() => {
+        dispatch({
+          type: ACTIONS.USER_SET_REFERRER_SUCCESS,
+        });
+        // for testing
+        dispatch(
+          doToast({
+            message: __(`Set Referrer to ${referrer}`),
+          })
+        );
+        // we need to userFetch because once you claim this,
+        if (shouldClaim) {
+          dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
+          dispatch(doUserFetch());
+        } else {
+          dispatch(doUserFetch());
+        }
+      })
+      .catch(error => {
+        dispatch({
+          type: ACTIONS.USER_SET_REFERRER_FAILURE,
           data: { error },
         });
       });

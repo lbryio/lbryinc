@@ -15,23 +15,28 @@ const defaultState = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
+  referralLink: undefined,
+  referralCode: undefined,
   user: undefined,
+  accessToken: undefined,
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
+  setReferrerIsPending: false,
+  setReferrerError: '',
 };
 
 reducers[ACTIONS.AUTHENTICATION_STARTED] = state =>
   Object.assign({}, state, {
     authenticationIsPending: true,
     userIsPending: true,
-    user: defaultState.user,
+    accessToken: defaultState.accessToken,
   });
 
 reducers[ACTIONS.AUTHENTICATION_SUCCESS] = (state, action) =>
   Object.assign({}, state, {
     authenticationIsPending: false,
     userIsPending: false,
-    user: action.data.user,
+    accessToken: action.data.accessToken,
   });
 
 reducers[ACTIONS.AUTHENTICATION_FAILURE] = state =>
@@ -198,6 +203,7 @@ reducers[ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS] = (state, action) =>
     invitesRemaining: action.data.invitesRemaining,
     invitees: action.data.invitees,
     referralLink: action.data.referralLink,
+    referralCode: action.data.referralCode,
   });
 
 reducers[ACTIONS.USER_INVITE_NEW_STARTED] = state =>
@@ -263,6 +269,24 @@ reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_SUCCESS] = state =>
 reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_FAILURE] = state =>
   Object.assign({}, state, {
     resendingVerificationEmail: false,
+  });
+
+reducers[ACTIONS.USER_SET_REFERRER_STARTED] = state =>
+  Object.assign({}, state, {
+    setReferrerIsPending: true,
+    setReferrerError: defaultState.setReferrerError,
+  });
+
+reducers[ACTIONS.USER_SET_REFERRER_SUCCESS] = state =>
+  Object.assign({}, state, {
+    setReferrerIsPending: false,
+    setReferrerError: defaultState.setReferrerError,
+  });
+
+reducers[ACTIONS.USER_SET_REFERRER_FAILURE] = (state, action) =>
+  Object.assign({}, state, {
+    setReferrerIsPending: false,
+    setReferrerError: action.data.error.message,
   });
 
 export function userReducer(state = defaultState, action) {

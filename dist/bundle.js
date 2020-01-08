@@ -205,6 +205,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckYoutubeTransfer", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_10__["doCheckYoutubeTransfer"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_10__["doUserSetReferrer"]; });
+
 /* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(29);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_11__["doFetchCostInfoForUri"]; });
 
@@ -404,6 +406,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectUserInviteReferralLink"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralCode", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectUserInviteReferralCode"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserVerifiedEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectUserVerifiedEmail"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectYoutubeChannels"]; });
@@ -413,6 +417,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectYouTubeImportError"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportVideosComplete", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectYouTubeImportVideosComplete"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectSetReferrerPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_31__["selectSetReferrerError"]; });
 
 /* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_32__["makeSelectFetchingCostInfoForUri"]; });
@@ -568,6 +576,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_STARTED", function() { return USER_YOUTUBE_IMPORT_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_FAILURE", function() { return USER_YOUTUBE_IMPORT_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_SUCCESS", function() { return USER_YOUTUBE_IMPORT_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_STARTED", function() { return USER_SET_REFERRER_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_SUCCESS", function() { return USER_SET_REFERRER_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_FAILURE", function() { return USER_SET_REFERRER_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_STARTED", function() { return FETCH_FEATURED_CONTENT_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_COMPLETED", function() { return FETCH_FEATURED_CONTENT_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_TRENDING_CONTENT_STARTED", function() { return FETCH_TRENDING_CONTENT_STARTED; });
@@ -684,7 +695,10 @@ var USER_INVITE_NEW_FAILURE = 'USER_INVITE_NEW_FAILURE';
 var FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
 var USER_YOUTUBE_IMPORT_STARTED = 'USER_YOUTUBE_IMPORT_STARTED';
 var USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
-var USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS'; // Claims
+var USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS';
+var USER_SET_REFERRER_STARTED = 'USER_SET_REFERRER_STARTED';
+var USER_SET_REFERRER_SUCCESS = 'USER_SET_REFERRER_SUCCESS';
+var USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE'; // Claims
 
 var FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 var FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
@@ -1255,6 +1269,7 @@ rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REFEREE = 'referee';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
@@ -4648,8 +4663,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewIsPending", function() { return selectUserInviteNewIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewErrorMessage", function() { return selectUserInviteNewErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return selectUserInviteReferralLink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralCode", function() { return selectUserInviteReferralCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportPending", function() { return selectYouTubeImportPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportError", function() { return selectYouTubeImportError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerPending", function() { return selectSetReferrerPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerError", function() { return selectSetReferrerError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportVideosComplete", function() { return selectYouTubeImportVideosComplete; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
@@ -4753,11 +4771,20 @@ var selectUserInviteNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0
 var selectUserInviteReferralLink = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.referralLink;
 });
+var selectUserInviteReferralCode = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.referralCode;
+});
 var selectYouTubeImportPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.youtubeChannelImportPending;
 });
 var selectYouTubeImportError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.youtubeChannelImportErrorMessage;
+});
+var selectSetReferrerPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.setReferrerIsPending;
+});
+var selectSetReferrerError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.setReferrerError;
 });
 var selectYouTubeImportVideosComplete = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   var total = state.youtubeChannelImportTotal;
@@ -4791,6 +4818,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return doUserIdentityVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return doUserInviteNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return doUserSetReferrer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return doClaimYoutubeChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckYoutubeTransfer", function() { return doCheckYoutubeTransfer; });
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
@@ -4830,7 +4858,8 @@ function doFetchInviteStatus() {
         data: {
           invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
           invitees: status.invitees,
-          referralLink: "".concat(lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].CONNECTION_STRING, "user/refer?r=").concat(code)
+          referralLink: "".concat(lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].CONNECTION_STRING, "user/refer?r=").concat(code),
+          referralCode: code
         }
       });
     })["catch"](function (error) {
@@ -4873,12 +4902,12 @@ function doAuthenticate(appVersion) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
     });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].authenticate().then(function (user) {
+    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].authenticate().then(function (accessToken) {
       // analytics.setUser(user);
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_SUCCESS"],
         data: {
-          user: user
+          accessToken: accessToken
         }
       });
       dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
@@ -5177,9 +5206,9 @@ function doUserInviteNew(email) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_STARTED"]
     });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'invite', {
+    return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'invite', {
       email: email
-    }, 'post').then(function () {
+    }, 'post').then(function (success) {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_SUCCESS"],
         data: {
@@ -5190,9 +5219,42 @@ function doUserInviteNew(email) {
         message: __("Invite sent to ".concat(email))
       }));
       dispatch(doFetchInviteStatus());
+      return success;
     })["catch"](function (error) {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_FAILURE"],
+        data: {
+          error: error
+        }
+      });
+    });
+  };
+}
+function doUserSetReferrer(referrer, shouldClaim) {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_STARTED"]
+    });
+    return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'referral', {
+      referrer: referrer
+    }, 'post').then(function () {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_SUCCESS"]
+      }); // for testing
+
+      dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
+        message: __("Set Referrer to ".concat(referrer))
+      })); // we need to userFetch because once you claim this,
+
+      if (shouldClaim) {
+        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_4__["default"].TYPE_REFEREE));
+        dispatch(doUserFetch());
+      } else {
+        dispatch(doUserFetch());
+      }
+    })["catch"](function (error) {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_FAILURE"],
         data: {
           error: error
         }
@@ -6629,16 +6691,21 @@ var defaultState = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
+  referralLink: undefined,
+  referralCode: undefined,
   user: undefined,
+  accessToken: undefined,
   youtubeChannelImportPending: false,
-  youtubeChannelImportErrorMessage: ''
+  youtubeChannelImportErrorMessage: '',
+  setReferrerIsPending: false,
+  setReferrerError: ''
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_STARTED"]] = function (state) {
   return Object.assign({}, state, {
     authenticationIsPending: true,
     userIsPending: true,
-    user: defaultState.user
+    accessToken: defaultState.accessToken
   });
 };
 
@@ -6646,7 +6713,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_SUC
   return Object.assign({}, state, {
     authenticationIsPending: false,
     userIsPending: false,
-    user: action.data.user
+    accessToken: action.data.accessToken
   });
 };
 
@@ -6832,7 +6899,8 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_STATUS
     inviteStatusIsPending: false,
     invitesRemaining: action.data.invitesRemaining,
     invitees: action.data.invitees,
-    referralLink: action.data.referralLink
+    referralLink: action.data.referralLink,
+    referralCode: action.data.referralCode
   });
 };
 
@@ -6909,6 +6977,27 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_FAILURE"]] = function (state) {
   return Object.assign({}, state, {
     resendingVerificationEmail: false
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    setReferrerIsPending: true,
+    setReferrerError: defaultState.setReferrerError
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_SUCCESS"]] = function (state) {
+  return Object.assign({}, state, {
+    setReferrerIsPending: false,
+    setReferrerError: defaultState.setReferrerError
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_FAILURE"]] = function (state, action) {
+  return Object.assign({}, state, {
+    setReferrerIsPending: false,
+    setReferrerError: action.data.error.message
   });
 };
 

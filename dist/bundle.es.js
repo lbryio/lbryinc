@@ -49,7 +49,10 @@ const USER_INVITE_NEW_FAILURE = 'USER_INVITE_NEW_FAILURE';
 const FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
 const USER_YOUTUBE_IMPORT_STARTED = 'USER_YOUTUBE_IMPORT_STARTED';
 const USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
-const USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS'; // Claims
+const USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS';
+const USER_SET_REFERRER_STARTED = 'USER_SET_REFERRER_STARTED';
+const USER_SET_REFERRER_SUCCESS = 'USER_SET_REFERRER_SUCCESS';
+const USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE'; // Claims
 
 const FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 const FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
@@ -176,6 +179,9 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_YOUTUBE_IMPORT_STARTED: USER_YOUTUBE_IMPORT_STARTED,
   USER_YOUTUBE_IMPORT_FAILURE: USER_YOUTUBE_IMPORT_FAILURE,
   USER_YOUTUBE_IMPORT_SUCCESS: USER_YOUTUBE_IMPORT_SUCCESS,
+  USER_SET_REFERRER_STARTED: USER_SET_REFERRER_STARTED,
+  USER_SET_REFERRER_SUCCESS: USER_SET_REFERRER_SUCCESS,
+  USER_SET_REFERRER_FAILURE: USER_SET_REFERRER_FAILURE,
   FETCH_FEATURED_CONTENT_STARTED: FETCH_FEATURED_CONTENT_STARTED,
   FETCH_FEATURED_CONTENT_COMPLETED: FETCH_FEATURED_CONTENT_COMPLETED,
   FETCH_TRENDING_CONTENT_STARTED: FETCH_TRENDING_CONTENT_STARTED,
@@ -485,6 +491,7 @@ rewards.TYPE_FIRST_STREAM = 'first_stream';
 rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
 rewards.TYPE_FIRST_PUBLISH = 'first_publish';
 rewards.TYPE_REFERRAL = 'referral';
+rewards.TYPE_REFEREE = 'referee';
 rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
@@ -1214,8 +1221,11 @@ const selectUserInviteStatusFailed = reselect.createSelector(selectUserInvitesRe
 const selectUserInviteNewIsPending = reselect.createSelector(selectState$2, state => state.inviteNewIsPending);
 const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$2, state => state.inviteNewErrorMessage);
 const selectUserInviteReferralLink = reselect.createSelector(selectState$2, state => state.referralLink);
+const selectUserInviteReferralCode = reselect.createSelector(selectState$2, state => state.referralCode);
 const selectYouTubeImportPending = reselect.createSelector(selectState$2, state => state.youtubeChannelImportPending);
 const selectYouTubeImportError = reselect.createSelector(selectState$2, state => state.youtubeChannelImportErrorMessage);
+const selectSetReferrerPending = reselect.createSelector(selectState$2, state => state.setReferrerIsPending);
+const selectSetReferrerError = reselect.createSelector(selectState$2, state => state.setReferrerError);
 const selectYouTubeImportVideosComplete = reselect.createSelector(selectState$2, state => {
   const total = state.youtubeChannelImportTotal;
   const complete = state.youtubeChannelImportComplete || 0;
@@ -1237,7 +1247,8 @@ function doFetchInviteStatus() {
         data: {
           invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
           invitees: status.invitees,
-          referralLink: `${Lbryio.CONNECTION_STRING}user/refer?r=${code}`
+          referralLink: `${Lbryio.CONNECTION_STRING}user/refer?r=${code}`,
+          referralCode: code
         }
       });
     }).catch(error => {
@@ -1276,12 +1287,12 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null) {
     dispatch({
       type: AUTHENTICATION_STARTED
     });
-    Lbryio.authenticate().then(user => {
+    Lbryio.authenticate().then(accessToken => {
       // analytics.setUser(user);
       dispatch({
         type: AUTHENTICATION_SUCCESS,
         data: {
-          user
+          accessToken
         }
       });
       dispatch(doRewardList());
@@ -1574,9 +1585,9 @@ function doUserInviteNew(email) {
     dispatch({
       type: USER_INVITE_NEW_STARTED
     });
-    Lbryio.call('user', 'invite', {
+    return Lbryio.call('user', 'invite', {
       email
-    }, 'post').then(() => {
+    }, 'post').then(success => {
       dispatch({
         type: USER_INVITE_NEW_SUCCESS,
         data: {
@@ -1587,9 +1598,42 @@ function doUserInviteNew(email) {
         message: __(`Invite sent to ${email}`)
       }));
       dispatch(doFetchInviteStatus());
+      return success;
     }).catch(error => {
       dispatch({
         type: USER_INVITE_NEW_FAILURE,
+        data: {
+          error
+        }
+      });
+    });
+  };
+}
+function doUserSetReferrer(referrer, shouldClaim) {
+  return dispatch => {
+    dispatch({
+      type: USER_SET_REFERRER_STARTED
+    });
+    return Lbryio.call('user', 'referral', {
+      referrer
+    }, 'post').then(() => {
+      dispatch({
+        type: USER_SET_REFERRER_SUCCESS
+      }); // for testing
+
+      dispatch(lbryRedux.doToast({
+        message: __(`Set Referrer to ${referrer}`)
+      })); // we need to userFetch because once you claim this,
+
+      if (shouldClaim) {
+        dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
+        dispatch(doUserFetch());
+      } else {
+        dispatch(doUserFetch());
+      }
+    }).catch(error => {
+      dispatch({
+        type: USER_SET_REFERRER_FAILURE,
         data: {
           error
         }
@@ -2879,21 +2923,26 @@ const defaultState$3 = {
   inviteStatusIsPending: false,
   invitesRemaining: undefined,
   invitees: undefined,
+  referralLink: undefined,
+  referralCode: undefined,
   user: undefined,
+  accessToken: undefined,
   youtubeChannelImportPending: false,
-  youtubeChannelImportErrorMessage: ''
+  youtubeChannelImportErrorMessage: '',
+  setReferrerIsPending: false,
+  setReferrerError: ''
 };
 
 reducers$2[AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
   authenticationIsPending: true,
   userIsPending: true,
-  user: defaultState$3.user
+  accessToken: defaultState$3.accessToken
 });
 
 reducers$2[AUTHENTICATION_SUCCESS] = (state, action) => Object.assign({}, state, {
   authenticationIsPending: false,
   userIsPending: false,
-  user: action.data.user
+  accessToken: action.data.accessToken
 });
 
 reducers$2[AUTHENTICATION_FAILURE] = state => Object.assign({}, state, {
@@ -3039,7 +3088,8 @@ reducers$2[USER_INVITE_STATUS_FETCH_SUCCESS] = (state, action) => Object.assign(
   inviteStatusIsPending: false,
   invitesRemaining: action.data.invitesRemaining,
   invitees: action.data.invitees,
-  referralLink: action.data.referralLink
+  referralLink: action.data.referralLink,
+  referralCode: action.data.referralCode
 });
 
 reducers$2[USER_INVITE_NEW_STARTED] = state => Object.assign({}, state, {
@@ -3094,6 +3144,21 @@ reducers$2[USER_EMAIL_VERIFY_RETRY_SUCCESS] = state => Object.assign({}, state, 
 
 reducers$2[USER_EMAIL_VERIFY_RETRY_FAILURE] = state => Object.assign({}, state, {
   resendingVerificationEmail: false
+});
+
+reducers$2[USER_SET_REFERRER_STARTED] = state => Object.assign({}, state, {
+  setReferrerIsPending: true,
+  setReferrerError: defaultState$3.setReferrerError
+});
+
+reducers$2[USER_SET_REFERRER_SUCCESS] = state => Object.assign({}, state, {
+  setReferrerIsPending: false,
+  setReferrerError: defaultState$3.setReferrerError
+});
+
+reducers$2[USER_SET_REFERRER_FAILURE] = (state, action) => Object.assign({}, state, {
+  setReferrerIsPending: false,
+  setReferrerError: action.data.error.message
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -3528,6 +3593,7 @@ exports.doUserPhoneReset = doUserPhoneReset;
 exports.doUserPhoneVerify = doUserPhoneVerify;
 exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
+exports.doUserSetReferrer = doUserSetReferrer;
 exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
 exports.lbrytvReducer = lbrytvReducer;
@@ -3586,6 +3652,8 @@ exports.selectPhoneVerifyIsPending = selectPhoneVerifyIsPending;
 exports.selectReferralReward = selectReferralReward;
 exports.selectResendingVerificationEmail = selectResendingVerificationEmail;
 exports.selectRewardContentClaimIds = selectRewardContentClaimIds;
+exports.selectSetReferrerError = selectSetReferrerError;
+exports.selectSetReferrerPending = selectSetReferrerPending;
 exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
 exports.selectSetSyncIsPending = selectSetSyncIsPending;
 exports.selectShowSuggestedSubs = selectShowSuggestedSubs;
@@ -3612,6 +3680,7 @@ exports.selectUserCountryCode = selectUserCountryCode;
 exports.selectUserEmail = selectUserEmail;
 exports.selectUserInviteNewErrorMessage = selectUserInviteNewErrorMessage;
 exports.selectUserInviteNewIsPending = selectUserInviteNewIsPending;
+exports.selectUserInviteReferralCode = selectUserInviteReferralCode;
 exports.selectUserInviteReferralLink = selectUserInviteReferralLink;
 exports.selectUserInviteStatusFailed = selectUserInviteStatusFailed;
 exports.selectUserInviteStatusIsPending = selectUserInviteStatusIsPending;

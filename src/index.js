@@ -63,6 +63,7 @@ export {
   doUserInviteNew,
   doClaimYoutubeChannels,
   doCheckYoutubeTransfer,
+  doUserSetReferrer,
 } from 'redux/actions/user';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
@@ -162,11 +163,14 @@ export {
   selectUserInviteNewIsPending,
   selectUserInviteNewErrorMessage,
   selectUserInviteReferralLink,
+  selectUserInviteReferralCode,
   selectUserVerifiedEmail,
   selectYoutubeChannels,
   selectYouTubeImportPending,
   selectYouTubeImportError,
   selectYouTubeImportVideosComplete,
+  selectSetReferrerPending,
+  selectSetReferrerError,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,
