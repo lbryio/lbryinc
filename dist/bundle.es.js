@@ -269,6 +269,14 @@ var youtube = /*#__PURE__*/Object.freeze({
   COMPLETED_TRANSFER: COMPLETED_TRANSFER
 });
 
+const ALREADY_CLAIMED = 'once the invite reward has been claimed the referrer cannot be changed';
+const REFERRER_NOT_FOUND = 'A lbry.tv account could not be found for the referrer you provided.';
+
+var errors = /*#__PURE__*/Object.freeze({
+  ALREADY_CLAIMED: ALREADY_CLAIMED,
+  REFERRER_NOT_FOUND: REFERRER_NOT_FOUND
+});
+
 const Lbryio = {
   enabled: true,
   authenticationPromise: null,
@@ -624,7 +632,11 @@ var subscriptions = handleActions({
   [CHANNEL_SUBSCRIBE]: (state, action) => {
     const newSubscription = action.data;
     const newSubscriptions = state.subscriptions.slice();
-    newSubscriptions.unshift(newSubscription);
+
+    if (!newSubscriptions.some(sub => sub.uri === newSubscription.uri)) {
+      newSubscriptions.unshift(newSubscription);
+    }
+
     return { ...state,
       subscriptions: newSubscriptions
     };
@@ -1221,7 +1233,7 @@ const selectUserInviteStatusFailed = reselect.createSelector(selectUserInvitesRe
 const selectUserInviteNewIsPending = reselect.createSelector(selectState$2, state => state.inviteNewIsPending);
 const selectUserInviteNewErrorMessage = reselect.createSelector(selectState$2, state => state.inviteNewErrorMessage);
 const selectUserInviteReferralLink = reselect.createSelector(selectState$2, state => state.referralLink);
-const selectUserInviteReferralCode = reselect.createSelector(selectState$2, state => state.referralCode);
+const selectUserInviteReferralCode = reselect.createSelector(selectState$2, state => state.referralCode ? state.referralCode[0] : '');
 const selectYouTubeImportPending = reselect.createSelector(selectState$2, state => state.youtubeChannelImportPending);
 const selectYouTubeImportError = reselect.createSelector(selectState$2, state => state.youtubeChannelImportErrorMessage);
 const selectSetReferrerPending = reselect.createSelector(selectState$2, state => state.setReferrerIsPending);
@@ -1610,20 +1622,47 @@ function doUserInviteNew(email) {
   };
 }
 function doUserSetReferrer(referrer, shouldClaim) {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch({
       type: USER_SET_REFERRER_STARTED
     });
-    return Lbryio.call('user', 'referral', {
-      referrer
-    }, 'post').then(() => {
+    let claim;
+    let referrerCode = referrer;
+    const isClaim = lbryRedux.parseURI(referrer).claimId;
+
+    if (isClaim) {
+      const uri = `lbry://${referrer}`;
+      claim = lbryRedux.makeSelectClaimForUri(uri)(getState());
+
+      if (!claim) {
+        try {
+          const response = await lbryRedux.Lbry.resolve({
+            urls: [uri]
+          });
+          claim = response && response[uri];
+        } catch (error) {
+          dispatch({
+            type: USER_SET_REFERRER_FAILURE,
+            data: {
+              error
+            }
+          });
+        }
+      }
+
+      referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+    }
+
+    try {
+      await Lbryio.call('user', 'referral', {
+        referrer: referrerCode
+      }, 'post');
       dispatch({
         type: USER_SET_REFERRER_SUCCESS
-      }); // for testing
-
+      });
       dispatch(lbryRedux.doToast({
         message: __(`Set Referrer to ${referrer}`)
-      })); // we need to userFetch because once you claim this,
+      }));
 
       if (shouldClaim) {
         dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
@@ -1631,14 +1670,14 @@ function doUserSetReferrer(referrer, shouldClaim) {
       } else {
         dispatch(doUserFetch());
       }
-    }).catch(error => {
+    } catch (error) {
       dispatch({
         type: USER_SET_REFERRER_FAILURE,
         data: {
           error
         }
       });
-    });
+    }
   };
 }
 function doClaimYoutubeChannels() {
@@ -3531,6 +3570,7 @@ const selectState$a = state => state.lbrytv || {};
 const selectCurrentUploads = reselect.createSelector(selectState$a, state => state.currentUploads);
 const selectUploadCount = reselect.createSelector(selectCurrentUploads, currentUploads => currentUploads && Object.keys(currentUploads).length);
 
+exports.ERRORS = errors;
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
 exports.YOUTUBE_STATUSES = youtube;

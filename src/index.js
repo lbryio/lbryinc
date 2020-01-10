@@ -1,5 +1,6 @@
 import * as LBRYINC_ACTIONS from 'constants/action_types';
 import * as YOUTUBE_STATUSES from 'constants/youtube';
+import * as ERRORS from 'constants/errors';
 import Lbryio from 'lbryio';
 import rewards from 'rewards';
 import subscriptionsReducer from 'redux/reducers/subscriptions';
@@ -8,7 +9,7 @@ import subscriptionsReducer from 'redux/reducers/subscriptions';
 export { userStateSyncMiddleware } from 'redux/middleware/sync';
 
 // constants
-export { LBRYINC_ACTIONS, YOUTUBE_STATUSES };
+export { LBRYINC_ACTIONS, YOUTUBE_STATUSES, ERRORS };
 
 // Lbryio and rewards
 export { Lbryio, rewards };

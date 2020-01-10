@@ -154,7 +154,7 @@ export const selectUserInviteReferralLink = createSelector(
 
 export const selectUserInviteReferralCode = createSelector(
   selectState,
-  state => state.referralCode
+  state => (state.referralCode ? state.referralCode[0] : '')
 );
 
 export const selectYouTubeImportPending = createSelector(

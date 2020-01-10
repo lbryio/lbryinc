@@ -1,4 +1,11 @@
-import { Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
+import {
+  Lbry,
+  doToast,
+  doFetchChannelListMine,
+  batchActions,
+  makeSelectClaimForUri,
+  parseURI,
+} from 'lbry-redux';
 import * as ACTIONS from 'constants/action_types';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
@@ -390,36 +397,52 @@ export function doUserInviteNew(email) {
 }
 
 export function doUserSetReferrer(referrer, shouldClaim) {
-  return dispatch => {
+  return async (dispatch, getState) => {
     dispatch({
       type: ACTIONS.USER_SET_REFERRER_STARTED,
     });
+    let claim;
+    let referrerCode = referrer;
 
-    return Lbryio.call('user', 'referral', { referrer }, 'post')
-      .then(() => {
-        dispatch({
-          type: ACTIONS.USER_SET_REFERRER_SUCCESS,
-        });
-        // for testing
-        dispatch(
-          doToast({
-            message: __(`Set Referrer to ${referrer}`),
-          })
-        );
-        // we need to userFetch because once you claim this,
-        if (shouldClaim) {
-          dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
-          dispatch(doUserFetch());
-        } else {
-          dispatch(doUserFetch());
+    const isClaim = parseURI(referrer).claimId;
+    if (isClaim) {
+      const uri = `lbry://${referrer}`;
+      claim = makeSelectClaimForUri(uri)(getState());
+      if (!claim) {
+        try {
+          const response = await Lbry.resolve({ urls: [uri] });
+          claim = response && response[uri];
+        } catch (error) {
+          dispatch({
+            type: ACTIONS.USER_SET_REFERRER_FAILURE,
+            data: { error },
+          });
         }
-      })
-      .catch(error => {
-        dispatch({
-          type: ACTIONS.USER_SET_REFERRER_FAILURE,
-          data: { error },
-        });
+      }
+      referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+    }
+    try {
+      await Lbryio.call('user', 'referral', { referrer: referrerCode }, 'post');
+      dispatch({
+        type: ACTIONS.USER_SET_REFERRER_SUCCESS,
       });
+      dispatch(
+        doToast({
+          message: __(`Set Referrer to ${referrer}`),
+        }),
+      );
+      if (shouldClaim) {
+        dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
+        dispatch(doUserFetch());
+      } else {
+        dispatch(doUserFetch());
+      }
+    } catch (error) {
+      dispatch({
+        type: ACTIONS.USER_SET_REFERRER_FAILURE,
+        data: { error },
+      });
+    }
   };
 }
 
