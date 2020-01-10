@@ -1236,8 +1236,8 @@ const selectUserInviteReferralLink = reselect.createSelector(selectState$2, stat
 const selectUserInviteReferralCode = reselect.createSelector(selectState$2, state => state.referralCode ? state.referralCode[0] : '');
 const selectYouTubeImportPending = reselect.createSelector(selectState$2, state => state.youtubeChannelImportPending);
 const selectYouTubeImportError = reselect.createSelector(selectState$2, state => state.youtubeChannelImportErrorMessage);
-const selectSetReferrerPending = reselect.createSelector(selectState$2, state => state.setReferrerIsPending);
-const selectSetReferrerError = reselect.createSelector(selectState$2, state => state.setReferrerError);
+const selectSetReferrerPending = reselect.createSelector(selectState$2, state => state.referrerSetIsPending);
+const selectSetReferrerError = reselect.createSelector(selectState$2, state => state.referrerSetError);
 const selectYouTubeImportVideosComplete = reselect.createSelector(selectState$2, state => {
   const total = state.youtubeChannelImportTotal;
   const complete = state.youtubeChannelImportComplete || 0;
@@ -2968,8 +2968,8 @@ const defaultState$3 = {
   accessToken: undefined,
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
-  setReferrerIsPending: false,
-  setReferrerError: ''
+  referrerSetIsPending: false,
+  referrerSetError: ''
 };
 
 reducers$2[AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
@@ -3186,18 +3186,18 @@ reducers$2[USER_EMAIL_VERIFY_RETRY_FAILURE] = state => Object.assign({}, state, 
 });
 
 reducers$2[USER_SET_REFERRER_STARTED] = state => Object.assign({}, state, {
-  setReferrerIsPending: true,
-  setReferrerError: defaultState$3.setReferrerError
+  referrerSetIsPending: true,
+  referrerSetError: defaultState$3.referrerSetError
 });
 
 reducers$2[USER_SET_REFERRER_SUCCESS] = state => Object.assign({}, state, {
-  setReferrerIsPending: false,
-  setReferrerError: defaultState$3.setReferrerError
+  referrerSetIsPending: false,
+  referrerSetError: defaultState$3.referrerSetError
 });
 
 reducers$2[USER_SET_REFERRER_FAILURE] = (state, action) => Object.assign({}, state, {
-  setReferrerIsPending: false,
-  setReferrerError: action.data.error.message
+  referrerSetIsPending: false,
+  referrerSetError: action.data.error.message
 });
 
 function userReducer(state = defaultState$3, action) {

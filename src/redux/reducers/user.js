@@ -21,8 +21,8 @@ const defaultState = {
   accessToken: undefined,
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
-  setReferrerIsPending: false,
-  setReferrerError: '',
+  referrerSetIsPending: false,
+  referrerSetError: '',
 };
 
 reducers[ACTIONS.AUTHENTICATION_STARTED] = state =>
@@ -273,20 +273,20 @@ reducers[ACTIONS.USER_EMAIL_VERIFY_RETRY_FAILURE] = state =>
 
 reducers[ACTIONS.USER_SET_REFERRER_STARTED] = state =>
   Object.assign({}, state, {
-    setReferrerIsPending: true,
-    setReferrerError: defaultState.setReferrerError,
+    referrerSetIsPending: true,
+    referrerSetError: defaultState.referrerSetError,
   });
 
 reducers[ACTIONS.USER_SET_REFERRER_SUCCESS] = state =>
   Object.assign({}, state, {
-    setReferrerIsPending: false,
-    setReferrerError: defaultState.setReferrerError,
+    referrerSetIsPending: false,
+    referrerSetError: defaultState.referrerSetError,
   });
 
 reducers[ACTIONS.USER_SET_REFERRER_FAILURE] = (state, action) =>
   Object.assign({}, state, {
-    setReferrerIsPending: false,
-    setReferrerError: action.data.error.message,
+    referrerSetIsPending: false,
+    referrerSetError: action.data.error.message,
   });
 
 export function userReducer(state = defaultState, action) {

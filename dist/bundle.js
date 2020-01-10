@@ -4801,10 +4801,10 @@ var selectYouTubeImportError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["cre
   return state.youtubeChannelImportErrorMessage;
 });
 var selectSetReferrerPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.setReferrerIsPending;
+  return state.referrerSetIsPending;
 });
 var selectSetReferrerError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.setReferrerError;
+  return state.referrerSetError;
 });
 var selectYouTubeImportVideosComplete = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   var total = state.youtubeChannelImportTotal;
@@ -6794,8 +6794,8 @@ var defaultState = {
   accessToken: undefined,
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
-  setReferrerIsPending: false,
-  setReferrerError: ''
+  referrerSetIsPending: false,
+  referrerSetError: ''
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_STARTED"]] = function (state) {
@@ -7079,22 +7079,22 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_STARTED"]] = function (state) {
   return Object.assign({}, state, {
-    setReferrerIsPending: true,
-    setReferrerError: defaultState.setReferrerError
+    referrerSetIsPending: true,
+    referrerSetError: defaultState.referrerSetError
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_SUCCESS"]] = function (state) {
   return Object.assign({}, state, {
-    setReferrerIsPending: false,
-    setReferrerError: defaultState.setReferrerError
+    referrerSetIsPending: false,
+    referrerSetError: defaultState.referrerSetError
   });
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_FAILURE"]] = function (state, action) {
   return Object.assign({}, state, {
-    setReferrerIsPending: false,
-    setReferrerError: action.data.error.message
+    referrerSetIsPending: false,
+    referrerSetError: action.data.error.message
   });
 };
 
