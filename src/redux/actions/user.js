@@ -426,11 +426,6 @@ export function doUserSetReferrer(referrer, shouldClaim) {
       dispatch({
         type: ACTIONS.USER_SET_REFERRER_SUCCESS,
       });
-      dispatch(
-        doToast({
-          message: __(`Set Referrer to ${referrer}`),
-        }),
-      );
       if (shouldClaim) {
         dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
         dispatch(doUserFetch());

@@ -5321,9 +5321,6 @@ function doUserSetReferrer(referrer, shouldClaim) {
                 dispatch({
                   type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_SUCCESS"]
                 });
-                dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
-                  message: __("Set Referrer to ".concat(referrer))
-                }));
 
                 if (shouldClaim) {
                   dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_4__["default"].TYPE_REFEREE));
@@ -5332,11 +5329,11 @@ function doUserSetReferrer(referrer, shouldClaim) {
                   dispatch(doUserFetch());
                 }
 
-                _context.next = 29;
+                _context.next = 28;
                 break;
 
-              case 26:
-                _context.prev = 26;
+              case 25:
+                _context.prev = 25;
                 _context.t1 = _context["catch"](18);
                 dispatch({
                   type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_FAILURE"],
@@ -5345,12 +5342,12 @@ function doUserSetReferrer(referrer, shouldClaim) {
                   }
                 });
 
-              case 29:
+              case 28:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[7, 14], [18, 26]]);
+        }, _callee, null, [[7, 14], [18, 25]]);
       }));
 
       return function (_x, _x2) {
