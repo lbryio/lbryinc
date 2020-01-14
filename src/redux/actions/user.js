@@ -1,4 +1,11 @@
-import { Lbry, doToast, doFetchChannelListMine, batchActions } from 'lbry-redux';
+import {
+  Lbry,
+  doToast,
+  doFetchChannelListMine,
+  batchActions,
+  makeSelectClaimForUri,
+  parseURI,
+} from 'lbry-redux';
 import * as ACTIONS from 'constants/action_types';
 import { doClaimRewardType, doRewardList } from 'redux/actions/rewards';
 import {
@@ -25,6 +32,7 @@ export function doFetchInviteStatus() {
             invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
             invitees: status.invitees,
             referralLink: `${Lbryio.CONNECTION_STRING}user/refer?r=${code}`,
+            referralCode: code,
           },
         });
       })
@@ -63,11 +71,11 @@ export function doAuthenticate(appVersion, os = null, firebaseToken = null) {
     });
 
     Lbryio.authenticate()
-      .then(user => {
+      .then(accessToken => {
         // analytics.setUser(user);
         dispatch({
           type: ACTIONS.AUTHENTICATION_SUCCESS,
-          data: { user },
+          data: { accessToken },
         });
         dispatch(doRewardList());
         dispatch(doFetchInviteStatus());
@@ -363,8 +371,8 @@ export function doUserInviteNew(email) {
       type: ACTIONS.USER_INVITE_NEW_STARTED,
     });
 
-    Lbryio.call('user', 'invite', { email }, 'post')
-      .then(() => {
+    return Lbryio.call('user', 'invite', { email }, 'post')
+      .then(success => {
         dispatch({
           type: ACTIONS.USER_INVITE_NEW_SUCCESS,
           data: { email },
@@ -377,6 +385,7 @@ export function doUserInviteNew(email) {
         );
 
         dispatch(doFetchInviteStatus());
+        return success;
       })
       .catch(error => {
         dispatch({
@@ -384,6 +393,51 @@ export function doUserInviteNew(email) {
           data: { error },
         });
       });
+  };
+}
+
+export function doUserSetReferrer(referrer, shouldClaim) {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: ACTIONS.USER_SET_REFERRER_STARTED,
+    });
+    let claim;
+    let referrerCode = referrer;
+
+    const isClaim = parseURI(referrer).claimId;
+    if (isClaim) {
+      const uri = `lbry://${referrer}`;
+      claim = makeSelectClaimForUri(uri)(getState());
+      if (!claim) {
+        try {
+          const response = await Lbry.resolve({ urls: [uri] });
+          claim = response && response[uri];
+        } catch (error) {
+          dispatch({
+            type: ACTIONS.USER_SET_REFERRER_FAILURE,
+            data: { error },
+          });
+        }
+      }
+      referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+    }
+    try {
+      await Lbryio.call('user', 'referral', { referrer: referrerCode }, 'post');
+      dispatch({
+        type: ACTIONS.USER_SET_REFERRER_SUCCESS,
+      });
+      if (shouldClaim) {
+        dispatch(doClaimRewardType(rewards.TYPE_REFEREE));
+        dispatch(doUserFetch());
+      } else {
+        dispatch(doUserFetch());
+      }
+    } catch (error) {
+      dispatch({
+        type: ACTIONS.USER_SET_REFERRER_FAILURE,
+        data: { error },
+      });
+    }
   };
 }
 

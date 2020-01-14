@@ -25,7 +25,9 @@ export default handleActions(
     ): SubscriptionState => {
       const newSubscription: Subscription = action.data;
       const newSubscriptions: Array<Subscription> = state.subscriptions.slice();
-      newSubscriptions.unshift(newSubscription);
+      if (!newSubscriptions.some(sub => sub.uri === newSubscription.uri)) {
+        newSubscriptions.unshift(newSubscription);
+      }
 
       return {
         ...state,
