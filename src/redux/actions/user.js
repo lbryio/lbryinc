@@ -71,15 +71,17 @@ export function doAuthenticate(appVersion, os = null, firebaseToken = null) {
     });
 
     Lbryio.authenticate()
-      .then(accessToken => {
-        // analytics.setUser(user);
-        dispatch({
-          type: ACTIONS.AUTHENTICATION_SUCCESS,
-          data: { accessToken },
+      .then(user => {
+        Lbryio.getAuthToken().then(token => {
+          dispatch({
+            type: ACTIONS.AUTHENTICATION_SUCCESS,
+            data: { user, accessToken: token },
+          });
+
+          dispatch(doRewardList());
+          dispatch(doFetchInviteStatus());
+          doInstallNew(appVersion, os, firebaseToken);
         });
-        dispatch(doRewardList());
-        dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, os, firebaseToken);
       })
       .catch(error => {
         dispatch({

@@ -37,6 +37,7 @@ reducers[ACTIONS.AUTHENTICATION_SUCCESS] = (state, action) =>
     authenticationIsPending: false,
     userIsPending: false,
     accessToken: action.data.accessToken,
+    user: action.data.user,
   });
 
 reducers[ACTIONS.AUTHENTICATION_FAILURE] = state =>

@@ -4926,17 +4926,19 @@ function doAuthenticate(appVersion) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
     });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].authenticate().then(function (accessToken) {
-      // analytics.setUser(user);
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_SUCCESS"],
-        data: {
-          accessToken: accessToken
-        }
+    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].authenticate().then(function (user) {
+      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].getAuthToken().then(function (token) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_SUCCESS"],
+          data: {
+            user: user,
+            accessToken: token
+          }
+        });
+        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
+        dispatch(doFetchInviteStatus());
+        doInstallNew(appVersion, os, firebaseToken);
       });
-      dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-      dispatch(doFetchInviteStatus());
-      doInstallNew(appVersion, os, firebaseToken);
     })["catch"](function (error) {
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_FAILURE"],
@@ -6807,7 +6809,8 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_SUC
   return Object.assign({}, state, {
     authenticationIsPending: false,
     userIsPending: false,
-    accessToken: action.data.accessToken
+    accessToken: action.data.accessToken,
+    user: action.data.user
   });
 };
 
