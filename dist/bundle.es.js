@@ -1299,17 +1299,19 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null) {
     dispatch({
       type: AUTHENTICATION_STARTED
     });
-    Lbryio.authenticate().then(accessToken => {
-      // analytics.setUser(user);
-      dispatch({
-        type: AUTHENTICATION_SUCCESS,
-        data: {
-          accessToken
-        }
+    Lbryio.authenticate().then(user => {
+      Lbryio.getAuthToken().then(token => {
+        dispatch({
+          type: AUTHENTICATION_SUCCESS,
+          data: {
+            user,
+            accessToken: token
+          }
+        });
+        dispatch(doRewardList());
+        dispatch(doFetchInviteStatus());
+        doInstallNew(appVersion, os, firebaseToken);
       });
-      dispatch(doRewardList());
-      dispatch(doFetchInviteStatus());
-      doInstallNew(appVersion, os, firebaseToken);
     }).catch(error => {
       dispatch({
         type: AUTHENTICATION_FAILURE,
@@ -2978,7 +2980,8 @@ reducers$2[AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
 reducers$2[AUTHENTICATION_SUCCESS] = (state, action) => Object.assign({}, state, {
   authenticationIsPending: false,
   userIsPending: false,
-  accessToken: action.data.accessToken
+  accessToken: action.data.accessToken,
+  user: action.data.user
 });
 
 reducers$2[AUTHENTICATION_FAILURE] = state => Object.assign({}, state, {

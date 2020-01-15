@@ -175,6 +175,7 @@ Lbryio.authenticate = () => {
           if (!user) {
             return Lbryio.getCurrentUser();
           }
+
           return user;
         })
         .then(resolve, reject);
