@@ -209,6 +209,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSetReferrer"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrerReset", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSetReferrerReset"]; });
+
 /* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(30);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__["doFetchCostInfoForUri"]; });
 
@@ -582,6 +584,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_STARTED", function() { return USER_SET_REFERRER_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_SUCCESS", function() { return USER_SET_REFERRER_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_FAILURE", function() { return USER_SET_REFERRER_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_RESET", function() { return USER_SET_REFERRER_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_STARTED", function() { return FETCH_FEATURED_CONTENT_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_COMPLETED", function() { return FETCH_FEATURED_CONTENT_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_TRENDING_CONTENT_STARTED", function() { return FETCH_TRENDING_CONTENT_STARTED; });
@@ -701,7 +704,8 @@ var USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
 var USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS';
 var USER_SET_REFERRER_STARTED = 'USER_SET_REFERRER_STARTED';
 var USER_SET_REFERRER_SUCCESS = 'USER_SET_REFERRER_SUCCESS';
-var USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE'; // Claims
+var USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE';
+var USER_SET_REFERRER_RESET = 'USER_SET_REFERRER_RESET'; // Claims
 
 var FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 var FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
@@ -4838,6 +4842,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return doUserIdentityVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return doUserInviteNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrerReset", function() { return doUserSetReferrerReset; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return doUserSetReferrer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return doClaimYoutubeChannels; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckYoutubeTransfer", function() { return doCheckYoutubeTransfer; });
@@ -5256,6 +5261,13 @@ function doUserInviteNew(email) {
     });
   };
 }
+function doUserSetReferrerReset() {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_RESET"]
+    });
+  };
+}
 function doUserSetReferrer(referrer, shouldClaim) {
   return (
     /*#__PURE__*/
@@ -5263,7 +5275,8 @@ function doUserSetReferrer(referrer, shouldClaim) {
       var _ref3 = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(dispatch, getState) {
-        var claim, referrerCode, isClaim, uri, response;
+        var claim, referrerCode, _parseURI, isChannel, uri, response;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -5271,11 +5284,10 @@ function doUserSetReferrer(referrer, shouldClaim) {
                 dispatch({
                   type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_STARTED"]
                 });
-                referrerCode = referrer;
-                isClaim = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["parseURI"])(referrer).claimId;
+                _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["parseURI"])(referrer), isChannel = _parseURI.isChannel;
 
-                if (!isClaim) {
-                  _context.next = 18;
+                if (!isChannel) {
+                  _context.next = 17;
                   break;
                 }
 
@@ -5283,25 +5295,25 @@ function doUserSetReferrer(referrer, shouldClaim) {
                 claim = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["makeSelectClaimForUri"])(uri)(getState());
 
                 if (claim) {
-                  _context.next = 17;
+                  _context.next = 16;
                   break;
                 }
 
-                _context.prev = 7;
-                _context.next = 10;
+                _context.prev = 6;
+                _context.next = 9;
                 return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].resolve({
                   urls: [uri]
                 });
 
-              case 10:
+              case 9:
                 response = _context.sent;
                 claim = response && response[uri];
-                _context.next = 17;
+                _context.next = 16;
                 break;
 
-              case 14:
-                _context.prev = 14;
-                _context.t0 = _context["catch"](7);
+              case 13:
+                _context.prev = 13;
+                _context.t0 = _context["catch"](6);
                 dispatch({
                   type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_FAILURE"],
                   data: {
@@ -5309,10 +5321,14 @@ function doUserSetReferrer(referrer, shouldClaim) {
                   }
                 });
 
-              case 17:
-                referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+              case 16:
+                referrerCode = claim && claim.permanent_url && claim.permanent_url.replace('lbry://', '');
 
-              case 18:
+              case 17:
+                if (!referrerCode) {
+                  referrerCode = referrer;
+                }
+
                 _context.prev = 18;
                 _context.next = 21;
                 return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'referral', {
@@ -5349,7 +5365,7 @@ function doUserSetReferrer(referrer, shouldClaim) {
                 return _context.stop();
             }
           }
-        }, _callee, null, [[7, 14], [18, 25]]);
+        }, _callee, null, [[6, 13], [18, 25]]);
       }));
 
       return function (_x, _x2) {
@@ -7095,6 +7111,13 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_
   return Object.assign({}, state, {
     referrerSetIsPending: false,
     referrerSetError: action.data.error.message
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_RESET"]] = function (state) {
+  return Object.assign({}, state, {
+    referrerSetIsPending: false,
+    referrerSetError: defaultState.referrerSetError
   });
 };
 

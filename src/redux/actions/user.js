@@ -398,16 +398,24 @@ export function doUserInviteNew(email) {
   };
 }
 
+export function doUserSetReferrerReset() {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_SET_REFERRER_RESET,
+    });
+  };
+}
 export function doUserSetReferrer(referrer, shouldClaim) {
   return async (dispatch, getState) => {
     dispatch({
       type: ACTIONS.USER_SET_REFERRER_STARTED,
     });
     let claim;
-    let referrerCode = referrer;
+    let referrerCode;
 
-    const isClaim = parseURI(referrer).claimId;
-    if (isClaim) {
+    const { isChannel } = parseURI(referrer);
+
+    if (isChannel) {
       const uri = `lbry://${referrer}`;
       claim = makeSelectClaimForUri(uri)(getState());
       if (!claim) {
@@ -421,8 +429,13 @@ export function doUserSetReferrer(referrer, shouldClaim) {
           });
         }
       }
-      referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+      referrerCode = claim && claim.permanent_url && claim.permanent_url.replace('lbry://', '');
     }
+
+    if (!referrerCode) {
+      referrerCode = referrer;
+    }
+
     try {
       await Lbryio.call('user', 'referral', { referrer: referrerCode }, 'post');
       dispatch({
