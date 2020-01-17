@@ -52,7 +52,8 @@ const USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
 const USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS';
 const USER_SET_REFERRER_STARTED = 'USER_SET_REFERRER_STARTED';
 const USER_SET_REFERRER_SUCCESS = 'USER_SET_REFERRER_SUCCESS';
-const USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE'; // Claims
+const USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE';
+const USER_SET_REFERRER_RESET = 'USER_SET_REFERRER_RESET'; // Claims
 
 const FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 const FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
@@ -182,6 +183,7 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_SET_REFERRER_STARTED: USER_SET_REFERRER_STARTED,
   USER_SET_REFERRER_SUCCESS: USER_SET_REFERRER_SUCCESS,
   USER_SET_REFERRER_FAILURE: USER_SET_REFERRER_FAILURE,
+  USER_SET_REFERRER_RESET: USER_SET_REFERRER_RESET,
   FETCH_FEATURED_CONTENT_STARTED: FETCH_FEATURED_CONTENT_STARTED,
   FETCH_FEATURED_CONTENT_COMPLETED: FETCH_FEATURED_CONTENT_COMPLETED,
   FETCH_TRENDING_CONTENT_STARTED: FETCH_TRENDING_CONTENT_STARTED,
@@ -1623,16 +1625,25 @@ function doUserInviteNew(email) {
     });
   };
 }
+function doUserSetReferrerReset() {
+  return dispatch => {
+    dispatch({
+      type: USER_SET_REFERRER_RESET
+    });
+  };
+}
 function doUserSetReferrer(referrer, shouldClaim) {
   return async (dispatch, getState) => {
     dispatch({
       type: USER_SET_REFERRER_STARTED
     });
     let claim;
-    let referrerCode = referrer;
-    const isClaim = lbryRedux.parseURI(referrer).claimId;
+    let referrerCode;
+    const {
+      isChannel
+    } = lbryRedux.parseURI(referrer);
 
-    if (isClaim) {
+    if (isChannel) {
       const uri = `lbry://${referrer}`;
       claim = lbryRedux.makeSelectClaimForUri(uri)(getState());
 
@@ -1652,7 +1663,11 @@ function doUserSetReferrer(referrer, shouldClaim) {
         }
       }
 
-      referrerCode = claim && claim.permanent_url.replace('lbry://', '');
+      referrerCode = claim && claim.permanent_url && claim.permanent_url.replace('lbry://', '');
+    }
+
+    if (!referrerCode) {
+      referrerCode = referrer;
     }
 
     try {
@@ -3200,6 +3215,11 @@ reducers$2[USER_SET_REFERRER_FAILURE] = (state, action) => Object.assign({}, sta
   referrerSetError: action.data.error.message
 });
 
+reducers$2[USER_SET_REFERRER_RESET] = state => Object.assign({}, state, {
+  referrerSetIsPending: false,
+  referrerSetError: defaultState$3.referrerSetError
+});
+
 function userReducer(state = defaultState$3, action) {
   const handler = reducers$2[action.type];
   if (handler) return handler(state, action);
@@ -3634,6 +3654,7 @@ exports.doUserPhoneVerify = doUserPhoneVerify;
 exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
 exports.doUserSetReferrer = doUserSetReferrer;
+exports.doUserSetReferrerReset = doUserSetReferrerReset;
 exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
 exports.lbrytvReducer = lbrytvReducer;

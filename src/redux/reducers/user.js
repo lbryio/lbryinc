@@ -290,6 +290,12 @@ reducers[ACTIONS.USER_SET_REFERRER_FAILURE] = (state, action) =>
     referrerSetError: action.data.error.message,
   });
 
+reducers[ACTIONS.USER_SET_REFERRER_RESET] = state =>
+  Object.assign({}, state, {
+    referrerSetIsPending: false,
+    referrerSetError: defaultState.referrerSetError,
+  });
+
 export function userReducer(state = defaultState, action) {
   const handler = reducers[action.type];
   if (handler) return handler(state, action);
