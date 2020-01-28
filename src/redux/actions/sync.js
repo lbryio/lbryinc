@@ -102,8 +102,17 @@ export function doGetSync(passedPassword, callback) {
         if (status.is_locked) {
           return Lbry.wallet_unlock({ password });
         }
+
+        // Wallet is already unlocked
+        return true;
       })
-      .then(() => Lbry.sync_hash())
+      .then(isUnlocked => {
+        if (isUnlocked) {
+          return Lbry.sync_hash();
+        }
+        data.unlockFailed = true;
+        throw new Error();
+      })
       .then(hash => Lbryio.call('sync', 'get', { hash }, 'post'))
       .then(response => {
         const syncHash = response.hash;
@@ -132,8 +141,16 @@ export function doGetSync(passedPassword, callback) {
         dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
         handleCallback();
       })
-      .catch(() => {
-        if (data.hasSyncedWallet) {
+      .catch(syncAttemptError => {
+        if (data.unlockFailed) {
+          dispatch({ type: ACTIONS.GET_SYNC_FAILED, data: { error: syncAttemptError } });
+
+          if (password !== '') {
+            dispatch({ type: ACTIONS.SYNC_APPLY_BAD_PASSWORD });
+          }
+
+          handleCallback(syncAttemptError);
+        } else if (data.hasSyncedWallet) {
           const error = 'Error getting synced wallet';
           dispatch({
             type: ACTIONS.GET_SYNC_FAILED,
@@ -164,8 +181,8 @@ export function doGetSync(passedPassword, callback) {
               dispatch(doSetSync('', walletHash, syncApplyData, password));
               handleCallback();
             })
-            .catch(error => {
-              handleCallback(error);
+            .catch(syncApplyError => {
+              handleCallback(syncApplyError);
             });
         }
       });

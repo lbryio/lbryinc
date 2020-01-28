@@ -6396,9 +6396,17 @@ function doGetSync(passedPassword, callback) {
         return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].wallet_unlock({
           password: password
         });
+      } // Wallet is already unlocked
+
+
+      return true;
+    }).then(function (isUnlocked) {
+      if (isUnlocked) {
+        return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash();
       }
-    }).then(function () {
-      return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash();
+
+      data.unlockFailed = true;
+      throw new Error();
     }).then(function (hash) {
       return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
         hash: hash
@@ -6439,8 +6447,24 @@ function doGetSync(passedPassword, callback) {
         data: data
       });
       handleCallback();
-    })["catch"](function () {
-      if (data.hasSyncedWallet) {
+    })["catch"](function (syncAttemptError) {
+      if (data.unlockFailed) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
+          data: {
+            error: syncAttemptError
+          }
+        });
+
+        if (password !== '') {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]
+          });
+        }
+
+        handleCallback(syncAttemptError);
+        return;
+      } else if (data.hasSyncedWallet) {
         var error = 'Error getting synced wallet';
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
@@ -6476,8 +6500,8 @@ function doGetSync(passedPassword, callback) {
               syncApplyData = _ref.data;
           dispatch(doSetSync('', walletHash, syncApplyData, password));
           handleCallback();
-        })["catch"](function (error) {
-          handleCallback(error);
+        })["catch"](function (syncApplyError) {
+          handleCallback(syncApplyError);
         });
       }
     });
