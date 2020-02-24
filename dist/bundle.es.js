@@ -1296,7 +1296,7 @@ function doInstallNew(appVersion, os = null, firebaseToken = null) {
   });
 } // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 
-function doAuthenticate(appVersion, os = null, firebaseToken = null) {
+function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true) {
   return dispatch => {
     dispatch({
       type: AUTHENTICATION_STARTED
@@ -1310,9 +1310,12 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null) {
             accessToken: token
           }
         });
-        dispatch(doRewardList());
-        dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, os, firebaseToken);
+
+        if (shareUsageData) {
+          dispatch(doRewardList());
+          dispatch(doFetchInviteStatus());
+          doInstallNew(appVersion, os, firebaseToken);
+        }
       });
     }).catch(error => {
       dispatch({

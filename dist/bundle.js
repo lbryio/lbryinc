@@ -4927,6 +4927,7 @@ function doInstallNew(appVersion) {
 function doAuthenticate(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var shareUsageData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
@@ -4940,9 +4941,12 @@ function doAuthenticate(appVersion) {
             accessToken: token
           }
         });
-        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-        dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, os, firebaseToken);
+
+        if (shareUsageData) {
+          dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
+          dispatch(doFetchInviteStatus());
+          doInstallNew(appVersion, os, firebaseToken);
+        }
       });
     })["catch"](function (error) {
       dispatch({
