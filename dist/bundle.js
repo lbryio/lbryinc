@@ -4943,7 +4943,6 @@ function doAuthenticate(appVersion) {
         });
 
         if (shareUsageData) {
-          dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
           dispatch(doFetchInviteStatus());
           doInstallNew(appVersion, os, firebaseToken);
         }

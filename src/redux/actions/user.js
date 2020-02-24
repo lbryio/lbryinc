@@ -79,7 +79,6 @@ export function doAuthenticate(appVersion, os = null, firebaseToken = null, shar
           });
 
           if (shareUsageData) {
-            dispatch(doRewardList());
             dispatch(doFetchInviteStatus());
             doInstallNew(appVersion, os, firebaseToken);
           }

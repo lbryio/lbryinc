@@ -1312,7 +1312,6 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
         });
 
         if (shareUsageData) {
-          dispatch(doRewardList());
           dispatch(doFetchInviteStatus());
           doInstallNew(appVersion, os, firebaseToken);
         }
