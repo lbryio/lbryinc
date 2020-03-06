@@ -173,6 +173,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doInstallNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doInstallNew"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doInstallNewWithParams", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doInstallNewWithParams"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doAuthenticate", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doAuthenticate"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserFetch", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserFetch"]; });
@@ -4827,6 +4829,7 @@ var selectYouTubeImportVideosComplete = Object(reselect__WEBPACK_IMPORTED_MODULE
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchInviteStatus", function() { return doFetchInviteStatus; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doInstallNew", function() { return doInstallNew; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doInstallNewWithParams", function() { return doInstallNewWithParams; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doAuthenticate", function() { return doAuthenticate; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserFetch", function() { return doUserFetch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserCheckEmailVerified", function() { return doUserCheckEmailVerified; });
@@ -4922,11 +4925,29 @@ function doInstallNew(appVersion) {
       lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('install', 'new', payload);
     });
   });
+}
+function doInstallNewWithParams(appVersion, installationId, nodeId, lbrynetVersion, os, platform) {
+  var firebaseToken = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
+  var payload = {
+    app_version: appVersion
+  };
+
+  if (firebaseToken) {
+    payload.firebase_token = firebaseToken;
+  }
+
+  payload.app_id = installationId;
+  payload.node_id = nodeId;
+  payload.daemon_version = lbrynetVersion;
+  payload.operating_system = os;
+  payload.platform = platform;
+  lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('install', 'new', payload);
 } // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 
 function doAuthenticate(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var callInstall = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
@@ -4942,7 +4963,10 @@ function doAuthenticate(appVersion) {
         });
         dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
         dispatch(doFetchInviteStatus());
-        doInstallNew(appVersion, os, firebaseToken);
+
+        if (callInstall) {
+          doInstallNew(appVersion, os, firebaseToken);
+        }
       });
     })["catch"](function (error) {
       dispatch({
@@ -6463,7 +6487,6 @@ function doGetSync(passedPassword, callback) {
         }
 
         handleCallback(syncAttemptError);
-        return;
       } else if (data.hasSyncedWallet) {
         var error = 'Error getting synced wallet';
         dispatch({
