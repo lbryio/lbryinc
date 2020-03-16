@@ -1275,7 +1275,7 @@ function doFetchInviteStatus() {
     });
   };
 }
-function doInstallNew(appVersion, os = null, firebaseToken = null, callback) {
+function doInstallNew(appVersion, os = null, firebaseToken = null, callbackForUsersWhoAreSharingData) {
   const payload = {
     app_version: appVersion
   };
@@ -1293,14 +1293,14 @@ function doInstallNew(appVersion, os = null, firebaseToken = null, callback) {
       payload.platform = version.platform;
       Lbryio.call('install', 'new', payload);
 
-      if (callback) {
-        callback(status);
+      if (callbackForUsersWhoAreSharingData) {
+        callbackForUsersWhoAreSharingData(status);
       }
     });
   });
 } // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 
-function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callback) {
+function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callbackForUsersWhoAreSharingData) {
   return dispatch => {
     dispatch({
       type: AUTHENTICATION_STARTED
@@ -1318,7 +1318,7 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
         if (shareUsageData) {
           dispatch(doRewardList());
           dispatch(doFetchInviteStatus());
-          doInstallNew(appVersion, os, firebaseToken, callback);
+          doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
         }
       });
     }).catch(error => {

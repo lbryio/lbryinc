@@ -4904,7 +4904,7 @@ function doFetchInviteStatus() {
 function doInstallNew(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var callback = arguments.length > 3 ? arguments[3] : undefined;
+  var callbackForUsersWhoAreSharingData = arguments.length > 3 ? arguments[3] : undefined;
   var payload = {
     app_version: appVersion
   };
@@ -4922,8 +4922,8 @@ function doInstallNew(appVersion) {
       payload.platform = version.platform;
       lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('install', 'new', payload);
 
-      if (callback) {
-        callback(status);
+      if (callbackForUsersWhoAreSharingData) {
+        callbackForUsersWhoAreSharingData(status);
       }
     });
   });
@@ -4933,7 +4933,7 @@ function doAuthenticate(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var shareUsageData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var callback = arguments.length > 4 ? arguments[4] : undefined;
+  var callbackForUsersWhoAreSharingData = arguments.length > 4 ? arguments[4] : undefined;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
@@ -4951,7 +4951,7 @@ function doAuthenticate(appVersion) {
         if (shareUsageData) {
           dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
           dispatch(doFetchInviteStatus());
-          doInstallNew(appVersion, os, firebaseToken, callback);
+          doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
         }
       });
     })["catch"](function (error) {

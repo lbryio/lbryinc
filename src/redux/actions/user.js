@@ -45,7 +45,12 @@ export function doFetchInviteStatus() {
   };
 }
 
-export function doInstallNew(appVersion, os = null, firebaseToken = null, callback) {
+export function doInstallNew(
+  appVersion,
+  os = null,
+  firebaseToken = null,
+  callbackForUsersWhoAreSharingData
+) {
   const payload = { app_version: appVersion };
   if (firebaseToken) {
     payload.firebase_token = firebaseToken;
@@ -60,8 +65,8 @@ export function doInstallNew(appVersion, os = null, firebaseToken = null, callba
       payload.platform = version.platform;
       Lbryio.call('install', 'new', payload);
 
-      if (callback) {
-        callback(status);
+      if (callbackForUsersWhoAreSharingData) {
+        callbackForUsersWhoAreSharingData(status);
       }
     });
   });
@@ -73,7 +78,7 @@ export function doAuthenticate(
   os = null,
   firebaseToken = null,
   shareUsageData = true,
-  callback
+  callbackForUsersWhoAreSharingData
 ) {
   return dispatch => {
     dispatch({
@@ -91,7 +96,7 @@ export function doAuthenticate(
           if (shareUsageData) {
             dispatch(doRewardList());
             dispatch(doFetchInviteStatus());
-            doInstallNew(appVersion, os, firebaseToken, callback);
+            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
           }
         });
       })
