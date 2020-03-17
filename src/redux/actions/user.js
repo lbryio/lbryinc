@@ -81,17 +81,19 @@ export function doInstallNewWithParams(
   platform,
   firebaseToken = null
 ) {
-  const payload = { app_version: appVersion };
-  if (firebaseToken) {
-    payload.firebase_token = firebaseToken;
-  }
+  return dispatch => {
+    const payload = { app_version: appVersion };
+    if (firebaseToken) {
+      payload.firebase_token = firebaseToken;
+    }
 
-  payload.app_id = installationId;
-  payload.node_id = nodeId;
-  payload.daemon_version = lbrynetVersion;
-  payload.operating_system = os;
-  payload.platform = platform;
-  Lbryio.call('install', 'new', payload);
+    payload.app_id = installationId;
+    payload.node_id = nodeId;
+    payload.daemon_version = lbrynetVersion;
+    payload.operating_system = os;
+    payload.platform = platform;
+    Lbryio.call('install', 'new', payload);
+  };
 }
 
 // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
