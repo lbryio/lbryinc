@@ -1298,9 +1298,27 @@ function doInstallNew(appVersion, os = null, firebaseToken = null, callbackForUs
       }
     });
   });
+}
+function doInstallNewWithParams(appVersion, installationId, nodeId, lbrynetVersion, os, platform, firebaseToken = null) {
+  return dispatch => {
+    const payload = {
+      app_version: appVersion
+    };
+
+    if (firebaseToken) {
+      payload.firebase_token = firebaseToken;
+    }
+
+    payload.app_id = installationId;
+    payload.node_id = nodeId;
+    payload.daemon_version = lbrynetVersion;
+    payload.operating_system = os;
+    payload.platform = platform;
+    Lbryio.call('install', 'new', payload);
+  };
 } // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 
-function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callbackForUsersWhoAreSharingData) {
+function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callbackForUsersWhoAreSharingData, callInstall = true) {
   return dispatch => {
     dispatch({
       type: AUTHENTICATION_STARTED
@@ -1318,7 +1336,10 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
         if (shareUsageData) {
           dispatch(doRewardList());
           dispatch(doFetchInviteStatus());
-          doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
+
+          if (callInstall) {
+            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
+          }
         }
       });
     }).catch(error => {
@@ -3659,6 +3680,7 @@ exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
 exports.doGenerateAuthToken = doGenerateAuthToken;
 exports.doGetSync = doGetSync;
 exports.doInstallNew = doInstallNew;
+exports.doInstallNewWithParams = doInstallNewWithParams;
 exports.doRemoveUnreadSubscription = doRemoveUnreadSubscription;
 exports.doRemoveUnreadSubscriptions = doRemoveUnreadSubscriptions;
 exports.doResetSync = doResetSync;

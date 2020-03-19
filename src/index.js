@@ -47,6 +47,7 @@ export {
 export {
   doFetchInviteStatus,
   doInstallNew,
+  doInstallNewWithParams,
   doAuthenticate,
   doUserFetch,
   doUserEmailNew,
