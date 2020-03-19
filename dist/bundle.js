@@ -6412,13 +6412,13 @@ function doSetSync(oldHash, newHash, data) {
 function doGetSync(passedPassword, callback) {
   var password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
 
-  function handleCallback(error) {
+  function handleCallback(error, hasNewData) {
     if (callback) {
       if (typeof callback !== 'function') {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
-      callback(error);
+      callback(error, hasNewData);
     }
   }
 
@@ -6451,6 +6451,7 @@ function doGetSync(passedPassword, callback) {
       var syncHash = response.hash;
       data.syncHash = syncHash;
       data.syncData = response.data;
+      data.changed = response.changed;
       data.hasSyncedWallet = true;
 
       if (response.changed) {
@@ -6466,7 +6467,7 @@ function doGetSync(passedPassword, callback) {
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
           data: data
         });
-        handleCallback();
+        handleCallback(null, data.changed);
         return;
       }
 
@@ -6482,7 +6483,7 @@ function doGetSync(passedPassword, callback) {
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
         data: data
       });
-      handleCallback();
+      handleCallback(null, data.changed);
     })["catch"](function (syncAttemptError) {
       if (data.unlockFailed) {
         dispatch({
