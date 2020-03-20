@@ -33,7 +33,7 @@ export function doClaimRewardType(rewardType, options = {}) {
     const userIsRewardApproved = selectUserIsRewardApproved(state);
     const unclaimedRewards = selectUnclaimedRewards(state);
     const reward =
-      rewardType === rewards.TYPE_REWARD_CODE
+      rewardType === rewards.TYPE_REWARD_CODE || rewardType === rewards.TYPE_NEW_ANDROID
         ? { reward_type: rewards.TYPE_REWARD_CODE }
         : unclaimedRewards.find(ur => ur.reward_type === rewardType);
 
@@ -41,7 +41,8 @@ export function doClaimRewardType(rewardType, options = {}) {
     if (
       rewardType !== rewards.TYPE_REWARD_CODE ||
       rewardType !== rewards.TYPE_CONFIRM_EMAIL ||
-      rewardType !== rewards.TYPE_DAILY_VIEW
+      rewardType !== rewards.TYPE_DAILY_VIEW ||
+      rewardType !== rewards.TYPE_NEW_ANDROID
     ) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
@@ -52,7 +53,8 @@ export function doClaimRewardType(rewardType, options = {}) {
     if (
       !userIsRewardApproved &&
       rewardType !== rewards.TYPE_CONFIRM_EMAIL &&
-      rewardType !== rewards.TYPE_REWARD_CODE
+      rewardType !== rewards.TYPE_REWARD_CODE &&
+      rewardType !== rewards.TYPE_NEW_ANDROID
     ) {
       if (!options || (!options.failSilently && rewards.callbacks.rewardApprovalRequested)) {
         rewards.callbacks.rewardApprovalRequested();

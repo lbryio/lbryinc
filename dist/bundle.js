@@ -1294,6 +1294,7 @@ rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 rewards.TYPE_DAILY_VIEW = 'daily_view';
+rewards.TYPE_NEW_ANDROID = 'new_android';
 
 rewards.claimReward = function (type, rewardParams) {
   function requestReward(resolve, reject, params) {
@@ -4400,20 +4401,20 @@ function doClaimRewardType(rewardType) {
     var state = getState();
     var userIsRewardApproved = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectUserIsRewardApproved"])(state);
     var unclaimedRewards = Object(redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_2__["selectUnclaimedRewards"])(state);
-    var reward = rewardType === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE ? {
+    var reward = rewardType === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID ? {
       reward_type: rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE
     } : unclaimedRewards.find(function (ur) {
       return ur.reward_type === rewardType;
     }); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW) {
+    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
       }
     }
 
-    if (!userIsRewardApproved && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE) {
+    if (!userIsRewardApproved && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID) {
       if (!options || !options.failSilently && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.rewardApprovalRequested) {
         rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.rewardApprovalRequested();
       }
