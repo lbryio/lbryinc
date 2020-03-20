@@ -506,6 +506,7 @@ rewards.TYPE_REWARD_CODE = 'reward_code';
 rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 rewards.TYPE_DAILY_VIEW = 'daily_view';
+rewards.TYPE_NEW_ANDROID = 'new_android';
 
 rewards.claimReward = (type, rewardParams) => {
   function requestReward(resolve, reject, params) {
@@ -1815,18 +1816,18 @@ function doClaimRewardType(rewardType, options = {}) {
     const state = getState();
     const userIsRewardApproved = selectUserIsRewardApproved(state);
     const unclaimedRewards = selectUnclaimedRewards(state);
-    const reward = rewardType === rewards.TYPE_REWARD_CODE ? {
+    const reward = rewardType === rewards.TYPE_REWARD_CODE || rewardType === rewards.TYPE_NEW_ANDROID ? {
       reward_type: rewards.TYPE_REWARD_CODE
     } : unclaimedRewards.find(ur => ur.reward_type === rewardType); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL || rewardType !== rewards.TYPE_DAILY_VIEW) {
+    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL || rewardType !== rewards.TYPE_DAILY_VIEW || rewardType !== rewards.TYPE_NEW_ANDROID) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
       }
     }
 
-    if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL && rewardType !== rewards.TYPE_REWARD_CODE) {
+    if (!userIsRewardApproved && rewardType !== rewards.TYPE_CONFIRM_EMAIL && rewardType !== rewards.TYPE_REWARD_CODE && rewardType !== rewards.TYPE_NEW_ANDROID) {
       if (!options || !options.failSilently && rewards.callbacks.rewardApprovalRequested) {
         rewards.callbacks.rewardApprovalRequested();
       }
