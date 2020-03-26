@@ -1199,6 +1199,10 @@ const makeSelectClaimRewardError = () => reselect.createSelector(selectClaimRewa
 const selectRewardByType = (state, rewardType) => selectUnclaimedRewards(state).find(reward => reward.reward_type === rewardType);
 
 const makeSelectRewardByType = () => reselect.createSelector(selectRewardByType, reward => reward);
+
+const selectRewardByClaimCode = (state, claimCode) => selectUnclaimedRewards(state).find(reward => reward.claim_code === claimCode);
+
+const makeSelectRewardByClaimCode = () => reselect.createSelector(selectRewardByClaimCode, reward => reward);
 const makeSelectRewardAmountByType = () => reselect.createSelector(selectRewardByType, reward => reward ? reward.reward_amount : 0);
 const selectRewardContentClaimIds = reselect.createSelector(selectState$1, state => state.rewardedContentClaimIds);
 const selectReferralReward = reselect.createSelector(selectUnclaimedRewards, unclaimedRewards => unclaimedRewards.filter(reward => reward.reward_type === rewards.TYPE_REFERRAL)[0]);
@@ -3721,6 +3725,7 @@ exports.makeSelectIsNew = makeSelectIsNew;
 exports.makeSelectIsRewardClaimPending = makeSelectIsRewardClaimPending;
 exports.makeSelectIsSubscribed = makeSelectIsSubscribed;
 exports.makeSelectRewardAmountByType = makeSelectRewardAmountByType;
+exports.makeSelectRewardByClaimCode = makeSelectRewardByClaimCode;
 exports.makeSelectRewardByType = makeSelectRewardByType;
 exports.makeSelectSubCountForUri = makeSelectSubCountForUri;
 exports.makeSelectUnreadByChannel = makeSelectUnreadByChannel;

@@ -104,6 +104,7 @@ export {
   makeSelectIsRewardClaimPending,
   makeSelectRewardAmountByType,
   makeSelectRewardByType,
+  makeSelectRewardByClaimCode,
   selectUnclaimedRewardsByType,
   selectClaimedRewardsById,
   selectClaimedRewards,
