@@ -294,6 +294,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectRewardByType"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByClaimCode", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectRewardByClaimCode"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewardsByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectUnclaimedRewardsByType"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewardsById", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimedRewardsById"]; });
@@ -4559,6 +4561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimErrorsByType", function() { return selectClaimErrorsByType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectClaimRewardError", function() { return makeSelectClaimRewardError; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByType", function() { return makeSelectRewardByType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByClaimCode", function() { return makeSelectRewardByClaimCode; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardAmountByType", function() { return makeSelectRewardAmountByType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRewardContentClaimIds", function() { return selectRewardContentClaimIds; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectReferralReward", function() { return selectReferralReward; });
@@ -4634,6 +4637,18 @@ var selectRewardByType = function selectRewardByType(state, rewardType) {
 
 var makeSelectRewardByType = function makeSelectRewardByType() {
   return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectRewardByType, function (reward) {
+    return reward;
+  });
+};
+
+var selectRewardByClaimCode = function selectRewardByClaimCode(state, claimCode) {
+  return selectUnclaimedRewards(state).find(function (reward) {
+    return reward.claim_code === claimCode;
+  });
+};
+
+var makeSelectRewardByClaimCode = function makeSelectRewardByClaimCode() {
+  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectRewardByClaimCode, function (reward) {
     return reward;
   });
 };

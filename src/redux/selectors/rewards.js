@@ -61,6 +61,12 @@ const selectRewardByType = (state, rewardType) =>
 
 export const makeSelectRewardByType = () => createSelector(selectRewardByType, reward => reward);
 
+const selectRewardByClaimCode = (state, claimCode) =>
+  selectUnclaimedRewards(state).find(reward => reward.claim_code === claimCode);
+
+export const makeSelectRewardByClaimCode = () =>
+  createSelector(selectRewardByClaimCode, reward => reward);
+
 export const makeSelectRewardAmountByType = () =>
   createSelector(selectRewardByType, reward => (reward ? reward.reward_amount : 0));
 
