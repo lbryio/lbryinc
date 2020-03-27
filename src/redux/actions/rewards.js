@@ -65,7 +65,9 @@ export function doClaimRewardType(rewardType, options = {}) {
 
     // Set `claim_code` so the api knows which reward to give if there are multiple of the same type
     const params = options.params || {};
-    params.claim_code = reward.claim_code;
+    if (!params.claim_code) {
+      params.claim_code = reward.claim_code;
+    }
 
     dispatch({
       type: ACTIONS.CLAIM_REWARD_STARTED,
