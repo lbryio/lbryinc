@@ -1841,7 +1841,11 @@ function doClaimRewardType(rewardType, options = {}) {
 
 
     const params = options.params || {};
-    params.claim_code = reward.claim_code;
+
+    if (!params.claim_code) {
+      params.claim_code = reward.claim_code;
+    }
+
     dispatch({
       type: lbryRedux.ACTIONS.CLAIM_REWARD_STARTED,
       data: {
