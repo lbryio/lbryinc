@@ -932,7 +932,7 @@ Lbryio.getAuthToken = function () {
       Lbryio.overrides.getAuthToken().then(function (token) {
         resolve(token);
       });
-    } else {
+    } else if (typeof window !== 'undefined') {
       var _window = window,
           store = _window.store;
 
@@ -943,6 +943,8 @@ Lbryio.getAuthToken = function () {
         resolve(token);
       }
 
+      resolve(null);
+    } else {
       resolve(null);
     }
   });

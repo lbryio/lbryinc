@@ -367,7 +367,7 @@ Lbryio.getAuthToken = () => new Promise(resolve => {
     Lbryio.overrides.getAuthToken().then(token => {
       resolve(token);
     });
-  } else {
+  } else if (typeof window !== 'undefined') {
     const {
       store
     } = window;
@@ -379,6 +379,8 @@ Lbryio.getAuthToken = () => new Promise(resolve => {
       resolve(token);
     }
 
+    resolve(null);
+  } else {
     resolve(null);
   }
 });
