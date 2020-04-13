@@ -16,6 +16,7 @@ declare type User = {
   is_email_enabled: boolean,
   is_identity_verified: boolean,
   is_reward_approved: boolean,
+  password_set: boolean,
   language: string,
   manual_approval_user_id: ?number,
   primary_email: string,

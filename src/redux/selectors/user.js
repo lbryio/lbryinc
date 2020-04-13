@@ -16,6 +16,11 @@ export const selectEmailAlreadyExists = createSelector(
   state => state.emailAlreadyExists
 );
 
+export const selectEmailDoesNotExist = createSelector(
+  selectState,
+  state => state.emailDoesNotExist
+);
+
 export const selectResendingVerificationEmail = createSelector(
   selectState,
   state => state.resendingVerificationEmail
@@ -63,10 +68,45 @@ export const selectEmailNewIsPending = createSelector(
   state => state.emailNewIsPending
 );
 
-export const selectEmailNewErrorMessage = createSelector(
+export const selectEmailNewErrorMessage = createSelector(selectState, state => {
+  const error = state.emailNewErrorMessage;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
+
+export const selectPasswordExists = createSelector(
   selectState,
-  state => state.emailNewErrorMessage
+  state => state.passwordExistsForUser
 );
+
+export const selectPasswordResetIsPending = createSelector(
+  selectState,
+  state => state.passwordResetPending
+);
+
+export const selectPasswordResetSuccess = createSelector(
+  selectState,
+  state => state.passwordResetSuccess
+);
+
+export const selectPasswordResetError = createSelector(selectState, state => {
+  const error = state.passwordResetError;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
+
+export const selectPasswordSetIsPending = createSelector(
+  selectState,
+  state => state.passwordSetPending
+);
+
+export const selectPasswordSetSuccess = createSelector(
+  selectState,
+  state => state.passwordSetSuccess
+);
+
+export const selectPasswordSetError = createSelector(selectState, state => {
+  const error = state.passwordSetError;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
 
 export const selectPhoneNewErrorMessage = createSelector(
   selectState,

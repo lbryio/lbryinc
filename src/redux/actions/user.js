@@ -81,7 +81,7 @@ export function doInstallNewWithParams(
   platform,
   firebaseToken = null
 ) {
-  return dispatch => {
+  return () => {
     const payload = { app_version: appVersion };
     if (firebaseToken) {
       payload.firebase_token = firebaseToken;
@@ -137,25 +137,29 @@ export function doAuthenticate(
 }
 
 export function doUserFetch() {
-  return dispatch => {
-    dispatch({
-      type: ACTIONS.USER_FETCH_STARTED,
-    });
-    Lbryio.getCurrentUser()
-      .then(user => {
-        dispatch(doRewardList());
-        dispatch({
-          type: ACTIONS.USER_FETCH_SUCCESS,
-          data: { user },
-        });
-      })
-      .catch(error => {
-        dispatch({
-          type: ACTIONS.USER_FETCH_FAILURE,
-          data: { error },
-        });
+  return dispatch =>
+    new Promise((resolve, reject) => {
+      dispatch({
+        type: ACTIONS.USER_FETCH_STARTED,
       });
-  };
+
+      Lbryio.getCurrentUser()
+        .then(user => {
+          dispatch(doRewardList());
+          dispatch({
+            type: ACTIONS.USER_FETCH_SUCCESS,
+            data: { user },
+          });
+          resolve(user);
+        })
+        .catch(error => {
+          reject(error);
+          dispatch({
+            type: ACTIONS.USER_FETCH_FAILURE,
+            data: { error },
+          });
+        });
+    });
 }
 
 export function doUserCheckEmailVerified() {
@@ -301,6 +305,175 @@ export function doUserEmailNew(email) {
   };
 }
 
+export function doUserCheckIfEmailExists(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_NEW_STARTED,
+      email,
+    });
+
+    const success = response => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email },
+      });
+
+      if (response.has_password) {
+        dispatch({
+          type: ACTIONS.USER_PASSWORD_EXISTS,
+        });
+      }
+    };
+
+    const failure = error =>
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error },
+      });
+
+    Lbryio.call('user', 'exists', { email }, 'post')
+      .catch(error => {
+        if (error.response && error.response.status === 404) {
+          dispatch({
+            type: ACTIONS.USER_EMAIL_NEW_DOES_NOT_EXIST,
+          });
+        }
+        throw error;
+      })
+      .then(success, failure);
+  };
+}
+
+export function doUserSignIn(email, password) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_NEW_STARTED,
+      email,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email },
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error =>
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error },
+      });
+
+    Lbryio.call('user', 'signin', { email, ...(password ? { password } : {}) }, 'post')
+      .catch(error => {
+        if (error.response && error.response.status === 409) {
+          dispatch({
+            type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+          });
+
+          return Lbryio.call(
+            'user_email',
+            'resend_token',
+            { email, only_if_expired: true },
+            'post'
+          ).then(success, failure);
+        }
+        throw error;
+      })
+      .then(success, failure);
+  };
+}
+
+export function doUserSignUp(email, password) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_EMAIL_NEW_STARTED,
+      email,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+        data: { email },
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => {
+      if (error.response && error.response.status === 409) {
+        dispatch({
+          type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+        });
+      }
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+        data: { error },
+      });
+    };
+
+    Lbryio.call('user', 'signup', { email, ...(password ? { password } : {}) }, 'post').then(
+      success,
+      failure
+    );
+  };
+}
+
+export function doUserPasswordReset(email) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_PASSWORD_RESET_STARTED,
+      email,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_PASSWORD_RESET_SUCCESS,
+      });
+    };
+
+    const failure = error =>
+      dispatch({
+        type: ACTIONS.USER_PASSWORD_RESET_FAILURE,
+        data: { error },
+      });
+
+    Lbryio.call('user_password', 'reset', { email }, 'post').then(success, failure);
+  };
+}
+
+export function doUserPasswordSet(newPassword, oldPassword, authToken) {
+  return dispatch => {
+    dispatch({
+      type: ACTIONS.USER_PASSWORD_SET_STARTED,
+    });
+
+    const success = () => {
+      dispatch({
+        type: ACTIONS.USER_PASSWORD_SET_SUCCESS,
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error =>
+      dispatch({
+        type: ACTIONS.USER_PASSWORD_SET_FAILURE,
+        data: { error },
+      });
+
+    Lbryio.call(
+      'user_password',
+      'set',
+      {
+        new_password: newPassword,
+        ...(oldPassword ? { old_password: oldPassword } : {}),
+        ...(authToken ? { auth_token: authToken } : {}),
+      },
+      'post'
+    ).then(success, failure);
+  };
+}
+
 export function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
@@ -327,6 +500,18 @@ export function doUserResendVerificationEmail(email) {
         }
       })
       .then(success, failure);
+  };
+}
+
+export function doClearEmailEntry() {
+  return {
+    type: ACTIONS.USER_EMAIL_NEW_CLEAR_ENTRY,
+  };
+}
+
+export function doClearPasswordEntries() {
+  return {
+    type: ACTIONS.USER_PASSWORD_SET_CLEAR,
   };
 }
 
