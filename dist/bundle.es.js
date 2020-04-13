@@ -1397,31 +1397,29 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
   };
 }
 function doUserFetch() {
-  return dispatch => {
-    return new Promise((resolve, reject) => {
+  return dispatch => new Promise((resolve, reject) => {
+    dispatch({
+      type: USER_FETCH_STARTED
+    });
+    Lbryio.getCurrentUser().then(user => {
+      dispatch(doRewardList());
       dispatch({
-        type: USER_FETCH_STARTED
+        type: USER_FETCH_SUCCESS,
+        data: {
+          user
+        }
       });
-      Lbryio.getCurrentUser().then(user => {
-        dispatch(doRewardList());
-        dispatch({
-          type: USER_FETCH_SUCCESS,
-          data: {
-            user
-          }
-        });
-        resolve(user);
-      }).catch(error => {
-        reject(error);
-        dispatch({
-          type: USER_FETCH_FAILURE,
-          data: {
-            error
-          }
-        });
+      resolve(user);
+    }).catch(error => {
+      reject(error);
+      dispatch({
+        type: USER_FETCH_FAILURE,
+        data: {
+          error
+        }
       });
     });
-  };
+  });
 }
 function doUserCheckEmailVerified() {
   // This will happen in the background so we don't need loading booleans
@@ -1578,6 +1576,9 @@ function doUserCheckIfEmailExists(email) {
         data: {
           email
         }
+      });
+      dispatch({
+        type: USER_EMAIL_NEW_EXISTS
       });
 
       if (response.has_password) {
@@ -1782,7 +1783,7 @@ function doClearEmailEntry() {
     type: USER_EMAIL_NEW_CLEAR_ENTRY
   };
 }
-function doClearPasswordEntries() {
+function doClearPasswordEntry() {
   return {
     type: USER_PASSWORD_SET_CLEAR
   };
@@ -3395,13 +3396,19 @@ reducers$2[USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state,
   emailNewErrorMessage: action.data.error
 });
 
-reducers$2[USER_EMAIL_NEW_CLEAR_ENTRY] = state => Object.assign({}, state, {
-  emailNewErrorMessage: null,
-  emailAlreadyExists: false,
-  emailDoesNotExist: false,
-  passwordExistsForUser: false,
-  emailToVerify: null
-});
+reducers$2[USER_EMAIL_NEW_CLEAR_ENTRY] = state => {
+  const newUser = { ...state.user
+  };
+  delete newUser.primary_email;
+  return Object.assign({}, state, {
+    emailNewErrorMessage: null,
+    emailAlreadyExists: false,
+    emailDoesNotExist: false,
+    passwordExistsForUser: false,
+    emailToVerify: null,
+    user: newUser
+  });
+};
 
 reducers$2[USER_PASSWORD_SET_CLEAR] = state => Object.assign({}, state, {
   passwordResetSuccess: false,
@@ -3972,7 +3979,7 @@ exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;
 exports.doClaimYoutubeChannels = doClaimYoutubeChannels;
 exports.doClearEmailEntry = doClearEmailEntry;
-exports.doClearPasswordEntries = doClearPasswordEntries;
+exports.doClearPasswordEntry = doClearPasswordEntry;
 exports.doCompleteFirstRun = doCompleteFirstRun;
 exports.doFetchAccessToken = doFetchAccessToken;
 exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
