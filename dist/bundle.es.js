@@ -19,7 +19,9 @@ const USER_EMAIL_DECLINE = 'USER_EMAIL_DECLINE';
 const USER_EMAIL_NEW_STARTED = 'USER_EMAIL_NEW_STARTED';
 const USER_EMAIL_NEW_SUCCESS = 'USER_EMAIL_NEW_SUCCESS';
 const USER_EMAIL_NEW_EXISTS = 'USER_EMAIL_NEW_EXISTS';
+const USER_EMAIL_NEW_DOES_NOT_EXIST = 'USER_EMAIL_NEW_DOES_NOT_EXIST';
 const USER_EMAIL_NEW_FAILURE = 'USER_EMAIL_NEW_FAILURE';
+const USER_EMAIL_NEW_CLEAR_ENTRY = 'USER_EMAIL_NEW_CLEAR_ENTRY';
 const USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
 const USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
 const USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
@@ -27,6 +29,14 @@ const USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
 const USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
 const USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
 const USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
+const USER_PASSWORD_EXISTS = 'USER_PASSWORD_EXISTS';
+const USER_PASSWORD_RESET_STARTED = 'USER_PASSWORD_RESET_STARTED';
+const USER_PASSWORD_RESET_SUCCESS = 'USER_PASSWORD_RESET_SUCCESS';
+const USER_PASSWORD_RESET_FAILURE = 'USER_PASSWORD_RESET_FAILURE';
+const USER_PASSWORD_SET_STARTED = 'USER_PASSWORD_SET_STARTED';
+const USER_PASSWORD_SET_SUCCESS = 'USER_PASSWORD_SET_SUCCESS';
+const USER_PASSWORD_SET_FAILURE = 'USER_PASSWORD_SET_FAILURE';
+const USER_PASSWORD_SET_CLEAR = 'USER_PASSWORD_SET_CLEAR';
 const USER_PHONE_RESET = 'USER_PHONE_RESET';
 const USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
 const USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
@@ -149,7 +159,9 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_EMAIL_NEW_STARTED: USER_EMAIL_NEW_STARTED,
   USER_EMAIL_NEW_SUCCESS: USER_EMAIL_NEW_SUCCESS,
   USER_EMAIL_NEW_EXISTS: USER_EMAIL_NEW_EXISTS,
+  USER_EMAIL_NEW_DOES_NOT_EXIST: USER_EMAIL_NEW_DOES_NOT_EXIST,
   USER_EMAIL_NEW_FAILURE: USER_EMAIL_NEW_FAILURE,
+  USER_EMAIL_NEW_CLEAR_ENTRY: USER_EMAIL_NEW_CLEAR_ENTRY,
   USER_EMAIL_VERIFY_SET: USER_EMAIL_VERIFY_SET,
   USER_EMAIL_VERIFY_STARTED: USER_EMAIL_VERIFY_STARTED,
   USER_EMAIL_VERIFY_SUCCESS: USER_EMAIL_VERIFY_SUCCESS,
@@ -157,6 +169,14 @@ var action_types = /*#__PURE__*/Object.freeze({
   USER_EMAIL_VERIFY_RETRY_STARTED: USER_EMAIL_VERIFY_RETRY_STARTED,
   USER_EMAIL_VERIFY_RETRY_FAILURE: USER_EMAIL_VERIFY_RETRY_FAILURE,
   USER_EMAIL_VERIFY_RETRY_SUCCESS: USER_EMAIL_VERIFY_RETRY_SUCCESS,
+  USER_PASSWORD_EXISTS: USER_PASSWORD_EXISTS,
+  USER_PASSWORD_RESET_STARTED: USER_PASSWORD_RESET_STARTED,
+  USER_PASSWORD_RESET_SUCCESS: USER_PASSWORD_RESET_SUCCESS,
+  USER_PASSWORD_RESET_FAILURE: USER_PASSWORD_RESET_FAILURE,
+  USER_PASSWORD_SET_STARTED: USER_PASSWORD_SET_STARTED,
+  USER_PASSWORD_SET_SUCCESS: USER_PASSWORD_SET_SUCCESS,
+  USER_PASSWORD_SET_FAILURE: USER_PASSWORD_SET_FAILURE,
+  USER_PASSWORD_SET_CLEAR: USER_PASSWORD_SET_CLEAR,
   USER_PHONE_RESET: USER_PHONE_RESET,
   USER_PHONE_NEW_STARTED: USER_PHONE_NEW_STARTED,
   USER_PHONE_NEW_SUCCESS: USER_PHONE_NEW_SUCCESS,
@@ -1212,6 +1232,7 @@ const selectAuthenticationIsPending = reselect.createSelector(selectState$2, sta
 const selectUserIsPending = reselect.createSelector(selectState$2, state => state.userIsPending);
 const selectUser = reselect.createSelector(selectState$2, state => state.user);
 const selectEmailAlreadyExists = reselect.createSelector(selectState$2, state => state.emailAlreadyExists);
+const selectEmailDoesNotExist = reselect.createSelector(selectState$2, state => state.emailDoesNotExist);
 const selectResendingVerificationEmail = reselect.createSelector(selectState$2, state => state.resendingVerificationEmail);
 const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email : null);
 const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.phone_number : null);
@@ -1221,7 +1242,23 @@ const selectPhoneToVerify = reselect.createSelector(selectState$2, selectUserPho
 const selectYoutubeChannels = reselect.createSelector(selectUser, user => user ? user.youtube_channels : null);
 const selectUserIsRewardApproved = reselect.createSelector(selectUser, user => user && user.is_reward_approved);
 const selectEmailNewIsPending = reselect.createSelector(selectState$2, state => state.emailNewIsPending);
-const selectEmailNewErrorMessage = reselect.createSelector(selectState$2, state => state.emailNewErrorMessage);
+const selectEmailNewErrorMessage = reselect.createSelector(selectState$2, state => {
+  const error = state.emailNewErrorMessage;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
+const selectPasswordExists = reselect.createSelector(selectState$2, state => state.passwordExistsForUser);
+const selectPasswordResetIsPending = reselect.createSelector(selectState$2, state => state.passwordResetPending);
+const selectPasswordResetSuccess = reselect.createSelector(selectState$2, state => state.passwordResetSuccess);
+const selectPasswordResetError = reselect.createSelector(selectState$2, state => {
+  const error = state.passwordResetError;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
+const selectPasswordSetIsPending = reselect.createSelector(selectState$2, state => state.passwordSetPending);
+const selectPasswordSetSuccess = reselect.createSelector(selectState$2, state => state.passwordSetSuccess);
+const selectPasswordSetError = reselect.createSelector(selectState$2, state => {
+  const error = state.passwordSetError;
+  return typeof error === 'object' && error !== null ? error.message : error;
+});
 const selectPhoneNewErrorMessage = reselect.createSelector(selectState$2, state => state.phoneNewErrorMessage);
 const selectEmailVerifyIsPending = reselect.createSelector(selectState$2, state => state.emailVerifyIsPending);
 const selectEmailVerifyErrorMessage = reselect.createSelector(selectState$2, state => state.emailVerifyErrorMessage);
@@ -1305,7 +1342,7 @@ function doInstallNew(appVersion, os = null, firebaseToken = null, callbackForUs
   });
 }
 function doInstallNewWithParams(appVersion, installationId, nodeId, lbrynetVersion, os, platform, firebaseToken = null) {
-  return dispatch => {
+  return () => {
     const payload = {
       app_version: appVersion
     };
@@ -1359,23 +1396,27 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
 }
 function doUserFetch() {
   return dispatch => {
-    dispatch({
-      type: USER_FETCH_STARTED
-    });
-    Lbryio.getCurrentUser().then(user => {
-      dispatch(doRewardList());
+    return new Promise((resolve, reject) => {
       dispatch({
-        type: USER_FETCH_SUCCESS,
-        data: {
-          user
-        }
+        type: USER_FETCH_STARTED
       });
-    }).catch(error => {
-      dispatch({
-        type: USER_FETCH_FAILURE,
-        data: {
-          error
-        }
+      Lbryio.getCurrentUser().then(user => {
+        dispatch(doRewardList());
+        dispatch({
+          type: USER_FETCH_SUCCESS,
+          data: {
+            user
+          }
+        });
+        resolve(user);
+      }).catch(error => {
+        reject(error);
+        dispatch({
+          type: USER_FETCH_FAILURE,
+          data: {
+            error
+          }
+        });
       });
     });
   };
@@ -1522,6 +1563,188 @@ function doUserEmailNew(email) {
     }).then(success, failure);
   };
 }
+function doUserCheckIfEmailExists(email) {
+  return dispatch => {
+    dispatch({
+      type: USER_EMAIL_NEW_STARTED,
+      email
+    });
+
+    const success = response => {
+      dispatch({
+        type: USER_EMAIL_NEW_SUCCESS,
+        data: {
+          email
+        }
+      });
+
+      if (response.has_password) {
+        dispatch({
+          type: USER_PASSWORD_EXISTS
+        });
+      }
+    };
+
+    const failure = error => dispatch({
+      type: USER_EMAIL_NEW_FAILURE,
+      data: {
+        error
+      }
+    });
+
+    Lbryio.call('user', 'exists', {
+      email
+    }, 'post').catch(error => {
+      if (error.response && error.response.status === 404) {
+        dispatch({
+          type: USER_EMAIL_NEW_DOES_NOT_EXIST
+        });
+      }
+
+      throw error;
+    }).then(success, failure);
+  };
+}
+function doUserSignIn(email, password) {
+  return dispatch => {
+    dispatch({
+      type: USER_EMAIL_NEW_STARTED,
+      email
+    });
+
+    const success = () => {
+      dispatch({
+        type: USER_EMAIL_NEW_SUCCESS,
+        data: {
+          email
+        }
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => dispatch({
+      type: USER_EMAIL_NEW_FAILURE,
+      data: {
+        error
+      }
+    });
+
+    Lbryio.call('user', 'signin', {
+      email,
+      ...(password ? {
+        password
+      } : {})
+    }, 'post').catch(error => {
+      if (error.response && error.response.status === 409) {
+        dispatch({
+          type: USER_EMAIL_NEW_EXISTS
+        });
+        return Lbryio.call('user_email', 'resend_token', {
+          email,
+          only_if_expired: true
+        }, 'post').then(success, failure);
+      }
+
+      throw error;
+    }).then(success, failure);
+  };
+}
+function doUserSignUp(email, password) {
+  return dispatch => {
+    dispatch({
+      type: USER_EMAIL_NEW_STARTED,
+      email
+    });
+
+    const success = () => {
+      dispatch({
+        type: USER_EMAIL_NEW_SUCCESS,
+        data: {
+          email
+        }
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => {
+      if (error.response && error.response.status === 409) {
+        dispatch({
+          type: USER_EMAIL_NEW_EXISTS
+        });
+      }
+
+      dispatch({
+        type: USER_EMAIL_NEW_FAILURE,
+        data: {
+          error
+        }
+      });
+    };
+
+    Lbryio.call('user', 'signup', {
+      email,
+      ...(password ? {
+        password
+      } : {})
+    }, 'post').then(success, failure);
+  };
+}
+function doUserPasswordReset(email) {
+  return dispatch => {
+    dispatch({
+      type: USER_PASSWORD_RESET_STARTED,
+      email
+    });
+
+    const success = () => {
+      dispatch({
+        type: USER_PASSWORD_RESET_SUCCESS
+      });
+    };
+
+    const failure = error => dispatch({
+      type: USER_PASSWORD_RESET_FAILURE,
+      data: {
+        error
+      }
+    });
+
+    Lbryio.call('user_password', 'reset', {
+      email
+    }, 'post').then(success, failure);
+  };
+}
+function doUserPasswordSet(newPassword, oldPassword, authToken) {
+  return dispatch => {
+    dispatch({
+      type: USER_PASSWORD_SET_STARTED
+    });
+
+    const success = () => {
+      dispatch({
+        type: USER_PASSWORD_SET_SUCCESS
+      });
+      dispatch(doUserFetch());
+    };
+
+    const failure = error => dispatch({
+      type: USER_PASSWORD_SET_FAILURE,
+      data: {
+        error
+      }
+    });
+
+    Lbryio.call('user_password', 'set', {
+      new_password: newPassword,
+      ...(oldPassword ? {
+        old_password: oldPassword
+      } : {}),
+      ...(authToken ? {
+        auth_token: authToken
+      } : {})
+    }, 'post').then(success, failure);
+  };
+}
 function doUserResendVerificationEmail(email) {
   return dispatch => {
     dispatch({
@@ -1550,6 +1773,16 @@ function doUserResendVerificationEmail(email) {
         throw error;
       }
     }).then(success, failure);
+  };
+}
+function doClearEmailEntry() {
+  return {
+    type: USER_EMAIL_NEW_CLEAR_ENTRY
+  };
+}
+function doClearPasswordEntries() {
+  return {
+    type: USER_PASSWORD_SET_CLEAR
   };
 }
 function doUserEmailVerifyFailure(error) {
@@ -3033,7 +3266,14 @@ const defaultState$3 = {
   emailNewErrorMessage: '',
   emailToVerify: '',
   emailAlreadyExists: false,
+  emailDoesNotExist: false,
   resendingVerificationEmail: false,
+  passwordResetPending: false,
+  passwordResetSuccess: false,
+  passwordResetError: undefined,
+  passwordSetPending: false,
+  passwordSetSuccess: false,
+  passwordSetError: undefined,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -3126,7 +3366,8 @@ reducers$2[USER_PHONE_VERIFY_FAILURE] = (state, action) => Object.assign({}, sta
 reducers$2[USER_EMAIL_NEW_STARTED] = state => Object.assign({}, state, {
   emailNewIsPending: true,
   emailNewErrorMessage: '',
-  emailAlreadyExists: false
+  emailAlreadyExists: false,
+  emailDoesNotExist: false
 });
 
 reducers$2[USER_EMAIL_NEW_SUCCESS] = (state, action) => {
@@ -3143,9 +3384,27 @@ reducers$2[USER_EMAIL_NEW_EXISTS] = state => Object.assign({}, state, {
   emailAlreadyExists: true
 });
 
+reducers$2[USER_EMAIL_NEW_DOES_NOT_EXIST] = state => Object.assign({}, state, {
+  emailDoesNotExist: true
+});
+
 reducers$2[USER_EMAIL_NEW_FAILURE] = (state, action) => Object.assign({}, state, {
   emailNewIsPending: false,
   emailNewErrorMessage: action.data.error
+});
+
+reducers$2[USER_EMAIL_NEW_CLEAR_ENTRY] = state => Object.assign({}, state, {
+  emailNewErrorMessage: null,
+  emailAlreadyExists: false,
+  emailDoesNotExist: false,
+  passwordExistsForUser: false,
+  emailToVerify: null
+});
+
+reducers$2[USER_PASSWORD_SET_CLEAR] = state => Object.assign({}, state, {
+  passwordResetSuccess: false,
+  passwordResetPending: false,
+  passwordResetError: null
 });
 
 reducers$2[USER_EMAIL_VERIFY_STARTED] = state => Object.assign({}, state, {
@@ -3281,6 +3540,41 @@ reducers$2[USER_SET_REFERRER_FAILURE] = (state, action) => Object.assign({}, sta
 reducers$2[USER_SET_REFERRER_RESET] = state => Object.assign({}, state, {
   referrerSetIsPending: false,
   referrerSetError: defaultState$3.referrerSetError
+});
+
+reducers$2[USER_PASSWORD_EXISTS] = state => Object.assign({}, state, {
+  passwordExistsForUser: true
+});
+
+reducers$2[USER_PASSWORD_RESET_STARTED] = state => Object.assign({}, state, {
+  passwordResetPending: true,
+  passwordResetSuccess: defaultState$3.passwordResetSuccess,
+  passwordResetError: null
+});
+
+reducers$2[USER_PASSWORD_RESET_SUCCESS] = state => Object.assign({}, state, {
+  passwordResetPending: false,
+  passwordResetSuccess: true
+});
+
+reducers$2[USER_PASSWORD_RESET_FAILURE] = (state, action) => Object.assign({}, state, {
+  passwordResetPending: false,
+  passwordResetError: action.data.error
+});
+
+reducers$2[USER_PASSWORD_SET_STARTED] = state => Object.assign({}, state, {
+  passwordSetPending: true,
+  passwordSetSuccess: defaultState$3.passwordSetSuccess
+});
+
+reducers$2[USER_PASSWORD_SET_SUCCESS] = state => Object.assign({}, state, {
+  passwordSetPending: false,
+  passwordSetSuccess: true
+});
+
+reducers$2[USER_PASSWORD_SET_FAILURE] = (state, action) => Object.assign({}, state, {
+  passwordSetPending: false,
+  passwordSetError: action.data.error
 });
 
 function userReducer(state = defaultState$3, action) {
@@ -3675,6 +3969,8 @@ exports.doClaimEligiblePurchaseRewards = doClaimEligiblePurchaseRewards;
 exports.doClaimRewardClearError = doClaimRewardClearError;
 exports.doClaimRewardType = doClaimRewardType;
 exports.doClaimYoutubeChannels = doClaimYoutubeChannels;
+exports.doClearEmailEntry = doClearEmailEntry;
+exports.doClearPasswordEntries = doClearPasswordEntries;
 exports.doCompleteFirstRun = doCompleteFirstRun;
 exports.doFetchAccessToken = doFetchAccessToken;
 exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
@@ -3705,6 +4001,7 @@ exports.doTransifexUpload = doTransifexUpload;
 exports.doUpdateUnreadSubscriptions = doUpdateUnreadSubscriptions;
 exports.doUpdateUploadProgress = doUpdateUploadProgress;
 exports.doUserCheckEmailVerified = doUserCheckEmailVerified;
+exports.doUserCheckIfEmailExists = doUserCheckIfEmailExists;
 exports.doUserEmailNew = doUserEmailNew;
 exports.doUserEmailToVerify = doUserEmailToVerify;
 exports.doUserEmailVerify = doUserEmailVerify;
@@ -3712,6 +4009,8 @@ exports.doUserEmailVerifyFailure = doUserEmailVerifyFailure;
 exports.doUserFetch = doUserFetch;
 exports.doUserIdentityVerify = doUserIdentityVerify;
 exports.doUserInviteNew = doUserInviteNew;
+exports.doUserPasswordReset = doUserPasswordReset;
+exports.doUserPasswordSet = doUserPasswordSet;
 exports.doUserPhoneNew = doUserPhoneNew;
 exports.doUserPhoneReset = doUserPhoneReset;
 exports.doUserPhoneVerify = doUserPhoneVerify;
@@ -3719,6 +4018,8 @@ exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
 exports.doUserSetReferrer = doUserSetReferrer;
 exports.doUserSetReferrerReset = doUserSetReferrerReset;
+exports.doUserSignIn = doUserSignIn;
+exports.doUserSignUp = doUserSignUp;
 exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
 exports.lbrytvReducer = lbrytvReducer;
@@ -3748,6 +4049,7 @@ exports.selectClaimedRewardsByTransactionId = selectClaimedRewardsByTransactionI
 exports.selectClaimsPendingByType = selectClaimsPendingByType;
 exports.selectCurrentUploads = selectCurrentUploads;
 exports.selectEmailAlreadyExists = selectEmailAlreadyExists;
+exports.selectEmailDoesNotExist = selectEmailDoesNotExist;
 exports.selectEmailNewErrorMessage = selectEmailNewErrorMessage;
 exports.selectEmailNewIsPending = selectEmailNewIsPending;
 exports.selectEmailToVerify = selectEmailToVerify;
@@ -3770,6 +4072,13 @@ exports.selectIdentityVerifyIsPending = selectIdentityVerifyIsPending;
 exports.selectIsAuthenticating = selectIsAuthenticating;
 exports.selectIsFetchingSubscriptions = selectIsFetchingSubscriptions;
 exports.selectIsFetchingSuggested = selectIsFetchingSuggested;
+exports.selectPasswordExists = selectPasswordExists;
+exports.selectPasswordResetError = selectPasswordResetError;
+exports.selectPasswordResetIsPending = selectPasswordResetIsPending;
+exports.selectPasswordResetSuccess = selectPasswordResetSuccess;
+exports.selectPasswordSetError = selectPasswordSetError;
+exports.selectPasswordSetIsPending = selectPasswordSetIsPending;
+exports.selectPasswordSetSuccess = selectPasswordSetSuccess;
 exports.selectPhoneNewErrorMessage = selectPhoneNewErrorMessage;
 exports.selectPhoneNewIsPending = selectPhoneNewIsPending;
 exports.selectPhoneToVerify = selectPhoneToVerify;

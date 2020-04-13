@@ -9,7 +9,14 @@ const defaultState = {
   emailNewErrorMessage: '',
   emailToVerify: '',
   emailAlreadyExists: false,
+  emailDoesNotExist: false,
   resendingVerificationEmail: false,
+  passwordResetPending: false,
+  passwordResetSuccess: false,
+  passwordResetError: undefined,
+  passwordSetPending: false,
+  passwordSetSuccess: false,
+  passwordSetError: undefined,
   inviteNewErrorMessage: '',
   inviteNewIsPending: false,
   inviteStatusIsPending: false,
@@ -116,6 +123,7 @@ reducers[ACTIONS.USER_EMAIL_NEW_STARTED] = state =>
     emailNewIsPending: true,
     emailNewErrorMessage: '',
     emailAlreadyExists: false,
+    emailDoesNotExist: false,
   });
 
 reducers[ACTIONS.USER_EMAIL_NEW_SUCCESS] = (state, action) => {
@@ -133,10 +141,31 @@ reducers[ACTIONS.USER_EMAIL_NEW_EXISTS] = state =>
     emailAlreadyExists: true,
   });
 
+reducers[ACTIONS.USER_EMAIL_NEW_DOES_NOT_EXIST] = state =>
+  Object.assign({}, state, {
+    emailDoesNotExist: true,
+  });
+
 reducers[ACTIONS.USER_EMAIL_NEW_FAILURE] = (state, action) =>
   Object.assign({}, state, {
     emailNewIsPending: false,
     emailNewErrorMessage: action.data.error,
+  });
+
+reducers[ACTIONS.USER_EMAIL_NEW_CLEAR_ENTRY] = state =>
+  Object.assign({}, state, {
+    emailNewErrorMessage: null,
+    emailAlreadyExists: false,
+    emailDoesNotExist: false,
+    passwordExistsForUser: false,
+    emailToVerify: null,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_SET_CLEAR] = state =>
+  Object.assign({}, state, {
+    passwordResetSuccess: false,
+    passwordResetPending: false,
+    passwordResetError: null,
   });
 
 reducers[ACTIONS.USER_EMAIL_VERIFY_STARTED] = state =>
@@ -294,6 +323,48 @@ reducers[ACTIONS.USER_SET_REFERRER_RESET] = state =>
   Object.assign({}, state, {
     referrerSetIsPending: false,
     referrerSetError: defaultState.referrerSetError,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_EXISTS] = state =>
+  Object.assign({}, state, {
+    passwordExistsForUser: true,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_RESET_STARTED] = state =>
+  Object.assign({}, state, {
+    passwordResetPending: true,
+    passwordResetSuccess: defaultState.passwordResetSuccess,
+    passwordResetError: null,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_RESET_SUCCESS] = state =>
+  Object.assign({}, state, {
+    passwordResetPending: false,
+    passwordResetSuccess: true,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_RESET_FAILURE] = (state, action) =>
+  Object.assign({}, state, {
+    passwordResetPending: false,
+    passwordResetError: action.data.error,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_SET_STARTED] = state =>
+  Object.assign({}, state, {
+    passwordSetPending: true,
+    passwordSetSuccess: defaultState.passwordSetSuccess,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_SET_SUCCESS] = state =>
+  Object.assign({}, state, {
+    passwordSetPending: false,
+    passwordSetSuccess: true,
+  });
+
+reducers[ACTIONS.USER_PASSWORD_SET_FAILURE] = (state, action) =>
+  Object.assign({}, state, {
+    passwordSetPending: false,
+    passwordSetError: action.data.error,
   });
 
 export function userReducer(state = defaultState, action) {

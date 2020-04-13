@@ -50,6 +50,8 @@ export {
   doInstallNewWithParams,
   doAuthenticate,
   doUserFetch,
+  doUserSignIn,
+  doUserSignUp,
   doUserEmailNew,
   doUserCheckEmailVerified,
   doUserEmailToVerify,
@@ -67,6 +69,11 @@ export {
   doCheckYoutubeTransfer,
   doUserSetReferrer,
   doUserSetReferrerReset,
+  doUserPasswordReset,
+  doUserPasswordSet,
+  doUserCheckIfEmailExists,
+  doClearEmailEntry,
+  doClearPasswordEntries,
 } from 'redux/actions/user';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
@@ -153,6 +160,7 @@ export {
   selectEmailVerifyIsPending,
   selectEmailVerifyErrorMessage,
   selectEmailAlreadyExists,
+  selectEmailDoesNotExist,
   selectResendingVerificationEmail,
   selectPhoneVerifyErrorMessage,
   selectPhoneVerifyIsPending,
@@ -175,6 +183,13 @@ export {
   selectYouTubeImportVideosComplete,
   selectSetReferrerPending,
   selectSetReferrerError,
+  selectPasswordResetIsPending,
+  selectPasswordResetSuccess,
+  selectPasswordResetError,
+  selectPasswordSetIsPending,
+  selectPasswordSetSuccess,
+  selectPasswordSetError,
+  selectPasswordExists,
 } from 'redux/selectors/user';
 export {
   makeSelectFetchingCostInfoForUri,
