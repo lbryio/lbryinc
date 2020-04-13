@@ -318,6 +318,10 @@ export function doUserCheckIfEmailExists(email) {
         data: { email },
       });
 
+      dispatch({
+        type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+      });
+
       if (response.has_password) {
         dispatch({
           type: ACTIONS.USER_PASSWORD_EXISTS,
@@ -509,7 +513,7 @@ export function doClearEmailEntry() {
   };
 }
 
-export function doClearPasswordEntries() {
+export function doClearPasswordEntry() {
   return {
     type: ACTIONS.USER_PASSWORD_SET_CLEAR,
   };

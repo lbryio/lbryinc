@@ -225,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClearEmailEntry", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClearEmailEntry"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntries", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClearPasswordEntries"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntry", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClearPasswordEntry"]; });
 
 /* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(30);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__["doFetchCostInfoForUri"]; });
@@ -4955,7 +4955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPasswordSet", function() { return doUserPasswordSet; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserResendVerificationEmail", function() { return doUserResendVerificationEmail; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClearEmailEntry", function() { return doClearEmailEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntries", function() { return doClearPasswordEntries; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntry", function() { return doClearPasswordEntry; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerifyFailure", function() { return doUserEmailVerifyFailure; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerify", function() { return doUserEmailVerify; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
@@ -5295,6 +5295,9 @@ function doUserCheckIfEmailExists(email) {
           email: email
         }
       });
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
+      });
 
       if (response.has_password) {
         dispatch({
@@ -5502,7 +5505,7 @@ function doClearEmailEntry() {
     type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_CLEAR_ENTRY"]
   };
 }
-function doClearPasswordEntries() {
+function doClearPasswordEntry() {
   return {
     type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_SET_CLEAR"]
   };
@@ -7168,6 +7171,10 @@ function rewardsReducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userReducer", function() { return userReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var reducers = {};
 var defaultState = {
@@ -7337,12 +7344,16 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_FAI
 };
 
 reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_CLEAR_ENTRY"]] = function (state) {
+  var newUser = _objectSpread({}, state.user);
+
+  delete newUser.primary_email;
   return Object.assign({}, state, {
     emailNewErrorMessage: null,
     emailAlreadyExists: false,
     emailDoesNotExist: false,
     passwordExistsForUser: false,
-    emailToVerify: null
+    emailToVerify: null,
+    user: newUser
   });
 };
 

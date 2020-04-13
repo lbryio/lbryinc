@@ -152,14 +152,19 @@ reducers[ACTIONS.USER_EMAIL_NEW_FAILURE] = (state, action) =>
     emailNewErrorMessage: action.data.error,
   });
 
-reducers[ACTIONS.USER_EMAIL_NEW_CLEAR_ENTRY] = state =>
-  Object.assign({}, state, {
+reducers[ACTIONS.USER_EMAIL_NEW_CLEAR_ENTRY] = state => {
+  const newUser = { ...state.user };
+  delete newUser.primary_email;
+
+  return Object.assign({}, state, {
     emailNewErrorMessage: null,
     emailAlreadyExists: false,
     emailDoesNotExist: false,
     passwordExistsForUser: false,
     emailToVerify: null,
+    user: newUser,
   });
+};
 
 reducers[ACTIONS.USER_PASSWORD_SET_CLEAR] = state =>
   Object.assign({}, state, {
