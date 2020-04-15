@@ -5375,41 +5375,45 @@ function doUserSignIn(email, password) {
 }
 function doUserSignUp(email, password) {
   return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
-      email: email
-    });
-
-    var success = function success() {
+    return new Promise(function (resolve, reject) {
       dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
+        email: email
       });
-      dispatch(doUserFetch());
-    };
 
-    var failure = function failure(error) {
-      if (error.response && error.response.status === 409) {
+      var success = function success() {
         dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
+          data: {
+            email: email
+          }
         });
-      }
+        dispatch(doUserFetch());
+        resolve();
+      };
 
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
-        data: {
-          error: error
+      var failure = function failure(error) {
+        if (error.response && error.response.status === 409) {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
+          });
         }
-      });
-    };
 
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'signup', _objectSpread({
-      email: email
-    }, password ? {
-      password: password
-    } : {}), 'post').then(success, failure);
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
+          data: {
+            error: error
+          }
+        });
+        reject(error);
+      };
+
+      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'signup', _objectSpread({
+        email: email
+      }, password ? {
+        password: password
+      } : {}), 'post').then(success, failure);
+    });
   };
 }
 function doUserPasswordReset(email) {

@@ -1654,42 +1654,46 @@ function doUserSignIn(email, password) {
 }
 function doUserSignUp(email, password) {
   return dispatch => {
-    dispatch({
-      type: USER_EMAIL_NEW_STARTED,
-      email
-    });
-
-    const success = () => {
+    return new Promise((resolve, reject) => {
       dispatch({
-        type: USER_EMAIL_NEW_SUCCESS,
-        data: {
-          email
-        }
+        type: USER_EMAIL_NEW_STARTED,
+        email
       });
-      dispatch(doUserFetch());
-    };
 
-    const failure = error => {
-      if (error.response && error.response.status === 409) {
+      const success = () => {
         dispatch({
-          type: USER_EMAIL_NEW_EXISTS
+          type: USER_EMAIL_NEW_SUCCESS,
+          data: {
+            email
+          }
         });
-      }
+        dispatch(doUserFetch());
+        resolve();
+      };
 
-      dispatch({
-        type: USER_EMAIL_NEW_FAILURE,
-        data: {
-          error
+      const failure = error => {
+        if (error.response && error.response.status === 409) {
+          dispatch({
+            type: USER_EMAIL_NEW_EXISTS
+          });
         }
-      });
-    };
 
-    Lbryio.call('user', 'signup', {
-      email,
-      ...(password ? {
-        password
-      } : {})
-    }, 'post').then(success, failure);
+        dispatch({
+          type: USER_EMAIL_NEW_FAILURE,
+          data: {
+            error
+          }
+        });
+        reject(error);
+      };
+
+      Lbryio.call('user', 'signup', {
+        email,
+        ...(password ? {
+          password
+        } : {})
+      }, 'post').then(success, failure);
+    });
   };
 }
 function doUserPasswordReset(email) {

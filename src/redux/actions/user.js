@@ -390,37 +390,41 @@ export function doUserSignIn(email, password) {
 }
 
 export function doUserSignUp(email, password) {
-  return dispatch => {
-    dispatch({
-      type: ACTIONS.USER_EMAIL_NEW_STARTED,
-      email,
-    });
-
-    const success = () => {
+  return dispatch =>
+    new Promise((resolve, reject) => {
       dispatch({
-        type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
-        data: { email },
+        type: ACTIONS.USER_EMAIL_NEW_STARTED,
+        email,
       });
-      dispatch(doUserFetch());
-    };
 
-    const failure = error => {
-      if (error.response && error.response.status === 409) {
+      const success = () => {
         dispatch({
-          type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+          type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
+          data: { email },
         });
-      }
-      dispatch({
-        type: ACTIONS.USER_EMAIL_NEW_FAILURE,
-        data: { error },
-      });
-    };
+        dispatch(doUserFetch());
+        resolve();
+      };
 
-    Lbryio.call('user', 'signup', { email, ...(password ? { password } : {}) }, 'post').then(
-      success,
-      failure
-    );
-  };
+      const failure = error => {
+        if (error.response && error.response.status === 409) {
+          dispatch({
+            type: ACTIONS.USER_EMAIL_NEW_EXISTS,
+          });
+        }
+        dispatch({
+          type: ACTIONS.USER_EMAIL_NEW_FAILURE,
+          data: { error },
+        });
+
+        reject(error);
+      };
+
+      Lbryio.call('user', 'signup', { email, ...(password ? { password } : {}) }, 'post').then(
+        success,
+        failure
+      );
+    });
 }
 
 export function doUserPasswordReset(email) {
