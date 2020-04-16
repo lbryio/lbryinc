@@ -5303,6 +5303,12 @@ function doUserCheckIfEmailExists(email) {
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_EXISTS"]
         });
+      } else {
+        // If they don't have a password, they will need to use the email verification api
+        lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
+          email: email,
+          only_if_expired: true
+        }, 'post');
       }
     };
 

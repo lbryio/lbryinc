@@ -1585,6 +1585,12 @@ function doUserCheckIfEmailExists(email) {
         dispatch({
           type: USER_PASSWORD_EXISTS
         });
+      } else {
+        // If they don't have a password, they will need to use the email verification api
+        Lbryio.call('user_email', 'resend_token', {
+          email,
+          only_if_expired: true
+        }, 'post');
       }
     };
 
@@ -1653,48 +1659,46 @@ function doUserSignIn(email, password) {
   };
 }
 function doUserSignUp(email, password) {
-  return dispatch => {
-    return new Promise((resolve, reject) => {
-      dispatch({
-        type: USER_EMAIL_NEW_STARTED,
-        email
-      });
-
-      const success = () => {
-        dispatch({
-          type: USER_EMAIL_NEW_SUCCESS,
-          data: {
-            email
-          }
-        });
-        dispatch(doUserFetch());
-        resolve();
-      };
-
-      const failure = error => {
-        if (error.response && error.response.status === 409) {
-          dispatch({
-            type: USER_EMAIL_NEW_EXISTS
-          });
-        }
-
-        dispatch({
-          type: USER_EMAIL_NEW_FAILURE,
-          data: {
-            error
-          }
-        });
-        reject(error);
-      };
-
-      Lbryio.call('user', 'signup', {
-        email,
-        ...(password ? {
-          password
-        } : {})
-      }, 'post').then(success, failure);
+  return dispatch => new Promise((resolve, reject) => {
+    dispatch({
+      type: USER_EMAIL_NEW_STARTED,
+      email
     });
-  };
+
+    const success = () => {
+      dispatch({
+        type: USER_EMAIL_NEW_SUCCESS,
+        data: {
+          email
+        }
+      });
+      dispatch(doUserFetch());
+      resolve();
+    };
+
+    const failure = error => {
+      if (error.response && error.response.status === 409) {
+        dispatch({
+          type: USER_EMAIL_NEW_EXISTS
+        });
+      }
+
+      dispatch({
+        type: USER_EMAIL_NEW_FAILURE,
+        data: {
+          error
+        }
+      });
+      reject(error);
+    };
+
+    Lbryio.call('user', 'signup', {
+      email,
+      ...(password ? {
+        password
+      } : {})
+    }, 'post').then(success, failure);
+  });
 }
 function doUserPasswordReset(email) {
   return dispatch => {

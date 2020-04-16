@@ -326,6 +326,9 @@ export function doUserCheckIfEmailExists(email) {
         dispatch({
           type: ACTIONS.USER_PASSWORD_EXISTS,
         });
+      } else {
+        // If they don't have a password, they will need to use the email verification api
+        Lbryio.call('user_email', 'resend_token', { email, only_if_expired: true }, 'post');
       }
     };
 
