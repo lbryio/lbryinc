@@ -28,7 +28,7 @@ export const selectResendingVerificationEmail = createSelector(
 
 export const selectUserEmail = createSelector(
   selectUser,
-  user => (user ? user.primary_email : null)
+  user => (user ? user.primary_email || user.latest_claimed_email : null)
 );
 
 export const selectUserPhone = createSelector(

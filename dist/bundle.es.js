@@ -1236,7 +1236,7 @@ const selectUser = reselect.createSelector(selectState$2, state => state.user);
 const selectEmailAlreadyExists = reselect.createSelector(selectState$2, state => state.emailAlreadyExists);
 const selectEmailDoesNotExist = reselect.createSelector(selectState$2, state => state.emailDoesNotExist);
 const selectResendingVerificationEmail = reselect.createSelector(selectState$2, state => state.resendingVerificationEmail);
-const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email : null);
+const selectUserEmail = reselect.createSelector(selectUser, user => user ? user.primary_email || user.latest_claimed_email : null);
 const selectUserPhone = reselect.createSelector(selectUser, user => user ? user.phone_number : null);
 const selectUserCountryCode = reselect.createSelector(selectUser, user => user ? user.country_code : null);
 const selectEmailToVerify = reselect.createSelector(selectState$2, selectUserEmail, (state, userEmail) => state.emailToVerify || userEmail);

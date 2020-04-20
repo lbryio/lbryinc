@@ -4802,7 +4802,7 @@ var selectResendingVerificationEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_
   return state.resendingVerificationEmail;
 });
 var selectUserEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user ? user.primary_email : null;
+  return user ? user.primary_email || user.latest_claimed_email : null;
 });
 var selectUserPhone = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
   return user ? user.phone_number : null;
