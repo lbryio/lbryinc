@@ -1570,7 +1570,7 @@ function doUserCheckIfEmailExists(email) {
       email
     });
 
-    const success = response => {
+    const triggerEmailFlow = hasPassword => {
       dispatch({
         type: USER_EMAIL_NEW_SUCCESS,
         data: {
@@ -1581,7 +1581,7 @@ function doUserCheckIfEmailExists(email) {
         type: USER_EMAIL_NEW_EXISTS
       });
 
-      if (response.has_password) {
+      if (hasPassword) {
         dispatch({
           type: USER_PASSWORD_EXISTS
         });
@@ -1592,6 +1592,10 @@ function doUserCheckIfEmailExists(email) {
           only_if_expired: true
         }, 'post');
       }
+    };
+
+    const success = response => {
+      triggerEmailFlow(response.has_password);
     };
 
     const failure = error => dispatch({
@@ -1608,6 +1612,8 @@ function doUserCheckIfEmailExists(email) {
         dispatch({
           type: USER_EMAIL_NEW_DOES_NOT_EXIST
         });
+      } else if (error.response && error.response.status === 412) {
+        triggerEmailFlow(false);
       }
 
       throw error;

@@ -312,7 +312,7 @@ export function doUserCheckIfEmailExists(email) {
       email,
     });
 
-    const success = response => {
+    const triggerEmailFlow = hasPassword => {
       dispatch({
         type: ACTIONS.USER_EMAIL_NEW_SUCCESS,
         data: { email },
@@ -322,7 +322,7 @@ export function doUserCheckIfEmailExists(email) {
         type: ACTIONS.USER_EMAIL_NEW_EXISTS,
       });
 
-      if (response.has_password) {
+      if (hasPassword) {
         dispatch({
           type: ACTIONS.USER_PASSWORD_EXISTS,
         });
@@ -330,6 +330,10 @@ export function doUserCheckIfEmailExists(email) {
         // If they don't have a password, they will need to use the email verification api
         Lbryio.call('user_email', 'resend_token', { email, only_if_expired: true }, 'post');
       }
+    };
+
+    const success = response => {
+      triggerEmailFlow(response.has_password);
     };
 
     const failure = error =>
@@ -344,7 +348,10 @@ export function doUserCheckIfEmailExists(email) {
           dispatch({
             type: ACTIONS.USER_EMAIL_NEW_DOES_NOT_EXIST,
           });
+        } else if (error.response && error.response.status === 412) {
+          triggerEmailFlow(false);
         }
+
         throw error;
       })
       .then(success, failure);
