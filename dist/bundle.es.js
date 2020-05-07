@@ -3917,7 +3917,7 @@ reducers$4[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
   };
 };
 
-function lbrytvReducer(state = defaultState$a, action) {
+function webReducer(state = defaultState$a, action) {
   const handler = reducers$4[action.type];
   if (handler) return handler(state, action);
   return state;
@@ -3968,7 +3968,7 @@ const selectSyncApplyIsPending = reselect.createSelector(selectState$9, state =>
 const selectSyncApplyErrorMessage = reselect.createSelector(selectState$9, state => state.syncApplyErrorMessage);
 const selectSyncApplyPasswordError = reselect.createSelector(selectState$9, state => state.syncApplyPasswordError);
 
-const selectState$a = state => state.lbrytv || {};
+const selectState$a = state => state.web || {};
 
 const selectCurrentUploads = reselect.createSelector(selectState$a, state => state.currentUploads);
 const selectUploadCount = reselect.createSelector(selectCurrentUploads, currentUploads => currentUploads && Object.keys(currentUploads).length);
@@ -4048,7 +4048,6 @@ exports.doUserSignIn = doUserSignIn;
 exports.doUserSignUp = doUserSignUp;
 exports.filteredReducer = filteredReducer;
 exports.homepageReducer = homepageReducer;
-exports.lbrytvReducer = lbrytvReducer;
 exports.makeSelectClaimRewardError = makeSelectClaimRewardError;
 exports.makeSelectCostInfoForUri = makeSelectCostInfoForUri;
 exports.makeSelectFetchingCostInfoForUri = makeSelectFetchingCostInfoForUri;
@@ -4163,3 +4162,4 @@ exports.subscriptionsReducer = subscriptions;
 exports.syncReducer = syncReducer;
 exports.userReducer = userReducer;
 exports.userStateSyncMiddleware = userStateSyncMiddleware;
+exports.webReducer = webReducer;

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectState = state => state.lbrytv || {};
+const selectState = state => state.web || {};
 
 export const selectCurrentUploads = createSelector(selectState, state => state.currentUploads);
 

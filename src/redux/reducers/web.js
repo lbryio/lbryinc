@@ -55,7 +55,7 @@ reducers[ACTIONS.UPDATE_UPLOAD_PROGRESS] = (state: TvState, action) => {
   return { ...state, currentUploads };
 };
 
-export function lbrytvReducer(state = defaultState, action) {
+export function webReducer(state = defaultState, action) {
   const handler = reducers[action.type];
   if (handler) return handler(state, action);
   return state;
