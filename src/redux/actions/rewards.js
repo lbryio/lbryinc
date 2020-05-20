@@ -39,10 +39,10 @@ export function doClaimRewardType(rewardType, options = {}) {
 
     // Try to claim the email reward right away, even if we haven't called reward_list yet
     if (
-      rewardType !== rewards.TYPE_REWARD_CODE ||
-      rewardType !== rewards.TYPE_CONFIRM_EMAIL ||
-      rewardType !== rewards.TYPE_DAILY_VIEW ||
-      rewardType !== rewards.TYPE_NEW_ANDROID ||
+      rewardType !== rewards.TYPE_REWARD_CODE &&
+      rewardType !== rewards.TYPE_CONFIRM_EMAIL &&
+      rewardType !== rewards.TYPE_DAILY_VIEW &&
+      rewardType !== rewards.TYPE_NEW_ANDROID &&
       rewardType !== rewards.TYPE_PAID_CONTENT
     ) {
       if (!reward || reward.transaction_id) {
@@ -66,7 +66,7 @@ export function doClaimRewardType(rewardType, options = {}) {
 
     // Set `claim_code` so the api knows which reward to give if there are multiple of the same type
     const params = options.params || {};
-    if (!params.claim_code) {
+    if (!params.claim_code && reward) {
       params.claim_code = reward.claim_code;
     }
 

@@ -4462,7 +4462,7 @@ function doClaimRewardType(rewardType) {
       return ur.reward_type === rewardType;
     }); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID || rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_PAID_CONTENT) {
+    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_PAID_CONTENT) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
@@ -4480,7 +4480,7 @@ function doClaimRewardType(rewardType) {
 
     var params = options.params || {};
 
-    if (!params.claim_code) {
+    if (!params.claim_code && reward) {
       params.claim_code = reward.claim_code;
     }
 
@@ -7112,16 +7112,18 @@ function setClaimRewardState(state, reward, isClaiming) {
   var newClaimErrorsByType = Object.assign({}, state.claimErrorsByType); // Currently, for multiple rewards of the same type, they will both show "claiming" when one is beacuse we track this by `reward_type`
   // To fix this we will need to use `claim_code` instead, and change all selectors to match
 
-  if (isClaiming) {
-    newClaimPendingByType[reward.reward_type] = isClaiming;
-  } else {
-    delete newClaimPendingByType[reward.reward_type];
-  }
+  if (reward) {
+    if (isClaiming) {
+      newClaimPendingByType[reward.reward_type] = isClaiming;
+    } else {
+      delete newClaimPendingByType[reward.reward_type];
+    }
 
-  if (errorMessage) {
-    newClaimErrorsByType[reward.reward_type] = errorMessage;
-  } else {
-    delete newClaimErrorsByType[reward.reward_type];
+    if (errorMessage) {
+      newClaimErrorsByType[reward.reward_type] = errorMessage;
+    } else {
+      delete newClaimErrorsByType[reward.reward_type];
+    }
   }
 
   return Object.assign({}, state, {

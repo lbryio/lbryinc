@@ -41,15 +41,17 @@ function setClaimRewardState(state, reward, isClaiming, errorMessage = '') {
 
   // Currently, for multiple rewards of the same type, they will both show "claiming" when one is beacuse we track this by `reward_type`
   // To fix this we will need to use `claim_code` instead, and change all selectors to match
-  if (isClaiming) {
-    newClaimPendingByType[reward.reward_type] = isClaiming;
-  } else {
-    delete newClaimPendingByType[reward.reward_type];
-  }
-  if (errorMessage) {
-    newClaimErrorsByType[reward.reward_type] = errorMessage;
-  } else {
-    delete newClaimErrorsByType[reward.reward_type];
+  if (reward) {
+    if (isClaiming) {
+      newClaimPendingByType[reward.reward_type] = isClaiming;
+    } else {
+      delete newClaimPendingByType[reward.reward_type];
+    }
+    if (errorMessage) {
+      newClaimErrorsByType[reward.reward_type] = errorMessage;
+    } else {
+      delete newClaimErrorsByType[reward.reward_type];
+    }
   }
 
   return Object.assign({}, state, {
