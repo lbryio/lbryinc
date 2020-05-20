@@ -1349,6 +1349,7 @@ rewards.TYPE_SUBSCRIPTION = 'subscription';
 rewards.YOUTUBE_CREATOR = 'youtube_creator';
 rewards.TYPE_DAILY_VIEW = 'daily_view';
 rewards.TYPE_NEW_ANDROID = 'new_android';
+rewards.TYPE_PAID_CONTENT = 'paid_content';
 
 rewards.claimReward = function (type, rewardParams) {
   function requestReward(resolve, reject, params) {
