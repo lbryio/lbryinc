@@ -2075,7 +2075,7 @@ function doClaimRewardType(rewardType, options = {}) {
       reward_type: rewards.TYPE_REWARD_CODE
     } : unclaimedRewards.find(ur => ur.reward_type === rewardType); // Try to claim the email reward right away, even if we haven't called reward_list yet
 
-    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL || rewardType !== rewards.TYPE_DAILY_VIEW || rewardType !== rewards.TYPE_NEW_ANDROID) {
+    if (rewardType !== rewards.TYPE_REWARD_CODE || rewardType !== rewards.TYPE_CONFIRM_EMAIL || rewardType !== rewards.TYPE_DAILY_VIEW || rewardType !== rewards.TYPE_NEW_ANDROID || rewardType !== rewards.TYPE_PAID_CONTENT) {
       if (!reward || reward.transaction_id) {
         // already claimed or doesn't exist, do nothing
         return;
