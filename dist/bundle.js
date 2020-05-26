@@ -261,8 +261,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doSyncEncryptAndDecrypt"]; });
 
-/* harmony import */ var redux_actions_lbrytv__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(36);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_lbrytv__WEBPACK_IMPORTED_MODULE_18__["doUpdateUploadProgress"]; });
+/* harmony import */ var redux_actions_web__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(36);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_web__WEBPACK_IMPORTED_MODULE_18__["doUpdateUploadProgress"]; });
 
 /* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(37);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_19__["authReducer"]; });
@@ -291,8 +291,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_reducers_sync__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(45);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "syncReducer", function() { return redux_reducers_sync__WEBPACK_IMPORTED_MODULE_27__["syncReducer"]; });
 
-/* harmony import */ var redux_reducers_lbrytv__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(46);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lbrytvReducer", function() { return redux_reducers_lbrytv__WEBPACK_IMPORTED_MODULE_28__["lbrytvReducer"]; });
+/* harmony import */ var redux_reducers_web__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(46);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return redux_reducers_web__WEBPACK_IMPORTED_MODULE_28__["webReducer"]; });
 
 /* harmony import */ var redux_selectors_auth__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(47);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_29__["selectAuthToken"]; });
@@ -512,10 +512,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncApplyPasswordError"]; });
 
-/* harmony import */ var redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(54);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_39__["selectCurrentUploads"]; });
+/* harmony import */ var redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(54);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__["selectCurrentUploads"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_lbrytv__WEBPACK_IMPORTED_MODULE_39__["selectUploadCount"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__["selectUploadCount"]; });
 
 
 
@@ -7983,7 +7983,7 @@ function syncReducer() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lbrytvReducer", function() { return lbrytvReducer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return webReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -8037,7 +8037,7 @@ reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_UPLOAD_PROG
   });
 };
 
-function lbrytvReducer() {
+function webReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
   var action = arguments.length > 1 ? arguments[1] : undefined;
   var handler = reducers[action.type];
@@ -8279,7 +8279,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var selectState = function selectState(state) {
-  return state.lbrytv || {};
+  return state.web || {};
 };
 
 var selectCurrentUploads = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
