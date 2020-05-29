@@ -5760,9 +5760,7 @@ function doClaimYoutubeChannels() {
       page: 1,
       page_size: 99999
     }).then(function (addressList) {
-      return addressList.items.sort(function (a, b) {
-        return a.used_times - b.used_times;
-      })[0];
+      return addressList.items[0];
     }).then(function (address) {
       return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('yt', 'transfer', {
         address: address.address,
