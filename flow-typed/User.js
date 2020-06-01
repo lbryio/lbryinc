@@ -3,6 +3,7 @@
 type DeviceType = 'mobile' | 'web' | 'desktop';
 
 declare type User = {
+  country: ?string,
   created_at: string,
   family_name: ?string,
   given_name: ?string,
