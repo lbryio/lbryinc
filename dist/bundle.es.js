@@ -1978,6 +1978,25 @@ function doUserSetReferrer(referrer, shouldClaim) {
     }
   };
 }
+function doUserSetCountry(country) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const user = selectUser(state);
+    Lbryio.call('user_country', 'set', {
+      country
+    }).then(() => {
+      const newUser = { ...user,
+        country
+      };
+      dispatch({
+        type: USER_FETCH_SUCCESS,
+        data: {
+          user: newUser
+        }
+      });
+    });
+  };
+}
 function doClaimYoutubeChannels() {
   return dispatch => {
     dispatch({
@@ -4042,6 +4061,7 @@ exports.doUserPhoneReset = doUserPhoneReset;
 exports.doUserPhoneVerify = doUserPhoneVerify;
 exports.doUserPhoneVerifyFailure = doUserPhoneVerifyFailure;
 exports.doUserResendVerificationEmail = doUserResendVerificationEmail;
+exports.doUserSetCountry = doUserSetCountry;
 exports.doUserSetReferrer = doUserSetReferrer;
 exports.doUserSetReferrerReset = doUserSetReferrerReset;
 exports.doUserSignIn = doUserSignIn;

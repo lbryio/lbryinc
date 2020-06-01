@@ -12,6 +12,7 @@ import {
   selectEmailToVerify,
   selectPhoneToVerify,
   selectUserCountryCode,
+  selectUser,
 } from 'redux/selectors/user';
 import rewards from 'rewards';
 import Lbryio from 'lbryio';
@@ -700,6 +701,21 @@ export function doUserSetReferrer(referrer, shouldClaim) {
         data: { error },
       });
     }
+  };
+}
+
+export function doUserSetCountry(country) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const user = selectUser(state);
+
+    Lbryio.call('user_country', 'set', { country }).then(() => {
+      const newUser = { ...user, country };
+      dispatch({
+        type: ACTIONS.USER_FETCH_SUCCESS,
+        data: { user: newUser },
+      });
+    });
   };
 }
 
