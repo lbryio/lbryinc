@@ -146,7 +146,6 @@ export function doUserFetch() {
 
       Lbryio.getCurrentUser()
         .then(user => {
-          dispatch(doRewardList());
           dispatch({
             type: ACTIONS.USER_FETCH_SUCCESS,
             data: { user },

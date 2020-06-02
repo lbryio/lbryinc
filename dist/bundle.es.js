@@ -1403,7 +1403,6 @@ function doUserFetch() {
       type: USER_FETCH_STARTED
     });
     Lbryio.getCurrentUser().then(user => {
-      dispatch(doRewardList());
       dispatch({
         type: USER_FETCH_SUCCESS,
         data: {
