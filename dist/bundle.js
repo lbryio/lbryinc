@@ -4999,6 +4999,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function doFetchInviteStatus() {
+  var shouldCallRewardList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_STATUS_FETCH_STARTED"]
@@ -5008,7 +5009,10 @@ function doFetchInviteStatus() {
           status = _ref2[0],
           code = _ref2[1];
 
-      dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
+      if (shouldCallRewardList) {
+        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
+      }
+
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_STATUS_FETCH_SUCCESS"],
         data: {
@@ -5097,7 +5101,7 @@ function doAuthenticate(appVersion) {
 
         if (shareUsageData) {
           dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-          dispatch(doFetchInviteStatus());
+          dispatch(doFetchInviteStatus(false));
 
           if (callInstall) {
             doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);

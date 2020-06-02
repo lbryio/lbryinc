@@ -17,7 +17,7 @@ import {
 import rewards from 'rewards';
 import Lbryio from 'lbryio';
 
-export function doFetchInviteStatus() {
+export function doFetchInviteStatus(shouldCallRewardList = true) {
   return dispatch => {
     dispatch({
       type: ACTIONS.USER_INVITE_STATUS_FETCH_STARTED,
@@ -25,7 +25,9 @@ export function doFetchInviteStatus() {
 
     Promise.all([Lbryio.call('user', 'invite_status'), Lbryio.call('user_referral_code', 'list')])
       .then(([status, code]) => {
-        dispatch(doRewardList());
+        if (shouldCallRewardList) {
+          dispatch(doRewardList());
+        }
 
         dispatch({
           type: ACTIONS.USER_INVITE_STATUS_FETCH_SUCCESS,
@@ -121,7 +123,7 @@ export function doAuthenticate(
 
           if (shareUsageData) {
             dispatch(doRewardList());
-            dispatch(doFetchInviteStatus());
+            dispatch(doFetchInviteStatus(false));
             if (callInstall) {
               doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
             }

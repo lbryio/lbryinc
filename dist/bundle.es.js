@@ -1294,13 +1294,16 @@ const selectYouTubeImportVideosComplete = reselect.createSelector(selectState$2,
   }
 });
 
-function doFetchInviteStatus() {
+function doFetchInviteStatus(shouldCallRewardList = true) {
   return dispatch => {
     dispatch({
       type: USER_INVITE_STATUS_FETCH_STARTED
     });
     Promise.all([Lbryio.call('user', 'invite_status'), Lbryio.call('user_referral_code', 'list')]).then(([status, code]) => {
-      dispatch(doRewardList());
+      if (shouldCallRewardList) {
+        dispatch(doRewardList());
+      }
+
       dispatch({
         type: USER_INVITE_STATUS_FETCH_SUCCESS,
         data: {
@@ -1380,7 +1383,7 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
 
         if (shareUsageData) {
           dispatch(doRewardList());
-          dispatch(doFetchInviteStatus());
+          dispatch(doFetchInviteStatus(false));
 
           if (callInstall) {
             doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
