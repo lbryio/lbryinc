@@ -5036,8 +5036,10 @@ function doInstallNew(appVersion) {
   var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var callbackForUsersWhoAreSharingData = arguments.length > 3 ? arguments[3] : undefined;
+  var domain = arguments.length > 4 ? arguments[4] : undefined;
   var payload = {
-    app_version: appVersion
+    app_version: appVersion,
+    domain: domain
   };
 
   if (firebaseToken) {
@@ -5085,6 +5087,7 @@ function doAuthenticate(appVersion) {
   var shareUsageData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var callbackForUsersWhoAreSharingData = arguments.length > 4 ? arguments[4] : undefined;
   var callInstall = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var domain = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
@@ -5104,7 +5107,7 @@ function doAuthenticate(appVersion) {
           dispatch(doFetchInviteStatus(false));
 
           if (callInstall) {
-            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
+            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData, domain);
           }
         }
       });

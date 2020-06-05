@@ -1323,9 +1323,10 @@ function doFetchInviteStatus(shouldCallRewardList = true) {
     });
   };
 }
-function doInstallNew(appVersion, os = null, firebaseToken = null, callbackForUsersWhoAreSharingData) {
+function doInstallNew(appVersion, os = null, firebaseToken = null, callbackForUsersWhoAreSharingData, domain) {
   const payload = {
-    app_version: appVersion
+    app_version: appVersion,
+    domain
   };
 
   if (firebaseToken) {
@@ -1366,7 +1367,7 @@ function doInstallNewWithParams(appVersion, installationId, nodeId, lbrynetVersi
   };
 } // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
 
-function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callbackForUsersWhoAreSharingData, callInstall = true) {
+function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageData = true, callbackForUsersWhoAreSharingData, callInstall = true, domain = null) {
   return dispatch => {
     dispatch({
       type: AUTHENTICATION_STARTED
@@ -1386,7 +1387,7 @@ function doAuthenticate(appVersion, os = null, firebaseToken = null, shareUsageD
           dispatch(doFetchInviteStatus(false));
 
           if (callInstall) {
-            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
+            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData, domain);
           }
         }
       });

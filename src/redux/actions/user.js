@@ -52,9 +52,10 @@ export function doInstallNew(
   appVersion,
   os = null,
   firebaseToken = null,
-  callbackForUsersWhoAreSharingData
+  callbackForUsersWhoAreSharingData,
+  domain
 ) {
-  const payload = { app_version: appVersion };
+  const payload = { app_version: appVersion, domain };
   if (firebaseToken) {
     payload.firebase_token = firebaseToken;
   }
@@ -106,7 +107,8 @@ export function doAuthenticate(
   firebaseToken = null,
   shareUsageData = true,
   callbackForUsersWhoAreSharingData,
-  callInstall = true
+  callInstall = true,
+  domain = null
 ) {
   return dispatch => {
     dispatch({
@@ -125,7 +127,13 @@ export function doAuthenticate(
             dispatch(doRewardList());
             dispatch(doFetchInviteStatus(false));
             if (callInstall) {
-              doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData);
+              doInstallNew(
+                appVersion,
+                os,
+                firebaseToken,
+                callbackForUsersWhoAreSharingData,
+                domain
+              );
             }
           }
         });
