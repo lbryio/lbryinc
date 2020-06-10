@@ -5047,7 +5047,7 @@ function doInstallNew(appVersion) {
   }
 
   lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status().then(function (status) {
-    payload.app_id = status.installation_id;
+    payload.app_id = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
     payload.node_id = status.lbry_id;
     lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].version().then(function (version) {
       payload.daemon_version = version.lbrynet_version;
