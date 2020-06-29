@@ -109,426 +109,140 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Lbryio", function() { return lbryio__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var rewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "rewards", function() { return rewards__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var util_transifex_upload__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doTransifexUpload", function() { return util_transifex_upload__WEBPACK_IMPORTED_MODULE_4__["doTransifexUpload"]; });
 
-/* harmony import */ var redux_reducers_subscriptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(10);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "subscriptionsReducer", function() { return redux_reducers_subscriptions__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var redux_actions_auth__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(15);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGenerateAuthToken", function() { return redux_actions_auth__WEBPACK_IMPORTED_MODULE_5__["doGenerateAuthToken"]; });
 
-/* harmony import */ var redux_middleware_sync__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(13);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "userStateSyncMiddleware", function() { return redux_middleware_sync__WEBPACK_IMPORTED_MODULE_6__["userStateSyncMiddleware"]; });
+/* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(16);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_6__["doFetchCostInfoForUri"]; });
 
-/* harmony import */ var util_transifex_upload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doTransifexUpload", function() { return util_transifex_upload__WEBPACK_IMPORTED_MODULE_7__["doTransifexUpload"]; });
+/* harmony import */ var redux_actions_blacklist__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(17);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doBlackListedOutpointsSubscribe", function() { return redux_actions_blacklist__WEBPACK_IMPORTED_MODULE_7__["doBlackListedOutpointsSubscribe"]; });
 
-/* harmony import */ var redux_actions_auth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(23);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGenerateAuthToken", function() { return redux_actions_auth__WEBPACK_IMPORTED_MODULE_8__["doGenerateAuthToken"]; });
+/* harmony import */ var redux_actions_filtered__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(18);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFilteredOutpointsSubscribe", function() { return redux_actions_filtered__WEBPACK_IMPORTED_MODULE_8__["doFilteredOutpointsSubscribe"]; });
 
-/* harmony import */ var redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(24);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doRewardList", function() { return redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__["doRewardList"]; });
+/* harmony import */ var redux_actions_homepage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(19);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchFeaturedUris", function() { return redux_actions_homepage__WEBPACK_IMPORTED_MODULE_9__["doFetchFeaturedUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimRewardType", function() { return redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__["doClaimRewardType"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchTrendingUris", function() { return redux_actions_homepage__WEBPACK_IMPORTED_MODULE_9__["doFetchTrendingUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimEligiblePurchaseRewards", function() { return redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__["doClaimEligiblePurchaseRewards"]; });
+/* harmony import */ var redux_actions_stats__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(20);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchViewCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_10__["doFetchViewCount"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimRewardClearError", function() { return redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__["doClaimRewardClearError"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchSubCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_10__["doFetchSubCount"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchRewardedContent", function() { return redux_actions_rewards__WEBPACK_IMPORTED_MODULE_9__["doFetchRewardedContent"]; });
+/* harmony import */ var redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(21);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doCheckSync"]; });
 
-/* harmony import */ var redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(28);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscribe", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doChannelSubscribe"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doGetSync"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doChannelUnsubscribe", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doChannelUnsubscribe"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSetSync"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscriptionEnableNotifications", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doChannelSubscriptionEnableNotifications"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSetDefaultAccount"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscriptionDisableNotifications", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doChannelSubscriptionDisableNotifications"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSyncApply"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscription", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doCheckSubscription"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doResetSync"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscriptions", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doCheckSubscriptions"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSyncEncryptAndDecrypt"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscriptionsInit", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doCheckSubscriptionsInit"]; });
+/* harmony import */ var redux_actions_web__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(22);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_web__WEBPACK_IMPORTED_MODULE_12__["doUpdateUploadProgress"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCompleteFirstRun", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doCompleteFirstRun"]; });
+/* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__["authReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchMySubscriptions", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doFetchMySubscriptions"]; });
+/* harmony import */ var redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(24);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_14__["costInfoReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchRecommendedSubscriptions", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doFetchRecommendedSubscriptions"]; });
+/* harmony import */ var redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(26);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_15__["blacklistReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doRemoveUnreadSubscription", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doRemoveUnreadSubscription"]; });
+/* harmony import */ var redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(27);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_16__["filteredReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doRemoveUnreadSubscriptions", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doRemoveUnreadSubscriptions"]; });
+/* harmony import */ var redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(28);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_17__["homepageReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetViewMode", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doSetViewMode"]; });
+/* harmony import */ var redux_reducers_stats__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(29);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return redux_reducers_stats__WEBPACK_IMPORTED_MODULE_18__["statsReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doShowSuggestedSubs", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doShowSuggestedSubs"]; });
+/* harmony import */ var redux_reducers_sync__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(30);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "syncReducer", function() { return redux_reducers_sync__WEBPACK_IMPORTED_MODULE_19__["syncReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUnreadSubscriptions", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["doUpdateUnreadSubscriptions"]; });
+/* harmony import */ var redux_reducers_web__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(31);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return redux_reducers_web__WEBPACK_IMPORTED_MODULE_20__["webReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "setSubscriptionLatest", function() { return redux_actions_subscriptions__WEBPACK_IMPORTED_MODULE_10__["setSubscriptionLatest"]; });
+/* harmony import */ var redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(32);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__["selectAuthToken"]; });
 
-/* harmony import */ var redux_actions_user__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(27);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchInviteStatus", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doFetchInviteStatus"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__["selectIsAuthenticating"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doInstallNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doInstallNew"]; });
+/* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(34);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["makeSelectFetchingCostInfoForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doInstallNewWithParams", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doInstallNewWithParams"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["makeSelectCostInfoForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doAuthenticate", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doAuthenticate"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAllCostInfoByUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["selectAllCostInfoByUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserFetch", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserFetch"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["selectFetchingCostInfo"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSignIn", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSignIn"]; });
+/* harmony import */ var redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(35);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__["selectBlackListedOutpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSignUp", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSignUp"]; });
+/* harmony import */ var redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(36);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__["selectFilteredOutpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserEmailNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserEmailNew"]; });
+/* harmony import */ var redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(37);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFeaturedUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserCheckEmailVerified", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserCheckEmailVerified"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFetchingFeaturedUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserEmailToVerify", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserEmailToVerify"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectTrendingUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerifyFailure", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserEmailVerifyFailure"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFetchingTrendingUris"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerify", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserEmailVerify"]; });
+/* harmony import */ var redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(38);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectViewCountForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPhoneNew"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectSubCountForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneReset", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPhoneReset"]; });
+/* harmony import */ var redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(39);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectHasSyncedWallet"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneVerifyFailure", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPhoneVerifyFailure"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncData"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneVerify", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPhoneVerify"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncHash"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doFetchAccessToken"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSetSyncErrorMessage"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserResendVerificationEmail", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserResendVerificationEmail"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectGetSyncErrorMessage"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserIdentityVerify"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectGetSyncIsPending"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserInviteNew"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSetSyncIsPending"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClaimYoutubeChannels"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyIsPending"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckYoutubeTransfer", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doCheckYoutubeTransfer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectHashChanged"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSetReferrer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyErrorMessage"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrerReset", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSetReferrerReset"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyPasswordError"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPasswordReset", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPasswordReset"]; });
+/* harmony import */ var redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(40);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__["selectCurrentUploads"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserPasswordSet", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserPasswordSet"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__["selectUploadCount"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserCheckIfEmailExists", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserCheckIfEmailExists"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClearEmailEntry", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClearEmailEntry"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntry", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doClearPasswordEntry"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUserSetCountry", function() { return redux_actions_user__WEBPACK_IMPORTED_MODULE_11__["doUserSetCountry"]; });
-
-/* harmony import */ var redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(30);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchCostInfoForUri", function() { return redux_actions_cost_info__WEBPACK_IMPORTED_MODULE_12__["doFetchCostInfoForUri"]; });
-
-/* harmony import */ var redux_actions_blacklist__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(31);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doBlackListedOutpointsSubscribe", function() { return redux_actions_blacklist__WEBPACK_IMPORTED_MODULE_13__["doBlackListedOutpointsSubscribe"]; });
-
-/* harmony import */ var redux_actions_filtered__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(32);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFilteredOutpointsSubscribe", function() { return redux_actions_filtered__WEBPACK_IMPORTED_MODULE_14__["doFilteredOutpointsSubscribe"]; });
-
-/* harmony import */ var redux_actions_homepage__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(33);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchFeaturedUris", function() { return redux_actions_homepage__WEBPACK_IMPORTED_MODULE_15__["doFetchFeaturedUris"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchTrendingUris", function() { return redux_actions_homepage__WEBPACK_IMPORTED_MODULE_15__["doFetchTrendingUris"]; });
-
-/* harmony import */ var redux_actions_stats__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(34);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchViewCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_16__["doFetchViewCount"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchSubCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_16__["doFetchSubCount"]; });
-
-/* harmony import */ var redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(35);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doCheckSync"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doGetSync"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doSetSync"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doSetDefaultAccount"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doSyncApply"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doResetSync"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_17__["doSyncEncryptAndDecrypt"]; });
-
-/* harmony import */ var redux_actions_web__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(36);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_web__WEBPACK_IMPORTED_MODULE_18__["doUpdateUploadProgress"]; });
-
-/* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(37);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_19__["authReducer"]; });
-
-/* harmony import */ var redux_reducers_rewards__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(38);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "rewardsReducer", function() { return redux_reducers_rewards__WEBPACK_IMPORTED_MODULE_20__["rewardsReducer"]; });
-
-/* harmony import */ var redux_reducers_user__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(39);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "userReducer", function() { return redux_reducers_user__WEBPACK_IMPORTED_MODULE_21__["userReducer"]; });
-
-/* harmony import */ var redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(40);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_22__["costInfoReducer"]; });
-
-/* harmony import */ var redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(41);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_23__["blacklistReducer"]; });
-
-/* harmony import */ var redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(42);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_24__["filteredReducer"]; });
-
-/* harmony import */ var redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(43);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_25__["homepageReducer"]; });
-
-/* harmony import */ var redux_reducers_stats__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(44);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return redux_reducers_stats__WEBPACK_IMPORTED_MODULE_26__["statsReducer"]; });
-
-/* harmony import */ var redux_reducers_sync__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(45);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "syncReducer", function() { return redux_reducers_sync__WEBPACK_IMPORTED_MODULE_27__["syncReducer"]; });
-
-/* harmony import */ var redux_reducers_web__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(46);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return redux_reducers_web__WEBPACK_IMPORTED_MODULE_28__["webReducer"]; });
-
-/* harmony import */ var redux_selectors_auth__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(47);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_29__["selectAuthToken"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_29__["selectIsAuthenticating"]; });
-
-/* harmony import */ var redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(25);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectClaimRewardError", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectClaimRewardError"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsRewardClaimPending", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectIsRewardClaimPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardAmountByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectRewardAmountByType"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectRewardByType"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByClaimCode", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["makeSelectRewardByClaimCode"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewardsByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectUnclaimedRewardsByType"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewardsById", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimedRewardsById"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewards", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimedRewards"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewardsByTransactionId", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimedRewardsByTransactionId"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewards", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectUnclaimedRewards"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingRewards", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectFetchingRewards"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewardValue", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectUnclaimedRewardValue"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimsPendingByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimsPendingByType"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectClaimErrorsByType", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectClaimErrorsByType"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectRewardContentClaimIds", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectRewardContentClaimIds"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectReferralReward", function() { return redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_30__["selectReferralReward"]; });
-
-/* harmony import */ var redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(14);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsNew", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["makeSelectIsNew"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsSubscribed", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["makeSelectIsSubscribed"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectUnreadByChannel", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["makeSelectUnreadByChannel"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEnabledChannelNotifications", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectEnabledChannelNotifications"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptions", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectSubscriptions"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsFetchingSubscriptions", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectIsFetchingSubscriptions"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectViewMode", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectViewMode"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSuggested", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectSuggested"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsFetchingSuggested", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectIsFetchingSuggested"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSuggestedChannels", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectSuggestedChannels"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFirstRunCompleted", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectFirstRunCompleted"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectShowSuggestedSubs", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectShowSuggestedSubs"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptionsBeingFetched", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectSubscriptionsBeingFetched"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnreadByChannel", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectUnreadByChannel"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnreadAmount", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectUnreadAmount"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUnreadSubscriptions", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectUnreadSubscriptions"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptionClaims", function() { return redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_31__["selectSubscriptionClaims"]; });
-
-/* harmony import */ var redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(26);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthenticationIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectAuthenticationIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUser", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUser"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserEmail"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserPhone", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserPhone"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserCountryCode"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailToVerify", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailToVerify"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneToVerify", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPhoneToVerify"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserIsRewardApproved", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserIsRewardApproved"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailNewIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailNewErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneNewErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPhoneNewErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneNewIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPhoneNewIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailVerifyIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailVerifyErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailAlreadyExists"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectEmailDoesNotExist", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectEmailDoesNotExist"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectResendingVerificationEmail"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPhoneVerifyErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPhoneVerifyIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIdentityVerifyIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectIdentityVerifyIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIdentityVerifyErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectIdentityVerifyErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserIsVerificationCandidate", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserIsVerificationCandidate"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAccessToken", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectAccessToken"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteStatusIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteStatusIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInvitesRemaining", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInvitesRemaining"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInvitees", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInvitees"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteStatusFailed", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteStatusFailed"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteNewIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewErrorMessage", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteNewErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteReferralLink"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralCode", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserInviteReferralCode"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUserVerifiedEmail", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectUserVerifiedEmail"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectYoutubeChannels"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectYouTubeImportPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectYouTubeImportError"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportVideosComplete", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectYouTubeImportVideosComplete"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectSetReferrerPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectSetReferrerError"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordResetIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetSuccess", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordResetSuccess"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordResetError"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetIsPending", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordSetIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetSuccess", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordSetSuccess"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetError", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordSetError"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectPasswordExists", function() { return redux_selectors_user__WEBPACK_IMPORTED_MODULE_32__["selectPasswordExists"]; });
-
-/* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(48);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_33__["makeSelectFetchingCostInfoForUri"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_33__["makeSelectCostInfoForUri"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAllCostInfoByUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_33__["selectAllCostInfoByUri"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_33__["selectFetchingCostInfo"]; });
-
-/* harmony import */ var redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(49);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_34__["selectBlackListedOutpoints"]; });
-
-/* harmony import */ var redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(50);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_35__["selectFilteredOutpoints"]; });
-
-/* harmony import */ var redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(51);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_36__["selectFeaturedUris"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_36__["selectFetchingFeaturedUris"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_36__["selectTrendingUris"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_36__["selectFetchingTrendingUris"]; });
-
-/* harmony import */ var redux_selectors_stats__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(52);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_37__["makeSelectViewCountForUri"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_37__["makeSelectSubCountForUri"]; });
-
-/* harmony import */ var redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(53);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectHasSyncedWallet"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncData"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncHash"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSetSyncErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectGetSyncErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectGetSyncIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSetSyncIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncApplyIsPending"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectHashChanged"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncApplyErrorMessage"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_38__["selectSyncApplyPasswordError"]; });
-
-/* harmony import */ var redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(54);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__["selectCurrentUploads"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_39__["selectUploadCount"]; });
-
-
-
-
-
-
- // middleware
 
  // constants
-
- // Lbryio and rewards
 
  // utils
 
@@ -541,13 +255,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
  // reducers
-
-
-
 
 
 
@@ -567,70 +275,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_FAILURE", function() { return GENERATE_AUTH_TOKEN_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_STARTED", function() { return GENERATE_AUTH_TOKEN_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_SUCCESS", function() { return GENERATE_AUTH_TOKEN_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTHENTICATION_STARTED", function() { return AUTHENTICATION_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTHENTICATION_SUCCESS", function() { return AUTHENTICATION_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTHENTICATION_FAILURE", function() { return AUTHENTICATION_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_DECLINE", function() { return USER_EMAIL_DECLINE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_STARTED", function() { return USER_EMAIL_NEW_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_SUCCESS", function() { return USER_EMAIL_NEW_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_EXISTS", function() { return USER_EMAIL_NEW_EXISTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_DOES_NOT_EXIST", function() { return USER_EMAIL_NEW_DOES_NOT_EXIST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_FAILURE", function() { return USER_EMAIL_NEW_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_NEW_CLEAR_ENTRY", function() { return USER_EMAIL_NEW_CLEAR_ENTRY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_SET", function() { return USER_EMAIL_VERIFY_SET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_STARTED", function() { return USER_EMAIL_VERIFY_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_SUCCESS", function() { return USER_EMAIL_VERIFY_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_FAILURE", function() { return USER_EMAIL_VERIFY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_STARTED", function() { return USER_EMAIL_VERIFY_RETRY_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_FAILURE", function() { return USER_EMAIL_VERIFY_RETRY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_EMAIL_VERIFY_RETRY_SUCCESS", function() { return USER_EMAIL_VERIFY_RETRY_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_EXISTS", function() { return USER_PASSWORD_EXISTS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_RESET_STARTED", function() { return USER_PASSWORD_RESET_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_RESET_SUCCESS", function() { return USER_PASSWORD_RESET_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_RESET_FAILURE", function() { return USER_PASSWORD_RESET_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_SET_STARTED", function() { return USER_PASSWORD_SET_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_SET_SUCCESS", function() { return USER_PASSWORD_SET_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_SET_FAILURE", function() { return USER_PASSWORD_SET_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PASSWORD_SET_CLEAR", function() { return USER_PASSWORD_SET_CLEAR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_RESET", function() { return USER_PHONE_RESET; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_STARTED", function() { return USER_PHONE_NEW_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_SUCCESS", function() { return USER_PHONE_NEW_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_NEW_FAILURE", function() { return USER_PHONE_NEW_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_VERIFY_STARTED", function() { return USER_PHONE_VERIFY_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_VERIFY_SUCCESS", function() { return USER_PHONE_VERIFY_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_PHONE_VERIFY_FAILURE", function() { return USER_PHONE_VERIFY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_IDENTITY_VERIFY_STARTED", function() { return USER_IDENTITY_VERIFY_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_IDENTITY_VERIFY_SUCCESS", function() { return USER_IDENTITY_VERIFY_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_IDENTITY_VERIFY_FAILURE", function() { return USER_IDENTITY_VERIFY_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_FETCH_STARTED", function() { return USER_FETCH_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_FETCH_SUCCESS", function() { return USER_FETCH_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_FETCH_FAILURE", function() { return USER_FETCH_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_STATUS_FETCH_STARTED", function() { return USER_INVITE_STATUS_FETCH_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_STATUS_FETCH_SUCCESS", function() { return USER_INVITE_STATUS_FETCH_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_STATUS_FETCH_FAILURE", function() { return USER_INVITE_STATUS_FETCH_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_NEW_STARTED", function() { return USER_INVITE_NEW_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_NEW_SUCCESS", function() { return USER_INVITE_NEW_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_INVITE_NEW_FAILURE", function() { return USER_INVITE_NEW_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_ACCESS_TOKEN_SUCCESS", function() { return FETCH_ACCESS_TOKEN_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_STARTED", function() { return USER_YOUTUBE_IMPORT_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_FAILURE", function() { return USER_YOUTUBE_IMPORT_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_YOUTUBE_IMPORT_SUCCESS", function() { return USER_YOUTUBE_IMPORT_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_STARTED", function() { return USER_SET_REFERRER_STARTED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_SUCCESS", function() { return USER_SET_REFERRER_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_FAILURE", function() { return USER_SET_REFERRER_FAILURE; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "USER_SET_REFERRER_RESET", function() { return USER_SET_REFERRER_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_STARTED", function() { return FETCH_FEATURED_CONTENT_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_FEATURED_CONTENT_COMPLETED", function() { return FETCH_FEATURED_CONTENT_COMPLETED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_TRENDING_CONTENT_STARTED", function() { return FETCH_TRENDING_CONTENT_STARTED; });
@@ -706,63 +356,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_BAD_PASSWORD", function() { return SYNC_APPLY_BAD_PASSWORD; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_RESET", function() { return SYNC_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPLOAD_PROGRESS", function() { return UPDATE_UPLOAD_PROGRESS; });
-// User
-var GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
-var GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
-var GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
-var AUTHENTICATION_STARTED = 'AUTHENTICATION_STARTED';
-var AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
-var AUTHENTICATION_FAILURE = 'AUTHENTICATION_FAILURE';
-var USER_EMAIL_DECLINE = 'USER_EMAIL_DECLINE';
-var USER_EMAIL_NEW_STARTED = 'USER_EMAIL_NEW_STARTED';
-var USER_EMAIL_NEW_SUCCESS = 'USER_EMAIL_NEW_SUCCESS';
-var USER_EMAIL_NEW_EXISTS = 'USER_EMAIL_NEW_EXISTS';
-var USER_EMAIL_NEW_DOES_NOT_EXIST = 'USER_EMAIL_NEW_DOES_NOT_EXIST';
-var USER_EMAIL_NEW_FAILURE = 'USER_EMAIL_NEW_FAILURE';
-var USER_EMAIL_NEW_CLEAR_ENTRY = 'USER_EMAIL_NEW_CLEAR_ENTRY';
-var USER_EMAIL_VERIFY_SET = 'USER_EMAIL_VERIFY_SET';
-var USER_EMAIL_VERIFY_STARTED = 'USER_EMAIL_VERIFY_STARTED';
-var USER_EMAIL_VERIFY_SUCCESS = 'USER_EMAIL_VERIFY_SUCCESS';
-var USER_EMAIL_VERIFY_FAILURE = 'USER_EMAIL_VERIFY_FAILURE';
-var USER_EMAIL_VERIFY_RETRY_STARTED = 'USER_EMAIL_VERIFY_RETRY_STARTED';
-var USER_EMAIL_VERIFY_RETRY_FAILURE = 'USER_EMAIL_VERIFY_RETRY_FAILURE';
-var USER_EMAIL_VERIFY_RETRY_SUCCESS = 'USER_EMAIL_VERIFY_RETRY_SUCCESS';
-var USER_PASSWORD_EXISTS = 'USER_PASSWORD_EXISTS';
-var USER_PASSWORD_RESET_STARTED = 'USER_PASSWORD_RESET_STARTED';
-var USER_PASSWORD_RESET_SUCCESS = 'USER_PASSWORD_RESET_SUCCESS';
-var USER_PASSWORD_RESET_FAILURE = 'USER_PASSWORD_RESET_FAILURE';
-var USER_PASSWORD_SET_STARTED = 'USER_PASSWORD_SET_STARTED';
-var USER_PASSWORD_SET_SUCCESS = 'USER_PASSWORD_SET_SUCCESS';
-var USER_PASSWORD_SET_FAILURE = 'USER_PASSWORD_SET_FAILURE';
-var USER_PASSWORD_SET_CLEAR = 'USER_PASSWORD_SET_CLEAR';
-var USER_PHONE_RESET = 'USER_PHONE_RESET';
-var USER_PHONE_NEW_STARTED = 'USER_PHONE_NEW_STARTED';
-var USER_PHONE_NEW_SUCCESS = 'USER_PHONE_NEW_SUCCESS';
-var USER_PHONE_NEW_FAILURE = 'USER_PHONE_NEW_FAILURE';
-var USER_PHONE_VERIFY_STARTED = 'USER_PHONE_VERIFY_STARTED';
-var USER_PHONE_VERIFY_SUCCESS = 'USER_PHONE_VERIFY_SUCCESS';
-var USER_PHONE_VERIFY_FAILURE = 'USER_PHONE_VERIFY_FAILURE';
-var USER_IDENTITY_VERIFY_STARTED = 'USER_IDENTITY_VERIFY_STARTED';
-var USER_IDENTITY_VERIFY_SUCCESS = 'USER_IDENTITY_VERIFY_SUCCESS';
-var USER_IDENTITY_VERIFY_FAILURE = 'USER_IDENTITY_VERIFY_FAILURE';
-var USER_FETCH_STARTED = 'USER_FETCH_STARTED';
-var USER_FETCH_SUCCESS = 'USER_FETCH_SUCCESS';
-var USER_FETCH_FAILURE = 'USER_FETCH_FAILURE';
-var USER_INVITE_STATUS_FETCH_STARTED = 'USER_INVITE_STATUS_FETCH_STARTED';
-var USER_INVITE_STATUS_FETCH_SUCCESS = 'USER_INVITE_STATUS_FETCH_SUCCESS';
-var USER_INVITE_STATUS_FETCH_FAILURE = 'USER_INVITE_STATUS_FETCH_FAILURE';
-var USER_INVITE_NEW_STARTED = 'USER_INVITE_NEW_STARTED';
-var USER_INVITE_NEW_SUCCESS = 'USER_INVITE_NEW_SUCCESS';
-var USER_INVITE_NEW_FAILURE = 'USER_INVITE_NEW_FAILURE';
-var FETCH_ACCESS_TOKEN_SUCCESS = 'FETCH_ACCESS_TOKEN_SUCCESS';
-var USER_YOUTUBE_IMPORT_STARTED = 'USER_YOUTUBE_IMPORT_STARTED';
-var USER_YOUTUBE_IMPORT_FAILURE = 'USER_YOUTUBE_IMPORT_FAILURE';
-var USER_YOUTUBE_IMPORT_SUCCESS = 'USER_YOUTUBE_IMPORT_SUCCESS';
-var USER_SET_REFERRER_STARTED = 'USER_SET_REFERRER_STARTED';
-var USER_SET_REFERRER_SUCCESS = 'USER_SET_REFERRER_SUCCESS';
-var USER_SET_REFERRER_FAILURE = 'USER_SET_REFERRER_FAILURE';
-var USER_SET_REFERRER_RESET = 'USER_SET_REFERRER_RESET'; // Claims
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_FAILURE", function() { return GENERATE_AUTH_TOKEN_FAILURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_STARTED", function() { return GENERATE_AUTH_TOKEN_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_SUCCESS", function() { return GENERATE_AUTH_TOKEN_SUCCESS; });
+// Claims
 var FETCH_FEATURED_CONTENT_STARTED = 'FETCH_FEATURED_CONTENT_STARTED';
 var FETCH_FEATURED_CONTENT_COMPLETED = 'FETCH_FEATURED_CONTENT_COMPLETED';
 var FETCH_TRENDING_CONTENT_STARTED = 'FETCH_TRENDING_CONTENT_STARTED';
@@ -844,7 +441,11 @@ var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
 var SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
 var SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
-var UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS';
+var UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS'; // User
+
+var GENERATE_AUTH_TOKEN_FAILURE = 'GENERATE_AUTH_TOKEN_FAILURE';
+var GENERATE_AUTH_TOKEN_STARTED = 'GENERATE_AUTH_TOKEN_STARTED';
+var GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
 
 /***/ }),
 /* 2 */
@@ -1327,884 +928,6 @@ var objectKeys = Object.keys || function (obj) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-var rewards = {};
-rewards.TYPE_NEW_DEVELOPER = 'new_developer';
-rewards.TYPE_NEW_USER = 'new_user';
-rewards.TYPE_CONFIRM_EMAIL = 'email_provided';
-rewards.TYPE_FIRST_CHANNEL = 'new_channel';
-rewards.TYPE_FIRST_STREAM = 'first_stream';
-rewards.TYPE_MANY_DOWNLOADS = 'many_downloads';
-rewards.TYPE_FIRST_PUBLISH = 'first_publish';
-rewards.TYPE_REFERRAL = 'referrer';
-rewards.TYPE_REFEREE = 'referee';
-rewards.TYPE_REWARD_CODE = 'reward_code';
-rewards.TYPE_SUBSCRIPTION = 'subscription';
-rewards.YOUTUBE_CREATOR = 'youtube_creator';
-rewards.TYPE_DAILY_VIEW = 'daily_view';
-rewards.TYPE_NEW_ANDROID = 'new_android';
-rewards.TYPE_PAID_CONTENT = 'paid_content';
-
-rewards.claimReward = function (type, rewardParams) {
-  function requestReward(resolve, reject, params) {
-    if (!lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].enabled) {
-      reject(new Error(__('Rewards are not enabled.')));
-      return;
-    }
-
-    lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('reward', 'claim', params, 'post').then(function (reward) {
-      var message = reward.reward_notification || "You have claimed a ".concat(reward.reward_amount, " LBC reward."); // Display global notice
-
-      var action = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
-        message: message,
-        linkText: __('Show All'),
-        linkTarget: '/rewards'
-      });
-      window.store.dispatch(action);
-
-      if (rewards.callbacks.claimRewardSuccess) {
-        rewards.callbacks.claimRewardSuccess();
-      }
-
-      resolve(reward);
-    }, reject);
-  }
-
-  return new Promise(function (resolve, reject) {
-    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_unused().then(function (address) {
-      var params = _objectSpread({
-        reward_type: type,
-        wallet_address: address
-      }, rewardParams);
-
-      switch (type) {
-        case rewards.TYPE_FIRST_CHANNEL:
-          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_list({
-            page: 1,
-            page_size: 10
-          }).then(function (claims) {
-            var claim = claims.items && claims.items.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] === '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(new Error(__('Please create a channel identity first.')));
-            }
-          })["catch"](reject);
-          break;
-
-        case rewards.TYPE_FIRST_PUBLISH:
-          lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].stream_list({
-            page: 1,
-            page_size: 10
-          }).then(function (claims) {
-            var claim = claims.items && claims.items.find(function (foundClaim) {
-              return foundClaim.name.length && foundClaim.name[0] !== '@' && foundClaim.txid.length && foundClaim.type === 'claim';
-            });
-
-            if (claim) {
-              params.transaction_id = claim.txid;
-              requestReward(resolve, reject, params);
-            } else {
-              reject(claims.length ? new Error(__('Please publish something and wait for confirmation by the network to claim this reward.')) : new Error(__('Please publish something to claim this reward.')));
-            }
-          })["catch"](reject);
-          break;
-
-        case rewards.TYPE_FIRST_STREAM:
-        case rewards.TYPE_NEW_USER:
-        default:
-          requestReward(resolve, reject, params);
-      }
-    });
-  });
-};
-
-rewards.callbacks = {
-  // Set any callbacks that require code not found in this project
-  claimRewardSuccess: null,
-  claimFirstRewardSuccess: null,
-  rewardApprovalRequired: null
-};
-
-rewards.setCallback = function (name, method) {
-  rewards.callbacks[name] = method;
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (rewards);
-
-/***/ }),
-/* 10 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var constants_subscriptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(12);
-var _handleActions;
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var defaultState = {
-  enabledChannelNotifications: [],
-  subscriptions: [],
-  latest: {},
-  unread: {},
-  suggested: {},
-  loading: false,
-  viewMode: constants_subscriptions__WEBPACK_IMPORTED_MODULE_2__["VIEW_ALL"],
-  loadingSuggested: false,
-  firstRunCompleted: false,
-  showSuggestedSubs: false
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_3__["handleActions"])((_handleActions = {}, _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_SUBSCRIBE"], function (state, action) {
-  var newSubscription = action.data;
-  var newSubscriptions = state.subscriptions.slice();
-
-  if (!newSubscriptions.some(function (sub) {
-    return sub.uri === newSubscription.uri;
-  })) {
-    newSubscriptions.unshift(newSubscription);
-  }
-
-  return _objectSpread({}, state, {
-    subscriptions: newSubscriptions
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_UNSUBSCRIBE"], function (state, action) {
-  var subscriptionToRemove = action.data;
-  var newSubscriptions = state.subscriptions.slice().filter(function (subscription) {
-    return subscription.channelName !== subscriptionToRemove.channelName;
-  }); // Check if we need to remove it from the 'unread' state
-
-  var unread = state.unread;
-
-  if (unread[subscriptionToRemove.uri]) {
-    delete unread[subscriptionToRemove.uri];
-  }
-
-  return _objectSpread({}, state, {
-    unread: _objectSpread({}, unread),
-    subscriptions: newSubscriptions
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SUBSCRIPTION_LATEST"], function (state, action) {
-  var _action$data = action.data,
-      subscription = _action$data.subscription,
-      uri = _action$data.uri;
-  var newLatest = Object.assign({}, state.latest);
-  newLatest[subscription.uri] = uri;
-  return _objectSpread({}, state, {
-    latest: newLatest
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SUBSCRIPTION_UNREADS"], function (state, action) {
-  var _action$data2 = action.data,
-      channel = _action$data2.channel,
-      uris = _action$data2.uris,
-      type = _action$data2.type;
-  return _objectSpread({}, state, {
-    unread: _objectSpread({}, state.unread, _defineProperty({}, channel, {
-      uris: uris,
-      type: type
-    }))
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["REMOVE_SUBSCRIPTION_UNREADS"], function (state, action) {
-  var _action$data3 = action.data,
-      channel = _action$data3.channel,
-      uris = _action$data3.uris; // If no channel is passed in, remove all unreads
-
-  var newUnread;
-
-  if (channel) {
-    newUnread = _objectSpread({}, state.unread);
-
-    if (!uris) {
-      delete newUnread[channel];
-    } else {
-      newUnread[channel].uris = uris;
-    }
-  } else {
-    newUnread = {};
-  }
-
-  return _objectSpread({}, state, {
-    unread: _objectSpread({}, newUnread)
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS"], function (state, action) {
-  var channelName = action.data;
-  var newEnabledChannelNotifications = state.enabledChannelNotifications.slice();
-
-  if (channelName && channelName.trim().length > 0 && newEnabledChannelNotifications.indexOf(channelName) === -1) {
-    newEnabledChannelNotifications.push(channelName);
-  }
-
-  return _objectSpread({}, state, {
-    enabledChannelNotifications: newEnabledChannelNotifications
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS"], function (state, action) {
-  var channelName = action.data;
-  var newEnabledChannelNotifications = state.enabledChannelNotifications.slice();
-  var index = newEnabledChannelNotifications.indexOf(channelName);
-
-  if (index > -1) {
-    newEnabledChannelNotifications.splice(index, 1);
-  }
-
-  return _objectSpread({}, state, {
-    enabledChannelNotifications: newEnabledChannelNotifications
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_SUBSCRIPTIONS_START"], function (state) {
-  return _objectSpread({}, state, {
-    loading: true
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_SUBSCRIPTIONS_FAIL"], function (state) {
-  return _objectSpread({}, state, {
-    loading: false
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_SUBSCRIPTIONS_SUCCESS"], function (state, action) {
-  return _objectSpread({}, state, {
-    loading: false,
-    subscriptions: action.data
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_VIEW_MODE"], function (state, action) {
-  return _objectSpread({}, state, {
-    viewMode: action.data
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SUGGESTED_SUBSCRIPTIONS_START"], function (state) {
-  return _objectSpread({}, state, {
-    loadingSuggested: true
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SUGGESTED_SUBSCRIPTIONS_SUCCESS"], function (state, action) {
-  return _objectSpread({}, state, {
-    suggested: action.data,
-    loadingSuggested: false
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SUGGESTED_SUBSCRIPTIONS_FAIL"], function (state) {
-  return _objectSpread({}, state, {
-    loadingSuggested: false
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SUBSCRIPTION_FIRST_RUN_COMPLETED"], function (state) {
-  return _objectSpread({}, state, {
-    firstRunCompleted: true
-  });
-}), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_0__["VIEW_SUGGESTED_SUBSCRIPTIONS"], function (state) {
-  return _objectSpread({}, state, {
-    showSuggestedSubs: true
-  });
-}), _defineProperty(_handleActions, lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].USER_STATE_POPULATE, function (state, action) {
-  var subscriptions = action.data.subscriptions;
-  var newSubscriptions;
-
-  if (!subscriptions) {
-    newSubscriptions = state.subscriptions;
-  } else {
-    var parsedSubscriptions = subscriptions.map(function (uri) {
-      var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["parseURI"])(uri),
-          channelName = _parseURI.channelName;
-
-      return {
-        uri: uri,
-        channelName: "@".concat(channelName)
-      };
-    });
-
-    if (!state.subscriptions || !state.subscriptions.length) {
-      newSubscriptions = parsedSubscriptions;
-    } else {
-      var map = {};
-      newSubscriptions = parsedSubscriptions.concat(state.subscriptions).filter(function (sub) {
-        return map[sub.uri] ? false : map[sub.uri] = true;
-      }, {});
-    }
-  }
-
-  return _objectSpread({}, state, {
-    subscriptions: newSubscriptions
-  });
-}), _handleActions), defaultState));
-
-/***/ }),
-/* 11 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIEW_ALL", function() { return VIEW_ALL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VIEW_LATEST_FIRST", function() { return VIEW_LATEST_FIRST; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOWNLOADING", function() { return DOWNLOADING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DOWNLOADED", function() { return DOWNLOADED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOTIFY_ONLY", function() { return NOTIFY_ONLY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUGGESTED_TOP_BID", function() { return SUGGESTED_TOP_BID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUGGESTED_TOP_SUBSCRIBED", function() { return SUGGESTED_TOP_SUBSCRIBED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUGGESTED_FEATURED", function() { return SUGGESTED_FEATURED; });
-var VIEW_ALL = 'view_all';
-var VIEW_LATEST_FIRST = 'view_latest_first'; // Types for unreads
-
-var DOWNLOADING = 'DOWNLOADING';
-var DOWNLOADED = 'DOWNLOADED';
-var NOTIFY_ONLY = 'NOTIFY_ONLY;'; // Suggested types
-
-var SUGGESTED_TOP_BID = 'top_bid';
-var SUGGESTED_TOP_SUBSCRIBED = 'top_subscribed';
-var SUGGESTED_FEATURED = 'featured';
-
-/***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleActions", function() { return handleActions; });
-// util for creating reducers
-// based off of redux-actions
-// https://redux-actions.js.org/docs/api/handleAction.html#handleactions
-// eslint-disable-next-line import/prefer-default-export
-var handleActions = function handleActions(actionMap, defaultState) {
-  return function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-    var action = arguments.length > 1 ? arguments[1] : undefined;
-    var handler = actionMap[action.type];
-
-    if (handler) {
-      var newState = handler(state, action);
-      return Object.assign({}, state, newState);
-    } // just return the original state if no handler
-    // returning a copy here breaks redux-persist
-
-
-    return state;
-  };
-};
-
-/***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userStateSyncMiddleware", function() { return userStateSyncMiddleware; });
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1);
-/* harmony import */ var redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(14);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var persistShape = {
-  version: '0',
-  shared: {}
-};
-function userStateSyncMiddleware() {
-  return function (_ref) {
-    var getState = _ref.getState;
-    return function (next) {
-      return function (action) {
-        if (action.type === constants_action_types__WEBPACK_IMPORTED_MODULE_2__["CHANNEL_SUBSCRIBE"] || action.type === constants_action_types__WEBPACK_IMPORTED_MODULE_2__["CHANNEL_UNSUBSCRIBE"] || action.type === lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].TOGGLE_TAG_FOLLOW) {
-          var newShape = _objectSpread({}, persistShape);
-
-          var state = getState();
-          var subscriptions = Object(redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_3__["selectSubscriptions"])(state).map(function (_ref2) {
-            var uri = _ref2.uri;
-            return uri;
-          });
-          var tags = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["selectFollowedTags"])(state);
-          newShape.shared.subscriptions = subscriptions;
-          newShape.shared.tags = tags;
-          var uri = action.data.uri;
-
-          if (action.type === constants_action_types__WEBPACK_IMPORTED_MODULE_2__["CHANNEL_SUBSCRIBE"]) {
-            var newSubscriptions = subscriptions.slice();
-            newSubscriptions.push(uri);
-            newShape.shared.subscriptions = newSubscriptions;
-          } else if (action.type === constants_action_types__WEBPACK_IMPORTED_MODULE_2__["CHANNEL_UNSUBSCRIBE"]) {
-            var _newSubscriptions = subscriptions.slice();
-
-            _newSubscriptions = _newSubscriptions.filter(function (subscribedUri) {
-              return subscribedUri !== uri;
-            });
-            newShape.shared.subscriptions = _newSubscriptions;
-          } else {
-            var toggledTag = action.data.name;
-            var followedTags = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["selectFollowedTags"])(state).map(function (_ref3) {
-              var name = _ref3.name;
-              return name;
-            });
-            var isFollowing = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["makeSelectIsFollowingTag"])(toggledTag)(state);
-            var newTags = followedTags.slice();
-
-            if (isFollowing) {
-              newTags = newTags.filter(function (followedTag) {
-                return followedTag.name !== toggledTag;
-              });
-            } else {
-              newTags.push(toggledTag);
-            }
-
-            newShape.shared.tags = newTags;
-          }
-
-          lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('user_settings', 'set', {
-            settings: newShape
-          });
-        }
-
-        return next(action);
-      };
-    };
-  };
-}
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptions", function() { return selectSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsFetchingSubscriptions", function() { return selectIsFetchingSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectViewMode", function() { return selectViewMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSuggested", function() { return selectSuggested; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsFetchingSuggested", function() { return selectIsFetchingSuggested; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSuggestedChannels", function() { return selectSuggestedChannels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFirstRunCompleted", function() { return selectFirstRunCompleted; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectShowSuggestedSubs", function() { return selectShowSuggestedSubs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptionsBeingFetched", function() { return selectSubscriptionsBeingFetched; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnreadByChannel", function() { return selectUnreadByChannel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnreadAmount", function() { return selectUnreadAmount; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnreadSubscriptions", function() { return selectUnreadSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectUnreadByChannel", function() { return makeSelectUnreadByChannel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSubscriptionClaims", function() { return selectSubscriptionClaims; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsSubscribed", function() { return makeSelectIsSubscribed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsNew", function() { return makeSelectIsNew; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEnabledChannelNotifications", function() { return selectEnabledChannelNotifications; });
-/* harmony import */ var constants_subscriptions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(15);
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var util_swap_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(16);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
- // Returns the entire subscriptions state
-
-var selectState = function selectState(state) {
-  return state.subscriptions || {};
-}; // Returns the list of channel uris a user is subscribed to
-
-
-var selectSubscriptions = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.subscriptions;
-}); // Fetching list of users subscriptions
-
-var selectIsFetchingSubscriptions = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.loading;
-}); // The current view mode on the subscriptions page
-
-var selectViewMode = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.viewMode;
-}); // Suggested subscriptions from internal apis
-
-var selectSuggested = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.suggested;
-});
-var selectIsFetchingSuggested = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.loadingSuggested;
-});
-var selectSuggestedChannels = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectSubscriptions, selectSuggested, function (userSubscriptions, suggested) {
-  if (!suggested) {
-    return null;
-  } // Swap the key/value because we will use the uri for everything, this just makes it easier
-  // suggested is returned from the api with the form:
-  // {
-  //   featured: { "Channel label": uri, ... },
-  //   top_subscribed: { "@channel": uri, ... }
-  //   top_bid: { "@channel": uri, ... }
-  // }
-  // To properly compare the suggested subscriptions from our current subscribed channels
-  // We only care about the uri, not the label
-  // We also only care about top_subscribed and featured
-  // top_bid could just be porn or a channel with no content
-
-
-  var topSubscribedSuggestions = Object(util_swap_json__WEBPACK_IMPORTED_MODULE_3__["swapKeyAndValue"])(suggested[constants_subscriptions__WEBPACK_IMPORTED_MODULE_0__["SUGGESTED_TOP_SUBSCRIBED"]]);
-  var featuredSuggestions = Object(util_swap_json__WEBPACK_IMPORTED_MODULE_3__["swapKeyAndValue"])(suggested[constants_subscriptions__WEBPACK_IMPORTED_MODULE_0__["SUGGESTED_FEATURED"]]); // Make sure there are no duplicates
-  // If a uri isn't already in the suggested object, add it
-
-  var suggestedChannels = _objectSpread({}, topSubscribedSuggestions);
-
-  Object.keys(featuredSuggestions).forEach(function (uri) {
-    if (!suggestedChannels[uri]) {
-      var channelLabel = featuredSuggestions[uri];
-      suggestedChannels[uri] = channelLabel;
-    }
-  });
-  userSubscriptions.forEach(function (_ref) {
-    var uri = _ref.uri;
-    // Note to passer bys:
-    // Maybe we should just remove the `lbry://` prefix from subscription uris
-    // Most places don't store them like that
-    var subscribedUri = uri.slice('lbry://'.length);
-
-    if (suggestedChannels[subscribedUri]) {
-      delete suggestedChannels[subscribedUri];
-    }
-  });
-  return Object.keys(suggestedChannels).map(function (uri) {
-    return {
-      uri: uri,
-      label: suggestedChannels[uri]
-    };
-  }).slice(0, 5);
-});
-var selectFirstRunCompleted = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.firstRunCompleted;
-});
-var selectShowSuggestedSubs = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.showSuggestedSubs;
-}); // Fetching any claims that are a part of a users subscriptions
-
-var selectSubscriptionsBeingFetched = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectSubscriptions, lbry_redux__WEBPACK_IMPORTED_MODULE_2__["selectAllFetchingChannelClaims"], function (subscriptions, fetchingChannelClaims) {
-  var fetchingSubscriptionMap = {};
-  subscriptions.forEach(function (sub) {
-    var isFetching = fetchingChannelClaims && fetchingChannelClaims[sub.uri];
-
-    if (isFetching) {
-      fetchingSubscriptionMap[sub.uri] = true;
-    }
-  });
-  return fetchingSubscriptionMap;
-});
-var selectUnreadByChannel = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.unread;
-}); // Returns the current total of unread subscriptions
-
-var selectUnreadAmount = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectUnreadByChannel, function (unreadByChannel) {
-  var unreadChannels = Object.keys(unreadByChannel);
-  var badges = 0;
-
-  if (!unreadChannels.length) {
-    return badges;
-  }
-
-  unreadChannels.forEach(function (channel) {
-    badges += unreadByChannel[channel].uris.length;
-  });
-  return badges;
-}); // Returns the uris with channels as an array with the channel with the newest content first
-// If you just want the `unread` state, use selectUnread
-
-var selectUnreadSubscriptions = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectUnreadAmount, selectUnreadByChannel, lbry_redux__WEBPACK_IMPORTED_MODULE_2__["selectClaimsByUri"], function (unreadAmount, unreadByChannel, claimsByUri) {
-  // determine which channel has the newest content
-  var unreadList = [];
-
-  if (!unreadAmount) {
-    return unreadList;
-  }
-
-  var channelUriList = Object.keys(unreadByChannel); // There is only one channel with unread notifications
-
-  if (unreadAmount === 1) {
-    channelUriList.forEach(function (channel) {
-      var unreadChannel = {
-        channel: channel,
-        uris: unreadByChannel[channel].uris
-      };
-      unreadList.push(unreadChannel);
-    });
-    return unreadList;
-  }
-
-  channelUriList.sort(function (channel1, channel2) {
-    var latestUriFromChannel1 = unreadByChannel[channel1].uris[0];
-    var latestClaimFromChannel1 = claimsByUri[latestUriFromChannel1] || {};
-    var latestUriFromChannel2 = unreadByChannel[channel2].uris[0];
-    var latestClaimFromChannel2 = claimsByUri[latestUriFromChannel2] || {};
-    var latestHeightFromChannel1 = latestClaimFromChannel1.height || 0;
-    var latestHeightFromChannel2 = latestClaimFromChannel2.height || 0;
-
-    if (latestHeightFromChannel1 !== latestHeightFromChannel2) {
-      return latestHeightFromChannel2 - latestHeightFromChannel1;
-    }
-
-    return 0;
-  }).forEach(function (channel) {
-    var unreadSubscription = unreadByChannel[channel];
-    var unreadChannel = {
-      channel: channel,
-      uris: unreadSubscription.uris
-    };
-    unreadList.push(unreadChannel);
-  });
-  return unreadList;
-}); // Returns all unread subscriptions for a uri passed in
-
-var makeSelectUnreadByChannel = function makeSelectUnreadByChannel(uri) {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectUnreadByChannel, function (unread) {
-    return unread[uri];
-  });
-}; // Returns the first page of claims for every channel a user is subscribed to
-
-var selectSubscriptionClaims = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["selectAllClaimsByChannel"], lbry_redux__WEBPACK_IMPORTED_MODULE_2__["selectClaimsById"], selectSubscriptions, selectUnreadByChannel, function (channelIds, allClaims, savedSubscriptions, unreadByChannel) {
-  // no claims loaded yet
-  if (!Object.keys(channelIds).length) {
-    return [];
-  }
-
-  var fetchedSubscriptions = [];
-  savedSubscriptions.forEach(function (subscription) {
-    var channelClaims = []; // if subscribed channel has content
-
-    if (channelIds[subscription.uri] && channelIds[subscription.uri]['1']) {
-      // This will need to be more robust, we will want to be able to load more than the first page
-      // Strip out any ids that will be shown as notifications
-      var pageOneChannelIds = channelIds[subscription.uri]['1']; // we have the channel ids and the corresponding claims
-      // loop over the list of ids and grab the claim
-
-      pageOneChannelIds.forEach(function (id) {
-        var grabbedClaim = allClaims[id];
-
-        if (unreadByChannel[subscription.uri] && unreadByChannel[subscription.uri].uris.some(function (uri) {
-          return uri.includes(id);
-        })) {
-          grabbedClaim.isNew = true;
-        }
-
-        channelClaims = channelClaims.concat([grabbedClaim]);
-      });
-    }
-
-    fetchedSubscriptions = fetchedSubscriptions.concat(channelClaims);
-  });
-  return fetchedSubscriptions;
-}); // Returns true if a user is subscribed to the channel associated with the uri passed in
-// Accepts content or channel uris
-
-var makeSelectIsSubscribed = function makeSelectIsSubscribed(uri) {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectSubscriptions, Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["makeSelectChannelForClaimUri"])(uri, true), function (subscriptions, channelUri) {
-    if (channelUri) {
-      return subscriptions.some(function (sub) {
-        return sub.uri === channelUri;
-      });
-    } // If we couldn't get a channel uri from the claim uri, the uri passed in might be a channel already
-
-
-    var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["parseURI"])(uri),
-        isChannel = _parseURI.isChannel;
-
-    if (isChannel) {
-      var uriWithPrefix = uri.startsWith('lbry://') ? uri : "lbry://".concat(uri);
-      return subscriptions.some(function (sub) {
-        return sub.uri === uriWithPrefix;
-      });
-    }
-
-    return false;
-  });
-};
-var makeSelectIsNew = function makeSelectIsNew(uri) {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(makeSelectIsSubscribed(uri), Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["makeSelectChannelForClaimUri"])(uri), selectUnreadByChannel, function (isSubscribed, channel, unreadByChannel) {
-    if (!isSubscribed) {
-      return false;
-    }
-
-    var unreadForChannel = unreadByChannel["lbry://".concat(channel)];
-
-    if (unreadForChannel) {
-      return unreadForChannel.uris.includes(uri);
-    }
-
-    return false; // If they are subscribed, check to see if this uri is in the list of unreads
-  });
-};
-var selectEnabledChannelNotifications = Object(reselect__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(selectState, function (state) {
-  return state.enabledChannelNotifications;
-});
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-exports.defaultMemoize = defaultMemoize;
-exports.createSelectorCreator = createSelectorCreator;
-exports.createStructuredSelector = createStructuredSelector;
-function defaultEqualityCheck(a, b) {
-  return a === b;
-}
-
-function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
-  if (prev === null || next === null || prev.length !== next.length) {
-    return false;
-  }
-
-  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
-  var length = prev.length;
-  for (var i = 0; i < length; i++) {
-    if (!equalityCheck(prev[i], next[i])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function defaultMemoize(func) {
-  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
-
-  var lastArgs = null;
-  var lastResult = null;
-  // we reference arguments instead of spreading them for performance reasons
-  return function () {
-    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
-      // apply arguments instead of spreading for performance.
-      lastResult = func.apply(null, arguments);
-    }
-
-    lastArgs = arguments;
-    return lastResult;
-  };
-}
-
-function getDependencies(funcs) {
-  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
-
-  if (!dependencies.every(function (dep) {
-    return typeof dep === 'function';
-  })) {
-    var dependencyTypes = dependencies.map(function (dep) {
-      return typeof dep;
-    }).join(', ');
-    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
-  }
-
-  return dependencies;
-}
-
-function createSelectorCreator(memoize) {
-  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    memoizeOptions[_key - 1] = arguments[_key];
-  }
-
-  return function () {
-    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      funcs[_key2] = arguments[_key2];
-    }
-
-    var recomputations = 0;
-    var resultFunc = funcs.pop();
-    var dependencies = getDependencies(funcs);
-
-    var memoizedResultFunc = memoize.apply(undefined, [function () {
-      recomputations++;
-      // apply arguments instead of spreading for performance.
-      return resultFunc.apply(null, arguments);
-    }].concat(memoizeOptions));
-
-    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
-    var selector = defaultMemoize(function () {
-      var params = [];
-      var length = dependencies.length;
-
-      for (var i = 0; i < length; i++) {
-        // apply arguments instead of spreading and mutate a local list of params for performance.
-        params.push(dependencies[i].apply(null, arguments));
-      }
-
-      // apply arguments instead of spreading for performance.
-      return memoizedResultFunc.apply(null, params);
-    });
-
-    selector.resultFunc = resultFunc;
-    selector.recomputations = function () {
-      return recomputations;
-    };
-    selector.resetRecomputations = function () {
-      return recomputations = 0;
-    };
-    return selector;
-  };
-}
-
-var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
-
-function createStructuredSelector(selectors) {
-  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
-
-  if (typeof selectors !== 'object') {
-    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
-  }
-  var objectKeys = Object.keys(selectors);
-  return selectorCreator(objectKeys.map(function (key) {
-    return selectors[key];
-  }), function () {
-    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-      values[_key3] = arguments[_key3];
-    }
-
-    return values.reduce(function (composition, value, index) {
-      composition[objectKeys[index]] = value;
-      return composition;
-    }, {});
-  });
-}
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "swapKeyAndValue", function() { return swapKeyAndValue; });
-function swapKeyAndValue(dict) {
-  var ret = {}; // eslint-disable-next-line no-restricted-syntax
-
-  for (var key in dict) {
-    if (dict.hasOwnProperty(key)) {
-      ret[dict[key]] = key;
-    }
-  }
-
-  return ret;
-}
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(Buffer) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doTransifexUpload", function() { return doTransifexUpload; });
 var apiBaseUrl = 'https://www.transifex.com/api/2/project';
 var resource = 'app-strings';
@@ -2279,10 +1002,10 @@ function doTransifexUpload(contents, project, token, success, fail) {
     }).then(handleResponse)["catch"](handleError);
   });
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(18).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(10).Buffer))
 
 /***/ }),
-/* 18 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2296,9 +1019,9 @@ function doTransifexUpload(contents, project, token, success, fail) {
 
 
 
-var base64 = __webpack_require__(20)
-var ieee754 = __webpack_require__(21)
-var isArray = __webpack_require__(22)
+var base64 = __webpack_require__(12)
+var ieee754 = __webpack_require__(13)
+var isArray = __webpack_require__(14)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -4076,10 +2799,10 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(19)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(11)))
 
 /***/ }),
-/* 19 */
+/* 11 */
 /***/ (function(module, exports) {
 
 var g;
@@ -4105,7 +2828,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 20 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4263,7 +2986,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 21 */
+/* 13 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -4353,7 +3076,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 22 */
+/* 14 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -4364,7 +3087,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 23 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4405,1918 +3128,7 @@ function doGenerateAuthToken(installationId) {
 }
 
 /***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doRewardList", function() { return doRewardList; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimRewardType", function() { return doClaimRewardType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimEligiblePurchaseRewards", function() { return doClaimEligiblePurchaseRewards; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimRewardClearError", function() { return doClaimRewardClearError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchRewardedContent", function() { return doFetchRewardedContent; });
-/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(25);
-/* harmony import */ var redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(26);
-/* harmony import */ var redux_actions_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(27);
-/* harmony import */ var rewards__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9);
-
-
-
-
-
-
-function doRewardList() {
-  return function (dispatch) {
-    dispatch({
-      type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].FETCH_REWARDS_STARTED
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('reward', 'list', {
-      multiple_rewards_per_type: true
-    }).then(function (userRewards) {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].FETCH_REWARDS_COMPLETED,
-        data: {
-          userRewards: userRewards
-        }
-      });
-    })["catch"](function () {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].FETCH_REWARDS_COMPLETED,
-        data: {
-          userRewards: []
-        }
-      });
-    });
-  };
-}
-function doClaimRewardType(rewardType) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return function (dispatch, getState) {
-    var state = getState();
-    var userIsRewardApproved = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectUserIsRewardApproved"])(state);
-    var unclaimedRewards = Object(redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_2__["selectUnclaimedRewards"])(state);
-    var reward = rewardType === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE || rewardType === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID ? {
-      reward_type: rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE
-    } : unclaimedRewards.find(function (ur) {
-      return ur.reward_type === rewardType;
-    }); // Try to claim the email reward right away, even if we haven't called reward_list yet
-
-    if (rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_PAID_CONTENT) {
-      if (!reward || reward.transaction_id) {
-        // already claimed or doesn't exist, do nothing
-        return;
-      }
-    }
-
-    if (!userIsRewardApproved && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_CONFIRM_EMAIL && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REWARD_CODE && rewardType !== rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_ANDROID) {
-      if (!options || !options.failSilently && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.rewardApprovalRequested) {
-        rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.rewardApprovalRequested();
-      }
-
-      return;
-    } // Set `claim_code` so the api knows which reward to give if there are multiple of the same type
-
-
-    var params = options.params || {};
-
-    if (!params.claim_code && reward) {
-      params.claim_code = reward.claim_code;
-    }
-
-    dispatch({
-      type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_STARTED,
-      data: {
-        reward: reward
-      }
-    });
-
-    var success = function success(successReward) {
-      // Temporary timeout to ensure the sdk has the correct balance after claiming a reward
-      setTimeout(function () {
-        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["doUpdateBalance"])()).then(function () {
-          dispatch({
-            type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_SUCCESS,
-            data: {
-              reward: successReward
-            }
-          });
-
-          if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_NEW_USER && rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess) {
-            rewards__WEBPACK_IMPORTED_MODULE_5__["default"].callbacks.claimFirstRewardSuccess();
-          } else if (successReward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_REFERRAL) {
-            dispatch(Object(redux_actions_user__WEBPACK_IMPORTED_MODULE_4__["doFetchInviteStatus"])());
-          }
-
-          dispatch(doRewardList());
-
-          if (options.callback) {
-            options.callback();
-          }
-        });
-      }, 2000);
-    };
-
-    var failure = function failure(error) {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_FAILURE,
-        data: {
-          reward: reward,
-          error: !options || !options.failSilently ? error : undefined
-        }
-      });
-
-      if (options.notifyError) {
-        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_1__["doToast"])({
-          message: error.message,
-          isError: true
-        }));
-      }
-
-      if (options.callback) {
-        options.callback(error);
-      }
-    };
-
-    return rewards__WEBPACK_IMPORTED_MODULE_5__["default"].claimReward(rewardType, params).then(success, failure);
-  };
-}
-function doClaimEligiblePurchaseRewards() {
-  return function (dispatch, getState) {
-    var state = getState();
-    var unclaimedRewards = Object(redux_selectors_rewards__WEBPACK_IMPORTED_MODULE_2__["selectUnclaimedRewards"])(state);
-    var userIsRewardApproved = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectUserIsRewardApproved"])(state);
-
-    if (!userIsRewardApproved || !lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].enabled) {
-      return;
-    }
-
-    if (unclaimedRewards.find(function (ur) {
-      return ur.reward_type === rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FIRST_STREAM;
-    })) {
-      dispatch(doClaimRewardType(rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_FIRST_STREAM));
-    } else {
-      [rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_MANY_DOWNLOADS, rewards__WEBPACK_IMPORTED_MODULE_5__["default"].TYPE_DAILY_VIEW].forEach(function (type) {
-        dispatch(doClaimRewardType(type, {
-          failSilently: true
-        }));
-      });
-    }
-  };
-}
-function doClaimRewardClearError(reward) {
-  return function (dispatch) {
-    dispatch({
-      type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].CLAIM_REWARD_CLEAR_ERROR,
-      data: {
-        reward: reward
-      }
-    });
-  };
-}
-function doFetchRewardedContent() {
-  return function (dispatch) {
-    var success = function success(nameToClaimId) {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].FETCH_REWARD_CONTENT_COMPLETED,
-        data: {
-          claimIds: Object.values(nameToClaimId),
-          success: true
-        }
-      });
-    };
-
-    var failure = function failure() {
-      dispatch({
-        type: lbry_redux__WEBPACK_IMPORTED_MODULE_1__["ACTIONS"].FETCH_REWARD_CONTENT_COMPLETED,
-        data: {
-          claimIds: [],
-          success: false
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('reward', 'list_featured').then(success, failure);
-  };
-}
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewardsByType", function() { return selectUnclaimedRewardsByType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewardsById", function() { return selectClaimedRewardsById; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewards", function() { return selectClaimedRewards; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimedRewardsByTransactionId", function() { return selectClaimedRewardsByTransactionId; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewards", function() { return selectUnclaimedRewards; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingRewards", function() { return selectFetchingRewards; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUnclaimedRewardValue", function() { return selectUnclaimedRewardValue; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimsPendingByType", function() { return selectClaimsPendingByType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectIsRewardClaimPending", function() { return makeSelectIsRewardClaimPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectClaimErrorsByType", function() { return selectClaimErrorsByType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectClaimRewardError", function() { return makeSelectClaimRewardError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByType", function() { return makeSelectRewardByType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardByClaimCode", function() { return makeSelectRewardByClaimCode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectRewardAmountByType", function() { return makeSelectRewardAmountByType; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectRewardContentClaimIds", function() { return selectRewardContentClaimIds; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectReferralReward", function() { return selectReferralReward; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var rewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-
-
-
-var selectState = function selectState(state) {
-  return state.rewards || {};
-};
-
-var selectUnclaimedRewardsByType = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.unclaimedRewardsByType;
-});
-var selectClaimedRewardsById = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.claimedRewardsById;
-});
-var selectClaimedRewards = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectClaimedRewardsById, function (byId) {
-  return Object.values(byId) || [];
-});
-var selectClaimedRewardsByTransactionId = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectClaimedRewards, function (rewards) {
-  return rewards.reduce(function (mapParam, reward) {
-    var map = mapParam;
-    map[reward.transaction_id] = reward;
-    return map;
-  }, {});
-});
-var selectUnclaimedRewards = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.unclaimedRewards;
-});
-var selectFetchingRewards = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return !!state.fetching;
-});
-var selectUnclaimedRewardValue = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUnclaimedRewards, function (rewards) {
-  return rewards.reduce(function (sum, reward) {
-    return sum + reward.reward_amount;
-  }, 0);
-});
-var selectClaimsPendingByType = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.claimPendingByType;
-});
-
-var selectIsClaimRewardPending = function selectIsClaimRewardPending(state, props) {
-  return selectClaimsPendingByType(state, props)[props.reward_type];
-};
-
-var makeSelectIsRewardClaimPending = function makeSelectIsRewardClaimPending() {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectIsClaimRewardPending, function (isClaiming) {
-    return isClaiming;
-  });
-};
-var selectClaimErrorsByType = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.claimErrorsByType;
-});
-
-var selectClaimRewardError = function selectClaimRewardError(state, props) {
-  return selectClaimErrorsByType(state, props)[props.reward_type];
-};
-
-var makeSelectClaimRewardError = function makeSelectClaimRewardError() {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectClaimRewardError, function (errorMessage) {
-    return errorMessage;
-  });
-};
-
-var selectRewardByType = function selectRewardByType(state, rewardType) {
-  return selectUnclaimedRewards(state).find(function (reward) {
-    return reward.reward_type === rewardType;
-  });
-};
-
-var makeSelectRewardByType = function makeSelectRewardByType() {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectRewardByType, function (reward) {
-    return reward;
-  });
-};
-
-var selectRewardByClaimCode = function selectRewardByClaimCode(state, claimCode) {
-  return selectUnclaimedRewards(state).find(function (reward) {
-    return reward.claim_code === claimCode;
-  });
-};
-
-var makeSelectRewardByClaimCode = function makeSelectRewardByClaimCode() {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectRewardByClaimCode, function (reward) {
-    return reward;
-  });
-};
-var makeSelectRewardAmountByType = function makeSelectRewardAmountByType() {
-  return Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectRewardByType, function (reward) {
-    return reward ? reward.reward_amount : 0;
-  });
-};
-var selectRewardContentClaimIds = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.rewardedContentClaimIds;
-});
-var selectReferralReward = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUnclaimedRewards, function (unclaimedRewards) {
-  return unclaimedRewards.filter(function (reward) {
-    return reward.reward_type === rewards__WEBPACK_IMPORTED_MODULE_1__["default"].TYPE_REFERRAL;
-  })[0];
-});
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAuthenticationIsPending", function() { return selectAuthenticationIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsPending", function() { return selectUserIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUser", function() { return selectUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailAlreadyExists", function() { return selectEmailAlreadyExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailDoesNotExist", function() { return selectEmailDoesNotExist; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectResendingVerificationEmail", function() { return selectResendingVerificationEmail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserEmail", function() { return selectUserEmail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserPhone", function() { return selectUserPhone; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserCountryCode", function() { return selectUserCountryCode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailToVerify", function() { return selectEmailToVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneToVerify", function() { return selectPhoneToVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYoutubeChannels", function() { return selectYoutubeChannels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsRewardApproved", function() { return selectUserIsRewardApproved; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewIsPending", function() { return selectEmailNewIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailNewErrorMessage", function() { return selectEmailNewErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordExists", function() { return selectPasswordExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetIsPending", function() { return selectPasswordResetIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetSuccess", function() { return selectPasswordResetSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordResetError", function() { return selectPasswordResetError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetIsPending", function() { return selectPasswordSetIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetSuccess", function() { return selectPasswordSetSuccess; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPasswordSetError", function() { return selectPasswordSetError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneNewErrorMessage", function() { return selectPhoneNewErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyIsPending", function() { return selectEmailVerifyIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectEmailVerifyErrorMessage", function() { return selectEmailVerifyErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneNewIsPending", function() { return selectPhoneNewIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyIsPending", function() { return selectPhoneVerifyIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectPhoneVerifyErrorMessage", function() { return selectPhoneVerifyErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIdentityVerifyIsPending", function() { return selectIdentityVerifyIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIdentityVerifyErrorMessage", function() { return selectIdentityVerifyErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserVerifiedEmail", function() { return selectUserVerifiedEmail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserIsVerificationCandidate", function() { return selectUserIsVerificationCandidate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAccessToken", function() { return selectAccessToken; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteStatusIsPending", function() { return selectUserInviteStatusIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInvitesRemaining", function() { return selectUserInvitesRemaining; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInvitees", function() { return selectUserInvitees; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteStatusFailed", function() { return selectUserInviteStatusFailed; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewIsPending", function() { return selectUserInviteNewIsPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteNewErrorMessage", function() { return selectUserInviteNewErrorMessage; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralLink", function() { return selectUserInviteReferralLink; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUserInviteReferralCode", function() { return selectUserInviteReferralCode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportPending", function() { return selectYouTubeImportPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportError", function() { return selectYouTubeImportError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerPending", function() { return selectSetReferrerPending; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetReferrerError", function() { return selectSetReferrerError; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectYouTubeImportVideosComplete", function() { return selectYouTubeImportVideosComplete; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-
-var selectState = function selectState(state) {
-  return state.user || {};
-};
-var selectAuthenticationIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.authenticationIsPending;
-});
-var selectUserIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.userIsPending;
-});
-var selectUser = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.user;
-});
-var selectEmailAlreadyExists = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.emailAlreadyExists;
-});
-var selectEmailDoesNotExist = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.emailDoesNotExist;
-});
-var selectResendingVerificationEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.resendingVerificationEmail;
-});
-var selectUserEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user ? user.primary_email || user.latest_claimed_email : null;
-});
-var selectUserPhone = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user ? user.phone_number : null;
-});
-var selectUserCountryCode = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user ? user.country_code : null;
-});
-var selectEmailToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, selectUserEmail, function (state, userEmail) {
-  return state.emailToVerify || userEmail;
-});
-var selectPhoneToVerify = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, selectUserPhone, function (state, userPhone) {
-  return state.phoneToVerify || userPhone;
-});
-var selectYoutubeChannels = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user ? user.youtube_channels : null;
-});
-var selectUserIsRewardApproved = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user && user.is_reward_approved;
-});
-var selectEmailNewIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.emailNewIsPending;
-});
-var selectEmailNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  var error = state.emailNewErrorMessage;
-  return _typeof(error) === 'object' && error !== null ? error.message : error;
-});
-var selectPasswordExists = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.passwordExistsForUser;
-});
-var selectPasswordResetIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.passwordResetPending;
-});
-var selectPasswordResetSuccess = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.passwordResetSuccess;
-});
-var selectPasswordResetError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  var error = state.passwordResetError;
-  return _typeof(error) === 'object' && error !== null ? error.message : error;
-});
-var selectPasswordSetIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.passwordSetPending;
-});
-var selectPasswordSetSuccess = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.passwordSetSuccess;
-});
-var selectPasswordSetError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  var error = state.passwordSetError;
-  return _typeof(error) === 'object' && error !== null ? error.message : error;
-});
-var selectPhoneNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.phoneNewErrorMessage;
-});
-var selectEmailVerifyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.emailVerifyIsPending;
-});
-var selectEmailVerifyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.emailVerifyErrorMessage;
-});
-var selectPhoneNewIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.phoneNewIsPending;
-});
-var selectPhoneVerifyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.phoneVerifyIsPending;
-});
-var selectPhoneVerifyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.phoneVerifyErrorMessage;
-});
-var selectIdentityVerifyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.identityVerifyIsPending;
-});
-var selectIdentityVerifyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.identityVerifyErrorMessage;
-});
-var selectUserVerifiedEmail = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user && user.has_verified_email;
-});
-var selectUserIsVerificationCandidate = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUser, function (user) {
-  return user && (!user.has_verified_email || !user.is_identity_verified);
-});
-var selectAccessToken = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.accessToken;
-});
-var selectUserInviteStatusIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.inviteStatusIsPending;
-});
-var selectUserInvitesRemaining = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.invitesRemaining;
-});
-var selectUserInvitees = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.invitees;
-});
-var selectUserInviteStatusFailed = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectUserInvitesRemaining, function () {
-  return selectUserInvitesRemaining === null;
-});
-var selectUserInviteNewIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.inviteNewIsPending;
-});
-var selectUserInviteNewErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.inviteNewErrorMessage;
-});
-var selectUserInviteReferralLink = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.referralLink;
-});
-var selectUserInviteReferralCode = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.referralCode ? state.referralCode[0] : '';
-});
-var selectYouTubeImportPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.youtubeChannelImportPending;
-});
-var selectYouTubeImportError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.youtubeChannelImportErrorMessage;
-});
-var selectSetReferrerPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.referrerSetIsPending;
-});
-var selectSetReferrerError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  return state.referrerSetError;
-});
-var selectYouTubeImportVideosComplete = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
-  var total = state.youtubeChannelImportTotal;
-  var complete = state.youtubeChannelImportComplete || 0;
-
-  if (total) {
-    return [complete, total];
-  }
-});
-
-/***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchInviteStatus", function() { return doFetchInviteStatus; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doInstallNew", function() { return doInstallNew; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doInstallNewWithParams", function() { return doInstallNewWithParams; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doAuthenticate", function() { return doAuthenticate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserFetch", function() { return doUserFetch; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserCheckEmailVerified", function() { return doUserCheckEmailVerified; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneReset", function() { return doUserPhoneReset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneNew", function() { return doUserPhoneNew; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneVerifyFailure", function() { return doUserPhoneVerifyFailure; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPhoneVerify", function() { return doUserPhoneVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailToVerify", function() { return doUserEmailToVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailNew", function() { return doUserEmailNew; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserCheckIfEmailExists", function() { return doUserCheckIfEmailExists; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSignIn", function() { return doUserSignIn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSignUp", function() { return doUserSignUp; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPasswordReset", function() { return doUserPasswordReset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserPasswordSet", function() { return doUserPasswordSet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserResendVerificationEmail", function() { return doUserResendVerificationEmail; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClearEmailEntry", function() { return doClearEmailEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClearPasswordEntry", function() { return doClearPasswordEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerifyFailure", function() { return doUserEmailVerifyFailure; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserEmailVerify", function() { return doUserEmailVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchAccessToken", function() { return doFetchAccessToken; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserIdentityVerify", function() { return doUserIdentityVerify; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserInviteNew", function() { return doUserInviteNew; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrerReset", function() { return doUserSetReferrerReset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetReferrer", function() { return doUserSetReferrer; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUserSetCountry", function() { return doUserSetCountry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doClaimYoutubeChannels", function() { return doClaimYoutubeChannels; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckYoutubeTransfer", function() { return doCheckYoutubeTransfer; });
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
-/* harmony import */ var redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(24);
-/* harmony import */ var redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(26);
-/* harmony import */ var rewards__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(9);
-/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-function doFetchInviteStatus() {
-  var shouldCallRewardList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_STATUS_FETCH_STARTED"]
-    });
-    Promise.all([lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'invite_status'), lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_referral_code', 'list')]).then(function (_ref) {
-      var _ref2 = _slicedToArray(_ref, 2),
-          status = _ref2[0],
-          code = _ref2[1];
-
-      if (shouldCallRewardList) {
-        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-      }
-
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_STATUS_FETCH_SUCCESS"],
-        data: {
-          invitesRemaining: status.invites_remaining ? status.invites_remaining : 0,
-          invitees: status.invitees,
-          referralLink: "".concat(lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].CONNECTION_STRING, "user/refer?r=").concat(code),
-          referralCode: code
-        }
-      });
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_STATUS_FETCH_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    });
-  };
-}
-function doInstallNew(appVersion) {
-  var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var callbackForUsersWhoAreSharingData = arguments.length > 3 ? arguments[3] : undefined;
-  var domain = arguments.length > 4 ? arguments[4] : undefined;
-  var payload = {
-    app_version: appVersion,
-    domain: domain
-  };
-
-  if (firebaseToken) {
-    payload.firebase_token = firebaseToken;
-  }
-
-  lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status().then(function (status) {
-    payload.app_id = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
-    payload.node_id = status.lbry_id;
-    lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].version().then(function (version) {
-      payload.daemon_version = version.lbrynet_version;
-      payload.operating_system = os || version.os_system;
-      payload.platform = version.platform;
-      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('install', 'new', payload);
-
-      if (callbackForUsersWhoAreSharingData) {
-        callbackForUsersWhoAreSharingData(status);
-      }
-    });
-  });
-}
-function doInstallNewWithParams(appVersion, installationId, nodeId, lbrynetVersion, os, platform) {
-  var firebaseToken = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-  return function () {
-    var payload = {
-      app_version: appVersion
-    };
-
-    if (firebaseToken) {
-      payload.firebase_token = firebaseToken;
-    }
-
-    payload.app_id = installationId;
-    payload.node_id = nodeId;
-    payload.daemon_version = lbrynetVersion;
-    payload.operating_system = os;
-    payload.platform = platform;
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('install', 'new', payload);
-  };
-} // TODO: Call doInstallNew separately so we don't have to pass appVersion and os_system params?
-
-function doAuthenticate(appVersion) {
-  var os = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var firebaseToken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var shareUsageData = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var callbackForUsersWhoAreSharingData = arguments.length > 4 ? arguments[4] : undefined;
-  var callInstall = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-  var domain = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_STARTED"]
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].authenticate().then(function (user) {
-      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].getAuthToken().then(function (token) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_SUCCESS"],
-          data: {
-            user: user,
-            accessToken: token
-          }
-        });
-
-        if (shareUsageData) {
-          dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-          dispatch(doFetchInviteStatus(false));
-
-          if (callInstall) {
-            doInstallNew(appVersion, os, firebaseToken, callbackForUsersWhoAreSharingData, domain);
-          }
-        }
-      });
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["AUTHENTICATION_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    });
-  };
-}
-function doUserFetch() {
-  return function (dispatch) {
-    return new Promise(function (resolve, reject) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_FETCH_STARTED"]
-      });
-      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].getCurrentUser().then(function (user) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_FETCH_SUCCESS"],
-          data: {
-            user: user
-          }
-        });
-        resolve(user);
-      })["catch"](function (error) {
-        reject(error);
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_FETCH_FAILURE"],
-          data: {
-            error: error
-          }
-        });
-      });
-    });
-  };
-}
-function doUserCheckEmailVerified() {
-  // This will happen in the background so we don't need loading booleans
-  return function (dispatch) {
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].getCurrentUser().then(function (user) {
-      if (user.has_verified_email) {
-        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doRewardList"])());
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_FETCH_SUCCESS"],
-          data: {
-            user: user
-          }
-        });
-      }
-    });
-  };
-}
-function doUserPhoneReset() {
-  return {
-    type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_RESET"]
-  };
-}
-function doUserPhoneNew(phone, countryCode) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_NEW_STARTED"],
-      data: {
-        phone: phone,
-        country_code: countryCode
-      }
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_NEW_SUCCESS"],
-        data: {
-          phone: phone
-        }
-      });
-    };
-
-    var failure = function failure(error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_NEW_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'phone_number_new', {
-      phone_number: phone,
-      country_code: countryCode
-    }, 'post').then(success, failure);
-  };
-}
-function doUserPhoneVerifyFailure(error) {
-  return {
-    type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_VERIFY_FAILURE"],
-    data: {
-      error: error
-    }
-  };
-}
-function doUserPhoneVerify(verificationCode) {
-  return function (dispatch, getState) {
-    var phoneNumber = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectPhoneToVerify"])(getState());
-    var countryCode = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectUserCountryCode"])(getState());
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_VERIFY_STARTED"],
-      code: verificationCode
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'phone_number_confirm', {
-      verification_code: verificationCode,
-      phone_number: phoneNumber,
-      country_code: countryCode
-    }, 'post').then(function (user) {
-      if (user.is_identity_verified) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PHONE_VERIFY_SUCCESS"],
-          data: {
-            user: user
-          }
-        });
-        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_4__["default"].TYPE_NEW_USER));
-      }
-    })["catch"](function (error) {
-      return dispatch(doUserPhoneVerifyFailure(error));
-    });
-  };
-}
-function doUserEmailToVerify(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_SET"],
-      data: {
-        email: email
-      }
-    });
-  };
-}
-function doUserEmailNew(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
-      email: email
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
-      });
-      dispatch(doUserFetch());
-    };
-
-    var failure = function failure(error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'new', {
-      email: email,
-      send_verification_email: true
-    }, 'post')["catch"](function (error) {
-      if (error.response && error.response.status === 409) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
-        });
-        return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
-          email: email,
-          only_if_expired: true
-        }, 'post').then(success, failure);
-      }
-
-      throw error;
-    }).then(success, failure);
-  };
-}
-function doUserCheckIfEmailExists(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
-      email: email
-    });
-
-    var triggerEmailFlow = function triggerEmailFlow(hasPassword) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
-      });
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
-      });
-
-      if (hasPassword) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_EXISTS"]
-        });
-      } else {
-        // If they don't have a password, they will need to use the email verification api
-        lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
-          email: email,
-          only_if_expired: true
-        }, 'post');
-      }
-    };
-
-    var success = function success(response) {
-      triggerEmailFlow(response.has_password);
-    };
-
-    var failure = function failure(error) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'exists', {
-      email: email
-    }, 'post')["catch"](function (error) {
-      if (error.response && error.response.status === 404) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_DOES_NOT_EXIST"]
-        });
-      } else if (error.response && error.response.status === 412) {
-        triggerEmailFlow(false);
-      }
-
-      throw error;
-    }).then(success, failure);
-  };
-}
-function doUserSignIn(email, password) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
-      email: email
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
-      });
-      dispatch(doUserFetch());
-    };
-
-    var failure = function failure(error) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'signin', _objectSpread({
-      email: email
-    }, password ? {
-      password: password
-    } : {}), 'post')["catch"](function (error) {
-      if (error.response && error.response.status === 409) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
-        });
-        return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
-          email: email,
-          only_if_expired: true
-        }, 'post').then(success, failure);
-      }
-
-      throw error;
-    }).then(success, failure);
-  };
-}
-function doUserSignUp(email, password) {
-  return function (dispatch) {
-    return new Promise(function (resolve, reject) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_STARTED"],
-        email: email
-      });
-
-      var success = function success() {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_SUCCESS"],
-          data: {
-            email: email
-          }
-        });
-        dispatch(doUserFetch());
-        resolve();
-      };
-
-      var failure = function failure(error) {
-        if (error.response && error.response.status === 409) {
-          dispatch({
-            type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_EXISTS"]
-          });
-        }
-
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_FAILURE"],
-          data: {
-            error: error
-          }
-        });
-        reject(error);
-      };
-
-      lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'signup', _objectSpread({
-        email: email
-      }, password ? {
-        password: password
-      } : {}), 'post').then(success, failure);
-    });
-  };
-}
-function doUserPasswordReset(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_RESET_STARTED"],
-      email: email
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_RESET_SUCCESS"]
-      });
-    };
-
-    var failure = function failure(error) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_RESET_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_password', 'reset', {
-      email: email
-    }, 'post').then(success, failure);
-  };
-}
-function doUserPasswordSet(newPassword, oldPassword, authToken) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_SET_STARTED"]
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_SET_SUCCESS"]
-      });
-      dispatch(doUserFetch());
-    };
-
-    var failure = function failure(error) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_SET_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_password', 'set', _objectSpread({
-      new_password: newPassword
-    }, oldPassword ? {
-      old_password: oldPassword
-    } : {}, authToken ? {
-      auth_token: authToken
-    } : {}), 'post').then(success, failure);
-  };
-}
-function doUserResendVerificationEmail(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_STARTED"]
-    });
-
-    var success = function success() {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]
-      });
-    };
-
-    var failure = function failure(error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_RETRY_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'resend_token', {
-      email: email
-    }, 'post')["catch"](function (error) {
-      if (error.response && error.response.status === 409) {
-        throw error;
-      }
-    }).then(success, failure);
-  };
-}
-function doClearEmailEntry() {
-  return {
-    type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_NEW_CLEAR_ENTRY"]
-  };
-}
-function doClearPasswordEntry() {
-  return {
-    type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_PASSWORD_SET_CLEAR"]
-  };
-}
-function doUserEmailVerifyFailure(error) {
-  return {
-    type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_FAILURE"],
-    data: {
-      error: error
-    }
-  };
-}
-function doUserEmailVerify(verificationToken, recaptcha) {
-  return function (dispatch, getState) {
-    var email = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectEmailToVerify"])(getState());
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_STARTED"],
-      code: verificationToken,
-      recaptcha: recaptcha
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_email', 'confirm', {
-      verification_token: verificationToken,
-      email: email,
-      recaptcha: recaptcha
-    }, 'post').then(function (userEmail) {
-      if (userEmail.is_verified) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_EMAIL_VERIFY_SUCCESS"],
-          data: {
-            email: email
-          }
-        });
-        dispatch(doUserFetch());
-      } else {
-        throw new Error('Your email is still not verified.'); // shouldn't happen
-      }
-    })["catch"](function (error) {
-      return dispatch(doUserEmailVerifyFailure(error));
-    });
-  };
-}
-function doFetchAccessToken() {
-  return function (dispatch) {
-    var success = function success(token) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_ACCESS_TOKEN_SUCCESS"],
-        data: {
-          token: token
-        }
-      });
-    };
-
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].getAuthToken().then(success);
-  };
-}
-function doUserIdentityVerify(stripeToken) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_IDENTITY_VERIFY_STARTED"],
-      token: stripeToken
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'verify_identity', {
-      stripe_token: stripeToken
-    }, 'post').then(function (user) {
-      if (user.is_identity_verified) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_IDENTITY_VERIFY_SUCCESS"],
-          data: {
-            user: user
-          }
-        });
-        dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_4__["default"].TYPE_NEW_USER));
-      } else {
-        throw new Error('Your identity is still not verified. This should not happen.'); // shouldn't happen
-      }
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_IDENTITY_VERIFY_FAILURE"],
-        data: {
-          error: error.toString()
-        }
-      });
-    });
-  };
-}
-function doUserInviteNew(email) {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_STARTED"]
-    });
-    return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'invite', {
-      email: email
-    }, 'post').then(function (success) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_SUCCESS"],
-        data: {
-          email: email
-        }
-      });
-      dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doToast"])({
-        message: __("Invite sent to ".concat(email))
-      }));
-      dispatch(doFetchInviteStatus());
-      return success;
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_INVITE_NEW_FAILURE"],
-        data: {
-          error: error
-        }
-      });
-    });
-  };
-}
-function doUserSetReferrerReset() {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_RESET"]
-    });
-  };
-}
-function doUserSetReferrer(referrer, shouldClaim) {
-  return (
-    /*#__PURE__*/
-    function () {
-      var _ref3 = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(dispatch, getState) {
-        var claim, referrerCode, _parseURI, isChannel, uri, response;
-
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_STARTED"]
-                });
-                _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["parseURI"])(referrer), isChannel = _parseURI.isChannel;
-
-                if (!isChannel) {
-                  _context.next = 17;
-                  break;
-                }
-
-                uri = "lbry://".concat(referrer);
-                claim = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["makeSelectClaimForUri"])(uri)(getState());
-
-                if (claim) {
-                  _context.next = 16;
-                  break;
-                }
-
-                _context.prev = 6;
-                _context.next = 9;
-                return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].resolve({
-                  urls: [uri]
-                });
-
-              case 9:
-                response = _context.sent;
-                claim = response && response[uri];
-                _context.next = 16;
-                break;
-
-              case 13:
-                _context.prev = 13;
-                _context.t0 = _context["catch"](6);
-                dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_FAILURE"],
-                  data: {
-                    error: _context.t0
-                  }
-                });
-
-              case 16:
-                referrerCode = claim && claim.permanent_url && claim.permanent_url.replace('lbry://', '');
-
-              case 17:
-                if (!referrerCode) {
-                  referrerCode = referrer;
-                }
-
-                _context.prev = 18;
-                _context.next = 21;
-                return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user', 'referral', {
-                  referrer: referrerCode
-                }, 'post');
-
-              case 21:
-                dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_SUCCESS"]
-                });
-
-                if (shouldClaim) {
-                  dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_2__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_4__["default"].TYPE_REFEREE));
-                  dispatch(doUserFetch());
-                } else {
-                  dispatch(doUserFetch());
-                }
-
-                _context.next = 28;
-                break;
-
-              case 25:
-                _context.prev = 25;
-                _context.t1 = _context["catch"](18);
-                dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_SET_REFERRER_FAILURE"],
-                  data: {
-                    error: _context.t1
-                  }
-                });
-
-              case 28:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[6, 13], [18, 25]]);
-      }));
-
-      return function (_x, _x2) {
-        return _ref3.apply(this, arguments);
-      };
-    }()
-  );
-}
-function doUserSetCountry(country) {
-  return function (dispatch, getState) {
-    var state = getState();
-    var user = Object(redux_selectors_user__WEBPACK_IMPORTED_MODULE_3__["selectUser"])(state);
-    lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('user_country', 'set', {
-      country: country
-    }).then(function () {
-      var newUser = _objectSpread({}, user, {
-        country: country
-      });
-
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_FETCH_SUCCESS"],
-        data: {
-          user: newUser
-        }
-      });
-    });
-  };
-}
-function doClaimYoutubeChannels() {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_STARTED"]
-    });
-    var transferResponse;
-    return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].address_list({
-      page: 1,
-      page_size: 99999
-    }).then(function (addressList) {
-      return addressList.items[0];
-    }).then(function (address) {
-      return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('yt', 'transfer', {
-        address: address.address,
-        public_key: address.pubkey
-      }).then(function (response) {
-        if (response && response.length) {
-          transferResponse = response;
-          return Promise.all(response.map(function (channelMeta) {
-            if (channelMeta && channelMeta.channel && channelMeta.channel.channel_certificate) {
-              return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].channel_import({
-                channel_data: channelMeta.channel.channel_certificate
-              });
-            }
-
-            return null;
-          })).then(function () {
-            var actions = [{
-              type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_SUCCESS"],
-              data: transferResponse
-            }];
-            actions.push(doUserFetch());
-            actions.push(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["doFetchChannelListMine"])());
-            dispatch(lbry_redux__WEBPACK_IMPORTED_MODULE_0__["batchActions"].apply(void 0, actions));
-          });
-        }
-      });
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_FAILURE"],
-        data: String(error)
-      });
-    });
-  };
-}
-function doCheckYoutubeTransfer() {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_STARTED"]
-    });
-    return lbryio__WEBPACK_IMPORTED_MODULE_5__["default"].call('yt', 'transfer').then(function (response) {
-      if (response && response.length) {
-        dispatch({
-          type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_SUCCESS"],
-          data: response
-        });
-      } else {
-        throw new Error();
-      }
-    })["catch"](function (error) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["USER_YOUTUBE_IMPORT_FAILURE"],
-        data: String(error)
-      });
-    });
-  };
-}
-
-/***/ }),
-/* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetViewMode", function() { return doSetViewMode; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSubscriptionLatest", function() { return setSubscriptionLatest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUpdateUnreadSubscriptions", function() { return doUpdateUnreadSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doRemoveUnreadSubscriptions", function() { return doRemoveUnreadSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doRemoveUnreadSubscription", function() { return doRemoveUnreadSubscription; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscription", function() { return doCheckSubscription; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscribe", function() { return doChannelSubscribe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doChannelUnsubscribe", function() { return doChannelUnsubscribe; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscriptions", function() { return doCheckSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchMySubscriptions", function() { return doFetchMySubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSubscriptionsInit", function() { return doCheckSubscriptionsInit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doFetchRecommendedSubscriptions", function() { return doFetchRecommendedSubscriptions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCompleteFirstRun", function() { return doCompleteFirstRun; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doShowSuggestedSubs", function() { return doShowSuggestedSubs; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscriptionEnableNotifications", function() { return doChannelSubscriptionEnableNotifications; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doChannelSubscriptionDisableNotifications", function() { return doChannelSubscriptionDisableNotifications; });
-/* harmony import */ var constants_claim__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(29);
-/* harmony import */ var redux_actions_rewards__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
-/* harmony import */ var redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(14);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(1);
-/* harmony import */ var constants_subscriptions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11);
-/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(4);
-/* harmony import */ var rewards__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(9);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-
-
-var CHECK_SUBSCRIPTIONS_INTERVAL = 15 * 60 * 1000;
-var SUBSCRIPTION_DOWNLOAD_LIMIT = 1;
-var doSetViewMode = function doSetViewMode(viewMode) {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["SET_VIEW_MODE"],
-      data: viewMode
-    });
-  };
-};
-var setSubscriptionLatest = function setSubscriptionLatest(subscription, uri) {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["SET_SUBSCRIPTION_LATEST"],
-      data: {
-        subscription: subscription,
-        uri: uri
-      }
-    });
-  };
-}; // Populate a channels unread subscriptions or update the type
-
-var doUpdateUnreadSubscriptions = function doUpdateUnreadSubscriptions(channelUri, uris, type) {
-  return function (dispatch, getState) {
-    var state = getState();
-    var unreadByChannel = Object(redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_2__["selectUnreadByChannel"])(state);
-    var currentUnreadForChannel = unreadByChannel[channelUri];
-    var newUris = [];
-    var newType = null;
-
-    if (!currentUnreadForChannel) {
-      newUris = uris;
-      newType = type;
-    } else {
-      if (uris) {
-        // If a channel currently has no unread uris, just add them all
-        if (!currentUnreadForChannel.uris || !currentUnreadForChannel.uris.length) {
-          newUris = uris;
-        } else {
-          // They already have unreads and now there are new ones
-          // Add the new ones to the beginning of the list
-          // Make sure there are no duplicates
-          var currentUnreadUris = currentUnreadForChannel.uris;
-          newUris = uris.filter(function (uri) {
-            return !currentUnreadUris.includes(uri);
-          }).concat(currentUnreadUris);
-        }
-      } else {
-        newUris = currentUnreadForChannel.uris;
-      }
-
-      newType = type || currentUnreadForChannel.type;
-    }
-
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["UPDATE_SUBSCRIPTION_UNREADS"],
-      data: {
-        channel: channelUri,
-        uris: newUris,
-        type: newType
-      }
-    });
-  };
-}; // Remove multiple files (or all) from a channels unread subscriptions
-
-var doRemoveUnreadSubscriptions = function doRemoveUnreadSubscriptions(channelUri, readUris) {
-  return function (dispatch, getState) {
-    var state = getState();
-    var unreadByChannel = Object(redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_2__["selectUnreadByChannel"])(state); // If no channel is passed in, remove all unread subscriptions from all channels
-
-    if (!channelUri) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["REMOVE_SUBSCRIPTION_UNREADS"],
-        data: {
-          channel: null
-        }
-      });
-    }
-
-    var currentChannelUnread = unreadByChannel[channelUri];
-
-    if (!currentChannelUnread || !currentChannelUnread.uris) {
-      // Channel passed in doesn't have any unreads
-      return null;
-    } // For each uri passed in, remove it from the list of unread uris
-    // If no uris are passed in, remove them all
-
-
-    var newUris;
-
-    if (readUris) {
-      var urisToRemoveMap = readUris.reduce(function (acc, val) {
-        return _objectSpread({}, acc, _defineProperty({}, val, true));
-      }, {});
-      var filteredUris = currentChannelUnread.uris.filter(function (uri) {
-        return !urisToRemoveMap[uri];
-      });
-      newUris = filteredUris.length ? filteredUris : null;
-    } else {
-      newUris = null;
-    }
-
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["REMOVE_SUBSCRIPTION_UNREADS"],
-      data: {
-        channel: channelUri,
-        uris: newUris
-      }
-    });
-  };
-}; // Remove a single file from a channels unread subscriptions
-
-var doRemoveUnreadSubscription = function doRemoveUnreadSubscription(channelUri, readUri) {
-  return function (dispatch) {
-    dispatch(doRemoveUnreadSubscriptions(channelUri, [readUri]));
-  };
-};
-var doCheckSubscription = function doCheckSubscription(subscriptionUri, shouldNotify) {
-  return function (dispatch, getState) {
-    // no dispatching FETCH_CHANNEL_CLAIMS_STARTED; causes loading issues on <SubscriptionsPage>
-    var state = getState();
-    var shouldAutoDownload = false; // makeSelectClientSetting(SETTINGS.AUTO_DOWNLOAD)(state);
-
-    var savedSubscription = state.subscriptions.subscriptions.find(function (sub) {
-      return sub.uri === subscriptionUri;
-    });
-    var subscriptionLatest = state.subscriptions.latest[subscriptionUri];
-
-    if (!savedSubscription) {
-      throw Error("Trying to find new content for ".concat(subscriptionUri, " but it doesn't exist in your subscriptions"));
-    } // We may be duplicating calls here. Can this logic be baked into doFetchClaimsByChannel?
-
-
-    lbry_redux__WEBPACK_IMPORTED_MODULE_3__["Lbry"].claim_search({
-      channel: subscriptionUri,
-      valid_channel_signature: true,
-      order_by: ['release_time'],
-      page: 1,
-      page_size: constants_claim__WEBPACK_IMPORTED_MODULE_0__["PAGE_SIZE"]
-    }).then(function (claimListByChannel) {
-      var claimsInChannel = claimListByChannel.items; // may happen if subscribed to an abandoned channel or an empty channel
-
-      if (!claimsInChannel || !claimsInChannel.length) {
-        return;
-      } // Determine if the latest subscription currently saved is actually the latest subscription
-
-
-      var latestIndex = claimsInChannel.findIndex(function (claim) {
-        return claim.permanent_url === subscriptionLatest;
-      }); // If latest is -1, it is a newly subscribed channel or there have been 10+ claims published since last viewed
-
-      var latestIndexToNotify = latestIndex === -1 ? 10 : latestIndex; // If latest is 0, nothing has changed
-      // Do not download/notify about new content, it would download/notify 10 claims per channel
-
-      if (latestIndex !== 0 && subscriptionLatest) {
-        var downloadCount = 0;
-        var newUnread = [];
-        claimsInChannel.slice(0, latestIndexToNotify).forEach(function (claim) {
-          var uri = claim.permanent_url;
-          var shouldDownload = shouldAutoDownload && Boolean(downloadCount < SUBSCRIPTION_DOWNLOAD_LIMIT && !claim.value.fee); // Add the new content to the list of "un-read" subscriptions
-
-          if (shouldNotify) {
-            newUnread.push(uri);
-          }
-
-          if (shouldDownload) {
-            downloadCount += 1;
-            dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["doPurchaseUri"])(uri, {
-              cost: 0
-            }, true));
-          }
-        });
-        dispatch(doUpdateUnreadSubscriptions(subscriptionUri, newUnread, downloadCount > 0 ? constants_subscriptions__WEBPACK_IMPORTED_MODULE_5__["DOWNLOADING"] : constants_subscriptions__WEBPACK_IMPORTED_MODULE_5__["NOTIFY_ONLY"]));
-      } // Set the latest piece of content for a channel
-      // This allows the app to know if there has been new content since it was last set
-
-
-      var latest = claimsInChannel[0];
-      dispatch(setSubscriptionLatest({
-        channelName: latest.signing_channel.name,
-        uri: latest.signing_channel.permanent_url
-      }, latest.permanent_url)); // calling FETCH_CHANNEL_CLAIMS_COMPLETED after not calling STARTED
-      // means it will delete a non-existant fetchingChannelClaims[uri]
-
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_CHANNEL_CLAIMS_COMPLETED"],
-        data: {
-          uri: subscriptionUri,
-          claims: claimsInChannel || [],
-          page: 1
-        }
-      });
-    });
-  };
-};
-var doChannelSubscribe = function doChannelSubscribe(subscription) {
-  return function (dispatch, getState) {
-    var _getState = getState(),
-        daemonSettings = _getState.settings.daemonSettings;
-
-    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
-    var subscriptionUri = subscription.uri;
-
-    if (!subscriptionUri.startsWith('lbry://')) {
-      throw Error("Subscription uris must inclue the \"lbry://\" prefix.\nTried to subscribe to ".concat(subscriptionUri));
-    }
-
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["CHANNEL_SUBSCRIBE"],
-      data: subscription
-    }); // if the user isn't sharing data, keep the subscriptions entirely in the app
-
-    if (isSharingData) {
-      var _parseURI = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          channelClaimId = _parseURI.channelClaimId; // They are sharing data, we can store their subscriptions in our internal database
-
-
-      lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'new', {
-        channel_name: subscription.channelName,
-        claim_id: channelClaimId
-      });
-      dispatch(Object(redux_actions_rewards__WEBPACK_IMPORTED_MODULE_1__["doClaimRewardType"])(rewards__WEBPACK_IMPORTED_MODULE_7__["default"].TYPE_SUBSCRIPTION, {
-        failSilently: true
-      }));
-    }
-
-    dispatch(doCheckSubscription(subscription.uri, true));
-  };
-};
-var doChannelUnsubscribe = function doChannelUnsubscribe(subscription) {
-  return function (dispatch, getState) {
-    var _getState2 = getState(),
-        daemonSettings = _getState2.settings.daemonSettings;
-
-    var isSharingData = daemonSettings ? daemonSettings.share_usage_data : true;
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["CHANNEL_UNSUBSCRIBE"],
-      data: subscription
-    });
-
-    if (isSharingData) {
-      var _parseURI2 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(subscription.uri),
-          channelClaimId = _parseURI2.channelClaimId;
-
-      lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'delete', {
-        claim_id: channelClaimId
-      });
-    }
-  };
-};
-var doCheckSubscriptions = function doCheckSubscriptions() {
-  return function (dispatch, getState) {
-    var state = getState();
-    var subscriptions = Object(redux_selectors_subscriptions__WEBPACK_IMPORTED_MODULE_2__["selectSubscriptions"])(state);
-    subscriptions.forEach(function (sub) {
-      dispatch(doCheckSubscription(sub.uri, true));
-    });
-  };
-};
-var doFetchMySubscriptions = function doFetchMySubscriptions() {
-  return function (dispatch, getState) {
-    var state = getState();
-    var reduxSubscriptions = state.subscriptions.subscriptions; // default to true if daemonSettings not found
-
-    var isSharingData = state.settings && state.settings.daemonSettings ? state.settings.daemonSettings.share_usage_data : true;
-
-    if (!isSharingData && isSharingData !== undefined) {
-      // They aren't sharing their data, subscriptions will be handled by persisted redux state
-      return;
-    } // most of this logic comes from scenarios where the db isn't synced with redux
-    // this will happen if the user stops sharing data
-
-
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_SUBSCRIPTIONS_START"]
-    });
-    lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'list').then(function (dbSubscriptions) {
-      var storedSubscriptions = dbSubscriptions || []; // User has no subscriptions in db or redux
-
-      if (!storedSubscriptions.length && (!reduxSubscriptions || !reduxSubscriptions.length)) {
-        return [];
-      } // There is some mismatch between redux state and db state
-      // If something is in the db, but not in redux, add it to redux
-      // If something is in redux, but not in the db, add it to the db
-
-
-      if (storedSubscriptions.length !== reduxSubscriptions.length) {
-        var dbSubMap = {};
-        var reduxSubMap = {};
-        var subsNotInDB = [];
-        var subscriptionsToReturn = reduxSubscriptions.slice();
-        storedSubscriptions.forEach(function (sub) {
-          dbSubMap[sub.claim_id] = 1;
-        });
-        reduxSubscriptions.forEach(function (sub) {
-          var _parseURI3 = Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["parseURI"])(sub.uri),
-              channelClaimId = _parseURI3.channelClaimId;
-
-          reduxSubMap[channelClaimId] = 1;
-        });
-        storedSubscriptions.forEach(function (sub) {
-          if (!reduxSubMap[sub.claim_id]) {
-            var uri = "lbry://".concat(sub.channel_name, "#").concat(sub.claim_id);
-            subscriptionsToReturn.push({
-              uri: uri,
-              channelName: sub.channel_name
-            });
-          }
-        });
-        return Promise.all(subsNotInDB.map(function (payload) {
-          return lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'new', payload);
-        })).then(function () {
-          return subscriptionsToReturn;
-        })["catch"](function () {
-          return (// let it fail, we will try again when the navigate to the subscriptions page
-            subscriptionsToReturn
-          );
-        });
-      } // DB is already synced, just return the subscriptions in redux
-
-
-      return reduxSubscriptions;
-    }).then(function (subscriptions) {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_SUBSCRIPTIONS_SUCCESS"],
-        data: subscriptions
-      });
-      dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_3__["doResolveUris"])(subscriptions.map(function (_ref) {
-        var uri = _ref.uri;
-        return uri;
-      })));
-      dispatch(doCheckSubscriptions());
-    })["catch"](function () {
-      dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["FETCH_SUBSCRIPTIONS_FAIL"]
-      });
-    });
-  };
-};
-var doCheckSubscriptionsInit = function doCheckSubscriptionsInit() {
-  return function (dispatch) {
-    // doCheckSubscriptionsInit is called by doDaemonReady
-    // setTimeout below is a hack to ensure redux is hydrated when subscriptions are checked
-    // this will be replaced with <PersistGate> which reqiures a package upgrade
-    setTimeout(function () {
-      return dispatch(doFetchMySubscriptions());
-    }, 5000);
-    var checkSubscriptionsTimer = setInterval(function () {
-      return dispatch(doCheckSubscriptions());
-    }, CHECK_SUBSCRIPTIONS_INTERVAL);
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["CHECK_SUBSCRIPTIONS_SUBSCRIBE"],
-      data: {
-        checkSubscriptionsTimer: checkSubscriptionsTimer
-      }
-    });
-    setInterval(function () {
-      return dispatch(doCheckSubscriptions());
-    }, CHECK_SUBSCRIPTIONS_INTERVAL);
-  };
-};
-var doFetchRecommendedSubscriptions = function doFetchRecommendedSubscriptions() {
-  return function (dispatch) {
-    dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["GET_SUGGESTED_SUBSCRIPTIONS_START"]
-    });
-    return lbryio__WEBPACK_IMPORTED_MODULE_6__["default"].call('subscription', 'suggest').then(function (suggested) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["GET_SUGGESTED_SUBSCRIPTIONS_SUCCESS"],
-        data: suggested
-      });
-    })["catch"](function (error) {
-      return dispatch({
-        type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["GET_SUGGESTED_SUBSCRIPTIONS_FAIL"],
-        error: error
-      });
-    });
-  };
-};
-var doCompleteFirstRun = function doCompleteFirstRun() {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["SUBSCRIPTION_FIRST_RUN_COMPLETED"]
-    });
-  };
-};
-var doShowSuggestedSubs = function doShowSuggestedSubs() {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["VIEW_SUGGESTED_SUBSCRIPTIONS"]
-    });
-  };
-};
-var doChannelSubscriptionEnableNotifications = function doChannelSubscriptionEnableNotifications(channelName) {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["CHANNEL_SUBSCRIPTION_ENABLE_NOTIFICATIONS"],
-      data: channelName
-    });
-  };
-};
-var doChannelSubscriptionDisableNotifications = function doChannelSubscriptionDisableNotifications(channelName) {
-  return function (dispatch) {
-    return dispatch({
-      type: constants_action_types__WEBPACK_IMPORTED_MODULE_4__["CHANNEL_SUBSCRIPTION_DISABLE_NOTIFICATIONS"],
-      data: channelName
-    });
-  };
-};
-
-/***/ }),
-/* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MINIMUM_PUBLISH_BID", function() { return MINIMUM_PUBLISH_BID; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANNEL_ANONYMOUS", function() { return CHANNEL_ANONYMOUS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CHANNEL_NEW", function() { return CHANNEL_NEW; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PAGE_SIZE", function() { return PAGE_SIZE; });
-var MINIMUM_PUBLISH_BID = 0.00000001;
-var CHANNEL_ANONYMOUS = 'anonymous';
-var CHANNEL_NEW = 'new';
-var PAGE_SIZE = 20;
-
-/***/ }),
-/* 30 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6371,7 +3183,7 @@ function doFetchCostInfoForUri(uri) {
 }
 
 /***/ }),
-/* 31 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6448,7 +3260,7 @@ function doBlackListedOutpointsSubscribe() {
 }
 
 /***/ }),
-/* 32 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6523,7 +3335,7 @@ function doFilteredOutpointsSubscribe() {
 }
 
 /***/ }),
-/* 33 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6619,7 +3431,7 @@ function doFetchTrendingUris() {
 }
 
 /***/ }),
-/* 34 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -6680,7 +3492,7 @@ var doFetchSubCount = function doFetchSubCount(claimId) {
 };
 
 /***/ }),
-/* 35 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7013,7 +3825,7 @@ function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
 }
 
 /***/ }),
-/* 36 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7035,7 +3847,7 @@ var doUpdateUploadProgress = function doUpdateUploadProgress(progress, params, x
 };
 
 /***/ }),
-/* 37 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -7077,584 +3889,13 @@ function authReducer() {
 }
 
 /***/ }),
-/* 38 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rewardsReducer", function() { return rewardsReducer; });
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var reducers = {};
-var defaultState = {
-  fetching: false,
-  claimedRewardsById: {},
-  // id => reward
-  unclaimedRewards: [],
-  claimPendingByType: {},
-  claimErrorsByType: {},
-  rewardedContentClaimIds: []
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].FETCH_REWARDS_STARTED] = function (state) {
-  return Object.assign({}, state, {
-    fetching: true
-  });
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].FETCH_REWARDS_COMPLETED] = function (state, action) {
-  var userRewards = action.data.userRewards;
-  var unclaimedRewards = [];
-  var claimedRewards = {};
-  userRewards.forEach(function (reward) {
-    if (reward.transaction_id) {
-      claimedRewards[reward.id] = reward;
-    } else {
-      unclaimedRewards.push(reward);
-    }
-  });
-  return Object.assign({}, state, {
-    claimedRewardsById: claimedRewards,
-    unclaimedRewards: unclaimedRewards,
-    fetching: false
-  });
-};
-
-function setClaimRewardState(state, reward, isClaiming) {
-  var errorMessage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-  var newClaimPendingByType = Object.assign({}, state.claimPendingByType);
-  var newClaimErrorsByType = Object.assign({}, state.claimErrorsByType); // Currently, for multiple rewards of the same type, they will both show "claiming" when one is beacuse we track this by `reward_type`
-  // To fix this we will need to use `claim_code` instead, and change all selectors to match
-
-  if (reward) {
-    if (isClaiming) {
-      newClaimPendingByType[reward.reward_type] = isClaiming;
-    } else {
-      delete newClaimPendingByType[reward.reward_type];
-    }
-
-    if (errorMessage) {
-      newClaimErrorsByType[reward.reward_type] = errorMessage;
-    } else {
-      delete newClaimErrorsByType[reward.reward_type];
-    }
-  }
-
-  return Object.assign({}, state, {
-    claimPendingByType: newClaimPendingByType,
-    claimErrorsByType: newClaimErrorsByType
-  });
-}
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].CLAIM_REWARD_STARTED] = function (state, action) {
-  var reward = action.data.reward;
-  return setClaimRewardState(state, reward, true, '');
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].CLAIM_REWARD_SUCCESS] = function (state, action) {
-  var reward = action.data.reward;
-  var unclaimedRewards = state.unclaimedRewards;
-  var index = unclaimedRewards.findIndex(function (ur) {
-    return ur.claim_code === reward.claim_code;
-  });
-  unclaimedRewards.splice(index, 1);
-  var claimedRewardsById = state.claimedRewardsById;
-  claimedRewardsById[reward.id] = reward;
-
-  var newState = _objectSpread({}, state, {
-    unclaimedRewards: _toConsumableArray(unclaimedRewards),
-    claimedRewardsById: _objectSpread({}, claimedRewardsById)
-  });
-
-  return setClaimRewardState(newState, reward, false, '');
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].CLAIM_REWARD_FAILURE] = function (state, action) {
-  var _action$data = action.data,
-      reward = _action$data.reward,
-      error = _action$data.error;
-  return setClaimRewardState(state, reward, false, error ? error.message : '');
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].CLAIM_REWARD_CLEAR_ERROR] = function (state, action) {
-  var reward = action.data.reward;
-  return setClaimRewardState(state, reward, state.claimPendingByType[reward.reward_type], '');
-};
-
-reducers[lbry_redux__WEBPACK_IMPORTED_MODULE_0__["ACTIONS"].FETCH_REWARD_CONTENT_COMPLETED] = function (state, action) {
-  var claimIds = action.data.claimIds;
-  return Object.assign({}, state, {
-    rewardedContentClaimIds: claimIds
-  });
-};
-
-function rewardsReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  var handler = reducers[action.type];
-  if (handler) return handler(state, action);
-  return state;
-}
-
-/***/ }),
-/* 39 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "userReducer", function() { return userReducer; });
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-var reducers = {};
-var defaultState = {
-  authenticationIsPending: false,
-  userIsPending: false,
-  emailNewIsPending: false,
-  emailNewErrorMessage: '',
-  emailToVerify: '',
-  emailAlreadyExists: false,
-  emailDoesNotExist: false,
-  resendingVerificationEmail: false,
-  passwordResetPending: false,
-  passwordResetSuccess: false,
-  passwordResetError: undefined,
-  passwordSetPending: false,
-  passwordSetSuccess: false,
-  passwordSetError: undefined,
-  inviteNewErrorMessage: '',
-  inviteNewIsPending: false,
-  inviteStatusIsPending: false,
-  invitesRemaining: undefined,
-  invitees: undefined,
-  referralLink: undefined,
-  referralCode: undefined,
-  user: undefined,
-  accessToken: undefined,
-  youtubeChannelImportPending: false,
-  youtubeChannelImportErrorMessage: '',
-  referrerSetIsPending: false,
-  referrerSetError: ''
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    authenticationIsPending: true,
-    userIsPending: true,
-    accessToken: defaultState.accessToken
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    authenticationIsPending: false,
-    userIsPending: false,
-    accessToken: action.data.accessToken,
-    user: action.data.user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["AUTHENTICATION_FAILURE"]] = function (state) {
-  return Object.assign({}, state, {
-    authenticationIsPending: false,
-    userIsPending: false,
-    user: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_FETCH_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    userIsPending: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_FETCH_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    userIsPending: false,
-    user: action.data.user,
-    emailToVerify: action.data.user.has_verified_email ? null : state.emailToVerify
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_FETCH_FAILURE"]] = function (state) {
-  return Object.assign({}, state, {
-    userIsPending: true,
-    user: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_NEW_STARTED"]] = function (state, action) {
-  var user = Object.assign({}, state.user);
-  user.country_code = action.data.country_code;
-  return Object.assign({}, state, {
-    phoneNewIsPending: true,
-    phoneNewErrorMessage: '',
-    user: user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_NEW_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    phoneToVerify: action.data.phone,
-    phoneNewIsPending: false
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_RESET"]] = function (state) {
-  return Object.assign({}, state, {
-    phoneToVerify: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_NEW_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    phoneNewIsPending: false,
-    phoneNewErrorMessage: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_VERIFY_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    phoneVerifyIsPending: true,
-    phoneVerifyErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_VERIFY_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    phoneToVerify: '',
-    phoneVerifyIsPending: false,
-    user: action.data.user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PHONE_VERIFY_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    phoneVerifyIsPending: false,
-    phoneVerifyErrorMessage: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    emailNewIsPending: true,
-    emailNewErrorMessage: '',
-    emailAlreadyExists: false,
-    emailDoesNotExist: false
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_SUCCESS"]] = function (state, action) {
-  var user = Object.assign({}, state.user);
-  user.primary_email = action.data.email;
-  return Object.assign({}, state, {
-    emailToVerify: action.data.email,
-    emailNewIsPending: false,
-    user: user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_EXISTS"]] = function (state) {
-  return Object.assign({}, state, {
-    emailAlreadyExists: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_DOES_NOT_EXIST"]] = function (state) {
-  return Object.assign({}, state, {
-    emailDoesNotExist: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    emailNewIsPending: false,
-    emailNewErrorMessage: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_NEW_CLEAR_ENTRY"]] = function (state) {
-  var newUser = _objectSpread({}, state.user);
-
-  delete newUser.primary_email;
-  return Object.assign({}, state, {
-    emailNewErrorMessage: null,
-    emailAlreadyExists: false,
-    emailDoesNotExist: false,
-    passwordExistsForUser: false,
-    emailToVerify: null,
-    user: newUser
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_SET_CLEAR"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordResetSuccess: false,
-    passwordResetPending: false,
-    passwordResetError: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    emailVerifyIsPending: true,
-    emailVerifyErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_SUCCESS"]] = function (state, action) {
-  var user = Object.assign({}, state.user);
-  user.primary_email = action.data.email;
-  return Object.assign({}, state, {
-    emailToVerify: '',
-    emailVerifyIsPending: false,
-    user: user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    emailVerifyIsPending: false,
-    emailVerifyErrorMessage: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_SET"]] = function (state, action) {
-  return Object.assign({}, state, {
-    emailToVerify: action.data.email
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_IDENTITY_VERIFY_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    identityVerifyIsPending: true,
-    identityVerifyErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_IDENTITY_VERIFY_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    identityVerifyIsPending: false,
-    identityVerifyErrorMessage: '',
-    user: action.data.user
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_IDENTITY_VERIFY_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    identityVerifyIsPending: false,
-    identityVerifyErrorMessage: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["FETCH_ACCESS_TOKEN_SUCCESS"]] = function (state, action) {
-  var token = action.data.token;
-  return Object.assign({}, state, {
-    accessToken: token
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_STATUS_FETCH_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    inviteStatusIsPending: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_STATUS_FETCH_SUCCESS"]] = function (state, action) {
-  return Object.assign({}, state, {
-    inviteStatusIsPending: false,
-    invitesRemaining: action.data.invitesRemaining,
-    invitees: action.data.invitees,
-    referralLink: action.data.referralLink,
-    referralCode: action.data.referralCode
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_NEW_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    inviteNewIsPending: true,
-    inviteNewErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_NEW_SUCCESS"]] = function (state) {
-  return Object.assign({}, state, {
-    inviteNewIsPending: false,
-    inviteNewErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_NEW_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    inviteNewIsPending: false,
-    inviteNewErrorMessage: action.data.error.message
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_INVITE_STATUS_FETCH_FAILURE"]] = function (state) {
-  return Object.assign({}, state, {
-    inviteStatusIsPending: false,
-    invitesRemaining: null,
-    invitees: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_YOUTUBE_IMPORT_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    youtubeChannelImportPending: true,
-    youtubeChannelImportErrorMessage: ''
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_YOUTUBE_IMPORT_SUCCESS"]] = function (state, action) {
-  var total = action.data.reduce(function (acc, value) {
-    return acc + value.total_published_videos;
-  }, 0);
-  var complete = action.data.reduce(function (acc, value) {
-    return acc + value.total_transferred;
-  }, 0);
-  return Object.assign({}, state, {
-    youtubeChannelImportPending: false,
-    youtubeChannelImportErrorMessage: '',
-    youtubeChannelImportTotal: total,
-    youtubeChannelImportComplete: complete
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_YOUTUBE_IMPORT_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    youtubeChannelImportPending: false,
-    youtubeChannelImportErrorMessage: action.data
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    resendingVerificationEmail: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_SUCCESS"]] = function (state) {
-  return Object.assign({}, state, {
-    resendingVerificationEmail: false
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_EMAIL_VERIFY_RETRY_FAILURE"]] = function (state) {
-  return Object.assign({}, state, {
-    resendingVerificationEmail: false
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    referrerSetIsPending: true,
-    referrerSetError: defaultState.referrerSetError
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_SUCCESS"]] = function (state) {
-  return Object.assign({}, state, {
-    referrerSetIsPending: false,
-    referrerSetError: defaultState.referrerSetError
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    referrerSetIsPending: false,
-    referrerSetError: action.data.error.message
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_SET_REFERRER_RESET"]] = function (state) {
-  return Object.assign({}, state, {
-    referrerSetIsPending: false,
-    referrerSetError: defaultState.referrerSetError
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_EXISTS"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordExistsForUser: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_RESET_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordResetPending: true,
-    passwordResetSuccess: defaultState.passwordResetSuccess,
-    passwordResetError: null
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_RESET_SUCCESS"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordResetPending: false,
-    passwordResetSuccess: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_RESET_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    passwordResetPending: false,
-    passwordResetError: action.data.error
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_SET_STARTED"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordSetPending: true,
-    passwordSetSuccess: defaultState.passwordSetSuccess
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_SET_SUCCESS"]] = function (state) {
-  return Object.assign({}, state, {
-    passwordSetPending: false,
-    passwordSetSuccess: true
-  });
-};
-
-reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["USER_PASSWORD_SET_FAILURE"]] = function (state, action) {
-  return Object.assign({}, state, {
-    passwordSetPending: false,
-    passwordSetError: action.data.error
-  });
-};
-
-function userReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-  var handler = reducers[action.type];
-  if (handler) return handler(state, action);
-  return state;
-}
-
-/***/ }),
-/* 40 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return costInfoReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -7690,14 +3931,42 @@ var costInfoReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 41 */
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "handleActions", function() { return handleActions; });
+// util for creating reducers
+// based off of redux-actions
+// https://redux-actions.js.org/docs/api/handleAction.html#handleactions
+// eslint-disable-next-line import/prefer-default-export
+var handleActions = function handleActions(actionMap, defaultState) {
+  return function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+    var action = arguments.length > 1 ? arguments[1] : undefined;
+    var handler = actionMap[action.type];
+
+    if (handler) {
+      var newState = handler(state, action);
+      return Object.assign({}, state, newState);
+    } // just return the original state if no handler
+    // returning a copy here breaks redux-persist
+
+
+    return state;
+  };
+};
+
+/***/ }),
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return blacklistReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 var _handleActions;
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -7736,14 +4005,14 @@ var blacklistReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_1__["han
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 42 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return filteredReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 var _handleActions;
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -7775,13 +4044,13 @@ var filteredReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_1__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 43 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return homepageReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -7828,13 +4097,13 @@ var homepageReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 44 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return statsReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -7893,7 +4162,7 @@ var statsReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["handleA
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 45 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8005,7 +4274,7 @@ function syncReducer() {
 }
 
 /***/ }),
-/* 46 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8073,14 +4342,14 @@ function webReducer() {
 }
 
 /***/ }),
-/* 47 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return selectAuthToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return selectIsAuthenticating; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -8096,7 +4365,138 @@ var selectIsAuthenticating = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["creat
 });
 
 /***/ }),
-/* 48 */
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.defaultMemoize = defaultMemoize;
+exports.createSelectorCreator = createSelectorCreator;
+exports.createStructuredSelector = createStructuredSelector;
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = defaultMemoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
+
+/***/ }),
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8106,7 +4506,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return makeSelectCostInfoForUri; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return selectFetchingCostInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return makeSelectFetchingCostInfoForUri; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 var selectState = function selectState(state) {
@@ -8130,14 +4530,14 @@ var makeSelectFetchingCostInfoForUri = function makeSelectFetchingCostInfoForUri
 };
 
 /***/ }),
-/* 49 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return selectBlackListedOutpoints; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 var selectState = function selectState(state) {
@@ -8148,14 +4548,14 @@ var selectBlackListedOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
 });
 
 /***/ }),
-/* 50 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return selectFilteredOutpoints; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 var selectState = function selectState(state) {
@@ -8166,7 +4566,7 @@ var selectFilteredOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["crea
 });
 
 /***/ }),
-/* 51 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8175,7 +4575,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return selectFetchingFeaturedUris; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return selectTrendingUris; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return selectFetchingTrendingUris; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -8197,7 +4597,7 @@ var selectFetchingTrendingUris = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
 });
 
 /***/ }),
-/* 52 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8206,7 +4606,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSubCount", function() { return selectSubCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return makeSelectViewCountForUri; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return makeSelectSubCountForUri; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
@@ -8235,7 +4635,7 @@ var makeSelectSubCountForUri = function makeSelectSubCountForUri(uri) {
 };
 
 /***/ }),
-/* 53 */
+/* 39 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8251,7 +4651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return selectSyncApplyPasswordError; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -8294,14 +4694,14 @@ var selectSyncApplyPasswordError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__[
 });
 
 /***/ }),
-/* 54 */
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return selectCurrentUploads; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return selectUploadCount; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(15);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
