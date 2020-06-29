@@ -30,6 +30,7 @@ const defaultState = {
   youtubeChannelImportErrorMessage: '',
   referrerSetIsPending: false,
   referrerSetError: '',
+  lbryFirstApproved: false,
 };
 
 reducers[ACTIONS.AUTHENTICATION_STARTED] = state =>

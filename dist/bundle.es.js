@@ -3328,7 +3328,8 @@ const defaultState$3 = {
   youtubeChannelImportPending: false,
   youtubeChannelImportErrorMessage: '',
   referrerSetIsPending: false,
-  referrerSetError: ''
+  referrerSetError: '',
+  lbryFirstApproved: false
 };
 
 reducers$2[AUTHENTICATION_STARTED] = state => Object.assign({}, state, {
