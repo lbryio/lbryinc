@@ -1464,9 +1464,21 @@ const makeSelectFetchingCostInfoForUri = uri => reselect.createSelector(selectFe
 
 const selectState$2 = state => state.blacklist || {};
 const selectBlackListedOutpoints = reselect.createSelector(selectState$2, state => state.blackListedOutpoints);
+const selectBlacklistedOutpointMap = reselect.createSelector(selectBlackListedOutpoints, outpoints => outpoints.reduce((acc, val) => {
+  const outpoint = `${val.txid}:${val.nout}`;
+  return { ...acc,
+    [outpoint]: 1
+  };
+}, {}));
 
 const selectState$3 = state => state.filtered || {};
 const selectFilteredOutpoints = reselect.createSelector(selectState$3, state => state.filteredOutpoints);
+const selectFilteredOutpointMap = reselect.createSelector(selectFilteredOutpoints, outpoints => outpoints.reduce((acc, val) => {
+  const outpoint = `${val.txid}:${val.nout}`;
+  return { ...acc,
+    [outpoint]: 1
+  };
+}, {}));
 
 const selectState$4 = state => state.homepage || {};
 
@@ -1534,11 +1546,13 @@ exports.makeSelectViewCountForUri = makeSelectViewCountForUri;
 exports.selectAllCostInfoByUri = selectAllCostInfoByUri;
 exports.selectAuthToken = selectAuthToken;
 exports.selectBlackListedOutpoints = selectBlackListedOutpoints;
+exports.selectBlacklistedOutpointMap = selectBlacklistedOutpointMap;
 exports.selectCurrentUploads = selectCurrentUploads;
 exports.selectFeaturedUris = selectFeaturedUris;
 exports.selectFetchingCostInfo = selectFetchingCostInfo;
 exports.selectFetchingFeaturedUris = selectFetchingFeaturedUris;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
+exports.selectFilteredOutpointMap = selectFilteredOutpointMap;
 exports.selectFilteredOutpoints = selectFilteredOutpoints;
 exports.selectGetSyncErrorMessage = selectGetSyncErrorMessage;
 exports.selectGetSyncIsPending = selectGetSyncIsPending;

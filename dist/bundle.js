@@ -193,8 +193,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(35);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__["selectBlackListedOutpoints"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__["selectBlacklistedOutpointMap"]; });
+
 /* harmony import */ var redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(36);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__["selectFilteredOutpoints"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__["selectFilteredOutpointMap"]; });
 
 /* harmony import */ var redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(37);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFeaturedUris"]; });
@@ -4537,14 +4541,25 @@ var makeSelectFetchingCostInfoForUri = function makeSelectFetchingCostInfoForUri
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return selectBlackListedOutpoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return selectBlacklistedOutpointMap; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var selectState = function selectState(state) {
   return state.blacklist || {};
 };
 var selectBlackListedOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.blackListedOutpoints;
+});
+var selectBlacklistedOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectBlackListedOutpoints, function (outpoints) {
+  return outpoints.reduce(function (acc, val) {
+    var outpoint = "".concat(val.txid, ":").concat(val.nout);
+    return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
+  }, {});
 });
 
 /***/ }),
@@ -4555,14 +4570,25 @@ var selectBlackListedOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return selectFilteredOutpoints; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return selectFilteredOutpointMap; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 var selectState = function selectState(state) {
   return state.filtered || {};
 };
 var selectFilteredOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
   return state.filteredOutpoints;
+});
+var selectFilteredOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFilteredOutpoints, function (outpoints) {
+  return outpoints.reduce(function (acc, val) {
+    var outpoint = "".concat(val.txid, ":").concat(val.nout);
+    return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
+  }, {});
 });
 
 /***/ }),
