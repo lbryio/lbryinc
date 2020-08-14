@@ -47,8 +47,11 @@ export {
   selectAllCostInfoByUri,
   selectFetchingCostInfo,
 } from 'redux/selectors/cost_info';
-export { selectBlackListedOutpoints } from 'redux/selectors/blacklist';
-export { selectFilteredOutpoints } from 'redux/selectors/filtered';
+export {
+  selectBlackListedOutpoints,
+  selectBlacklistedOutpointMap,
+} from 'redux/selectors/blacklist';
+export { selectFilteredOutpoints, selectFilteredOutpointMap } from 'redux/selectors/filtered';
 export {
   selectFeaturedUris,
   selectFetchingFeaturedUris,
