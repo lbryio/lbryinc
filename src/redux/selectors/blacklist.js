@@ -7,12 +7,16 @@ export const selectBlackListedOutpoints = createSelector(
   state => state.blackListedOutpoints
 );
 
-export const selectBlacklistedOutpointMap = createSelector(selectBlackListedOutpoints, outpoints =>
-  outpoints.reduce((acc, val) => {
-    const outpoint = `${val.txid}:${val.nout}`;
-    return {
-      ...acc,
-      [outpoint]: 1,
-    };
-  }, {})
+export const selectBlacklistedOutpointMap = createSelector(
+  selectBlackListedOutpoints,
+  outpoints =>
+    outpoints
+      ? outpoints.reduce((acc, val) => {
+          const outpoint = `${val.txid}:${val.nout}`;
+          return {
+            ...acc,
+            [outpoint]: 1,
+          };
+        }, {})
+      : {}
 );

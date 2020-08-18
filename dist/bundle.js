@@ -4556,10 +4556,10 @@ var selectBlackListedOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
   return state.blackListedOutpoints;
 });
 var selectBlacklistedOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectBlackListedOutpoints, function (outpoints) {
-  return outpoints.reduce(function (acc, val) {
+  return outpoints ? outpoints.reduce(function (acc, val) {
     var outpoint = "".concat(val.txid, ":").concat(val.nout);
     return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
-  }, {});
+  }, {}) : {};
 });
 
 /***/ }),
@@ -4585,10 +4585,10 @@ var selectFilteredOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["crea
   return state.filteredOutpoints;
 });
 var selectFilteredOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFilteredOutpoints, function (outpoints) {
-  return outpoints.reduce(function (acc, val) {
+  return outpoints ? outpoints.reduce(function (acc, val) {
     var outpoint = "".concat(val.txid, ":").concat(val.nout);
     return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
-  }, {});
+  }, {}) : {};
 });
 
 /***/ }),
