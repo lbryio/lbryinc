@@ -457,12 +457,24 @@ var GENERATE_AUTH_TOKEN_SUCCESS = 'GENERATE_AUTH_TOKEN_SUCCESS';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOT_TRANSFERRED", function() { return NOT_TRANSFERRED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PENDING_TRANSFER", function() { return PENDING_TRANSFER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COMPLETED_TRANSFER", function() { return COMPLETED_TRANSFER; });
-var NOT_TRANSFERRED = 'not_transferred';
-var PENDING_TRANSFER = 'pending_transfer';
-var COMPLETED_TRANSFER = 'completed_transfer';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_NOT_TRANSFERRED", function() { return YOUTUBE_SYNC_NOT_TRANSFERRED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_PENDING_TRANSFER", function() { return YOUTUBE_SYNC_PENDING_TRANSFER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_COMPLETED_TRANSFER", function() { return YOUTUBE_SYNC_COMPLETED_TRANSFER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_QUEUED", function() { return YOUTUBE_SYNC_QUEUED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_SYNCING", function() { return YOUTUBE_SYNC_SYNCING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_SYNCED", function() { return YOUTUBE_SYNC_SYNCED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_FAILED", function() { return YOUTUBE_SYNC_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_PENDINGUPGRADE", function() { return YOUTUBE_SYNC_PENDINGUPGRADE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "YOUTUBE_SYNC_ABANDONDED", function() { return YOUTUBE_SYNC_ABANDONDED; });
+var YOUTUBE_SYNC_NOT_TRANSFERRED = 'not_transferred';
+var YOUTUBE_SYNC_PENDING_TRANSFER = 'pending_transfer';
+var YOUTUBE_SYNC_COMPLETED_TRANSFER = 'completed_transfer';
+var YOUTUBE_SYNC_QUEUED = 'queued';
+var YOUTUBE_SYNC_SYNCING = 'syncing';
+var YOUTUBE_SYNC_SYNCED = 'synced';
+var YOUTUBE_SYNC_FAILED = 'failed';
+var YOUTUBE_SYNC_PENDINGUPGRADE = 'pendingupgrade';
+var YOUTUBE_SYNC_ABANDONDED = 'abandonded';
 
 /***/ }),
 /* 3 */
