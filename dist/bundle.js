@@ -644,11 +644,6 @@ Lbryio.authenticate = function () {
         }
 
         return lbry_redux__WEBPACK_IMPORTED_MODULE_1__["Lbry"].status().then(function (status) {
-          if (Lbryio.overrides.setAuthToken) {
-            return Lbryio.overrides.setAuthToken(status);
-          } // simply call the logic to create a new user, and obtain the auth token
-
-
           return new Promise(function (res, rej) {
             Lbryio.call('user', 'new', {
               auth_token: '',
@@ -662,6 +657,10 @@ Lbryio.authenticate = function () {
               var _window2 = window,
                   store = _window2.store;
 
+              if (Lbryio.overrides.setAuthToken) {
+                Lbryio.overrides.setAuthToken(response.auth_token);
+              }
+
               if (store) {
                 store.dispatch({
                   type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GENERATE_AUTH_TOKEN_SUCCESS"],
@@ -672,18 +671,18 @@ Lbryio.authenticate = function () {
               }
 
               Lbryio.authToken = response.auth_token;
-              res(response);
+              return res(response);
             })["catch"](function (error) {
               return rej(error);
             });
           });
-        });
-      }).then(function (user) {
-        if (!user) {
-          return Lbryio.getCurrentUser();
-        }
+        }).then(function (newUser) {
+          if (!newUser) {
+            return Lbryio.getCurrentUser();
+          }
 
-        return user;
+          return newUser;
+        });
       }).then(resolve, reject);
     });
   }
