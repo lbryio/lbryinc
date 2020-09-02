@@ -125,6 +125,9 @@ Lbryio.authenticate = () => {
           if (!token || token.length > 60) {
             return false;
           }
+          if (Lbryio.overrides.setAuthToken) {
+            Lbryio.overrides.setAuthToken(token);
+          }
 
           // check that token works
           return Lbryio.getCurrentUser()
@@ -136,49 +139,49 @@ Lbryio.authenticate = () => {
             return user;
           }
 
-          return Lbry.status().then(status => {
-            if (Lbryio.overrides.setAuthToken) {
-              return Lbryio.overrides.setAuthToken(status);
-            }
+          return Lbry.status()
+            .then(
+              status =>
+                // simply call the logic to create a new user, and obtain the auth token
+                new Promise((res, rej) => {
+                  Lbryio.call(
+                    'user',
+                    'new',
+                    {
+                      auth_token: '',
+                      language: 'en',
+                      app_id: status.installation_id,
+                    },
+                    'post'
+                  )
+                    .then(response => {
+                      if (!response.auth_token) {
+                        throw new Error('auth_token was not set in the response');
+                      }
 
-            // simply call the logic to create a new user, and obtain the auth token
-            return new Promise((res, rej) => {
-              Lbryio.call(
-                'user',
-                'new',
-                {
-                  auth_token: '',
-                  language: 'en',
-                  app_id: status.installation_id,
-                },
-                'post'
-              )
-                .then(response => {
-                  if (!response.auth_token) {
-                    throw new Error('auth_token was not set in the response');
-                  }
+                      const { store } = window;
+                      if (Lbryio.overrides.setAuthToken) {
+                        Lbryio.overrides.setAuthToken(response.auth_token);
+                      }
 
-                  const { store } = window;
-                  if (store) {
-                    store.dispatch({
-                      type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
-                      data: { authToken: response.auth_token },
-                    });
-                  }
-
-                  Lbryio.authToken = response.auth_token;
-                  res(response);
+                      if (store) {
+                        store.dispatch({
+                          type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+                          data: { authToken: response.auth_token },
+                        });
+                      }
+                      Lbryio.authToken = response.auth_token;
+                      return res(response);
+                    })
+                    .catch(error => rej(error));
                 })
-                .catch(error => rej(error));
+            )
+            .then(newUser => {
+              if (!newUser) {
+                return Lbryio.getCurrentUser();
+              }
+              return newUser;
             });
-          });
-        })
-        .then(user => {
-          if (!user) {
-            return Lbryio.getCurrentUser();
-          }
-
-          return user;
         })
         .then(resolve, reject);
     });

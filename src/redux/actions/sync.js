@@ -52,6 +52,7 @@ export function doSetDefaultAccount(success, failure) {
 }
 
 export function doSetSync(oldHash, newHash, data) {
+  console.log('doSetSync newhash, data', newHash, data);
   return dispatch => {
     dispatch({
       type: ACTIONS.SET_SYNC_STARTED,
@@ -86,6 +87,7 @@ export function doGetSync(passedPassword, callback) {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
+      console.log('callback hasnewdata', hasNewData);
       callback(error, hasNewData);
     }
   }
@@ -116,6 +118,7 @@ export function doGetSync(passedPassword, callback) {
       .then(hash => Lbryio.call('sync', 'get', { hash }, 'post'))
       .then(response => {
         const syncHash = response.hash;
+        console.log('hash response', response);
         data.syncHash = syncHash;
         data.syncData = response.data;
         data.changed = response.changed;
@@ -126,7 +129,9 @@ export function doGetSync(passedPassword, callback) {
         }
       })
       .then(response => {
+        console.log('apply response', response);
         if (!response) {
+          console.log('apply no response data', data);
           dispatch({ type: ACTIONS.GET_SYNC_COMPLETED, data });
           handleCallback(null, data.changed);
           return;
@@ -136,6 +141,7 @@ export function doGetSync(passedPassword, callback) {
 
         if (walletHash !== data.syncHash) {
           // different local hash, need to synchronise
+          console.log('setSync');
           dispatch(doSetSync(data.syncHash, walletHash, walletData));
         }
 

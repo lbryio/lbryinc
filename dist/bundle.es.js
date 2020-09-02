@@ -322,6 +322,10 @@ Lbryio.authenticate = () => {
       Lbryio.getAuthToken().then(token => {
         if (!token || token.length > 60) {
           return false;
+        }
+
+        if (Lbryio.overrides.setAuthToken) {
+          Lbryio.overrides.setAuthToken(token);
         } // check that token works
 
 
@@ -331,46 +335,44 @@ Lbryio.authenticate = () => {
           return user;
         }
 
-        return lbryRedux.Lbry.status().then(status => {
-          if (Lbryio.overrides.setAuthToken) {
-            return Lbryio.overrides.setAuthToken(status);
-          } // simply call the logic to create a new user, and obtain the auth token
+        return lbryRedux.Lbry.status().then(status => // simply call the logic to create a new user, and obtain the auth token
+        new Promise((res, rej) => {
+          Lbryio.call('user', 'new', {
+            auth_token: '',
+            language: 'en',
+            app_id: status.installation_id
+          }, 'post').then(response => {
+            if (!response.auth_token) {
+              throw new Error('auth_token was not set in the response');
+            }
 
+            const {
+              store
+            } = window;
 
-          return new Promise((res, rej) => {
-            Lbryio.call('user', 'new', {
-              auth_token: '',
-              language: 'en',
-              app_id: status.installation_id
-            }, 'post').then(response => {
-              if (!response.auth_token) {
-                throw new Error('auth_token was not set in the response');
-              }
+            if (Lbryio.overrides.setAuthToken) {
+              Lbryio.overrides.setAuthToken(response.auth_token);
+            }
 
-              const {
-                store
-              } = window;
+            if (store) {
+              store.dispatch({
+                type: GENERATE_AUTH_TOKEN_SUCCESS,
+                data: {
+                  authToken: response.auth_token
+                }
+              });
+            }
 
-              if (store) {
-                store.dispatch({
-                  type: GENERATE_AUTH_TOKEN_SUCCESS,
-                  data: {
-                    authToken: response.auth_token
-                  }
-                });
-              }
+            Lbryio.authToken = response.auth_token;
+            return res(response);
+          }).catch(error => rej(error));
+        })).then(newUser => {
+          if (!newUser) {
+            return Lbryio.getCurrentUser();
+          }
 
-              Lbryio.authToken = response.auth_token;
-              res(response);
-            }).catch(error => rej(error));
-          });
+          return newUser;
         });
-      }).then(user => {
-        if (!user) {
-          return Lbryio.getCurrentUser();
-        }
-
-        return user;
       }).then(resolve, reject);
     });
   }
@@ -824,6 +826,7 @@ function doSetDefaultAccount(success, failure) {
   };
 }
 function doSetSync(oldHash, newHash, data) {
+  console.log('doSetSync newhash, data', newHash, data);
   return dispatch => {
     dispatch({
       type: SET_SYNC_STARTED
@@ -862,6 +865,7 @@ function doGetSync(passedPassword, callback) {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
+      console.log('callback hasnewdata', hasNewData);
       callback(error, hasNewData);
     }
   }
@@ -891,6 +895,7 @@ function doGetSync(passedPassword, callback) {
       hash
     }, 'post')).then(response => {
       const syncHash = response.hash;
+      console.log('hash response', response);
       data.syncHash = syncHash;
       data.syncData = response.data;
       data.changed = response.changed;
@@ -904,7 +909,10 @@ function doGetSync(passedPassword, callback) {
         });
       }
     }).then(response => {
+      console.log('apply response', response);
+
       if (!response) {
+        console.log('apply no response data', data);
         dispatch({
           type: GET_SYNC_COMPLETED,
           data
@@ -920,6 +928,7 @@ function doGetSync(passedPassword, callback) {
 
       if (walletHash !== data.syncHash) {
         // different local hash, need to synchronise
+        console.log('setSync');
         dispatch(doSetSync(data.syncHash, walletHash, walletData));
       }
 

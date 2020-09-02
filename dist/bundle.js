@@ -630,6 +630,10 @@ Lbryio.authenticate = function () {
       Lbryio.getAuthToken().then(function (token) {
         if (!token || token.length > 60) {
           return false;
+        }
+
+        if (Lbryio.overrides.setAuthToken) {
+          Lbryio.overrides.setAuthToken(token);
         } // check that token works
 
 
@@ -644,46 +648,47 @@ Lbryio.authenticate = function () {
         }
 
         return lbry_redux__WEBPACK_IMPORTED_MODULE_1__["Lbry"].status().then(function (status) {
-          if (Lbryio.overrides.setAuthToken) {
-            return Lbryio.overrides.setAuthToken(status);
-          } // simply call the logic to create a new user, and obtain the auth token
+          return (// simply call the logic to create a new user, and obtain the auth token
+            new Promise(function (res, rej) {
+              Lbryio.call('user', 'new', {
+                auth_token: '',
+                language: 'en',
+                app_id: status.installation_id
+              }, 'post').then(function (response) {
+                if (!response.auth_token) {
+                  throw new Error('auth_token was not set in the response');
+                }
 
+                var _window2 = window,
+                    store = _window2.store;
 
-          return new Promise(function (res, rej) {
-            Lbryio.call('user', 'new', {
-              auth_token: '',
-              language: 'en',
-              app_id: status.installation_id
-            }, 'post').then(function (response) {
-              if (!response.auth_token) {
-                throw new Error('auth_token was not set in the response');
-              }
+                if (Lbryio.overrides.setAuthToken) {
+                  Lbryio.overrides.setAuthToken(response.auth_token);
+                }
 
-              var _window2 = window,
-                  store = _window2.store;
+                if (store) {
+                  store.dispatch({
+                    type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GENERATE_AUTH_TOKEN_SUCCESS"],
+                    data: {
+                      authToken: response.auth_token
+                    }
+                  });
+                }
 
-              if (store) {
-                store.dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GENERATE_AUTH_TOKEN_SUCCESS"],
-                  data: {
-                    authToken: response.auth_token
-                  }
-                });
-              }
+                Lbryio.authToken = response.auth_token;
+                return res(response);
+              })["catch"](function (error) {
+                return rej(error);
+              });
+            })
+          );
+        }).then(function (newUser) {
+          if (!newUser) {
+            return Lbryio.getCurrentUser();
+          }
 
-              Lbryio.authToken = response.auth_token;
-              res(response);
-            })["catch"](function (error) {
-              return rej(error);
-            });
-          });
+          return newUser;
         });
-      }).then(function (user) {
-        if (!user) {
-          return Lbryio.getCurrentUser();
-        }
-
-        return user;
       }).then(resolve, reject);
     });
   }
@@ -3563,6 +3568,7 @@ function doSetDefaultAccount(success, failure) {
   };
 }
 function doSetSync(oldHash, newHash, data) {
+  console.log('doSetSync newhash, data', newHash, data);
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]
@@ -3601,6 +3607,7 @@ function doGetSync(passedPassword, callback) {
         throw new Error('Second argument passed to "doGetSync" must be a function');
       }
 
+      console.log('callback hasnewdata', hasNewData);
       callback(error, hasNewData);
     }
   }
@@ -3632,6 +3639,7 @@ function doGetSync(passedPassword, callback) {
       }, 'post');
     }).then(function (response) {
       var syncHash = response.hash;
+      console.log('hash response', response);
       data.syncHash = syncHash;
       data.syncData = response.data;
       data.changed = response.changed;
@@ -3645,7 +3653,10 @@ function doGetSync(passedPassword, callback) {
         });
       }
     }).then(function (response) {
+      console.log('apply response', response);
+
       if (!response) {
+        console.log('apply no response data', data);
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
           data: data
@@ -3659,6 +3670,7 @@ function doGetSync(passedPassword, callback) {
 
       if (walletHash !== data.syncHash) {
         // different local hash, need to synchronise
+        console.log('setSync');
         dispatch(doSetSync(data.syncHash, walletHash, walletData));
       }
 
