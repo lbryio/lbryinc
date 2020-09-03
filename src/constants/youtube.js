@@ -6,4 +6,4 @@ export const YOUTUBE_SYNC_SYNCING = 'syncing';
 export const YOUTUBE_SYNC_SYNCED = 'synced';
 export const YOUTUBE_SYNC_FAILED = 'failed';
 export const YOUTUBE_SYNC_PENDINGUPGRADE = 'pendingupgrade';
-export const YOUTUBE_SYNC_ABANDONDED = 'abandonded';
+export const YOUTUBE_SYNC_ABANDONDED = 'abandoned';

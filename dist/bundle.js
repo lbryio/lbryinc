@@ -474,7 +474,7 @@ var YOUTUBE_SYNC_SYNCING = 'syncing';
 var YOUTUBE_SYNC_SYNCED = 'synced';
 var YOUTUBE_SYNC_FAILED = 'failed';
 var YOUTUBE_SYNC_PENDINGUPGRADE = 'pendingupgrade';
-var YOUTUBE_SYNC_ABANDONDED = 'abandonded';
+var YOUTUBE_SYNC_ABANDONDED = 'abandoned';
 
 /***/ }),
 /* 3 */

@@ -185,7 +185,7 @@ const YOUTUBE_SYNC_SYNCING = 'syncing';
 const YOUTUBE_SYNC_SYNCED = 'synced';
 const YOUTUBE_SYNC_FAILED = 'failed';
 const YOUTUBE_SYNC_PENDINGUPGRADE = 'pendingupgrade';
-const YOUTUBE_SYNC_ABANDONDED = 'abandonded';
+const YOUTUBE_SYNC_ABANDONDED = 'abandoned';
 
 var youtube = /*#__PURE__*/Object.freeze({
   YOUTUBE_SYNC_NOT_TRANSFERRED: YOUTUBE_SYNC_NOT_TRANSFERRED,
