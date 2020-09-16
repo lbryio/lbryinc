@@ -138,7 +138,7 @@ Lbryio.authenticate = () => {
 
           return Lbry.status()
             .then(
-              status =>
+              () =>
                 new Promise((res, rej) => {
                   Lbryio.call(
                     'user',
@@ -146,7 +146,6 @@ Lbryio.authenticate = () => {
                     {
                       auth_token: '',
                       language: 'en',
-                      app_id: status.installation_id,
                     },
                     'post'
                   )

@@ -346,8 +346,7 @@ Lbryio.authenticate = () => {
         return lbryRedux.Lbry.status().then(status => new Promise((res, rej) => {
           Lbryio.call('user', 'new', {
             auth_token: '',
-            language: 'en',
-            app_id: status.installation_id
+            language: 'en'
           }, 'post').then(response => {
             if (!response.auth_token) {
               throw new Error('auth_token was not set in the response');
@@ -489,36 +488,6 @@ function doTransifexUpload(contents, project, token, success, fail) {
       return response.text();
     }).then(handleResponse).catch(handleError);
   });
-}
-
-function doGenerateAuthToken(installationId) {
-  return dispatch => {
-    dispatch({
-      type: GENERATE_AUTH_TOKEN_STARTED
-    });
-    Lbryio.call('user', 'new', {
-      auth_token: '',
-      language: 'en',
-      app_id: installationId
-    }, 'post').then(response => {
-      if (!response.auth_token) {
-        dispatch({
-          type: GENERATE_AUTH_TOKEN_FAILURE
-        });
-      } else {
-        dispatch({
-          type: GENERATE_AUTH_TOKEN_SUCCESS,
-          data: {
-            authToken: response.auth_token
-          }
-        });
-      }
-    }).catch(() => {
-      dispatch({
-        type: GENERATE_AUTH_TOKEN_FAILURE
-      });
-    });
-  };
 }
 
 function doFetchCostInfoForUri(uri) {
@@ -1537,7 +1506,6 @@ exports.doFetchSubCount = doFetchSubCount;
 exports.doFetchTrendingUris = doFetchTrendingUris;
 exports.doFetchViewCount = doFetchViewCount;
 exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
-exports.doGenerateAuthToken = doGenerateAuthToken;
 exports.doGetSync = doGetSync;
 exports.doResetSync = doResetSync;
 exports.doSetDefaultAccount = doSetDefaultAccount;
