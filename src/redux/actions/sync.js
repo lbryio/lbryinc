@@ -152,7 +152,8 @@ export function doGetSync(passedPassword, callback) {
 
           handleCallback(syncAttemptError);
         } else if (data.hasSyncedWallet) {
-          const error = 'Error getting synced wallet';
+          const error =
+            (syncAttemptError && syncAttemptError.message) || 'Error getting synced wallet';
           dispatch({
             type: ACTIONS.GET_SYNC_FAILED,
             data: {

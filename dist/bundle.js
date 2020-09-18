@@ -3695,7 +3695,7 @@ function doGetSync(passedPassword, callback) {
 
         handleCallback(syncAttemptError);
       } else if (data.hasSyncedWallet) {
-        var error = 'Error getting synced wallet';
+        var error = syncAttemptError && syncAttemptError.message || 'Error getting synced wallet';
         dispatch({
           type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
           data: {
