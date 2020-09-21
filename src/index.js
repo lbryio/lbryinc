@@ -12,6 +12,7 @@ export { LBRYINC_ACTIONS, YOUTUBE_STATUSES, ERRORS };
 export { doTransifexUpload } from 'util/transifex-upload';
 
 // actions
+export { doGenerateAuthToken } from 'redux/actions/auth';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
 export { doFilteredOutpointsSubscribe } from 'redux/actions/filtered';
