@@ -13,6 +13,7 @@ const defaultState = {
   getSyncIsPending: false,
   setSyncIsPending: false,
   hashChanged: false,
+  hasCompletedInitialSync: false,
 };
 
 reducers[ACTIONS.GET_SYNC_STARTED] = state =>
@@ -28,6 +29,7 @@ reducers[ACTIONS.GET_SYNC_COMPLETED] = (state, action) =>
     hasSyncedWallet: action.data.hasSyncedWallet,
     getSyncIsPending: false,
     hashChanged: action.data.hashChanged,
+    hasCompletedInitialSync: true,
   });
 
 reducers[ACTIONS.GET_SYNC_FAILED] = (state, action) =>

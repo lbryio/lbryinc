@@ -75,20 +75,7 @@ const FETCH_VIEW_COUNT_FAILED = 'FETCH_VIEW_COUNT_FAILED';
 const FETCH_VIEW_COUNT_COMPLETED = 'FETCH_VIEW_COUNT_COMPLETED';
 const FETCH_SUB_COUNT_STARTED = 'FETCH_SUB_COUNT_STARTED';
 const FETCH_SUB_COUNT_FAILED = 'FETCH_SUB_COUNT_FAILED';
-const FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Cross-device Sync
-
-const GET_SYNC_STARTED = 'GET_SYNC_STARTED';
-const GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
-const GET_SYNC_FAILED = 'GET_SYNC_FAILED';
-const SET_SYNC_STARTED = 'SET_SYNC_STARTED';
-const SET_SYNC_FAILED = 'SET_SYNC_FAILED';
-const SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
-const SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
-const SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
-const SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
-const SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
-const SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
-const SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
+const FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Lbry.tv
 
 const UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS'; // User
 
@@ -159,18 +146,6 @@ var action_types = /*#__PURE__*/Object.freeze({
   FETCH_SUB_COUNT_STARTED: FETCH_SUB_COUNT_STARTED,
   FETCH_SUB_COUNT_FAILED: FETCH_SUB_COUNT_FAILED,
   FETCH_SUB_COUNT_COMPLETED: FETCH_SUB_COUNT_COMPLETED,
-  GET_SYNC_STARTED: GET_SYNC_STARTED,
-  GET_SYNC_COMPLETED: GET_SYNC_COMPLETED,
-  GET_SYNC_FAILED: GET_SYNC_FAILED,
-  SET_SYNC_STARTED: SET_SYNC_STARTED,
-  SET_SYNC_FAILED: SET_SYNC_FAILED,
-  SET_SYNC_COMPLETED: SET_SYNC_COMPLETED,
-  SET_DEFAULT_ACCOUNT: SET_DEFAULT_ACCOUNT,
-  SYNC_APPLY_STARTED: SYNC_APPLY_STARTED,
-  SYNC_APPLY_COMPLETED: SYNC_APPLY_COMPLETED,
-  SYNC_APPLY_FAILED: SYNC_APPLY_FAILED,
-  SYNC_APPLY_BAD_PASSWORD: SYNC_APPLY_BAD_PASSWORD,
-  SYNC_RESET: SYNC_RESET,
   UPDATE_UPLOAD_PROGRESS: UPDATE_UPLOAD_PROGRESS,
   GENERATE_AUTH_TOKEN_FAILURE: GENERATE_AUTH_TOKEN_FAILURE,
   GENERATE_AUTH_TOKEN_STARTED: GENERATE_AUTH_TOKEN_STARTED,
@@ -783,317 +758,6 @@ const doFetchSubCount = claimId => dispatch => {
   });
 };
 
-function doSetDefaultAccount(success, failure) {
-  return dispatch => {
-    dispatch({
-      type: SET_DEFAULT_ACCOUNT
-    });
-    lbryRedux.Lbry.account_list().then(accountList => {
-      const {
-        lbc_mainnet: accounts
-      } = accountList;
-      let defaultId;
-
-      for (let i = 0; i < accounts.length; ++i) {
-        if (accounts[i].satoshis > 0) {
-          defaultId = accounts[i].id;
-          break;
-        }
-      } // In a case where there's no balance on either account
-      // assume the second (which is created after sync) as default
-
-
-      if (!defaultId && accounts.length > 1) {
-        defaultId = accounts[1].id;
-      } // Set the default account
-
-
-      if (defaultId) {
-        lbryRedux.Lbry.account_set({
-          account_id: defaultId,
-          default: true
-        }).then(() => {
-          if (success) {
-            success();
-          }
-        }).catch(err => {
-          if (failure) {
-            failure(err);
-          }
-        });
-      } else if (failure) {
-        // no default account to set
-        failure('Could not set a default account'); // fail
-      }
-    }).catch(err => {
-      if (failure) {
-        failure(err);
-      }
-    });
-  };
-}
-function doSetSync(oldHash, newHash, data) {
-  return dispatch => {
-    dispatch({
-      type: SET_SYNC_STARTED
-    });
-    return Lbryio.call('sync', 'set', {
-      old_hash: oldHash,
-      new_hash: newHash,
-      data
-    }, 'post').then(response => {
-      if (!response.hash) {
-        throw Error('No hash returned for sync/set.');
-      }
-
-      return dispatch({
-        type: SET_SYNC_COMPLETED,
-        data: {
-          syncHash: response.hash
-        }
-      });
-    }).catch(error => {
-      dispatch({
-        type: SET_SYNC_FAILED,
-        data: {
-          error
-        }
-      });
-    });
-  };
-}
-function doGetSync(passedPassword, callback) {
-  const password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
-
-  function handleCallback(error, hasNewData) {
-    if (callback) {
-      if (typeof callback !== 'function') {
-        throw new Error('Second argument passed to "doGetSync" must be a function');
-      }
-
-      callback(error, hasNewData);
-    }
-  }
-
-  return dispatch => {
-    dispatch({
-      type: GET_SYNC_STARTED
-    });
-    const data = {};
-    lbryRedux.Lbry.wallet_status().then(status => {
-      if (status.is_locked) {
-        return lbryRedux.Lbry.wallet_unlock({
-          password
-        });
-      } // Wallet is already unlocked
-
-
-      return true;
-    }).then(isUnlocked => {
-      if (isUnlocked) {
-        return lbryRedux.Lbry.sync_hash();
-      }
-
-      data.unlockFailed = true;
-      throw new Error();
-    }).then(hash => Lbryio.call('sync', 'get', {
-      hash
-    }, 'post')).then(response => {
-      const syncHash = response.hash;
-      data.syncHash = syncHash;
-      data.syncData = response.data;
-      data.changed = response.changed;
-      data.hasSyncedWallet = true;
-
-      if (response.changed) {
-        return lbryRedux.Lbry.sync_apply({
-          password,
-          data: response.data,
-          blocking: true
-        });
-      }
-    }).then(response => {
-      if (!response) {
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data
-        });
-        handleCallback(null, data.changed);
-        return;
-      }
-
-      const {
-        hash: walletHash,
-        data: walletData
-      } = response;
-
-      if (walletHash !== data.syncHash) {
-        // different local hash, need to synchronise
-        dispatch(doSetSync(data.syncHash, walletHash, walletData));
-      }
-
-      dispatch({
-        type: GET_SYNC_COMPLETED,
-        data
-      });
-      handleCallback(null, data.changed);
-    }).catch(syncAttemptError => {
-      if (data.unlockFailed) {
-        dispatch({
-          type: GET_SYNC_FAILED,
-          data: {
-            error: syncAttemptError
-          }
-        });
-
-        if (password !== '') {
-          dispatch({
-            type: SYNC_APPLY_BAD_PASSWORD
-          });
-        }
-
-        handleCallback(syncAttemptError);
-      } else if (data.hasSyncedWallet) {
-        const error = syncAttemptError && syncAttemptError.message || 'Error getting synced wallet';
-        dispatch({
-          type: GET_SYNC_FAILED,
-          data: {
-            error
-          }
-        }); // Temp solution until we have a bad password error code
-        // Don't fail on blank passwords so we don't show a "password error" message
-        // before users have ever entered a password
-
-        if (password !== '') {
-          dispatch({
-            type: SYNC_APPLY_BAD_PASSWORD
-          });
-        }
-
-        handleCallback(error);
-      } else {
-        // user doesn't have a synced wallet
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data: {
-            hasSyncedWallet: false,
-            syncHash: null
-          }
-        }); // call sync_apply to get data to sync
-        // first time sync. use any string for old hash
-
-        lbryRedux.Lbry.sync_apply({
-          password
-        }).then(({
-          hash: walletHash,
-          data: syncApplyData
-        }) => {
-          dispatch(doSetSync('', walletHash, syncApplyData, password));
-          handleCallback();
-        }).catch(syncApplyError => {
-          handleCallback(syncApplyError);
-        });
-      }
-    });
-  };
-}
-function doSyncApply(syncHash, syncData, password) {
-  return dispatch => {
-    dispatch({
-      type: SYNC_APPLY_STARTED
-    });
-    lbryRedux.Lbry.sync_apply({
-      password,
-      data: syncData
-    }).then(({
-      hash: walletHash,
-      data: walletData
-    }) => {
-      dispatch({
-        type: SYNC_APPLY_COMPLETED
-      });
-
-      if (walletHash !== syncHash) {
-        // different local hash, need to synchronise
-        dispatch(doSetSync(syncHash, walletHash, walletData));
-      }
-    }).catch(() => {
-      dispatch({
-        type: SYNC_APPLY_FAILED,
-        data: {
-          error: 'Invalid password specified. Please enter the password for your previously synchronised wallet.'
-        }
-      });
-    });
-  };
-}
-function doCheckSync() {
-  return dispatch => {
-    dispatch({
-      type: GET_SYNC_STARTED
-    });
-    lbryRedux.Lbry.sync_hash().then(hash => {
-      Lbryio.call('sync', 'get', {
-        hash
-      }, 'post').then(response => {
-        const data = {
-          hasSyncedWallet: true,
-          syncHash: response.hash,
-          syncData: response.data,
-          hashChanged: response.changed
-        };
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data
-        });
-      }).catch(() => {
-        // user doesn't have a synced wallet
-        dispatch({
-          type: GET_SYNC_COMPLETED,
-          data: {
-            hasSyncedWallet: false,
-            syncHash: null
-          }
-        });
-      });
-    });
-  };
-}
-function doResetSync() {
-  return dispatch => new Promise(resolve => {
-    dispatch({
-      type: SYNC_RESET
-    });
-    resolve();
-  });
-}
-function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
-  return dispatch => {
-    const data = {};
-    return lbryRedux.Lbry.sync_hash().then(hash => Lbryio.call('sync', 'get', {
-      hash
-    }, 'post')).then(syncGetResponse => {
-      data.oldHash = syncGetResponse.hash;
-      return lbryRedux.Lbry.sync_apply({
-        password: oldPassword,
-        data: syncGetResponse.data
-      });
-    }).then(() => {
-      if (encrypt) {
-        dispatch(lbryRedux.doWalletEncrypt(newPassword));
-      } else {
-        dispatch(lbryRedux.doWalletDecrypt());
-      }
-    }).then(() => lbryRedux.Lbry.sync_apply({
-      password: newPassword
-    })).then(syncApplyResponse => {
-      if (syncApplyResponse.hash !== data.oldHash) {
-        return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
-      }
-    }).catch(console.error);
-  };
-}
-
 //      
 const doUpdateUploadProgress = (progress, params, xhr) => dispatch => dispatch({
   type: UPDATE_UPLOAD_PROGRESS,
@@ -1326,85 +990,6 @@ const statsReducer = handleActions({
   }
 }, defaultState$5);
 
-const reducers$1 = {};
-const defaultState$6 = {
-  hasSyncedWallet: false,
-  syncHash: null,
-  syncData: null,
-  setSyncErrorMessage: null,
-  getSyncErrorMessage: null,
-  syncApplyErrorMessage: '',
-  syncApplyIsPending: false,
-  syncApplyPasswordError: false,
-  getSyncIsPending: false,
-  setSyncIsPending: false,
-  hashChanged: false
-};
-
-reducers$1[GET_SYNC_STARTED] = state => Object.assign({}, state, {
-  getSyncIsPending: true,
-  getSyncErrorMessage: null
-});
-
-reducers$1[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
-  syncHash: action.data.syncHash,
-  syncData: action.data.syncData,
-  hasSyncedWallet: action.data.hasSyncedWallet,
-  getSyncIsPending: false,
-  hashChanged: action.data.hashChanged
-});
-
-reducers$1[GET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
-  getSyncIsPending: false,
-  getSyncErrorMessage: action.data.error
-});
-
-reducers$1[SET_SYNC_STARTED] = state => Object.assign({}, state, {
-  setSyncIsPending: true,
-  setSyncErrorMessage: null
-});
-
-reducers$1[SET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
-  setSyncIsPending: false,
-  setSyncErrorMessage: action.data.error
-});
-
-reducers$1[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
-  setSyncIsPending: false,
-  setSyncErrorMessage: null,
-  hasSyncedWallet: true,
-  // sync was successful, so the user has a synced wallet at this point
-  syncHash: action.data.syncHash
-});
-
-reducers$1[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
-  syncApplyPasswordError: false,
-  syncApplyIsPending: true,
-  syncApplyErrorMessage: ''
-});
-
-reducers$1[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
-  syncApplyIsPending: false,
-  syncApplyErrorMessage: ''
-});
-
-reducers$1[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
-  syncApplyIsPending: false,
-  syncApplyErrorMessage: action.data.error
-});
-
-reducers$1[SYNC_APPLY_BAD_PASSWORD] = state => Object.assign({}, state, {
-  syncApplyPasswordError: true
-});
-
-reducers$1[SYNC_RESET] = () => defaultState$6;
-
-function syncReducer(state = defaultState$6, action) {
-  const handler = reducers$1[action.type];
-  if (handler) return handler(state, action);
-  return state;
-}
-
 //      
 /*
 test mock:
@@ -1419,12 +1004,12 @@ test mock:
   },
  */
 
-const reducers$2 = {};
-const defaultState$7 = {
+const reducers$1 = {};
+const defaultState$6 = {
   currentUploads: {}
 };
 
-reducers$2[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
+reducers$1[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
   const {
     progress,
     params,
@@ -1454,8 +1039,8 @@ reducers$2[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
   };
 };
 
-function webReducer(state = defaultState$7, action) {
-  const handler = reducers$2[action.type];
+function webReducer(state = defaultState$6, action) {
+  const handler = reducers$1[action.type];
   if (handler) return handler(state, action);
   return state;
 }
@@ -1503,23 +1088,9 @@ const selectSubCount = reselect.createSelector(selectState$5, state => state.sub
 const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => claim ? viewCountById[claim.claim_id] || 0 : 0);
 const makeSelectSubCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectSubCount, (claim, subCountById) => claim ? subCountById[claim.claim_id] || 0 : 0);
 
-const selectState$6 = state => state.sync || {};
+const selectState$6 = state => state.web || {};
 
-const selectHasSyncedWallet = reselect.createSelector(selectState$6, state => state.hasSyncedWallet);
-const selectSyncHash = reselect.createSelector(selectState$6, state => state.syncHash);
-const selectSyncData = reselect.createSelector(selectState$6, state => state.syncData);
-const selectSetSyncErrorMessage = reselect.createSelector(selectState$6, state => state.setSyncErrorMessage);
-const selectGetSyncErrorMessage = reselect.createSelector(selectState$6, state => state.getSyncErrorMessage);
-const selectGetSyncIsPending = reselect.createSelector(selectState$6, state => state.getSyncIsPending);
-const selectSetSyncIsPending = reselect.createSelector(selectState$6, state => state.setSyncIsPending);
-const selectHashChanged = reselect.createSelector(selectState$6, state => state.hashChanged);
-const selectSyncApplyIsPending = reselect.createSelector(selectState$6, state => state.syncApplyIsPending);
-const selectSyncApplyErrorMessage = reselect.createSelector(selectState$6, state => state.syncApplyErrorMessage);
-const selectSyncApplyPasswordError = reselect.createSelector(selectState$6, state => state.syncApplyPasswordError);
-
-const selectState$7 = state => state.web || {};
-
-const selectCurrentUploads = reselect.createSelector(selectState$7, state => state.currentUploads);
+const selectCurrentUploads = reselect.createSelector(selectState$6, state => state.currentUploads);
 const selectUploadCount = reselect.createSelector(selectCurrentUploads, currentUploads => currentUploads && Object.keys(currentUploads).length);
 
 exports.ERRORS = errors;
@@ -1530,7 +1101,6 @@ exports.authReducer = authReducer;
 exports.blacklistReducer = blacklistReducer;
 exports.costInfoReducer = costInfoReducer;
 exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
-exports.doCheckSync = doCheckSync;
 exports.doFetchCostInfoForUri = doFetchCostInfoForUri;
 exports.doFetchFeaturedUris = doFetchFeaturedUris;
 exports.doFetchSubCount = doFetchSubCount;
@@ -1538,12 +1108,6 @@ exports.doFetchTrendingUris = doFetchTrendingUris;
 exports.doFetchViewCount = doFetchViewCount;
 exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
 exports.doGenerateAuthToken = doGenerateAuthToken;
-exports.doGetSync = doGetSync;
-exports.doResetSync = doResetSync;
-exports.doSetDefaultAccount = doSetDefaultAccount;
-exports.doSetSync = doSetSync;
-exports.doSyncApply = doSyncApply;
-exports.doSyncEncryptAndDecrypt = doSyncEncryptAndDecrypt;
 exports.doTransifexUpload = doTransifexUpload;
 exports.doUpdateUploadProgress = doUpdateUploadProgress;
 exports.filteredReducer = filteredReducer;
@@ -1563,20 +1127,8 @@ exports.selectFetchingFeaturedUris = selectFetchingFeaturedUris;
 exports.selectFetchingTrendingUris = selectFetchingTrendingUris;
 exports.selectFilteredOutpointMap = selectFilteredOutpointMap;
 exports.selectFilteredOutpoints = selectFilteredOutpoints;
-exports.selectGetSyncErrorMessage = selectGetSyncErrorMessage;
-exports.selectGetSyncIsPending = selectGetSyncIsPending;
-exports.selectHasSyncedWallet = selectHasSyncedWallet;
-exports.selectHashChanged = selectHashChanged;
 exports.selectIsAuthenticating = selectIsAuthenticating;
-exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
-exports.selectSetSyncIsPending = selectSetSyncIsPending;
-exports.selectSyncApplyErrorMessage = selectSyncApplyErrorMessage;
-exports.selectSyncApplyIsPending = selectSyncApplyIsPending;
-exports.selectSyncApplyPasswordError = selectSyncApplyPasswordError;
-exports.selectSyncData = selectSyncData;
-exports.selectSyncHash = selectSyncHash;
 exports.selectTrendingUris = selectTrendingUris;
 exports.selectUploadCount = selectUploadCount;
 exports.statsReducer = statsReducer;
-exports.syncReducer = syncReducer;
 exports.webReducer = webReducer;
