@@ -514,7 +514,8 @@ var Lbryio = {
   exchangeLastFetched: null,
   CONNECTION_STRING: 'https://api.lbry.com/'
 };
-var EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000; // We can't use env's because they aren't passed into node_modules
+var EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
+var INTERNAL_APIS_DOWN = 'internal_apis_down'; // We can't use env's because they aren't passed into node_modules
 
 Lbryio.setLocalApi = function (endpoint) {
   Lbryio.CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
@@ -537,7 +538,11 @@ Lbryio.call = function (resource, action) {
       return response.json();
     }
 
-    return response.json().then(function (json) {
+    if (response.status === 500) {
+      return Promise.reject(INTERNAL_APIS_DOWN);
+    }
+
+    if (response) return response.json().then(function (json) {
       var error;
 
       if (json.error) {
@@ -647,7 +652,11 @@ Lbryio.authenticate = function () {
 
         return Lbryio.getCurrentUser().then(function (user) {
           return user;
-        })["catch"](function () {
+        })["catch"](function (error) {
+          if (error === INTERNAL_APIS_DOWN) {
+            throw new Error('Internal APIS down');
+          }
+
           return false;
         });
       }).then(function (user) {
