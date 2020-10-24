@@ -794,6 +794,7 @@ const doFetchSubCount = claimId => dispatch => {
   });
 };
 
+const NO_WALLET_ERROR = 'no wallet found for this user';
 function doSetDefaultAccount(success, failure) {
   return dispatch => {
     dispatch({
@@ -993,17 +994,19 @@ function doGetSync(passedPassword, callback) {
         }); // call sync_apply to get data to sync
         // first time sync. use any string for old hash
 
-        lbryRedux.Lbry.sync_apply({
-          password
-        }).then(({
-          hash: walletHash,
-          data: syncApplyData
-        }) => {
-          dispatch(doSetSync('', walletHash, syncApplyData, password));
-          handleCallback();
-        }).catch(syncApplyError => {
-          handleCallback(syncApplyError);
-        });
+        if (syncAttemptError.message === NO_WALLET_ERROR) {
+          lbryRedux.Lbry.sync_apply({
+            password
+          }).then(({
+            hash: walletHash,
+            data: syncApplyData
+          }) => {
+            dispatch(doSetSync('', walletHash, syncApplyData, password));
+            handleCallback();
+          }).catch(syncApplyError => {
+            handleCallback(syncApplyError);
+          });
+        }
       }
     });
   };

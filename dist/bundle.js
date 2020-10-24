@@ -3535,6 +3535,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var NO_WALLET_ERROR = 'no wallet found for this user';
 function doSetDefaultAccount(success, failure) {
   return function (dispatch) {
     dispatch({
@@ -3732,16 +3733,18 @@ function doGetSync(passedPassword, callback) {
         }); // call sync_apply to get data to sync
         // first time sync. use any string for old hash
 
-        lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
-          password: password
-        }).then(function (_ref) {
-          var walletHash = _ref.hash,
-              syncApplyData = _ref.data;
-          dispatch(doSetSync('', walletHash, syncApplyData, password));
-          handleCallback();
-        })["catch"](function (syncApplyError) {
-          handleCallback(syncApplyError);
-        });
+        if (syncAttemptError.message === NO_WALLET_ERROR) {
+          lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+            password: password
+          }).then(function (_ref) {
+            var walletHash = _ref.hash,
+                syncApplyData = _ref.data;
+            dispatch(doSetSync('', walletHash, syncApplyData, password));
+            handleCallback();
+          })["catch"](function (syncApplyError) {
+            handleCallback(syncApplyError);
+          });
+        }
       }
     });
   };
