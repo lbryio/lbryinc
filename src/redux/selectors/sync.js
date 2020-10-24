@@ -38,8 +38,3 @@ export const selectSyncApplyPasswordError = createSelector(
   selectState,
   state => state.syncApplyPasswordError
 );
-
-export const selectHasCompletedInitialSync = createSelector(
-  selectState,
-  state => state.hasCompletedInitialSync
-);

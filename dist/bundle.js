@@ -134,72 +134,113 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doFetchSubCount", function() { return redux_actions_stats__WEBPACK_IMPORTED_MODULE_10__["doFetchSubCount"]; });
 
-/* harmony import */ var redux_actions_web__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(21);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_web__WEBPACK_IMPORTED_MODULE_11__["doUpdateUploadProgress"]; });
+/* harmony import */ var redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(21);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doCheckSync"]; });
 
-/* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(22);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_12__["authReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doGetSync"]; });
 
-/* harmony import */ var redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_13__["costInfoReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSetSync"]; });
 
-/* harmony import */ var redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(25);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_14__["blacklistReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSetDefaultAccount"]; });
 
-/* harmony import */ var redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(26);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_15__["filteredReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSyncApply"]; });
 
-/* harmony import */ var redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(27);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_16__["homepageReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doResetSync"]; });
 
-/* harmony import */ var redux_reducers_stats__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(28);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return redux_reducers_stats__WEBPACK_IMPORTED_MODULE_17__["statsReducer"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return redux_actions_sync__WEBPACK_IMPORTED_MODULE_11__["doSyncEncryptAndDecrypt"]; });
 
-/* harmony import */ var redux_reducers_web__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(29);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return redux_reducers_web__WEBPACK_IMPORTED_MODULE_18__["webReducer"]; });
+/* harmony import */ var redux_actions_web__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(22);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return redux_actions_web__WEBPACK_IMPORTED_MODULE_12__["doUpdateUploadProgress"]; });
 
-/* harmony import */ var redux_selectors_auth__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(30);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_19__["selectAuthToken"]; });
+/* harmony import */ var redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(23);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "authReducer", function() { return redux_reducers_auth__WEBPACK_IMPORTED_MODULE_13__["authReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_19__["selectIsAuthenticating"]; });
+/* harmony import */ var redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(24);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return redux_reducers_cost_info__WEBPACK_IMPORTED_MODULE_14__["costInfoReducer"]; });
 
-/* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(32);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_20__["makeSelectFetchingCostInfoForUri"]; });
+/* harmony import */ var redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(26);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return redux_reducers_blacklist__WEBPACK_IMPORTED_MODULE_15__["blacklistReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_20__["makeSelectCostInfoForUri"]; });
+/* harmony import */ var redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(27);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return redux_reducers_filtered__WEBPACK_IMPORTED_MODULE_16__["filteredReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAllCostInfoByUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_20__["selectAllCostInfoByUri"]; });
+/* harmony import */ var redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(28);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return redux_reducers_homepage__WEBPACK_IMPORTED_MODULE_17__["homepageReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_20__["selectFetchingCostInfo"]; });
+/* harmony import */ var redux_reducers_stats__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(29);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return redux_reducers_stats__WEBPACK_IMPORTED_MODULE_18__["statsReducer"]; });
 
-/* harmony import */ var redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(33);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_21__["selectBlackListedOutpoints"]; });
+/* harmony import */ var redux_reducers_sync__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(30);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "syncReducer", function() { return redux_reducers_sync__WEBPACK_IMPORTED_MODULE_19__["syncReducer"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_21__["selectBlacklistedOutpointMap"]; });
+/* harmony import */ var redux_reducers_web__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(31);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "webReducer", function() { return redux_reducers_web__WEBPACK_IMPORTED_MODULE_20__["webReducer"]; });
 
-/* harmony import */ var redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(34);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_22__["selectFilteredOutpoints"]; });
+/* harmony import */ var redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(32);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__["selectAuthToken"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_22__["selectFilteredOutpointMap"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return redux_selectors_auth__WEBPACK_IMPORTED_MODULE_21__["selectIsAuthenticating"]; });
 
-/* harmony import */ var redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(35);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_23__["selectFeaturedUris"]; });
+/* harmony import */ var redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(34);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["makeSelectFetchingCostInfoForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_23__["selectFetchingFeaturedUris"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["makeSelectCostInfoForUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_23__["selectTrendingUris"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectAllCostInfoByUri", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["selectAllCostInfoByUri"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_23__["selectFetchingTrendingUris"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return redux_selectors_cost_info__WEBPACK_IMPORTED_MODULE_22__["selectFetchingCostInfo"]; });
 
-/* harmony import */ var redux_selectors_stats__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(36);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_24__["makeSelectViewCountForUri"]; });
+/* harmony import */ var redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(35);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__["selectBlackListedOutpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_24__["makeSelectSubCountForUri"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return redux_selectors_blacklist__WEBPACK_IMPORTED_MODULE_23__["selectBlacklistedOutpointMap"]; });
 
-/* harmony import */ var redux_selectors_web__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(37);
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_25__["selectCurrentUploads"]; });
+/* harmony import */ var redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(36);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__["selectFilteredOutpoints"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_25__["selectUploadCount"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return redux_selectors_filtered__WEBPACK_IMPORTED_MODULE_24__["selectFilteredOutpointMap"]; });
+
+/* harmony import */ var redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(37);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFeaturedUris"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFetchingFeaturedUris"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectTrendingUris"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFetchingTrendingUris"]; });
+
+/* harmony import */ var redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(38);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectViewCountForUri"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectSubCountForUri"]; });
+
+/* harmony import */ var redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(39);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectHasSyncedWallet"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncData"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncHash"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSetSyncErrorMessage"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectGetSyncErrorMessage"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectGetSyncIsPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSetSyncIsPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyIsPending"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectHashChanged"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyErrorMessage"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return redux_selectors_sync__WEBPACK_IMPORTED_MODULE_27__["selectSyncApplyPasswordError"]; });
+
+/* harmony import */ var redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(40);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__["selectCurrentUploads"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return redux_selectors_web__WEBPACK_IMPORTED_MODULE_28__["selectUploadCount"]; });
 
 
 
@@ -217,6 +258,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // reducers
 
 
@@ -225,7 +267,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
  // selectors
+
 
 
 
@@ -303,6 +347,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SUB_COUNT_STARTED", function() { return FETCH_SUB_COUNT_STARTED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SUB_COUNT_FAILED", function() { return FETCH_SUB_COUNT_FAILED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SUB_COUNT_COMPLETED", function() { return FETCH_SUB_COUNT_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SYNC_STARTED", function() { return GET_SYNC_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SYNC_COMPLETED", function() { return GET_SYNC_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_SYNC_FAILED", function() { return GET_SYNC_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_STARTED", function() { return SET_SYNC_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_FAILED", function() { return SET_SYNC_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SYNC_COMPLETED", function() { return SET_SYNC_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_DEFAULT_ACCOUNT", function() { return SET_DEFAULT_ACCOUNT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_STARTED", function() { return SYNC_APPLY_STARTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_COMPLETED", function() { return SYNC_APPLY_COMPLETED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_FAILED", function() { return SYNC_APPLY_FAILED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_APPLY_BAD_PASSWORD", function() { return SYNC_APPLY_BAD_PASSWORD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SYNC_RESET", function() { return SYNC_RESET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE_UPLOAD_PROGRESS", function() { return UPDATE_UPLOAD_PROGRESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_FAILURE", function() { return GENERATE_AUTH_TOKEN_FAILURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GENERATE_AUTH_TOKEN_STARTED", function() { return GENERATE_AUTH_TOKEN_STARTED; });
@@ -374,7 +430,20 @@ var FETCH_VIEW_COUNT_FAILED = 'FETCH_VIEW_COUNT_FAILED';
 var FETCH_VIEW_COUNT_COMPLETED = 'FETCH_VIEW_COUNT_COMPLETED';
 var FETCH_SUB_COUNT_STARTED = 'FETCH_SUB_COUNT_STARTED';
 var FETCH_SUB_COUNT_FAILED = 'FETCH_SUB_COUNT_FAILED';
-var FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Lbry.tv
+var FETCH_SUB_COUNT_COMPLETED = 'FETCH_SUB_COUNT_COMPLETED'; // Cross-device Sync
+
+var GET_SYNC_STARTED = 'GET_SYNC_STARTED';
+var GET_SYNC_COMPLETED = 'GET_SYNC_COMPLETED';
+var GET_SYNC_FAILED = 'GET_SYNC_FAILED';
+var SET_SYNC_STARTED = 'SET_SYNC_STARTED';
+var SET_SYNC_FAILED = 'SET_SYNC_FAILED';
+var SET_SYNC_COMPLETED = 'SET_SYNC_COMPLETED';
+var SET_DEFAULT_ACCOUNT = 'SET_DEFAULT_ACCOUNT';
+var SYNC_APPLY_STARTED = 'SYNC_APPLY_STARTED';
+var SYNC_APPLY_COMPLETED = 'SYNC_APPLY_COMPLETED';
+var SYNC_APPLY_FAILED = 'SYNC_APPLY_FAILED';
+var SYNC_APPLY_BAD_PASSWORD = 'SYNC_APPLY_BAD_PASSWORD';
+var SYNC_RESET = 'SYNC_RESET'; // Lbry.tv
 
 var UPDATE_UPLOAD_PROGRESS = 'UPDATE_UPLOAD_PROGRESS'; // User
 
@@ -3443,6 +3512,339 @@ var doFetchSubCount = function doFetchSubCount(claimId) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetDefaultAccount", function() { return doSetDefaultAccount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSetSync", function() { return doSetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doGetSync", function() { return doGetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncApply", function() { return doSyncApply; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doCheckSync", function() { return doCheckSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doResetSync", function() { return doResetSync; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doSyncEncryptAndDecrypt", function() { return doSyncEncryptAndDecrypt; });
+/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var lbryio__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+function doSetDefaultAccount(success, failure) {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_DEFAULT_ACCOUNT"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_list().then(function (accountList) {
+      var accounts = accountList.lbc_mainnet;
+      var defaultId;
+
+      for (var i = 0; i < accounts.length; ++i) {
+        if (accounts[i].satoshis > 0) {
+          defaultId = accounts[i].id;
+          break;
+        }
+      } // In a case where there's no balance on either account
+      // assume the second (which is created after sync) as default
+
+
+      if (!defaultId && accounts.length > 1) {
+        defaultId = accounts[1].id;
+      } // Set the default account
+
+
+      if (defaultId) {
+        lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].account_set({
+          account_id: defaultId,
+          "default": true
+        }).then(function () {
+          if (success) {
+            success();
+          }
+        })["catch"](function (err) {
+          if (failure) {
+            failure(err);
+          }
+        });
+      } else if (failure) {
+        // no default account to set
+        failure('Could not set a default account'); // fail
+      }
+    })["catch"](function (err) {
+      if (failure) {
+        failure(err);
+      }
+    });
+  };
+}
+function doSetSync(oldHash, newHash, data) {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]
+    });
+    return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'set', {
+      old_hash: oldHash,
+      new_hash: newHash,
+      data: data
+    }, 'post').then(function (response) {
+      if (!response.hash) {
+        throw Error('No hash returned for sync/set.');
+      }
+
+      return dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED"],
+        data: {
+          syncHash: response.hash
+        }
+      });
+    })["catch"](function (error) {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"],
+        data: {
+          error: error
+        }
+      });
+    });
+  };
+}
+function doGetSync(passedPassword, callback) {
+  var password = passedPassword === null || passedPassword === undefined ? '' : passedPassword;
+
+  function handleCallback(error, hasNewData) {
+    if (callback) {
+      if (typeof callback !== 'function') {
+        throw new Error('Second argument passed to "doGetSync" must be a function');
+      }
+
+      callback(error, hasNewData);
+    }
+  }
+
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
+    });
+    var data = {};
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].wallet_status().then(function (status) {
+      if (status.is_locked) {
+        return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].wallet_unlock({
+          password: password
+        });
+      } // Wallet is already unlocked
+
+
+      return true;
+    }).then(function (isUnlocked) {
+      if (isUnlocked) {
+        return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash();
+      }
+
+      data.unlockFailed = true;
+      throw new Error();
+    }).then(function (hash) {
+      return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post');
+    }).then(function (response) {
+      var syncHash = response.hash;
+      data.syncHash = syncHash;
+      data.syncData = response.data;
+      data.changed = response.changed;
+      data.hasSyncedWallet = true;
+
+      if (response.changed) {
+        return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+          password: password,
+          data: response.data,
+          blocking: true
+        });
+      }
+    }).then(function (response) {
+      if (!response) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: data
+        });
+        handleCallback(null, data.changed);
+        return;
+      }
+
+      var walletHash = response.hash,
+          walletData = response.data;
+
+      if (walletHash !== data.syncHash) {
+        // different local hash, need to synchronise
+        dispatch(doSetSync(data.syncHash, walletHash, walletData));
+      }
+
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+        data: data
+      });
+      handleCallback(null, data.changed);
+    })["catch"](function (syncAttemptError) {
+      if (data.unlockFailed) {
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
+          data: {
+            error: syncAttemptError
+          }
+        });
+
+        if (password !== '') {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]
+          });
+        }
+
+        handleCallback(syncAttemptError);
+      } else if (data.hasSyncedWallet) {
+        var error = syncAttemptError && syncAttemptError.message || 'Error getting synced wallet';
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"],
+          data: {
+            error: error
+          }
+        }); // Temp solution until we have a bad password error code
+        // Don't fail on blank passwords so we don't show a "password error" message
+        // before users have ever entered a password
+
+        if (password !== '') {
+          dispatch({
+            type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]
+          });
+        }
+
+        handleCallback(error);
+      } else {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: {
+            hasSyncedWallet: false,
+            syncHash: null
+          }
+        }); // call sync_apply to get data to sync
+        // first time sync. use any string for old hash
+
+        lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+          password: password
+        }).then(function (_ref) {
+          var walletHash = _ref.hash,
+              syncApplyData = _ref.data;
+          dispatch(doSetSync('', walletHash, syncApplyData, password));
+          handleCallback();
+        })["catch"](function (syncApplyError) {
+          handleCallback(syncApplyError);
+        });
+      }
+    });
+  };
+}
+function doSyncApply(syncHash, syncData, password) {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+      password: password,
+      data: syncData
+    }).then(function (_ref2) {
+      var walletHash = _ref2.hash,
+          walletData = _ref2.data;
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_COMPLETED"]
+      });
+
+      if (walletHash !== syncHash) {
+        // different local hash, need to synchronise
+        dispatch(doSetSync(syncHash, walletHash, walletData));
+      }
+    })["catch"](function () {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"],
+        data: {
+          error: 'Invalid password specified. Please enter the password for your previously synchronised wallet.'
+        }
+      });
+    });
+  };
+}
+function doCheckSync() {
+  return function (dispatch) {
+    dispatch({
+      type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]
+    });
+    lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
+      lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post').then(function (response) {
+        var data = {
+          hasSyncedWallet: true,
+          syncHash: response.hash,
+          syncData: response.data,
+          hashChanged: response.changed
+        };
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: data
+        });
+      })["catch"](function () {
+        // user doesn't have a synced wallet
+        dispatch({
+          type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"],
+          data: {
+            hasSyncedWallet: false,
+            syncHash: null
+          }
+        });
+      });
+    });
+  };
+}
+function doResetSync() {
+  return function (dispatch) {
+    return new Promise(function (resolve) {
+      dispatch({
+        type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_RESET"]
+      });
+      resolve();
+    });
+  };
+}
+function doSyncEncryptAndDecrypt(oldPassword, newPassword, encrypt) {
+  return function (dispatch) {
+    var data = {};
+    return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_hash().then(function (hash) {
+      return lbryio__WEBPACK_IMPORTED_MODULE_1__["default"].call('sync', 'get', {
+        hash: hash
+      }, 'post');
+    }).then(function (syncGetResponse) {
+      data.oldHash = syncGetResponse.hash;
+      return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+        password: oldPassword,
+        data: syncGetResponse.data
+      });
+    }).then(function () {
+      if (encrypt) {
+        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doWalletEncrypt"])(newPassword));
+      } else {
+        dispatch(Object(lbry_redux__WEBPACK_IMPORTED_MODULE_2__["doWalletDecrypt"])());
+      }
+    }).then(function () {
+      return lbry_redux__WEBPACK_IMPORTED_MODULE_2__["Lbry"].sync_apply({
+        password: newPassword
+      });
+    }).then(function (syncApplyResponse) {
+      if (syncApplyResponse.hash !== data.oldHash) {
+        return dispatch(doSetSync(data.oldHash, syncApplyResponse.hash, syncApplyResponse.data));
+      }
+    })["catch"](console.error);
+  };
+}
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doUpdateUploadProgress", function() { return doUpdateUploadProgress; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 
@@ -3460,7 +3862,7 @@ var doUpdateUploadProgress = function doUpdateUploadProgress(progress, params, x
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3502,13 +3904,13 @@ function authReducer() {
 }
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "costInfoReducer", function() { return costInfoReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -3544,7 +3946,7 @@ var costInfoReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3572,14 +3974,14 @@ var handleActions = function handleActions(actionMap, defaultState) {
 };
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "blacklistReducer", function() { return blacklistReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 var _handleActions;
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -3618,14 +4020,14 @@ var blacklistReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_1__["han
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "filteredReducer", function() { return filteredReducer; });
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(24);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(25);
 var _handleActions;
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -3657,13 +4059,13 @@ var filteredReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_1__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "homepageReducer", function() { return homepageReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -3710,13 +4112,13 @@ var homepageReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["hand
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "statsReducer", function() { return statsReducer; });
-/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(24);
+/* harmony import */ var util_redux_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(25);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 var _handleActions;
 
@@ -3775,7 +4177,119 @@ var statsReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["handleA
 }), _handleActions), defaultState);
 
 /***/ }),
-/* 29 */
+/* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "syncReducer", function() { return syncReducer; });
+/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
+var reducers = {};
+var defaultState = {
+  hasSyncedWallet: false,
+  syncHash: null,
+  syncData: null,
+  setSyncErrorMessage: null,
+  getSyncErrorMessage: null,
+  syncApplyErrorMessage: '',
+  syncApplyIsPending: false,
+  syncApplyPasswordError: false,
+  getSyncIsPending: false,
+  setSyncIsPending: false,
+  hashChanged: false
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    getSyncIsPending: true,
+    getSyncErrorMessage: null
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_COMPLETED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    syncHash: action.data.syncHash,
+    syncData: action.data.syncData,
+    hasSyncedWallet: action.data.hasSyncedWallet,
+    getSyncIsPending: false,
+    hashChanged: action.data.hashChanged
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GET_SYNC_FAILED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    getSyncIsPending: false,
+    getSyncErrorMessage: action.data.error
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    setSyncIsPending: true,
+    setSyncErrorMessage: null
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_FAILED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    setSyncIsPending: false,
+    setSyncErrorMessage: action.data.error
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SET_SYNC_COMPLETED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    setSyncIsPending: false,
+    setSyncErrorMessage: null,
+    hasSyncedWallet: true,
+    // sync was successful, so the user has a synced wallet at this point
+    syncHash: action.data.syncHash
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_STARTED"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyPasswordError: false,
+    syncApplyIsPending: true,
+    syncApplyErrorMessage: ''
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_COMPLETED"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: ''
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_FAILED"]] = function (state, action) {
+  return Object.assign({}, state, {
+    syncApplyIsPending: false,
+    syncApplyErrorMessage: action.data.error
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_APPLY_BAD_PASSWORD"]] = function (state) {
+  return Object.assign({}, state, {
+    syncApplyPasswordError: true
+  });
+};
+
+reducers[constants_action_types__WEBPACK_IMPORTED_MODULE_0__["SYNC_RESET"]] = function () {
+  return defaultState;
+};
+
+function syncReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  var handler = reducers[action.type];
+  if (handler) return handler(state, action);
+  return state;
+}
+
+/***/ }),
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3843,14 +4357,14 @@ function webReducer() {
 }
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectAuthToken", function() { return selectAuthToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectIsAuthenticating", function() { return selectIsAuthenticating; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -3866,7 +4380,7 @@ var selectIsAuthenticating = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["creat
 });
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3997,7 +4511,7 @@ function createStructuredSelector(selectors) {
 }
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4007,7 +4521,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectCostInfoForUri", function() { return makeSelectCostInfoForUri; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingCostInfo", function() { return selectFetchingCostInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectFetchingCostInfoForUri", function() { return makeSelectFetchingCostInfoForUri; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 var selectState = function selectState(state) {
@@ -4031,7 +4545,7 @@ var makeSelectFetchingCostInfoForUri = function makeSelectFetchingCostInfoForUri
 };
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4039,7 +4553,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlackListedOutpoints", function() { return selectBlackListedOutpoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return selectBlacklistedOutpointMap; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -4060,7 +4574,7 @@ var selectBlacklistedOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__[
 });
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4068,7 +4582,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectState", function() { return selectState; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpoints", function() { return selectFilteredOutpoints; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return selectFilteredOutpointMap; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
@@ -4089,7 +4603,7 @@ var selectFilteredOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["cr
 });
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4098,7 +4612,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingFeaturedUris", function() { return selectFetchingFeaturedUris; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectTrendingUris", function() { return selectTrendingUris; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return selectFetchingTrendingUris; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
@@ -4120,7 +4634,7 @@ var selectFetchingTrendingUris = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
 });
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4129,7 +4643,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSubCount", function() { return selectSubCount; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return makeSelectViewCountForUri; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return makeSelectSubCountForUri; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
 /* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
@@ -4158,14 +4672,73 @@ var makeSelectSubCountForUri = function makeSelectSubCountForUri(uri) {
 };
 
 /***/ }),
-/* 37 */
+/* 39 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHasSyncedWallet", function() { return selectHasSyncedWallet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncHash", function() { return selectSyncHash; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncData", function() { return selectSyncData; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncErrorMessage", function() { return selectSetSyncErrorMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncErrorMessage", function() { return selectGetSyncErrorMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectGetSyncIsPending", function() { return selectGetSyncIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSetSyncIsPending", function() { return selectSetSyncIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectHashChanged", function() { return selectHashChanged; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyIsPending", function() { return selectSyncApplyIsPending; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyErrorMessage", function() { return selectSyncApplyErrorMessage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectSyncApplyPasswordError", function() { return selectSyncApplyPasswordError; });
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var selectState = function selectState(state) {
+  return state.sync || {};
+};
+
+var selectHasSyncedWallet = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.hasSyncedWallet;
+});
+var selectSyncHash = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncHash;
+});
+var selectSyncData = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncData;
+});
+var selectSetSyncErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.setSyncErrorMessage;
+});
+var selectGetSyncErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.getSyncErrorMessage;
+});
+var selectGetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.getSyncIsPending;
+});
+var selectSetSyncIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.setSyncIsPending;
+});
+var selectHashChanged = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.hashChanged;
+});
+var selectSyncApplyIsPending = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyIsPending;
+});
+var selectSyncApplyErrorMessage = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyErrorMessage;
+});
+var selectSyncApplyPasswordError = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectState, function (state) {
+  return state.syncApplyPasswordError;
+});
+
+/***/ }),
+/* 40 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectCurrentUploads", function() { return selectCurrentUploads; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectUploadCount", function() { return selectUploadCount; });
-/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(31);
+/* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
 
 
