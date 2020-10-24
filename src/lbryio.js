@@ -11,6 +11,7 @@ const Lbryio = {
 };
 
 const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
+const INTERNAL_APIS_DOWN = 'internal_apis_down';
 
 // We can't use env's because they aren't passed into node_modules
 Lbryio.setLocalApi = endpoint => {
@@ -30,16 +31,22 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
     if (response.status >= 200 && response.status < 300) {
       return response.json();
     }
-    return response.json().then(json => {
-      let error;
-      if (json.error) {
-        error = new Error(json.error);
-      } else {
-        error = new Error('Unknown API error signature');
-      }
-      error.response = response; // This is primarily a hack used in actions/user.js
-      return Promise.reject(error);
-    });
+
+    if (response.status === 500) {
+      return Promise.reject(INTERNAL_APIS_DOWN);
+    }
+
+    if (response)
+      return response.json().then(json => {
+        let error;
+        if (json.error) {
+          error = new Error(json.error);
+        } else {
+          error = new Error('Unknown API error signature');
+        }
+        error.response = response; // This is primarily a hack used in actions/user.js
+        return Promise.reject(error);
+      });
   }
 
   function makeRequest(url, options) {
@@ -129,7 +136,13 @@ Lbryio.authenticate = () => {
           // check that token works
           return Lbryio.getCurrentUser()
             .then(user => user)
-            .catch(() => false);
+            .catch(error => {
+              if (error === INTERNAL_APIS_DOWN) {
+                throw new Error('Internal APIS down');
+              }
+
+              return false;
+            });
         })
         .then(user => {
           if (user) {

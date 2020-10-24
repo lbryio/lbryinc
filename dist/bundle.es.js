@@ -214,7 +214,8 @@ const Lbryio = {
   exchangeLastFetched: null,
   CONNECTION_STRING: 'https://api.lbry.com/'
 };
-const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000; // We can't use env's because they aren't passed into node_modules
+const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
+const INTERNAL_APIS_DOWN = 'internal_apis_down'; // We can't use env's because they aren't passed into node_modules
 
 Lbryio.setLocalApi = endpoint => {
   Lbryio.CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
@@ -234,7 +235,11 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
       return response.json();
     }
 
-    return response.json().then(json => {
+    if (response.status === 500) {
+      return Promise.reject(INTERNAL_APIS_DOWN);
+    }
+
+    if (response) return response.json().then(json => {
       let error;
 
       if (json.error) {
@@ -337,7 +342,13 @@ Lbryio.authenticate = () => {
         } // check that token works
 
 
-        return Lbryio.getCurrentUser().then(user => user).catch(() => false);
+        return Lbryio.getCurrentUser().then(user => user).catch(error => {
+          if (error === INTERNAL_APIS_DOWN) {
+            throw new Error('Internal APIS down');
+          }
+
+          return false;
+        });
       }).then(user => {
         if (user) {
           return user;
