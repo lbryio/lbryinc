@@ -628,7 +628,7 @@ Lbryio.getCurrentUser = function () {
   return Lbryio.call('user', 'me');
 };
 
-Lbryio.authenticate = function () {
+Lbryio.authenticate = function (domain) {
   if (!Lbryio.enabled) {
     return new Promise(function (resolve) {
       resolve({
@@ -666,10 +666,11 @@ Lbryio.authenticate = function () {
 
         return lbry_redux__WEBPACK_IMPORTED_MODULE_1__["Lbry"].status().then(function (status) {
           return new Promise(function (res, rej) {
+            var appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
             Lbryio.call('user', 'new', {
               auth_token: '',
               language: 'en',
-              app_id: status.installation_id
+              app_id: appId
             }, 'post').then(function (response) {
               if (!response.auth_token) {
                 throw new Error('auth_token was not set in the response');

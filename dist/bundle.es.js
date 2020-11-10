@@ -320,7 +320,7 @@ Lbryio.getAuthToken = () => new Promise(resolve => {
 
 Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
 
-Lbryio.authenticate = () => {
+Lbryio.authenticate = domain => {
   if (!Lbryio.enabled) {
     return new Promise(resolve => {
       resolve({
@@ -355,10 +355,11 @@ Lbryio.authenticate = () => {
         }
 
         return lbryRedux.Lbry.status().then(status => new Promise((res, rej) => {
+          const appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
           Lbryio.call('user', 'new', {
             auth_token: '',
             language: 'en',
-            app_id: status.installation_id
+            app_id: appId
           }, 'post').then(response => {
             if (!response.auth_token) {
               throw new Error('auth_token was not set in the response');
