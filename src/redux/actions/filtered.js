@@ -35,7 +35,7 @@ export function doFetchFilteredOutpoints() {
       });
     };
 
-    Lbryio.call('file', 'list_filtered').then(success, failure);
+    Lbryio.call('file', 'list_filtered', { auth_token: '' }).then(success, failure);
   };
 }
 

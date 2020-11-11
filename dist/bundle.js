@@ -3272,7 +3272,9 @@ function doFetchBlackListedOutpoints() {
       });
     };
 
-    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('file', 'list_blocked').then(success, failure);
+    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('file', 'list_blocked', {
+      auth_token: ''
+    }).then(success, failure);
   };
 }
 function doBlackListedOutpointsSubscribe() {
@@ -3347,7 +3349,9 @@ function doFetchFilteredOutpoints() {
       });
     };
 
-    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('file', 'list_filtered').then(success, failure);
+    lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('file', 'list_filtered', {
+      auth_token: ''
+    }).then(success, failure);
   };
 }
 function doFilteredOutpointsSubscribe() {

@@ -38,7 +38,9 @@ export function doFetchBlackListedOutpoints() {
       });
     };
 
-    Lbryio.call('file', 'list_blocked').then(success, failure);
+    Lbryio.call('file', 'list_blocked', {
+      auth_token: '',
+    }).then(success, failure);
   };
 }
 

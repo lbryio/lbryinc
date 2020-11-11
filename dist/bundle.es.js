@@ -617,7 +617,9 @@ function doFetchBlackListedOutpoints() {
       });
     };
 
-    Lbryio.call('file', 'list_blocked').then(success, failure);
+    Lbryio.call('file', 'list_blocked', {
+      auth_token: ''
+    }).then(success, failure);
   };
 }
 function doBlackListedOutpointsSubscribe() {
@@ -668,7 +670,9 @@ function doFetchFilteredOutpoints() {
       });
     };
 
-    Lbryio.call('file', 'list_filtered').then(success, failure);
+    Lbryio.call('file', 'list_filtered', {
+      auth_token: ''
+    }).then(success, failure);
   };
 }
 function doFilteredOutpointsSubscribe() {
