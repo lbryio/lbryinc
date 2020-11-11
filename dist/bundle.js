@@ -628,17 +628,18 @@ Lbryio.getCurrentUser = function () {
   return Lbryio.call('user', 'me');
 };
 
-Lbryio.authenticate = function (domain) {
+Lbryio.authenticate = function (domain, language) {
   if (!Lbryio.enabled) {
+    var params = {
+      id: 1,
+      primary_email: 'disabled@lbry.io',
+      has_verified_email: true,
+      is_identity_verified: true,
+      is_reward_approved: false,
+      language: language || 'en'
+    };
     return new Promise(function (resolve) {
-      resolve({
-        id: 1,
-        language: 'en',
-        primary_email: 'disabled@lbry.io',
-        has_verified_email: true,
-        is_identity_verified: true,
-        is_reward_approved: false
-      });
+      resolve(params);
     });
   }
 
@@ -669,7 +670,7 @@ Lbryio.authenticate = function (domain) {
             var appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
             Lbryio.call('user', 'new', {
               auth_token: '',
-              language: 'en',
+              language: language || 'en',
               app_id: appId
             }, 'post').then(function (response) {
               if (!response.auth_token) {

@@ -320,17 +320,18 @@ Lbryio.getAuthToken = () => new Promise(resolve => {
 
 Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
 
-Lbryio.authenticate = domain => {
+Lbryio.authenticate = (domain, language) => {
   if (!Lbryio.enabled) {
+    const params = {
+      id: 1,
+      primary_email: 'disabled@lbry.io',
+      has_verified_email: true,
+      is_identity_verified: true,
+      is_reward_approved: false,
+      language: language || 'en'
+    };
     return new Promise(resolve => {
-      resolve({
-        id: 1,
-        language: 'en',
-        primary_email: 'disabled@lbry.io',
-        has_verified_email: true,
-        is_identity_verified: true,
-        is_reward_approved: false
-      });
+      resolve(params);
     });
   }
 
@@ -358,7 +359,7 @@ Lbryio.authenticate = domain => {
           const appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
           Lbryio.call('user', 'new', {
             auth_token: '',
-            language: 'en',
+            language: language || 'en',
             app_id: appId
           }, 'post').then(response => {
             if (!response.auth_token) {
