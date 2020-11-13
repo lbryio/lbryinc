@@ -111,17 +111,19 @@ Lbryio.getAuthToken = () =>
 
 Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
 
-Lbryio.authenticate = domain => {
+Lbryio.authenticate = (domain, language) => {
   if (!Lbryio.enabled) {
+    const params = {
+      id: 1,
+      primary_email: 'disabled@lbry.io',
+      has_verified_email: true,
+      is_identity_verified: true,
+      is_reward_approved: false,
+      language: language || 'en',
+    };
+
     return new Promise(resolve => {
-      resolve({
-        id: 1,
-        language: 'en',
-        primary_email: 'disabled@lbry.io',
-        has_verified_email: true,
-        is_identity_verified: true,
-        is_reward_approved: false,
-      });
+      resolve(params);
     });
   }
 
@@ -162,7 +164,7 @@ Lbryio.authenticate = domain => {
                     'new',
                     {
                       auth_token: '',
-                      language: 'en',
+                      language: language || 'en',
                       app_id: appId,
                     },
                     'post'
