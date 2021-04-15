@@ -4577,10 +4577,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectBlacklistedOutpointMap", function() { return selectBlacklistedOutpointMap; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 var selectState = function selectState(state) {
   return state.blacklist || {};
@@ -4591,7 +4587,8 @@ var selectBlackListedOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["c
 var selectBlacklistedOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectBlackListedOutpoints, function (outpoints) {
   return outpoints ? outpoints.reduce(function (acc, val) {
     var outpoint = "".concat(val.txid, ":").concat(val.nout);
-    return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
+    acc[outpoint] = 1;
+    return acc;
   }, {}) : {};
 });
 
@@ -4606,10 +4603,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectFilteredOutpointMap", function() { return selectFilteredOutpointMap; });
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(33);
 /* harmony import */ var reselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(reselect__WEBPACK_IMPORTED_MODULE_0__);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 var selectState = function selectState(state) {
   return state.filtered || {};
@@ -4620,7 +4613,8 @@ var selectFilteredOutpoints = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["crea
 var selectFilteredOutpointMap = Object(reselect__WEBPACK_IMPORTED_MODULE_0__["createSelector"])(selectFilteredOutpoints, function (outpoints) {
   return outpoints ? outpoints.reduce(function (acc, val) {
     var outpoint = "".concat(val.txid, ":").concat(val.nout);
-    return _objectSpread({}, acc, _defineProperty({}, outpoint, 1));
+    acc[outpoint] = 1;
+    return acc;
   }, {}) : {};
 });
 

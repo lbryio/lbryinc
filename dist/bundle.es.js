@@ -1499,18 +1499,16 @@ const selectState$2 = state => state.blacklist || {};
 const selectBlackListedOutpoints = reselect.createSelector(selectState$2, state => state.blackListedOutpoints);
 const selectBlacklistedOutpointMap = reselect.createSelector(selectBlackListedOutpoints, outpoints => outpoints ? outpoints.reduce((acc, val) => {
   const outpoint = `${val.txid}:${val.nout}`;
-  return { ...acc,
-    [outpoint]: 1
-  };
+  acc[outpoint] = 1;
+  return acc;
 }, {}) : {});
 
 const selectState$3 = state => state.filtered || {};
 const selectFilteredOutpoints = reselect.createSelector(selectState$3, state => state.filteredOutpoints);
 const selectFilteredOutpointMap = reselect.createSelector(selectFilteredOutpoints, outpoints => outpoints ? outpoints.reduce((acc, val) => {
   const outpoint = `${val.txid}:${val.nout}`;
-  return { ...acc,
-    [outpoint]: 1
-  };
+  acc[outpoint] = 1;
+  return acc;
 }, {}) : {});
 
 const selectState$4 = state => state.homepage || {};
