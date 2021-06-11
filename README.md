@@ -17,6 +17,9 @@ yarn link lbryinc
 ### Build
 Run `$ yarn build`. If the symlink does not work, just build the file and move the `bundle.js` file in to the `node_modules/` folder.
 
+### Automatic rebuild
+To have the code automatically rebuild upon changes you can run `$ yarn dev` which will use `rollup` to watch the files and build upon detection of updated source code.
+
 ## License
 
 [MIT © LBRY](LICENSE)
