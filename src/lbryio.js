@@ -10,6 +10,7 @@ const Lbryio = {
   CONNECTION_STRING: 'https://api.lbry.com/',
 };
 
+// 20 minute exchange rate timeout
 const EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
 const INTERNAL_APIS_DOWN = 'internal_apis_down';
 
@@ -18,43 +19,57 @@ Lbryio.setLocalApi = endpoint => {
   Lbryio.CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
 };
 
+function checkAndParse(response) {
+  if (response.status >= 200 && response.status < 300) {
+    return response.json();
+  }
+
+  if (response.status === 500) {
+    return Promise.reject(INTERNAL_APIS_DOWN);
+  }
+
+  if (response)
+    return response.json().then(json => {
+      let error;
+      if (json.error) {
+        error = new Error(json.error);
+      } else {
+        error = new Error('Unknown API error signature');
+      }
+      error.response = response; // This is primarily a hack used in actions/user.js
+      return Promise.reject(error);
+    });
+}
+
+function makeRequest(url, options) {
+  return fetch(url, options).then(checkAndParse);
+}
+
+/**
+ * Call a Lbry API method
+ *
+ * @param {string} resource - resource value (me/lbc/customer/account/etc.)
+ * @param {string} action - the subresource (aka for customer: status/link)
+ * @param {object || string} params - used to build querystring for fetch (default {})
+ * @param {string} method - 'get' or 'post' (default - get)
+ * @returns {string} returns response.data returned by the API
+ */
 Lbryio.call = (resource, action, params = {}, method = 'get') => {
+  // reject promise if API disabled
   if (!Lbryio.enabled) {
     return Promise.reject(new Error(__('LBRY internal API is disabled')));
   }
 
+  // only allow get or post requests
   if (!(method === 'get' || method === 'post')) {
     return Promise.reject(new Error(__('Invalid method')));
   }
 
-  function checkAndParse(response) {
-    if (response.status >= 200 && response.status < 300) {
-      return response.json();
-    }
-
-    if (response.status === 500) {
-      return Promise.reject(INTERNAL_APIS_DOWN);
-    }
-
-    if (response)
-      return response.json().then(json => {
-        let error;
-        if (json.error) {
-          error = new Error(json.error);
-        } else {
-          error = new Error('Unknown API error signature');
-        }
-        error.response = response; // This is primarily a hack used in actions/user.js
-        return Promise.reject(error);
-      });
-  }
-
-  function makeRequest(url, options) {
-    return fetch(url, options).then(checkAndParse);
-  }
-
+  // get auth token and build request to be called via fetch
   return Lbryio.getAuthToken().then(token => {
+    // add auth token to params
     const fullParams = { auth_token: token, ...params };
+    // stringify param values
     Object.keys(fullParams).forEach(key => {
       const value = fullParams[key];
       if (typeof value === 'object') {
@@ -62,16 +77,21 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
       }
     });
 
+    // build querystring for fetch
     const qs = querystring.stringify(fullParams);
+    // build url for fetch
     let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
 
+    // set method to GET (changed to POST if applicable later)
     let options = {
       method: 'GET',
     };
 
+    // build post request for fetch
     if (method === 'post') {
       options = {
         method: 'POST',
+        // send as a form encoded url with query string
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -80,20 +100,29 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
       url = `${Lbryio.CONNECTION_STRING}${resource}/${action}`;
     }
 
+    // make request per url and options and return response.data
     return makeRequest(url, options).then(response => response.data);
   });
 };
 
 Lbryio.authToken = null;
 
+/**
+ * Get user auth token, either stored on the window, or via a request to the API
+ *
+ * @returns {string} returns user's auth token
+ */
 Lbryio.getAuthToken = () =>
   new Promise(resolve => {
+    // if authToken already saved on Lbryio object, return it
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
+      // if there is an override, use that to get token
     } else if (Lbryio.overrides.getAuthToken) {
       Lbryio.overrides.getAuthToken().then(token => {
         resolve(token);
       });
+      // if the window is already defined, get token from there
     } else if (typeof window !== 'undefined') {
       const { store } = window;
       if (store) {
@@ -102,9 +131,10 @@ Lbryio.getAuthToken = () =>
         Lbryio.authToken = token;
         resolve(token);
       }
-
+      // if everything whifs, return null
       resolve(null);
     } else {
+      // return null if nothing above worked
       resolve(null);
     }
   });
@@ -235,4 +265,13 @@ Lbryio.setOverride = (methodName, newMethod) => {
   Lbryio.overrides[methodName] = newMethod;
 };
 
+function getCustomerStatus() {
+  const response = Lbryio.call('account', 'status', {}, 'post');
+
+  console.log(response);
+}
+
+setTimeout(() => {
+  getCustomerStatus();
+}, 1000 * 5);
 export default Lbryio;
