@@ -210,6 +210,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectFetchingTrendingUris", function() { return redux_selectors_homepage__WEBPACK_IMPORTED_MODULE_25__["selectFetchingTrendingUris"]; });
 
 /* harmony import */ var redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(38);
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "selectViewCount", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["selectViewCount"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectViewCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectViewCountForUri"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "makeSelectSubCountForUri", function() { return redux_selectors_stats__WEBPACK_IMPORTED_MODULE_26__["makeSelectSubCountForUri"]; });
@@ -3476,20 +3478,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1);
 
 
-var doFetchViewCount = function doFetchViewCount(claimId) {
+var doFetchViewCount = function doFetchViewCount(claimIdCsv) {
   return function (dispatch) {
     dispatch({
       type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_VIEW_COUNT_STARTED"]
     });
     return lbryio__WEBPACK_IMPORTED_MODULE_0__["default"].call('file', 'view_count', {
-      claim_id: claimId
+      claim_id: claimIdCsv
     }).then(function (result) {
-      var viewCount = result[0];
+      var viewCounts = result;
       dispatch({
         type: constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_VIEW_COUNT_COMPLETED"],
         data: {
-          claimId: claimId,
-          viewCount: viewCount
+          claimIdCsv: claimIdCsv,
+          viewCounts: viewCounts
         }
       });
     })["catch"](function (error) {
@@ -4168,10 +4170,16 @@ var statsReducer = Object(util_redux_utils__WEBPACK_IMPORTED_MODULE_0__["handleA
   });
 }), _defineProperty(_handleActions, constants_action_types__WEBPACK_IMPORTED_MODULE_1__["FETCH_VIEW_COUNT_COMPLETED"], function (state, action) {
   var _action$data = action.data,
-      claimId = _action$data.claimId,
-      viewCount = _action$data.viewCount;
+      claimIdCsv = _action$data.claimIdCsv,
+      viewCounts = _action$data.viewCounts;
+  var viewCountById = Object.assign({}, state.viewCountById);
+  var claimIds = claimIdCsv.split(',');
 
-  var viewCountById = _objectSpread({}, state.viewCountById, _defineProperty({}, claimId, viewCount));
+  if (claimIds.length === viewCounts.length) {
+    claimIds.forEach(function (claimId, index) {
+      viewCountById[claimId] = viewCounts[index];
+    });
+  }
 
   return _objectSpread({}, state, {
     fetchingViewCount: false,

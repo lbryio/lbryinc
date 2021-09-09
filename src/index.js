@@ -58,7 +58,11 @@ export {
   selectTrendingUris,
   selectFetchingTrendingUris,
 } from 'redux/selectors/homepage';
-export { makeSelectViewCountForUri, makeSelectSubCountForUri } from 'redux/selectors/stats';
+export {
+  selectViewCount,
+  makeSelectViewCountForUri,
+  makeSelectSubCountForUri,
+} from 'redux/selectors/stats';
 export {
   selectHasSyncedWallet,
   selectSyncData,

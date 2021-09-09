@@ -18,9 +18,17 @@ export const statsReducer = handleActions(
       viewCountError: action.data,
     }),
     [ACTIONS.FETCH_VIEW_COUNT_COMPLETED]: (state, action) => {
-      const { claimId, viewCount } = action.data;
+      const { claimIdCsv, viewCounts } = action.data;
 
-      const viewCountById = { ...state.viewCountById, [claimId]: viewCount };
+      const viewCountById = Object.assign({}, state.viewCountById);
+      const claimIds = claimIdCsv.split(',');
+
+      if (claimIds.length === viewCounts.length) {
+        claimIds.forEach((claimId, index) => {
+          viewCountById[claimId] = viewCounts[index];
+        });
+      }
+
       return {
         ...state,
         fetchingViewCount: false,

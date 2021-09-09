@@ -759,19 +759,19 @@ function doFetchTrendingUris() {
 }
 
 //      
-const doFetchViewCount = claimId => dispatch => {
+const doFetchViewCount = claimIdCsv => dispatch => {
   dispatch({
     type: FETCH_VIEW_COUNT_STARTED
   });
   return Lbryio.call('file', 'view_count', {
-    claim_id: claimId
+    claim_id: claimIdCsv
   }).then(result => {
-    const viewCount = result[0];
+    const viewCounts = result;
     dispatch({
       type: FETCH_VIEW_COUNT_COMPLETED,
       data: {
-        claimId,
-        viewCount
+        claimIdCsv,
+        viewCounts
       }
     });
   }).catch(error => {
@@ -1318,12 +1318,18 @@ const statsReducer = handleActions({
   }),
   [FETCH_VIEW_COUNT_COMPLETED]: (state, action) => {
     const {
-      claimId,
-      viewCount
+      claimIdCsv,
+      viewCounts
     } = action.data;
-    const viewCountById = { ...state.viewCountById,
-      [claimId]: viewCount
-    };
+    const viewCountById = Object.assign({}, state.viewCountById);
+    const claimIds = claimIdCsv.split(',');
+
+    if (claimIds.length === viewCounts.length) {
+      claimIds.forEach((claimId, index) => {
+        viewCountById[claimId] = viewCounts[index];
+      });
+    }
+
     return { ...state,
       fetchingViewCount: false,
       viewCountById
@@ -1599,6 +1605,7 @@ exports.selectSyncData = selectSyncData;
 exports.selectSyncHash = selectSyncHash;
 exports.selectTrendingUris = selectTrendingUris;
 exports.selectUploadCount = selectUploadCount;
+exports.selectViewCount = selectViewCount;
 exports.statsReducer = statsReducer;
 exports.syncReducer = syncReducer;
 exports.webReducer = webReducer;
