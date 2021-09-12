@@ -52,9 +52,33 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
   function makeRequest(url, options) {
     return fetch(url, options).then(checkAndParse);
   }
+  // TOKENS = { auth_token, access_token }
+  return Lbryio.getTokens().then(tokens => {
+    // string -=> { auth_token: xyz, authorization: abc }
+    console.log('LBRYIO CALL TOKEN', tokens);
+    const fullParams = { ...params };
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
 
-  return Lbryio.getAuthToken().then(token => {
-    const fullParams = { auth_token: token, ...params };
+    // TODO refactor this
+    // Send both tokens to userMe
+    // find a way to trigger deleting auth token after success
+    if (action === 'me') {
+      if (tokens && tokens.access_token) {
+        headers.Authorization = 'Bearer ' + tokens.access_token;
+      }
+      if (tokens && tokens.auth_token) {
+        fullParams.auth_token = tokens.auth_token;
+      }
+    } else {
+      if (tokens && tokens.access_token) {
+        headers.Authorization = 'Bearer ' + tokens.access_token;
+      } else {
+        fullParams.auth_token = tokens.auth_token;
+      }
+    }
+
     Object.keys(fullParams).forEach(key => {
       const value = fullParams[key];
       if (typeof value === 'object') {
@@ -67,14 +91,13 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 
     let options = {
       method: 'GET',
+      headers,
     };
 
     if (method === 'post') {
       options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers,
         body: qs,
       };
       url = `${Lbryio.CONNECTION_STRING}${resource}/${action}`;
@@ -85,32 +108,63 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 };
 
 Lbryio.authToken = null;
-
 Lbryio.getAuthToken = () =>
   new Promise(resolve => {
     if (Lbryio.authToken) {
       resolve(Lbryio.authToken);
-    } else if (Lbryio.overrides.getAuthToken) {
+    } else {
       Lbryio.overrides.getAuthToken().then(token => {
+        // now { auth_token: <token>, authorization: <token> }
+        Lbryio.authTokens = token;
         resolve(token);
       });
-    } else if (typeof window !== 'undefined') {
-      const { store } = window;
-      if (store) {
-        const state = store.getState();
-        const token = state.auth ? state.auth.authToken : null;
-        Lbryio.authToken = token;
-        resolve(token);
-      }
-
-      resolve(null);
-    } else {
-      resolve(null);
     }
   });
 
+Lbryio.getTokens = () => new Promise(resolve => {
+  Lbryio.overrides.getTokens().then(tokens => {
+    resolve(tokens);
+  });
+});
+
 Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
 
+// const getAppId =
+// Lbryio.getUserNew = (options) => {
+//   const { language, appId, auth_token, authorization } = options;
+//   Lbryio.call(
+//   'user',
+//   'new',
+//   {
+//     auth_token: '',
+//     language: language || 'en',
+//     app_id: appId,
+//   },
+//   'post'
+// )}
+
+/**
+ *  LBRYIO.AUTHENTICATE()
+ * @param domain
+ * @param language
+ * @returns {null|Promise<any>}
+ *
+ * returns user object.
+ * gets current token,
+ *  then if so, gets current user using lbryio.userMe()
+ *  otherwise calls lbryio.userNew() (with some Lbry.status info)
+ *    then sets the authtoken, and returns the user.
+ *
+ * What it actually needs to do is...
+ * 1) GetAuthTokens( < get tokens from both keycloak and auth_token > )
+ *  a) have auth_token
+ *  b) have sso access token
+ * 2) Get User Object
+ *  a) access - get user for access token
+ *  b) auth_token - get user for auth_token
+ *  b)
+ * If <user>
+ */
 Lbryio.authenticate = (domain, language) => {
   if (!Lbryio.enabled) {
     const params = {
@@ -129,9 +183,10 @@ Lbryio.authenticate = (domain, language) => {
 
   if (Lbryio.authenticationPromise === null) {
     Lbryio.authenticationPromise = new Promise((resolve, reject) => {
-      Lbryio.getAuthToken()
+      // see if we already have a token
+      Lbryio.getTokens()
         .then(token => {
-          if (!token || token.length > 60) {
+          if (!token) {
             return false;
           }
 
@@ -174,17 +229,18 @@ Lbryio.authenticate = (domain, language) => {
                         throw new Error('auth_token was not set in the response');
                       }
 
-                      const { store } = window;
-                      if (Lbryio.overrides.setAuthToken) {
-                        Lbryio.overrides.setAuthToken(response.auth_token);
-                      }
+                      // const { store } = window;
+                      // Not setting new "auth_tokens"
+                      // if (Lbryio.overrides.setAuthToken) {
+                      //   Lbryio.overrides.setAuthToken(response.auth_token);
+                      // }
 
-                      if (store) {
-                        store.dispatch({
-                          type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
-                          data: { authToken: response.auth_token },
-                        });
-                      }
+                      // if (store) {
+                      //   store.dispatch({
+                      //     type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+                      //     data: { authToken: response.auth_token },
+                      //   });
+                      // }
                       Lbryio.authToken = response.auth_token;
                       return res(response);
                     })

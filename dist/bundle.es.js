@@ -260,13 +260,36 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 
   function makeRequest(url, options) {
     return fetch(url, options).then(checkAndParse);
-  }
+  } // TOKENS = { auth_token, access_token }
 
-  return Lbryio.getAuthToken().then(token => {
-    const fullParams = {
-      auth_token: token,
-      ...params
+
+  return Lbryio.getTokens().then(tokens => {
+    // string -=> { auth_token: xyz, authorization: abc }
+    console.log('LBRYIO CALL TOKEN', tokens);
+    const fullParams = { ...params
     };
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }; // TODO refactor this
+    // Send both tokens to userMe
+    // find a way to trigger deleting auth token after success
+
+    if (action === 'me') {
+      if (tokens && tokens.access_token) {
+        headers.Authorization = 'Bearer ' + tokens.access_token;
+      }
+
+      if (tokens && tokens.auth_token) {
+        fullParams.auth_token = tokens.auth_token;
+      }
+    } else {
+      if (tokens && tokens.access_token) {
+        headers.Authorization = 'Bearer ' + tokens.access_token;
+      } else {
+        fullParams.auth_token = tokens.auth_token;
+      }
+    }
+
     Object.keys(fullParams).forEach(key => {
       const value = fullParams[key];
 
@@ -277,15 +300,14 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
     const qs = querystring.stringify(fullParams);
     let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
     let options = {
-      method: 'GET'
+      method: 'GET',
+      headers
     };
 
     if (method === 'post') {
       options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        headers,
         body: qs
       };
       url = `${Lbryio.CONNECTION_STRING}${resource}/${action}`;
@@ -300,29 +322,60 @@ Lbryio.authToken = null;
 Lbryio.getAuthToken = () => new Promise(resolve => {
   if (Lbryio.authToken) {
     resolve(Lbryio.authToken);
-  } else if (Lbryio.overrides.getAuthToken) {
+  } else {
     Lbryio.overrides.getAuthToken().then(token => {
+      // now { auth_token: <token>, authorization: <token> }
+      Lbryio.authTokens = token;
       resolve(token);
     });
-  } else if (typeof window !== 'undefined') {
-    const {
-      store
-    } = window;
-
-    if (store) {
-      const state = store.getState();
-      const token = state.auth ? state.auth.authToken : null;
-      Lbryio.authToken = token;
-      resolve(token);
-    }
-
-    resolve(null);
-  } else {
-    resolve(null);
   }
 });
 
-Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
+Lbryio.getTokens = () => new Promise(resolve => {
+  Lbryio.overrides.getTokens().then(tokens => {
+    resolve(tokens);
+  });
+});
+
+Lbryio.getCurrentUser = () => Lbryio.call('user', 'me'); // const getAppId =
+
+
+Lbryio.getUserNew = options => {
+  const {
+    language,
+    appId,
+    auth_token,
+    authorization
+  } = options;
+  Lbryio.call('user', 'new', {
+    auth_token: '',
+    language: language || 'en',
+    app_id: appId
+  }, 'post');
+};
+/**
+ *  LBRYIO.AUTHENTICATE()
+ * @param domain
+ * @param language
+ * @returns {null|Promise<any>}
+ *
+ * returns user object.
+ * gets current token,
+ *  then if so, gets current user using lbryio.userMe()
+ *  otherwise calls lbryio.userNew() (with some Lbry.status info)
+ *    then sets the authtoken, and returns the user.
+ *
+ * What it actually needs to do is...
+ * 1) GetAuthTokens( < get tokens from both keycloak and auth_token > )
+ *  a) have auth_token
+ *  b) have sso access token
+ * 2) Get User Object
+ *  a) access - get user for access token
+ *  b) auth_token - get user for auth_token
+ *  b)
+ * If <user>
+ */
+
 
 Lbryio.authenticate = (domain, language) => {
   if (!Lbryio.enabled) {
@@ -341,8 +394,9 @@ Lbryio.authenticate = (domain, language) => {
 
   if (Lbryio.authenticationPromise === null) {
     Lbryio.authenticationPromise = new Promise((resolve, reject) => {
+      // see if we already have a token
       Lbryio.getAuthToken().then(token => {
-        if (!token || token.length > 60) {
+        if (!token) {
           return false;
         } // check that token works
 
@@ -368,24 +422,18 @@ Lbryio.authenticate = (domain, language) => {
           }, 'post').then(response => {
             if (!response.auth_token) {
               throw new Error('auth_token was not set in the response');
-            }
+            } // const { store } = window;
+            // Not setting new "auth_tokens"
+            // if (Lbryio.overrides.setAuthToken) {
+            //   Lbryio.overrides.setAuthToken(response.auth_token);
+            // }
+            // if (store) {
+            //   store.dispatch({
+            //     type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+            //     data: { authToken: response.auth_token },
+            //   });
+            // }
 
-            const {
-              store
-            } = window;
-
-            if (Lbryio.overrides.setAuthToken) {
-              Lbryio.overrides.setAuthToken(response.auth_token);
-            }
-
-            if (store) {
-              store.dispatch({
-                type: GENERATE_AUTH_TOKEN_SUCCESS,
-                data: {
-                  authToken: response.auth_token
-                }
-              });
-            }
 
             Lbryio.authToken = response.auth_token;
             return res(response);
@@ -506,36 +554,6 @@ function doTransifexUpload(contents, project, token, success, fail) {
       return response.text();
     }).then(handleResponse).catch(handleError);
   });
-}
-
-function doGenerateAuthToken(installationId) {
-  return dispatch => {
-    dispatch({
-      type: GENERATE_AUTH_TOKEN_STARTED
-    });
-    Lbryio.call('user', 'new', {
-      auth_token: '',
-      language: 'en',
-      app_id: installationId
-    }, 'post').then(response => {
-      if (!response.auth_token) {
-        dispatch({
-          type: GENERATE_AUTH_TOKEN_FAILURE
-        });
-      } else {
-        dispatch({
-          type: GENERATE_AUTH_TOKEN_SUCCESS,
-          data: {
-            authToken: response.auth_token
-          }
-        });
-      }
-    }).catch(() => {
-      dispatch({
-        type: GENERATE_AUTH_TOKEN_FAILURE
-      });
-    });
-  };
 }
 
 function doFetchCostInfoForUri(uri) {
@@ -1128,31 +1146,6 @@ const doUpdateUploadProgress = (progress, params, xhr) => dispatch => dispatch({
   }
 });
 
-const reducers = {};
-const defaultState = {
-  authenticating: false
-};
-
-reducers[GENERATE_AUTH_TOKEN_FAILURE] = state => Object.assign({}, state, {
-  authToken: null,
-  authenticating: false
-});
-
-reducers[GENERATE_AUTH_TOKEN_STARTED] = state => Object.assign({}, state, {
-  authenticating: true
-});
-
-reducers[GENERATE_AUTH_TOKEN_SUCCESS] = (state, action) => Object.assign({}, state, {
-  authToken: action.data.authToken,
-  authenticating: false
-});
-
-function authReducer(state = defaultState, action) {
-  const handler = reducers[action.type];
-  if (handler) return handler(state, action);
-  return state;
-}
-
 // util for creating reducers
 // based off of redux-actions
 // https://redux-actions.js.org/docs/api/handleAction.html#handleactions
@@ -1170,7 +1163,7 @@ const handleActions = (actionMap, defaultState) => (state = defaultState, action
   return state;
 };
 
-const defaultState$1 = {
+const defaultState = {
   fetching: {},
   byUri: {}
 };
@@ -1199,9 +1192,9 @@ const costInfoReducer = handleActions({
       fetching: newFetching
     };
   }
-}, defaultState$1);
+}, defaultState);
 
-const defaultState$2 = {
+const defaultState$1 = {
   fetchingBlackListedOutpoints: false,
   fetchingBlackListedOutpointsSucceed: undefined,
   blackListedOutpoints: undefined
@@ -1232,9 +1225,9 @@ const blacklistReducer = handleActions({
       fetchingBlackListedOutpointsError: error
     };
   }
-}, defaultState$2);
+}, defaultState$1);
 
-const defaultState$3 = {
+const defaultState$2 = {
   loading: false,
   filteredOutpoints: undefined
 };
@@ -1260,9 +1253,9 @@ const filteredReducer = handleActions({
       fetchingFilteredOutpointsError: error
     };
   }
-}, defaultState$3);
+}, defaultState$2);
 
-const defaultState$4 = {
+const defaultState$3 = {
   fetchingFeaturedContent: false,
   fetchingFeaturedContentFailed: false,
   featuredUris: undefined,
@@ -1299,9 +1292,9 @@ const homepageReducer = handleActions({
       trendingUris: uris
     };
   }
-}, defaultState$4);
+}, defaultState$3);
 
-const defaultState$5 = {
+const defaultState$4 = {
   fetchingViewCount: false,
   viewCountError: undefined,
   viewCountById: {},
@@ -1348,10 +1341,10 @@ const statsReducer = handleActions({
       subCountById
     };
   }
-}, defaultState$5);
+}, defaultState$4);
 
-const reducers$1 = {};
-const defaultState$6 = {
+const reducers = {};
+const defaultState$5 = {
   hasSyncedWallet: false,
   syncHash: null,
   syncData: null,
@@ -1365,12 +1358,12 @@ const defaultState$6 = {
   hashChanged: false
 };
 
-reducers$1[GET_SYNC_STARTED] = state => Object.assign({}, state, {
+reducers[GET_SYNC_STARTED] = state => Object.assign({}, state, {
   getSyncIsPending: true,
   getSyncErrorMessage: null
 });
 
-reducers$1[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
+reducers[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   syncHash: action.data.syncHash,
   syncData: action.data.syncData,
   hasSyncedWallet: action.data.hasSyncedWallet,
@@ -1378,22 +1371,22 @@ reducers$1[GET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   hashChanged: action.data.hashChanged
 });
 
-reducers$1[GET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
+reducers[GET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
   getSyncIsPending: false,
   getSyncErrorMessage: action.data.error
 });
 
-reducers$1[SET_SYNC_STARTED] = state => Object.assign({}, state, {
+reducers[SET_SYNC_STARTED] = state => Object.assign({}, state, {
   setSyncIsPending: true,
   setSyncErrorMessage: null
 });
 
-reducers$1[SET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
+reducers[SET_SYNC_FAILED] = (state, action) => Object.assign({}, state, {
   setSyncIsPending: false,
   setSyncErrorMessage: action.data.error
 });
 
-reducers$1[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
+reducers[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   setSyncIsPending: false,
   setSyncErrorMessage: null,
   hasSyncedWallet: true,
@@ -1401,30 +1394,30 @@ reducers$1[SET_SYNC_COMPLETED] = (state, action) => Object.assign({}, state, {
   syncHash: action.data.syncHash
 });
 
-reducers$1[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
+reducers[SYNC_APPLY_STARTED] = state => Object.assign({}, state, {
   syncApplyPasswordError: false,
   syncApplyIsPending: true,
   syncApplyErrorMessage: ''
 });
 
-reducers$1[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
+reducers[SYNC_APPLY_COMPLETED] = state => Object.assign({}, state, {
   syncApplyIsPending: false,
   syncApplyErrorMessage: ''
 });
 
-reducers$1[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
+reducers[SYNC_APPLY_FAILED] = (state, action) => Object.assign({}, state, {
   syncApplyIsPending: false,
   syncApplyErrorMessage: action.data.error
 });
 
-reducers$1[SYNC_APPLY_BAD_PASSWORD] = state => Object.assign({}, state, {
+reducers[SYNC_APPLY_BAD_PASSWORD] = state => Object.assign({}, state, {
   syncApplyPasswordError: true
 });
 
-reducers$1[SYNC_RESET] = () => defaultState$6;
+reducers[SYNC_RESET] = () => defaultState$5;
 
-function syncReducer(state = defaultState$6, action) {
-  const handler = reducers$1[action.type];
+function syncReducer(state = defaultState$5, action) {
+  const handler = reducers[action.type];
   if (handler) return handler(state, action);
   return state;
 }
@@ -1443,12 +1436,12 @@ test mock:
   },
  */
 
-const reducers$2 = {};
-const defaultState$7 = {
+const reducers$1 = {};
+const defaultState$6 = {
   currentUploads: {}
 };
 
-reducers$2[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
+reducers$1[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
   const {
     progress,
     params,
@@ -1478,77 +1471,71 @@ reducers$2[UPDATE_UPLOAD_PROGRESS] = (state, action) => {
   };
 };
 
-function webReducer(state = defaultState$7, action) {
-  const handler = reducers$2[action.type];
+function webReducer(state = defaultState$6, action) {
+  const handler = reducers$1[action.type];
   if (handler) return handler(state, action);
   return state;
 }
 
-const selectState = state => state.auth || {};
-
-const selectAuthToken = reselect.createSelector(selectState, state => state.authToken);
-const selectIsAuthenticating = reselect.createSelector(selectState, state => state.authenticating);
-
-const selectState$1 = state => state.costInfo || {};
-const selectAllCostInfoByUri = reselect.createSelector(selectState$1, state => state.byUri || {});
+const selectState = state => state.costInfo || {};
+const selectAllCostInfoByUri = reselect.createSelector(selectState, state => state.byUri || {});
 const makeSelectCostInfoForUri = uri => reselect.createSelector(selectAllCostInfoByUri, costInfos => costInfos && costInfos[uri]);
-const selectFetchingCostInfo = reselect.createSelector(selectState$1, state => state.fetching || {});
+const selectFetchingCostInfo = reselect.createSelector(selectState, state => state.fetching || {});
 const makeSelectFetchingCostInfoForUri = uri => reselect.createSelector(selectFetchingCostInfo, fetchingByUri => fetchingByUri && fetchingByUri[uri]);
 
-const selectState$2 = state => state.blacklist || {};
-const selectBlackListedOutpoints = reselect.createSelector(selectState$2, state => state.blackListedOutpoints);
+const selectState$1 = state => state.blacklist || {};
+const selectBlackListedOutpoints = reselect.createSelector(selectState$1, state => state.blackListedOutpoints);
 const selectBlacklistedOutpointMap = reselect.createSelector(selectBlackListedOutpoints, outpoints => outpoints ? outpoints.reduce((acc, val) => {
   const outpoint = `${val.txid}:${val.nout}`;
   acc[outpoint] = 1;
   return acc;
 }, {}) : {});
 
-const selectState$3 = state => state.filtered || {};
-const selectFilteredOutpoints = reselect.createSelector(selectState$3, state => state.filteredOutpoints);
+const selectState$2 = state => state.filtered || {};
+const selectFilteredOutpoints = reselect.createSelector(selectState$2, state => state.filteredOutpoints);
 const selectFilteredOutpointMap = reselect.createSelector(selectFilteredOutpoints, outpoints => outpoints ? outpoints.reduce((acc, val) => {
   const outpoint = `${val.txid}:${val.nout}`;
   acc[outpoint] = 1;
   return acc;
 }, {}) : {});
 
-const selectState$4 = state => state.homepage || {};
+const selectState$3 = state => state.homepage || {};
 
-const selectFeaturedUris = reselect.createSelector(selectState$4, state => state.featuredUris);
-const selectFetchingFeaturedUris = reselect.createSelector(selectState$4, state => state.fetchingFeaturedContent);
-const selectTrendingUris = reselect.createSelector(selectState$4, state => state.trendingUris);
-const selectFetchingTrendingUris = reselect.createSelector(selectState$4, state => state.fetchingTrendingContent);
+const selectFeaturedUris = reselect.createSelector(selectState$3, state => state.featuredUris);
+const selectFetchingFeaturedUris = reselect.createSelector(selectState$3, state => state.fetchingFeaturedContent);
+const selectTrendingUris = reselect.createSelector(selectState$3, state => state.trendingUris);
+const selectFetchingTrendingUris = reselect.createSelector(selectState$3, state => state.fetchingTrendingContent);
 
-const selectState$5 = state => state.stats || {};
+const selectState$4 = state => state.stats || {};
 
-const selectViewCount = reselect.createSelector(selectState$5, state => state.viewCountById);
-const selectSubCount = reselect.createSelector(selectState$5, state => state.subCountById);
+const selectViewCount = reselect.createSelector(selectState$4, state => state.viewCountById);
+const selectSubCount = reselect.createSelector(selectState$4, state => state.subCountById);
 const makeSelectViewCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectViewCount, (claim, viewCountById) => claim ? viewCountById[claim.claim_id] || 0 : 0);
 const makeSelectSubCountForUri = uri => reselect.createSelector(lbryRedux.makeSelectClaimForUri(uri), selectSubCount, (claim, subCountById) => claim ? subCountById[claim.claim_id] || 0 : 0);
 
-const selectState$6 = state => state.sync || {};
+const selectState$5 = state => state.sync || {};
 
-const selectHasSyncedWallet = reselect.createSelector(selectState$6, state => state.hasSyncedWallet);
-const selectSyncHash = reselect.createSelector(selectState$6, state => state.syncHash);
-const selectSyncData = reselect.createSelector(selectState$6, state => state.syncData);
-const selectSetSyncErrorMessage = reselect.createSelector(selectState$6, state => state.setSyncErrorMessage);
-const selectGetSyncErrorMessage = reselect.createSelector(selectState$6, state => state.getSyncErrorMessage);
-const selectGetSyncIsPending = reselect.createSelector(selectState$6, state => state.getSyncIsPending);
-const selectSetSyncIsPending = reselect.createSelector(selectState$6, state => state.setSyncIsPending);
-const selectHashChanged = reselect.createSelector(selectState$6, state => state.hashChanged);
-const selectSyncApplyIsPending = reselect.createSelector(selectState$6, state => state.syncApplyIsPending);
-const selectSyncApplyErrorMessage = reselect.createSelector(selectState$6, state => state.syncApplyErrorMessage);
-const selectSyncApplyPasswordError = reselect.createSelector(selectState$6, state => state.syncApplyPasswordError);
+const selectHasSyncedWallet = reselect.createSelector(selectState$5, state => state.hasSyncedWallet);
+const selectSyncHash = reselect.createSelector(selectState$5, state => state.syncHash);
+const selectSyncData = reselect.createSelector(selectState$5, state => state.syncData);
+const selectSetSyncErrorMessage = reselect.createSelector(selectState$5, state => state.setSyncErrorMessage);
+const selectGetSyncErrorMessage = reselect.createSelector(selectState$5, state => state.getSyncErrorMessage);
+const selectGetSyncIsPending = reselect.createSelector(selectState$5, state => state.getSyncIsPending);
+const selectSetSyncIsPending = reselect.createSelector(selectState$5, state => state.setSyncIsPending);
+const selectHashChanged = reselect.createSelector(selectState$5, state => state.hashChanged);
+const selectSyncApplyIsPending = reselect.createSelector(selectState$5, state => state.syncApplyIsPending);
+const selectSyncApplyErrorMessage = reselect.createSelector(selectState$5, state => state.syncApplyErrorMessage);
+const selectSyncApplyPasswordError = reselect.createSelector(selectState$5, state => state.syncApplyPasswordError);
 
-const selectState$7 = state => state.web || {};
+const selectState$6 = state => state.web || {};
 
-const selectCurrentUploads = reselect.createSelector(selectState$7, state => state.currentUploads);
+const selectCurrentUploads = reselect.createSelector(selectState$6, state => state.currentUploads);
 const selectUploadCount = reselect.createSelector(selectCurrentUploads, currentUploads => currentUploads && Object.keys(currentUploads).length);
 
 exports.ERRORS = errors;
 exports.LBRYINC_ACTIONS = action_types;
 exports.Lbryio = Lbryio;
 exports.YOUTUBE_STATUSES = youtube;
-exports.authReducer = authReducer;
 exports.blacklistReducer = blacklistReducer;
 exports.costInfoReducer = costInfoReducer;
 exports.doBlackListedOutpointsSubscribe = doBlackListedOutpointsSubscribe;
@@ -1559,7 +1546,6 @@ exports.doFetchSubCount = doFetchSubCount;
 exports.doFetchTrendingUris = doFetchTrendingUris;
 exports.doFetchViewCount = doFetchViewCount;
 exports.doFilteredOutpointsSubscribe = doFilteredOutpointsSubscribe;
-exports.doGenerateAuthToken = doGenerateAuthToken;
 exports.doGetSync = doGetSync;
 exports.doResetSync = doResetSync;
 exports.doSetDefaultAccount = doSetDefaultAccount;
@@ -1575,7 +1561,6 @@ exports.makeSelectFetchingCostInfoForUri = makeSelectFetchingCostInfoForUri;
 exports.makeSelectSubCountForUri = makeSelectSubCountForUri;
 exports.makeSelectViewCountForUri = makeSelectViewCountForUri;
 exports.selectAllCostInfoByUri = selectAllCostInfoByUri;
-exports.selectAuthToken = selectAuthToken;
 exports.selectBlackListedOutpoints = selectBlackListedOutpoints;
 exports.selectBlacklistedOutpointMap = selectBlacklistedOutpointMap;
 exports.selectCurrentUploads = selectCurrentUploads;
@@ -1589,7 +1574,6 @@ exports.selectGetSyncErrorMessage = selectGetSyncErrorMessage;
 exports.selectGetSyncIsPending = selectGetSyncIsPending;
 exports.selectHasSyncedWallet = selectHasSyncedWallet;
 exports.selectHashChanged = selectHashChanged;
-exports.selectIsAuthenticating = selectIsAuthenticating;
 exports.selectSetSyncErrorMessage = selectSetSyncErrorMessage;
 exports.selectSetSyncIsPending = selectSetSyncIsPending;
 exports.selectSyncApplyErrorMessage = selectSyncApplyErrorMessage;

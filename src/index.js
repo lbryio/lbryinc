@@ -12,7 +12,7 @@ export { LBRYINC_ACTIONS, YOUTUBE_STATUSES, ERRORS };
 export { doTransifexUpload } from 'util/transifex-upload';
 
 // actions
-export { doGenerateAuthToken } from 'redux/actions/auth';
+// export { doGenerateAuthToken } from 'redux/actions/auth';
 export { doFetchCostInfoForUri } from 'redux/actions/cost_info';
 export { doBlackListedOutpointsSubscribe } from 'redux/actions/blacklist';
 export { doFilteredOutpointsSubscribe } from 'redux/actions/filtered';
@@ -30,7 +30,7 @@ export {
 export { doUpdateUploadProgress } from 'redux/actions/web';
 
 // reducers
-export { authReducer } from 'redux/reducers/auth';
+// export { authReducer } from 'redux/reducers/auth';
 export { costInfoReducer } from 'redux/reducers/cost_info';
 export { blacklistReducer } from 'redux/reducers/blacklist';
 export { filteredReducer } from 'redux/reducers/filtered';
@@ -40,7 +40,7 @@ export { syncReducer } from 'redux/reducers/sync';
 export { webReducer } from 'redux/reducers/web';
 
 // selectors
-export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
+// export { selectAuthToken, selectIsAuthenticating } from 'redux/selectors/auth';
 export {
   makeSelectFetchingCostInfoForUri,
   makeSelectCostInfoForUri,
