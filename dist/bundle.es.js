@@ -276,7 +276,7 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 
     if (action === 'me') {
       if (tokens && tokens.access_token) {
-        headers.Authorization = 'Bearer ' + tokens.access_token;
+        headers.Authorization = `Bearer ${tokens.access_token}`;
       }
 
       if (tokens && tokens.auth_token) {
@@ -284,7 +284,7 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
       }
     } else {
       if (tokens && tokens.access_token) {
-        headers.Authorization = 'Bearer ' + tokens.access_token;
+        headers.Authorization = `Bearer ${tokens.access_token}`;
       } else {
         fullParams.auth_token = tokens.auth_token;
       }
@@ -337,22 +337,7 @@ Lbryio.getTokens = () => new Promise(resolve => {
   });
 });
 
-Lbryio.getCurrentUser = () => Lbryio.call('user', 'me'); // const getAppId =
-
-
-Lbryio.getUserNew = options => {
-  const {
-    language,
-    appId,
-    auth_token,
-    authorization
-  } = options;
-  Lbryio.call('user', 'new', {
-    auth_token: '',
-    language: language || 'en',
-    app_id: appId
-  }, 'post');
-};
+Lbryio.getCurrentUser = () => Lbryio.call('user', 'me');
 /**
  *  LBRYIO.AUTHENTICATE()
  * @param domain
@@ -395,8 +380,8 @@ Lbryio.authenticate = (domain, language) => {
   if (Lbryio.authenticationPromise === null) {
     Lbryio.authenticationPromise = new Promise((resolve, reject) => {
       // see if we already have a token
-      Lbryio.getAuthToken().then(token => {
-        if (!token) {
+      Lbryio.getTokens().then(tokens => {
+        if (!tokens) {
           return false;
         } // check that token works
 

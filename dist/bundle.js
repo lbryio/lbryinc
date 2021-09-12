@@ -569,7 +569,7 @@ Lbryio.call = function (resource, action) {
 
     if (action === 'me') {
       if (tokens && tokens.access_token) {
-        headers.Authorization = 'Bearer ' + tokens.access_token;
+        headers.Authorization = "Bearer ".concat(tokens.access_token);
       }
 
       if (tokens && tokens.auth_token) {
@@ -577,7 +577,7 @@ Lbryio.call = function (resource, action) {
       }
     } else {
       if (tokens && tokens.access_token) {
-        headers.Authorization = 'Bearer ' + tokens.access_token;
+        headers.Authorization = "Bearer ".concat(tokens.access_token);
       } else {
         fullParams.auth_token = tokens.auth_token;
       }
@@ -638,19 +638,6 @@ Lbryio.getTokens = function () {
 
 Lbryio.getCurrentUser = function () {
   return Lbryio.call('user', 'me');
-}; // const getAppId =
-
-
-Lbryio.getUserNew = function (options) {
-  var language = options.language,
-      appId = options.appId,
-      auth_token = options.auth_token,
-      authorization = options.authorization;
-  Lbryio.call('user', 'new', {
-    auth_token: '',
-    language: language || 'en',
-    app_id: appId
-  }, 'post');
 };
 /**
  *  LBRYIO.AUTHENTICATE()
@@ -694,8 +681,8 @@ Lbryio.authenticate = function (domain, language) {
   if (Lbryio.authenticationPromise === null) {
     Lbryio.authenticationPromise = new Promise(function (resolve, reject) {
       // see if we already have a token
-      Lbryio.getAuthToken().then(function (token) {
-        if (!token) {
+      Lbryio.getTokens().then(function (tokens) {
+        if (!tokens) {
           return false;
         } // check that token works
 
