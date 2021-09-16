@@ -523,7 +523,8 @@ var Lbryio = {
   CONNECTION_STRING: 'https://api.lbry.com/'
 };
 var EXCHANGE_RATE_TIMEOUT = 20 * 60 * 1000;
-var INTERNAL_APIS_DOWN = 'internal_apis_down'; // We can't use env's because they aren't passed into node_modules
+var INTERNAL_APIS_DOWN = 'internal_apis_down';
+Lbryio.fetchingUser = false; // We can't use env's because they aren't passed into node_modules
 
 Lbryio.setLocalApi = function (endpoint) {
   Lbryio.CONNECTION_STRING = endpoint.replace(/\/*$/, '/'); // exactly one slash at the end;
@@ -567,11 +568,10 @@ Lbryio.call = function (resource, action) {
 
   function makeRequest(url, options) {
     return fetch(url, options).then(checkAndParse);
-  } // TOKENS = { auth_token, access_token }
-
+  }
 
   return Lbryio.getTokens().then(function (tokens) {
-    // string -=> { auth_token: xyz, authorization: abc }
+    // TOKENS = { auth_token, access_token }
     var fullParams = _objectSpread({}, params);
 
     var headers = {
@@ -624,13 +624,9 @@ Lbryio.call = function (resource, action) {
   });
 };
 
-Lbryio.fetchingUser = false; // Lbryio.authToken = null;
-
 Lbryio.getAuthToken = function () {
   return new Promise(function (resolve) {
     Lbryio.overrides.getAuthToken().then(function (token) {
-      // now { auth_token: <token>, authorization: <token> }
-      // Lbryio.authTokens = token;
       resolve(token);
     });
   });
@@ -789,87 +785,6 @@ function () {
     return _ref2.apply(this, arguments);
   };
 }();
-
-Lbryio.authenticate = function (domain, language) {
-  if (!Lbryio.enabled) {
-    var params = {
-      id: 1,
-      primary_email: 'disabled@lbry.io',
-      has_verified_email: true,
-      is_identity_verified: true,
-      is_reward_approved: false,
-      language: language || 'en'
-    };
-    return new Promise(function (resolve) {
-      resolve(params);
-    });
-  }
-
-  if (Lbryio.authenticationPromise === null) {
-    Lbryio.authenticationPromise = new Promise(function (resolve, reject) {
-      // see if we already have a token
-      Lbryio.getTokens().then(function (tokens) {
-        if (!tokens) {
-          return false;
-        } // check that token works
-
-
-        return Lbryio.fetchCurrentUser().then(function (user) {
-          return user;
-        })["catch"](function (error) {
-          if (error === INTERNAL_APIS_DOWN) {
-            throw new Error('Internal APIS down');
-          }
-
-          return false;
-        });
-      }).then(function (user) {
-        if (user) {
-          return user;
-        }
-
-        return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status().then(function (status) {
-          return new Promise(function (res, rej) {
-            var appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
-            Lbryio.call('user', 'new', {
-              auth_token: '',
-              language: language || 'en',
-              app_id: appId
-            }, 'post').then(function (response) {
-              if (!response.auth_token) {
-                throw new Error('auth_token was not set in the response');
-              } // const { store } = window;
-              // Not setting new "auth_tokens"
-              // if (Lbryio.overrides.setAuthToken) {
-              //   Lbryio.overrides.setAuthToken(response.auth_token);
-              // }
-              // if (store) {
-              //   store.dispatch({
-              //     type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
-              //     data: { authToken: response.auth_token },
-              //   });
-              // }
-              // Lbryio.authToken = response.auth_token;
-
-
-              return res(response);
-            })["catch"](function (error) {
-              return rej(error);
-            });
-          });
-        }).then(function (newUser) {
-          if (!newUser) {
-            return Lbryio.fetchCurrentUser();
-          }
-
-          return newUser;
-        });
-      }).then(resolve, reject);
-    });
-  }
-
-  return Lbryio.authenticationPromise;
-};
 
 Lbryio.getStripeToken = function () {
   return Lbryio.CONNECTION_STRING.startsWith('http://localhost:') ? 'pk_test_NoL1JWL7i1ipfhVId5KfDZgo' : 'pk_live_e8M4dRNnCCbmpZzduEUZBgJO';
