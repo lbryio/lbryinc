@@ -499,17 +499,19 @@ var REFERRER_NOT_FOUND = 'A lbry.tv account could not be found for the referrer 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var constants_action_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6);
-/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(querystring__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+/* harmony import */ var lbry_redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lbry_redux__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var querystring__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(querystring__WEBPACK_IMPORTED_MODULE_1__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -565,12 +567,32 @@ Lbryio.call = function (resource, action) {
 
   function makeRequest(url, options) {
     return fetch(url, options).then(checkAndParse);
-  }
+  } // TOKENS = { auth_token, access_token }
 
-  return Lbryio.getAuthToken().then(function (token) {
-    var fullParams = _objectSpread({
-      auth_token: token
-    }, params);
+
+  return Lbryio.getTokens().then(function (tokens) {
+    // string -=> { auth_token: xyz, authorization: abc }
+    var fullParams = _objectSpread({}, params);
+
+    var headers = {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }; // TODO refactor this
+    // Send both tokens to userMe
+    // delete auth token after success
+
+    if (action === 'me') {
+      // when we support transition from auth to access, bring this in
+      // if (tokens && tokens.access_token) {
+      //   headers.Authorization = `Bearer ${tokens.access_token}`;
+      // }
+      if (tokens && tokens.auth_token) {
+        fullParams.auth_token = tokens.auth_token;
+      }
+    } else if (tokens && tokens.access_token) {
+      headers.Authorization = "Bearer ".concat(tokens.access_token);
+    } else {
+      fullParams.auth_token = tokens.auth_token;
+    }
 
     Object.keys(fullParams).forEach(function (key) {
       var value = fullParams[key];
@@ -579,7 +601,7 @@ Lbryio.call = function (resource, action) {
         fullParams[key] = JSON.stringify(value);
       }
     });
-    var qs = querystring__WEBPACK_IMPORTED_MODULE_2___default.a.stringify(fullParams);
+    var qs = querystring__WEBPACK_IMPORTED_MODULE_1___default.a.stringify(fullParams);
     var url = "".concat(Lbryio.CONNECTION_STRING).concat(resource, "/").concat(action, "?").concat(qs);
     var options = {
       method: 'GET'
@@ -602,37 +624,171 @@ Lbryio.call = function (resource, action) {
   });
 };
 
-Lbryio.authToken = null;
+Lbryio.fetchingUser = false; // Lbryio.authToken = null;
 
 Lbryio.getAuthToken = function () {
   return new Promise(function (resolve) {
-    if (Lbryio.authToken) {
-      resolve(Lbryio.authToken);
-    } else if (Lbryio.overrides.getAuthToken) {
-      Lbryio.overrides.getAuthToken().then(function (token) {
-        resolve(token);
-      });
-    } else if (typeof window !== 'undefined') {
-      var _window = window,
-          store = _window.store;
-
-      if (store) {
-        var state = store.getState();
-        var token = state.auth ? state.auth.authToken : null;
-        Lbryio.authToken = token;
-        resolve(token);
-      }
-
-      resolve(null);
-    } else {
-      resolve(null);
-    }
+    Lbryio.overrides.getAuthToken().then(function (token) {
+      // now { auth_token: <token>, authorization: <token> }
+      // Lbryio.authTokens = token;
+      resolve(token);
+    });
   });
 };
 
-Lbryio.getCurrentUser = function () {
+Lbryio.getTokens = function () {
+  return new Promise(function (resolve) {
+    Lbryio.overrides.getTokens().then(function (tokens) {
+      resolve(tokens);
+    });
+  });
+};
+
+Lbryio.deleteAuthToken = function () {
+  return new Promise(function (resolve) {
+    Lbryio.overrides.deleteAuthToken().then(function () {
+      resolve(true);
+    });
+  });
+};
+
+Lbryio.fetchCurrentUser = function () {
   return Lbryio.call('user', 'me');
 };
+
+Lbryio.fetchUser =
+/*#__PURE__*/
+function () {
+  var _ref = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(domain, language) {
+    var user, tokens;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (Lbryio.fetchingUser) {
+              _context.next = 19;
+              break;
+            }
+
+            Lbryio.fetchingUser = true;
+            _context.next = 4;
+            return Lbryio.getTokens(domain, language);
+
+          case 4:
+            tokens = _context.sent;
+
+            if (!(!tokens.auth_token && !tokens.access_token)) {
+              _context.next = 11;
+              break;
+            }
+
+            _context.next = 8;
+            return Lbryio.fetchNewUser();
+
+          case 8:
+            user = _context.sent;
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.next = 13;
+            return Lbryio.fetchCurrentUser();
+
+          case 13:
+            user = _context.sent;
+
+          case 14:
+            if (!tokens.access_token) {
+              _context.next = 18;
+              break;
+            }
+
+            if (!tokens.auth_token) {
+              _context.next = 18;
+              break;
+            }
+
+            _context.next = 18;
+            return Lbryio.deleteAuthToken();
+
+          case 18:
+            return _context.abrupt("return", user);
+
+          case 19:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+Lbryio.fetchNewUser =
+/*#__PURE__*/
+function () {
+  var _ref2 = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee2(domain, language) {
+    var status, appId, userResponse;
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            _context2.next = 3;
+            return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status();
+
+          case 3:
+            status = _context2.sent;
+            appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
+            _context2.next = 7;
+            return Lbryio.call('user', 'new', {
+              auth_token: '',
+              language: language || 'en',
+              app_id: appId
+            }, 'post');
+
+          case 7:
+            userResponse = _context2.sent;
+
+            if (userResponse.auth_token) {
+              _context2.next = 12;
+              break;
+            }
+
+            throw new Error('auth_token was not set in the response');
+
+          case 12:
+            _context2.next = 14;
+            return Lbryio.overrides.setAuthToken(userResponse.auth_token);
+
+          case 14:
+            return _context2.abrupt("return", userResponse);
+
+          case 17:
+            _context2.prev = 17;
+            _context2.t0 = _context2["catch"](0);
+            console.log('error', _context2.t0.message);
+            return _context2.abrupt("return", false);
+
+          case 21:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 17]]);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 Lbryio.authenticate = function (domain, language) {
   if (!Lbryio.enabled) {
@@ -651,13 +807,14 @@ Lbryio.authenticate = function (domain, language) {
 
   if (Lbryio.authenticationPromise === null) {
     Lbryio.authenticationPromise = new Promise(function (resolve, reject) {
-      Lbryio.getAuthToken().then(function (token) {
-        if (!token || token.length > 60) {
+      // see if we already have a token
+      Lbryio.getTokens().then(function (tokens) {
+        if (!tokens) {
           return false;
         } // check that token works
 
 
-        return Lbryio.getCurrentUser().then(function (user) {
+        return Lbryio.fetchCurrentUser().then(function (user) {
           return user;
         })["catch"](function (error) {
           if (error === INTERNAL_APIS_DOWN) {
@@ -671,7 +828,7 @@ Lbryio.authenticate = function (domain, language) {
           return user;
         }
 
-        return lbry_redux__WEBPACK_IMPORTED_MODULE_1__["Lbry"].status().then(function (status) {
+        return lbry_redux__WEBPACK_IMPORTED_MODULE_0__["Lbry"].status().then(function (status) {
           return new Promise(function (res, rej) {
             var appId = domain && domain !== 'lbry.tv' ? (domain.replace(/[.]/gi, '') + status.installation_id).slice(0, 66) : status.installation_id;
             Lbryio.call('user', 'new', {
@@ -681,25 +838,20 @@ Lbryio.authenticate = function (domain, language) {
             }, 'post').then(function (response) {
               if (!response.auth_token) {
                 throw new Error('auth_token was not set in the response');
-              }
+              } // const { store } = window;
+              // Not setting new "auth_tokens"
+              // if (Lbryio.overrides.setAuthToken) {
+              //   Lbryio.overrides.setAuthToken(response.auth_token);
+              // }
+              // if (store) {
+              //   store.dispatch({
+              //     type: ACTIONS.GENERATE_AUTH_TOKEN_SUCCESS,
+              //     data: { authToken: response.auth_token },
+              //   });
+              // }
+              // Lbryio.authToken = response.auth_token;
 
-              var _window2 = window,
-                  store = _window2.store;
 
-              if (Lbryio.overrides.setAuthToken) {
-                Lbryio.overrides.setAuthToken(response.auth_token);
-              }
-
-              if (store) {
-                store.dispatch({
-                  type: constants_action_types__WEBPACK_IMPORTED_MODULE_0__["GENERATE_AUTH_TOKEN_SUCCESS"],
-                  data: {
-                    authToken: response.auth_token
-                  }
-                });
-              }
-
-              Lbryio.authToken = response.auth_token;
               return res(response);
             })["catch"](function (error) {
               return rej(error);
@@ -707,7 +859,7 @@ Lbryio.authenticate = function (domain, language) {
           });
         }).then(function (newUser) {
           if (!newUser) {
-            return Lbryio.getCurrentUser();
+            return Lbryio.fetchCurrentUser();
           }
 
           return newUser;
@@ -726,10 +878,10 @@ Lbryio.getStripeToken = function () {
 Lbryio.getExchangeRates = function () {
   if (!Lbryio.exchangeLastFetched || Date.now() - Lbryio.exchangeLastFetched > EXCHANGE_RATE_TIMEOUT) {
     Lbryio.exchangePromise = new Promise(function (resolve, reject) {
-      Lbryio.call('lbc', 'exchange_rate', {}, 'get', true).then(function (_ref) {
-        var LBC_USD = _ref.lbc_usd,
-            LBC_BTC = _ref.lbc_btc,
-            BTC_USD = _ref.btc_usd;
+      Lbryio.call('lbc', 'exchange_rate', {}, 'get', true).then(function (_ref3) {
+        var LBC_USD = _ref3.lbc_usd,
+            LBC_BTC = _ref3.lbc_btc,
+            BTC_USD = _ref3.btc_usd;
         var rates = {
           LBC_USD: LBC_USD,
           LBC_BTC: LBC_BTC,
