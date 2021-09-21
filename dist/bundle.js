@@ -649,7 +649,13 @@ Lbryio.deleteAuthToken = function () {
 };
 
 Lbryio.fetchCurrentUser = function () {
-  return Lbryio.call('user', 'me');
+  return Lbryio.call('user', 'me')["catch"](function (e) {
+    return {
+      error: {
+        message: e.message
+      }
+    };
+  });
 };
 
 Lbryio.fetchUser =
@@ -771,7 +777,11 @@ function () {
             _context2.prev = 17;
             _context2.t0 = _context2["catch"](0);
             console.log('error', _context2.t0.message);
-            return _context2.abrupt("return", false);
+            return _context2.abrupt("return", {
+              error: {
+                message: _context2.t0.message
+              }
+            });
 
           case 21:
           case "end":
