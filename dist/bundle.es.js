@@ -275,9 +275,10 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
 
     if (action === 'me') {
       // when we support transition from auth to access, bring this in
-      // if (tokens && tokens.access_token) {
-      //   headers.Authorization = `Bearer ${tokens.access_token}`;
-      // }
+      if (tokens && tokens.access_token) {
+        headers.Authorization = `Bearer ${tokens.access_token}`;
+      }
+
       if (tokens && tokens.auth_token) {
         fullParams.auth_token = tokens.auth_token;
       }
