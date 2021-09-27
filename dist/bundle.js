@@ -576,7 +576,8 @@ Lbryio.call = function (resource, action) {
 
     var headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
-    }; // TODO refactor this
+    };
+    console.log('USER ME TOKENS', tokens); // TODO refactor this
     // Send both tokens to userMe
     // delete auth token after success
 
@@ -605,7 +606,8 @@ Lbryio.call = function (resource, action) {
     var qs = querystring__WEBPACK_IMPORTED_MODULE_1___default.a.stringify(fullParams);
     var url = "".concat(Lbryio.CONNECTION_STRING).concat(resource, "/").concat(action, "?").concat(qs);
     var options = {
-      method: 'GET'
+      method: 'GET',
+      headers: headers
     };
 
     if (method === 'post') {
@@ -671,7 +673,7 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             if (Lbryio.fetchingUser) {
-              _context.next = 19;
+              _context.next = 20;
               break;
             }
 
@@ -681,45 +683,46 @@ function () {
 
           case 4:
             tokens = _context.sent;
+            console.log('tokens', tokens);
 
             if (!(!tokens.auth_token && !tokens.access_token)) {
-              _context.next = 11;
+              _context.next = 12;
               break;
             }
 
-            _context.next = 8;
+            _context.next = 9;
             return Lbryio.fetchNewUser();
 
-          case 8:
+          case 9:
             user = _context.sent;
-            _context.next = 14;
+            _context.next = 15;
             break;
 
-          case 11:
-            _context.next = 13;
+          case 12:
+            _context.next = 14;
             return Lbryio.fetchCurrentUser();
 
-          case 13:
+          case 14:
             user = _context.sent;
 
-          case 14:
+          case 15:
             if (!tokens.access_token) {
-              _context.next = 18;
+              _context.next = 19;
               break;
             }
 
             if (!tokens.auth_token) {
-              _context.next = 18;
+              _context.next = 19;
               break;
             }
 
-            _context.next = 18;
+            _context.next = 19;
             return Lbryio.deleteAuthToken();
 
-          case 18:
+          case 19:
             return _context.abrupt("return", user);
 
-          case 19:
+          case 20:
           case "end":
             return _context.stop();
         }

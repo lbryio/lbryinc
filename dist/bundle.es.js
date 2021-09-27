@@ -269,7 +269,8 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
     };
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
-    }; // TODO refactor this
+    };
+    console.log('USER ME TOKENS', tokens); // TODO refactor this
     // Send both tokens to userMe
     // delete auth token after success
 
@@ -298,7 +299,8 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
     const qs = querystring.stringify(fullParams);
     let url = `${Lbryio.CONNECTION_STRING}${resource}/${action}?${qs}`;
     let options = {
-      method: 'GET'
+      method: 'GET',
+      headers
     };
 
     if (method === 'post') {
@@ -345,6 +347,7 @@ Lbryio.fetchUser = async (domain, language) => {
     let user;
     Lbryio.fetchingUser = true;
     const tokens = await Lbryio.getTokens(domain, language);
+    console.log('tokens', tokens);
 
     if (!tokens.auth_token && !tokens.access_token) {
       user = await Lbryio.fetchNewUser();
