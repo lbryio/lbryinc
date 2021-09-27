@@ -613,9 +613,7 @@ Lbryio.call = function (resource, action) {
     if (method === 'post') {
       options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        headers: headers,
         body: qs
       };
       url = "".concat(Lbryio.CONNECTION_STRING).concat(resource, "/").concat(action);

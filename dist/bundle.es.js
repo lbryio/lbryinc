@@ -306,9 +306,7 @@ Lbryio.call = (resource, action, params = {}, method = 'get') => {
     if (method === 'post') {
       options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        headers,
         body: qs
       };
       url = `${Lbryio.CONNECTION_STRING}${resource}/${action}`;
